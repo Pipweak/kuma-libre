@@ -21,16 +21,6 @@ Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Mi
 - [Leçon 14 — Vocabulaire](lessons/lesson-14/vocabulary.md)
 - [Leçon 15 — Vocabulaire](lessons/lesson-15/vocabulary.md)
 - [Leçon 16 — Vocabulaire](lessons/lesson-16/vocabulary.md)
-- [Leçon 12 — Vocabulaire](lessons/lesson-12/vocabulary.md)
-- [Leçon 13 — Vocabulaire](lessons/lesson-13/vocabulary.md)
-- [Leçon 14 — Vocabulaire](lessons/lesson-14/vocabulary.md)
-- [Leçon 15 — Vocabulaire](lessons/lesson-15/vocabulary.md)
-- [Leçon 12 — Vocabulaire](lessons/lesson-12/vocabulary.md)
-- [Leçon 13 — Vocabulaire](lessons/lesson-13/vocabulary.md)
-- [Leçon 14 — Vocabulaire](lessons/lesson-14/vocabulary.md)
-- [Leçon 12 — Vocabulaire](lessons/lesson-12/vocabulary.md)
-- [Leçon 13 — Vocabulaire](lessons/lesson-13/vocabulary.md)
-- [Leçon 12 — Vocabulaire](lessons/lesson-12/vocabulary.md)
 - [Glossaire des termes du manuel](reference/instruction-terms.md)
 
 ## Format
