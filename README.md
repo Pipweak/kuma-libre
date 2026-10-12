@@ -13,6 +13,7 @@ Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Mi
   - [Leçon 6 — III. Useful Words and Information](lessons/lesson-06/useful-words.md)
 - [Leçon 7 — Vocabulaire](lessons/lesson-07/vocabulary.md)
 - [Leçon 8 — Vocabulaire](lessons/lesson-08/vocabulary.md)
+- [Leçon 9 — Vocabulaire](lessons/lesson-09/vocabulary.md)
 - [Glossaire des termes du manuel](reference/instruction-terms.md)
 
 ## Format
