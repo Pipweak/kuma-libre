@@ -53,3 +53,6 @@ Ces statuts sont un instantané des photos du livre et peuvent évoluer en fonct
 - Les traductions françaises sont des reformulations pédagogiques vérifiées dans le contexte, et non le texte du livre.
 - Les couleurs sont lues sur les photographies ; en cas de photo floue, leur attribution peut être incertaine.
 - Un mot sans surlignage est marqué « À revoir » suivant la convention choisie, ce qui n'est pas une mesure indépendante de connaissance.
+
+- [Leçon 17 — Vocabulaire](lessons/lesson-17/vocabulary.md)
+- [Leçon 18 — Vocabulaire](lessons/lesson-18/vocabulary.md)
