@@ -36,7 +36,7 @@ Ces statuts sont un instantané des photos du livre et peuvent évoluer en fonct
 
 ## Précision et limites de transcription
 
-- Les photos du manuel constituent la référence pour l'appartenance des mots à une leçon. Certaines graphies en kanji ont été ajoutées pour faciliter l'étude alors que la page présente seulement des kana ; ce sont des variantes pédagogiques, pas une reproduction diplomatique de la mise en page.
+- Les photos du manuel constituent la référence pour l'appartenance des mots à une leçon. La transcription doit reprendre uniquement les graphies, lectures et équivalents anglais imprimés sur la photo, sans ajouter de graphies alternatives. Les traductions françaises sont la seule colonne ajoutée.
 - Les traductions françaises sont des reformulations pédagogiques vérifiées dans le contexte, et non le texte du livre.
 - Les couleurs sont lues sur les photographies ; en cas de photo floue, leur attribution peut être incertaine.
 - Un mot sans surlignage est marqué « À revoir » suivant la convention choisie, ce qui n'est pas une mesure indépendante de connaissance.
