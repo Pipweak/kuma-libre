@@ -1,6 +1,6 @@
 # Lesson 12 — I. Vocabulary
 
-Transcription des pages photographiées de la leçon 12. Colonnes kana et écriture séparées selon le livre ; aucun ajout tiré des annotations manuscrites. Français et maîtrise ajoutés. Bleu = 🟢 OK ; jaune = 🟡 À réviser ; sans surlignage = 🔴 À revoir.
+Transcription des pages photographiées de la leçon 12. Colonnes kana et écriture séparées selon le livre ; aucun ajout tiré des annotations manuscrites. Français et maîtrise ajoutés. Bleu = 🔴 À revoir ; jaune = 🔴 À revoir ; sans surlignage = 🔴 À revoir.
 
 | Kana (livre) | Kanji / écriture (livre) | English (livre) | Français (ajout) | Maîtrise |
 |---|---|---|---|---|
@@ -9,14 +9,14 @@ Transcription des pages photographiées de la leçon 12. Colonnes kana et écrit
 | とおい* | 遠い | far | loin | 🔴 À revoir |
 | はやい | 速い、早い | fast, early | rapide, tôt | 🔴 À revoir |
 | おそい* | 遅い | slow, late | lent, en retard | 🔴 À revoir |
-| おおい［ひとが～］ | 多い［人が～］ | many [people], much | nombreux | 🟢 OK |
-| すくない*［ひとが～］ | 少ない［人が～］ | few [people], a little | peu nombreux | 🟢 OK |
-| あたたかい | 暖かい、温かい | warm | chaud, doux | 🟢 OK |
-| すずしい | 涼しい | cool | frais | 🟢 OK |
+| おおい［ひとが～］ | 多い［人が～］ | many [people], much | nombreux | 🔴 À revoir |
+| すくない*［ひとが～］ | 少ない［人が～］ | few [people], a little | peu nombreux | 🔴 À revoir |
+| あたたかい | 暖かい、温かい | warm | chaud, doux | 🔴 À revoir |
+| すずしい | 涼しい | cool | frais | 🔴 À revoir |
 | あまい | 甘い | sweet | sucré | 🔴 À revoir |
 | からい | 辛い | hot (taste), spicy | épicé, piquant | 🔴 À revoir |
 | おもい | 重い | heavy | lourd | 🔴 À revoir |
-| かるい* | 軽い | light | léger | 🟢 OK |
+| かるい* | 軽い | light | léger | 🔴 À revoir |
 | いい［コーヒーが～］ |  | prefer [coffee] | préférer [le café] | 🔴 À revoir |
 | きせつ | 季節 | season | saison | 🔴 À revoir |
 | はる | 春 | spring | printemps | 🔴 À revoir |
@@ -41,7 +41,7 @@ Transcription des pages photographiées de la leçon 12. Colonnes kana et écrit
 | とりにく | とり肉 | chicken | poulet | 🔴 À revoir |
 | ぎゅうにく | 牛肉 | beef | bœuf | 🔴 À revoir |
 | レモン |  | lemon | citron | 🔴 À revoir |
-| いけばな | 生け花 | flower arrangement (～を します : practise flower arrangement) | arrangement floral | 🟢 OK |
+| いけばな | 生け花 | flower arrangement (～を します : practise flower arrangement) | arrangement floral | 🔴 À revoir |
 | もみじ | 紅葉 | maple, red leaves of autumn | érable, feuilles d'automne | 🔴 À revoir |
 | どちら |  | which one (of two things) | lequel (des deux) | 🔴 À revoir |
 | どちらも |  | both | les deux | 🔴 À revoir |
