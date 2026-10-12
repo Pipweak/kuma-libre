@@ -23,3 +23,13 @@ Demander des quiz par leçon, japonais → français, français → japonais, ou
 ## Méthode d'ajout
 
 Pour chaque nouvelle photo, identifier la leçon et la section, transcrire les entrées visibles, puis enrichir le fichier concerné sans supprimer les données existantes.
+
+## Suivi de maîtrise
+
+Chaque mot possède un champ **Maîtrise** :
+
+- 🟢 **OK** : surlignage vert / bleu-vert, mot maîtrisé.
+- 🟡 **À réviser** : surlignage jaune, mot à consolider.
+- 🔴 **À revoir** : surlignage rouge ou absence de surlignage, mot à réapprendre.
+
+Ces statuts sont un instantané des photos du livre et peuvent évoluer en fonction des réponses aux quiz. Les quiz donnent la priorité aux mots 🔴, puis 🟡, tout en réintroduisant régulièrement les mots 🟢.
