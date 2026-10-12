@@ -36,7 +36,7 @@
 | 初めまして。 | はじめまして | Enchanté (première rencontre) | How do you do? | 🟡 À réviser |
 | ～から来ました。 | ～からきました | Je viens de… | I'm from… | 🟡 À réviser |
 | どうぞよろしくお願いします。 | どうぞよろしくおねがいします | Ravi de faire votre connaissance | Pleased to meet you | 🟡 À réviser |
-| 失礼ですが、 | しつれいですが | Excusez-moi, mais… (avant une question personnelle) | Excuse me, but… | 🟢 OK |
+| 失礼ですが、 | しつれいですが | Excusez-moi, mais… | Excuse me, but… | 🟢 OK |
 | お名前は？ | おなまえは？ | Comment vous appelez-vous ? | May I have your name? | 🟡 À réviser |
 | こちらは～さんです。 | こちらは～さんです | Voici M./Mme… | This is Mr./Ms.… | 🔴 À revoir |
 
