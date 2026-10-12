@@ -15,6 +15,7 @@ Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Mi
 - [Leçon 8 — Vocabulaire](lessons/lesson-08/vocabulary.md)
 - [Leçon 9 — Vocabulaire](lessons/lesson-09/vocabulary.md)
 - [Leçon 10 — Vocabulaire](lessons/lesson-10/vocabulary.md)
+- [Leçon 11 — Vocabulaire](lessons/lesson-11/vocabulary.md)
 - [Glossaire des termes du manuel](reference/instruction-terms.md)
 
 ## Format
