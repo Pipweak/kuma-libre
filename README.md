@@ -12,7 +12,7 @@ Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Mi
 
 ## Format
 
-Chaque entrée est une ligne de tableau Markdown : **Japonais | Lecture | Français | English**.
+Chaque entrée est une ligne de tableau Markdown : **Japonais | Lecture | Français | English | Maîtrise**.
 
 Les entrées sont regroupées par leçon et séparées en vocabulaire, expressions et noms propres. Les lectures de mots écrits en katakana restent en katakana. Les traductions françaises sont des aides à l'étude.
 
@@ -33,3 +33,10 @@ Chaque mot possède un champ **Maîtrise** :
 - 🔴 **À revoir** : surlignage rouge ou absence de surlignage, mot à réapprendre.
 
 Ces statuts sont un instantané des photos du livre et peuvent évoluer en fonction des réponses aux quiz. Les quiz donnent la priorité aux mots 🔴, puis 🟡, tout en réintroduisant régulièrement les mots 🟢.
+
+## Précision et limites de transcription
+
+- Les photos du manuel constituent la référence pour l'appartenance des mots à une leçon. Certaines graphies en kanji ont été ajoutées pour faciliter l'étude alors que la page présente seulement des kana ; ce sont des variantes pédagogiques, pas une reproduction diplomatique de la mise en page.
+- Les traductions françaises sont des reformulations pédagogiques vérifiées dans le contexte, et non le texte du livre.
+- Les couleurs sont lues sur les photographies ; en cas de photo floue, leur attribution peut être incertaine.
+- Un mot sans surlignage est marqué « À revoir » suivant la convention choisie, ce qui n'est pas une mesure indépendante de connaissance.
