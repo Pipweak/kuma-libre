@@ -6,14 +6,14 @@ Cette page correspond au glossaire introductif photographié (p. 8). Elle est di
 
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
-| 課 | か | leçon | lesson | 🟢 OK |
+| 第～課 | だい～か | leçon numéro… (ex. 第1課 = leçon 1) | lesson number… | 🟢 OK |
 | 文型 | ぶんけい | structure de phrase | sentence pattern | 🟢 OK |
 | 例文 | れいぶん | phrase d'exemple | example sentence | 🟢 OK |
 | 会話 | かいわ | conversation | conversation | 🔴 À revoir |
 | 練習 | れんしゅう | exercice | exercise | 🔴 À revoir |
-| 問題 | もんだい | question, problème | practice question | 🔴 À revoir |
+| 問題 | もんだい | question d'exercice | practice question | 🔴 À revoir |
 | 答え | こたえ | réponse | answer | 🔴 À revoir |
-| 読み物 | よみもの | texte de lecture | reading text | 🔴 À revoir |
+| 読物 | よみもの | texte, lecture | text | 🔴 À revoir |
 | 復習 | ふくしゅう | révision | review | 🔴 À revoir |
 | 目次 | もくじ | table des matières | contents | 🔴 À revoir |
 | 索引 | さくいん | index | index | 🔴 À revoir |
@@ -25,13 +25,13 @@ Cette page correspond au glossaire introductif photographié (p. 8). Elle est di
 | 発音 | はつおん | prononciation | pronunciation | 🔴 À revoir |
 | 母音 | ぼいん | voyelle | vowel | 🔴 À revoir |
 | 子音 | しいん | consonne | consonant | 🔴 À revoir |
-| 拍 | はく | more (unité rythmique) | mora | 🔴 À revoir |
+| 拍 | はく | more (unité rythmique du japonais) | mora | 🔴 À revoir |
 | アクセント | アクセント | accent | accent | 🔴 À revoir |
 | イントネーション | イントネーション | intonation | intonation | 🔴 À revoir |
 | 行 | ぎょう | ligne | row | 🔴 À revoir |
 | 列 | れつ | colonne | column | 🔴 À revoir |
-| 丁寧体 | ていねいたい | style poli | polite style | 🔴 À revoir |
-| 普通体 | ふつうたい | style neutre | plain style | 🔴 À revoir |
+| 丁寧体 | ていねいたい | style de discours poli | polite style | 🔴 À revoir |
+| 普通体 | ふつうたい | style courant (non poli) | plain style | 🔴 À revoir |
 | 活用 | かつよう | conjugaison, flexion | conjugation | 🔴 À revoir |
 | フォーム | フォーム | forme | form | 🔴 À revoir |
 | ～形 | ～けい | forme en… | …form | 🔴 À revoir |
