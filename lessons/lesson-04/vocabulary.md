@@ -20,11 +20,11 @@
 | ～分 | ～ふん（～ぷん） | … minute(s) | …minute(s) | 🟡 À réviser |
 | 半 | はん | moitié, demie | half | 🟡 À réviser |
 | 何時 | なんじ | quelle heure | what time | 🟡 À réviser |
-| 何分 | なんぷん | combien de minutes | what minute | 🟡 À réviser |
+| 何分 | なんぷん | combien de minutes / quelle minute | what minute | 🟡 À réviser |
 | 午前 | ごぜん | matin, avant-midi (AM) | a.m. | 🟡 À réviser |
 | 午後 | ごご | après-midi (PM) | p.m. | 🟡 À réviser |
 | 朝 | あさ | matin | morning | 🟡 À réviser |
-| 昼 | ひる | midi, journée | daytime, noon | 🟡 À réviser |
+| 昼 | ひる | midi, journée (période diurne) | daytime, noon | 🟡 À réviser |
 | 晩（夜） | ばん（よる） | soir, nuit | evening, night | 🟡 À réviser |
 | おととい | おととい | avant-hier | day before yesterday | 🟢 OK |
 | 昨日 | きのう | hier | yesterday | 🟡 À réviser |
@@ -58,8 +58,8 @@
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
 | 大変ですね。 | たいへんですね | Ça doit être dur ! | That's tough, isn't it? | 🔴 À revoir |
-| 番号 | ばんごう | numéro | number | 🔴 À revoir |
-| 何番 | なんばん | quel numéro | what number | 🔴 À revoir |
+| 番号 | ばんごう | numéro | number | 🟡 À réviser |
+| 何番 | なんばん | quel numéro | what number | 🟡 À réviser |
 | そちら | そちら | chez vous, de votre côté | your place | 🟢 OK |
 
 ## Noms propres (exemples du livre)
