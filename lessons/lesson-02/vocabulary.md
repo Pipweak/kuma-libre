@@ -49,7 +49,7 @@
 | あのう | あのう | euh… | er… | 🟡 À réviser |
 | えっ | えっ | hein ? quoi ? | oh? what? | 🟡 À réviser |
 | どうぞ。 | どうぞ | Tenez, je vous en prie | Here you are | 🟡 À réviser |
-| ［どうも］ありがとう［ございます］。 | ［どうも］ありがとう［ございます］ | Merci (beaucoup) ; ございます rend l'expression plus polie | Thank you (very much) | 🟡 À réviser |
+| [どうも] ありがとう [ございます]。 | [どうも] ありがとう [ございます] | Merci (beaucoup) ; ございます rend l'expression plus polie | Thank you (very much) | 🟡 À réviser |
 | そうですか。 | そうですか | Ah, je vois | I see | 🟡 À réviser |
 | 違います。 | ちがいます | Non, ce n'est pas cela / vous vous trompez | No, it isn't / that's wrong | 🟡 À réviser |
 | あ | あ | Ah ! | Oh! | 🟡 À réviser |
