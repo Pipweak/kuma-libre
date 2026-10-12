@@ -9,7 +9,7 @@
 | あそこ | あそこ | là-bas | over there | 🟡 À réviser |
 | どこ | どこ | où | where | 🟡 À réviser |
 | こちら | こちら | par ici, ici (poli) | this way, here (polite) | 🟡 À réviser |
-| そちら | そちら | par là, là (poli) | that way (near listener) | 🟢 OK |
+| そちら | そちら | par là / cet endroit près de l'interlocuteur (poli) | that way (near listener) | 🟢 OK |
 | あちら | あちら | par là-bas (poli) | that way (over there) | 🟢 OK |
 | どちら | どちら | où, de quel côté (poli) | which way, where | 🟢 OK |
 | 教室 | きょうしつ | salle de classe | classroom | 🟢 OK |
@@ -49,7 +49,7 @@
 | どうも。 | どうも | Merci | Thanks | 🟡 À réviser |
 | いらっしゃいませ。 | いらっしゃいませ | Bienvenue (dans un commerce) | Welcome | 🟡 À réviser |
 | ～を見せてください。 | ～をみせてください | Montrez-moi…, s'il vous plaît | Please show me… | 🟡 À réviser |
-| じゃ | じゃ | bon, alors | well then | 🔴 À revoir |
+| じゃ | じゃ | alors, dans ce cas | well then, in that case | 🔴 À revoir |
 | ～をください。 | ～をください | Donnez-moi…, s'il vous plaît | Give me…, please | 🟡 À réviser |
 
 ## Noms propres (exemples du livre)
