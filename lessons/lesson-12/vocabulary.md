@@ -1,6 +1,8 @@
 # Lesson 12 — I. Vocabulary
 
-Transcription des pages photographiées de la leçon 12. Colonnes kana et écriture séparées selon le livre ; aucun ajout tiré des annotations manuscrites. Français et maîtrise ajoutés. Bleu = 🔴 À revoir ; jaune = 🔴 À revoir ; sans surlignage = 🔴 À revoir.
+Transcription des pages photographiées de la leçon 12. Colonnes kana et écriture séparées selon le livre ; aucun ajout tiré des annotations manuscrites. Français et maîtrise ajoutés. 
+
+**Maîtrise : toutes les entrées sont définies sur 🔴 À revoir (réinitialisation demandée, indépendamment des surlignages).**
 
 | Kana (livre) | Kanji / écriture (livre) | English (livre) | Français (ajout) | Maîtrise |
 |---|---|---|---|---|
