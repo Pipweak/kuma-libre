@@ -2,6 +2,8 @@
 
 Transcription des pages photographiées (p. 70–71). Les colonnes kana, écriture et English suivent les formes imprimées. Les annotations manuscrites ne sont pas intégrées au texte du livre. Français et maîtrise sont ajoutés.
 
+**Maîtrise : toutes les entrées sont définies sur 🔴 À revoir (réinitialisation demandée, indépendamment des surlignages).**
+
 | Kana (livre) | Kanji / écriture (livre) | English (livre) | Français (ajout) | Maîtrise |
 |---|---|---|---|---|
 | います［こどもが～］ | ［子どもが～］ | have [a child] | avoir [un enfant] | 🔴 À revoir |
