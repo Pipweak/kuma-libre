@@ -10,13 +10,14 @@ Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Mi
 - [Leçon 4 — Vocabulaire](lessons/lesson-04/vocabulary.md)
 - [Leçon 5 — Vocabulaire](lessons/lesson-05/vocabulary.md)
 - [Leçon 6 — Vocabulaire](lessons/lesson-06/vocabulary.md)
+  - [Leçon 6 — III. Useful Words and Information](lessons/lesson-06/useful-words.md)
 - [Glossaire des termes du manuel](reference/instruction-terms.md)
 
 ## Format
 
 Chaque entrée est une ligne de tableau Markdown : **Japonais | Lecture | Français | English | Maîtrise**.
 
-Les entrées sont regroupées par leçon et séparées en vocabulaire, expressions et noms propres. Les lectures de mots écrits en katakana restent en katakana. Les traductions françaises sont des aides à l'étude.
+Les entrées sont regroupées par leçon et séparées en vocabulaire, expressions et noms propres. Lorsqu'une leçon comprend une section **III. Useful Words and Information**, elle est conservée dans un fichier `useful-words.md` distinct du vocabulaire principal. Les lectures de mots écrits en katakana restent en katakana. Les traductions françaises sont des aides à l'étude.
 
 ## Utilisation en révision
 
