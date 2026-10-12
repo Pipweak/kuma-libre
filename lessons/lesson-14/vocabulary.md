@@ -2,6 +2,8 @@
 
 Transcription des pages photographiées de la leçon 14. Les annotations manuscrites ne sont pas intégrées au texte du livre. Colonnes français et maîtrise ajoutées.
 
+**Maîtrise : toutes les entrées sont définies sur 🔴 À revoir (réinitialisation demandée, indépendamment des surlignages).**
+
 | Kana (livre) | Kanji / écriture (livre) | English (livre) | Français (ajout) | Maîtrise |
 |---|---|---|---|---|
 | つけます |  | turn on | allumer | 🔴 À revoir |
