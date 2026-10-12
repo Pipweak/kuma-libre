@@ -40,7 +40,7 @@
 | 日本語 | にほんご | japonais (langue) | Japanese language | 🟡 À réviser |
 | ～語 | ～ご | langue… | …language | 🟡 À réviser |
 | 何 | なん | quoi | what | 🟡 À réviser |
-| そう | そう | ainsi, c'est ça | so | 🟡 À réviser |
+| そう | そう | comme ça, ainsi | so | 🟡 À réviser |
 
 ## Expressions
 
@@ -49,9 +49,9 @@
 | あのう | あのう | euh… | er… | 🟡 À réviser |
 | えっ | えっ | hein ? quoi ? | oh? what? | 🟡 À réviser |
 | どうぞ。 | どうぞ | Tenez, je vous en prie | Here you are | 🟡 À réviser |
-| どうもありがとう（ございます）。 | どうもありがとう（ございます） | Merci (beaucoup) | Thank you (very much) | 🟡 À réviser |
+| ［どうも］ありがとう［ございます］。 | ［どうも］ありがとう［ございます］ | Merci (beaucoup) ; ございます rend l'expression plus polie | Thank you (very much) | 🟡 À réviser |
 | そうですか。 | そうですか | Ah, je vois | I see | 🟡 À réviser |
-| 違います。 | ちがいます | Non, ce n'est pas ça | No, that's wrong | 🟡 À réviser |
+| 違います。 | ちがいます | Non, ce n'est pas cela / vous vous trompez | No, it isn't / that's wrong | 🟡 À réviser |
 | あ | あ | Ah ! | Oh! | 🟡 À réviser |
 | これからお世話になります。 | これからおせわになります | Merci d'avance pour votre aide | Thank you in advance for your kindness | 🔴 À revoir |
-| こちらこそよろしくお願いします。 | こちらこそよろしくおねがいします | Tout le plaisir est pour moi | Pleased to meet you, too | 🔴 À revoir |
+| こちらこそよろしくお願いします。 | こちらこそよろしくおねがいします | Ravi de faire votre connaissance également | Pleased to meet you, too | 🟢 OK |
