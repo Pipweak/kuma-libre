@@ -1,6 +1,8 @@
 # Lesson 17 — I. Vocabulary
 
-Source : photos des pages 106–107. Les annotations manuscrites ne sont pas des entrées du manuel. Le bleu-vert = 🔴 À revoir, le jaune = 🔴 À revoir, l'absence de surlignage = 🔴 À revoir.
+Source : photos des pages 106–107. Les annotations manuscrites ne sont pas des entrées du manuel. 
+
+**Maîtrise : toutes les entrées sont définies sur 🔴 À revoir (réinitialisation demandée, indépendamment des surlignages).**
 
 | Kana (livre) | Kanji / écriture (livre) | English (livre) | Français (ajout) | Maîtrise |
 | --- | --- | --- | --- | --- |
