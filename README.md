@@ -1,0 +1,25 @@
+# Minna no Nihongo — Base de révision 🇯🇵
+
+Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Minna no Nihongo — Shokyū I*.
+
+## Leçons
+
+- [Leçon 1 — Vocabulaire](lessons/lesson-01/vocabulary.md)
+- [Leçon 2 — Vocabulaire](lessons/lesson-02/vocabulary.md)
+- [Leçon 3 — Vocabulaire](lessons/lesson-03/vocabulary.md)
+- [Leçon 4 — Vocabulaire](lessons/lesson-04/vocabulary.md)
+- [Glossaire des termes du manuel](reference/instruction-terms.md)
+
+## Format
+
+Chaque entrée est une ligne de tableau Markdown : **Japonais | Lecture | Français | English**.
+
+Les entrées sont regroupées par leçon et séparées en vocabulaire, expressions et noms propres. Les lectures de mots écrits en katakana restent en katakana. Les traductions françaises sont des aides à l'étude.
+
+## Utilisation en révision
+
+Demander des quiz par leçon, japonais → français, français → japonais, ou kanji → lecture. Les fichiers sont la source des questions : aucun mot ne doit être présenté comme appartenant à une leçon sans figurer dans son fichier.
+
+## Méthode d'ajout
+
+Pour chaque nouvelle photo, identifier la leçon et la section, transcrire les entrées visibles, puis enrichir le fichier concerné sans supprimer les données existantes.
