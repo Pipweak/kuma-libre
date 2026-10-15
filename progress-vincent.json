@@ -366,6 +366,286 @@
       "successful_dates": [],
       "last_reviewed": "2026-10-15",
       "last_result": "incorrect"
+    },
+    "lesson-01:vocabulary:教師": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "教師",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:学生": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "学生",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:会社員": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "会社員",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:日本": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "日本",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:アメリカ": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "アメリカ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:インド": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "インド",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:インドネシア": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "インドネシア",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:タイ": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "タイ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:中国": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "中国",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:ドイツ": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "ドイツ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:先生": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "先生",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:あの人": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "あの人",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:だれ": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "だれ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:～歳": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "～歳",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:何歳": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "何歳",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:はい": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "はい",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:いいえ": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "いいえ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:初めまして。": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "初めまして。",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:どうぞよろしくお願いします。": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "どうぞよろしくお願いします。",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-01:vocabulary:韓国": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "韓国",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-01:vocabulary:大学": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "大学",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-01:vocabulary:失礼ですが、": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "失礼ですが、",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
     }
   }
 }
