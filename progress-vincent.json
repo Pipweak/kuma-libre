@@ -659,6 +659,612 @@
       ],
       "last_reviewed": "2026-10-15",
       "last_result": "correct"
+    },
+    "lesson-03:vocabulary:ここ": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "ここ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:そこ": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "そこ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:あそこ": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "あそこ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:どこ": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "どこ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:こちら": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "こちら",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:そちら": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "そちら",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:あちら": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "あちら",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:どちら": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "どちら",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:教室": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "教室",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:食堂": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "食堂",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:事務所": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "事務所",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 1,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:会議室": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "会議室",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:受付": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "受付",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:ロビー": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "ロビー",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:部屋": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "部屋",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:トイレ（お手洗い）": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "トイレ（お手洗い）",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:階段": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "階段",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:エレベーター": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "エレベーター",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:エスカレーター": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "エスカレーター",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:自動販売機": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "自動販売機",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:電話": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "電話",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:お国": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "お国",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:会社": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "会社",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:うち": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "うち",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:靴": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "靴",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:ネクタイ": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "ネクタイ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:ワイン": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "ワイン",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:売り場": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "売り場",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:地下": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "地下",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:～階": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "～階",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:何階": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "何階",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:～円": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "～円",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:いくら": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "いくら",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:千": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "千",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:万": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "万",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:すみません。": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "すみません。",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:どうも。": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "どうも。",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:いらっしゃいませ。": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "いらっしゃいませ。",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:～を見せてください。": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "～を見せてください。",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:じゃ": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "じゃ",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:～をください。": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "～をください。",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:イタリア": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "イタリア",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:スイス": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "スイス",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:フランス": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "フランス",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:ジャカルタ": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "ジャカルタ",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:バンコク": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "バンコク",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:ベルリン": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "ベルリン",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-03:vocabulary:新大阪": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "新大阪",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
     }
   }
 }
