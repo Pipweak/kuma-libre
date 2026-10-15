@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "description": "Progression des quiz, indépendante des fichiers de vocabulaire. Toute entrée absente de entries est considérée comme à revoir (red), avec zéro réussite.",
+  "rules": {
+    "correct": "Première réussite: yellow; après trois réussites sur trois dates distinctes: green.",
+    "incorrect": "Une erreur fait redescendre green à yellow ou yellow à red; elle remet à zéro la série de réussites vers green.",
+    "session": "Une seule réussite par mot et par date locale compte pour la progression vers green.",
+    "default_status": "red"
+  },
+  "entries": {
+    "lesson-01:vocabulary:わたし": {
+      "source": "lessons/lesson-01/vocabulary.md",
+      "japanese": "わたし",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    }
+  }
+}
