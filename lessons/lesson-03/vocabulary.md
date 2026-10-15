@@ -4,62 +4,62 @@
 
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
-| ここ | ここ | ici | here | 🔴 À revoir |
-| そこ | そこ | là (près de toi) | there (near listener) | 🔴 À revoir |
-| あそこ | あそこ | là-bas | over there | 🔴 À revoir |
-| どこ | どこ | où | where | 🔴 À revoir |
+| ここ | ここ | ici | here | 🟡 À réviser |
+| そこ | そこ | là (près de toi) | there (near listener) | 🟡 À réviser |
+| あそこ | あそこ | là-bas | over there | 🟡 À réviser |
+| どこ | どこ | où | where | 🟡 À réviser |
 | こちら | こちら | par ici, ici (poli) | this way, here (polite) | 🔴 À revoir |
-| そちら | そちら | par là / cet endroit près de l'interlocuteur (poli) | that way (near listener) | 🔴 À revoir |
-| あちら | あちら | par là-bas (poli) | that way (over there) | 🔴 À revoir |
-| どちら | どちら | où, de quel côté (poli) | which way, where | 🔴 À revoir |
+| そちら | そちら | par là / cet endroit près de l'interlocuteur (poli) | that way (near listener) | 🟡 À réviser |
+| あちら | あちら | par là-bas (poli) | that way (over there) | 🟡 À réviser |
+| どちら | どちら | où, de quel côté (poli) | which way, where | 🟡 À réviser |
 | 教室 | きょうしつ | salle de classe | classroom | 🔴 À revoir |
 | 食堂 | しょくどう | cantine, réfectoire | dining hall | 🔴 À revoir |
-| 事務所 | じむしょ | bureau (lieu) | office | 🔴 À revoir |
+| 事務所 | じむしょ | bureau (lieu) | office | 🟡 À réviser |
 | 会議室 | かいぎしつ | salle de réunion | meeting room | 🔴 À revoir |
 | 受付 | うけつけ | accueil, réception | reception desk | 🔴 À revoir |
-| ロビー | ロビー | hall d'entrée | lobby | 🔴 À revoir |
-| 部屋 | へや | chambre, pièce | room | 🔴 À revoir |
-| トイレ（お手洗い） | トイレ（おてあらい） | toilettes | restroom | 🔴 À revoir |
+| ロビー | ロビー | hall d'entrée | lobby | 🟡 À réviser |
+| 部屋 | へや | chambre, pièce | room | 🟡 À réviser |
+| トイレ（お手洗い） | トイレ（おてあらい） | toilettes | restroom | 🟡 À réviser |
 | 階段 | かいだん | escalier | staircase | 🔴 À revoir |
-| エレベーター | エレベーター | ascenseur | elevator | 🔴 À revoir |
-| エスカレーター | エスカレーター | escalator | escalator | 🔴 À revoir |
-| 自動販売機 | じどうはんばいき | distributeur automatique | vending machine | 🔴 À revoir |
-| 電話 | でんわ | téléphone, appel téléphonique | telephone | 🔴 À revoir |
-| お国 | おくに | pays (poli) | country | 🔴 À revoir |
-| 会社 | かいしゃ | entreprise | company | 🔴 À revoir |
-| うち | うち | chez moi, maison | home | 🔴 À revoir |
-| 靴 | くつ | chaussures | shoes | 🔴 À revoir |
-| ネクタイ | ネクタイ | cravate | necktie | 🔴 À revoir |
-| ワイン | ワイン | vin | wine | 🔴 À revoir |
+| エレベーター | エレベーター | ascenseur | elevator | 🟡 À réviser |
+| エスカレーター | エスカレーター | escalator | escalator | 🟡 À réviser |
+| 自動販売機 | じどうはんばいき | distributeur automatique | vending machine | 🟡 À réviser |
+| 電話 | でんわ | téléphone, appel téléphonique | telephone | 🟡 À réviser |
+| お国 | おくに | pays (poli) | country | 🟡 À réviser |
+| 会社 | かいしゃ | entreprise | company | 🟡 À réviser |
+| うち | うち | chez moi, maison | home | 🟡 À réviser |
+| 靴 | くつ | chaussures | shoes | 🟡 À réviser |
+| ネクタイ | ネクタイ | cravate | necktie | 🟡 À réviser |
+| ワイン | ワイン | vin | wine | 🟡 À réviser |
 | 売り場 | うりば | rayon, comptoir de vente | sales counter | 🔴 À revoir |
 | 地下 | ちか | sous-sol | basement | 🔴 À revoir |
-| ～階 | ～かい（～がい） | …e étage | …th floor | 🔴 À revoir |
-| 何階 | なんがい | quel étage | what floor | 🔴 À revoir |
-| ～円 | ～えん | … yens | …yen | 🔴 À revoir |
-| いくら | いくら | combien (prix) | how much | 🔴 À revoir |
-| 百 | ひゃく | cent | hundred | 🔴 À revoir |
-| 千 | せん | mille | thousand | 🔴 À revoir |
-| 万 | まん | dix mille | ten thousand | 🔴 À revoir |
+| ～階 | ～かい（～がい） | …e étage | …th floor | 🟡 À réviser |
+| 何階 | なんがい | quel étage | what floor | 🟡 À réviser |
+| ～円 | ～えん | … yens | …yen | 🟡 À réviser |
+| いくら | いくら | combien (prix) | how much | 🟡 À réviser |
+| 百 | ひゃく | cent | hundred | 🟡 À réviser |
+| 千 | せん | mille | thousand | 🟡 À réviser |
+| 万 | まん | dix mille | ten thousand | 🟡 À réviser |
 
 ## Expressions
 
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
-| すみません。 | すみません | Excusez-moi | Excuse me | 🔴 À revoir |
-| どうも。 | どうも | Merci | Thanks | 🔴 À revoir |
-| いらっしゃいませ。 | いらっしゃいませ | Bienvenue (dans un commerce) | Welcome | 🔴 À revoir |
-| ～を見せてください。 | ～をみせてください | Montrez-moi…, s'il vous plaît | Please show me… | 🔴 À revoir |
+| すみません。 | すみません | Excusez-moi | Excuse me | 🟡 À réviser |
+| どうも。 | どうも | Merci | Thanks | 🟡 À réviser |
+| いらっしゃいませ。 | いらっしゃいませ | Bienvenue (dans un commerce) | Welcome | 🟡 À réviser |
+| ～を見せてください。 | ～をみせてください | Montrez-moi…, s'il vous plaît | Please show me… | 🟡 À réviser |
 | じゃ | じゃ | alors, dans ce cas | well then, in that case | 🔴 À revoir |
-| ～をください。 | ～をください | Donnez-moi…, s'il vous plaît | Give me…, please | 🔴 À revoir |
+| ～をください。 | ～をください | Donnez-moi…, s'il vous plaît | Give me…, please | 🟡 À réviser |
 
 ## Noms propres (exemples du livre)
 
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
-| イタリア | イタリア | Italie | Italy | 🔴 À revoir |
-| スイス | スイス | Suisse | Switzerland | 🔴 À revoir |
-| フランス | フランス | France | France | 🔴 À revoir |
-| ジャカルタ | ジャカルタ | Jakarta | Jakarta | 🔴 À revoir |
-| バンコク | バンコク | Bangkok | Bangkok | 🔴 À revoir |
-| ベルリン | ベルリン | Berlin | Berlin | 🔴 À revoir |
-| 新大阪 | しんおおさか | Shin-Osaka (gare) | Shin-Osaka station | 🔴 À revoir |
+| イタリア | イタリア | Italie | Italy | 🟡 À réviser |
+| スイス | スイス | Suisse | Switzerland | 🟡 À réviser |
+| フランス | フランス | France | France | 🟡 À réviser |
+| ジャカルタ | ジャカルタ | Jakarta | Jakarta | 🟡 À réviser |
+| バンコク | バンコク | Bangkok | Bangkok | 🟡 À réviser |
+| ベルリン | ベルリン | Berlin | Berlin | 🟡 À réviser |
+| 新大阪 | しんおおさか | Shin-Osaka (gare) | Shin-Osaka station | 🟡 À réviser |
