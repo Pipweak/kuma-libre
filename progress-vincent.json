@@ -646,6 +646,19 @@
       "successful_dates": [],
       "last_reviewed": "2026-10-15",
       "last_result": "incorrect"
+    },
+    "lesson-03:vocabulary:百": {
+      "source": "lessons/lesson-03/vocabulary.md",
+      "japanese": "百",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
     }
   }
 }
