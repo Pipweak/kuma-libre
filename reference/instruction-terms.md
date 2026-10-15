@@ -2,13 +2,13 @@
 
 Cette page correspond au glossaire introductif photographié (p. 8). Elle est distincte du vocabulaire des leçons.
 
-> **Maîtrise :** 🟢 OK (surligné bleu-vert/vert) · 🟡 À réviser (jaune) · 🔴 À revoir (rouge ou sans surlignage). Statuts initiaux estimés d'après les photos ; modifiables pendant les quiz.
+> **Maîtrise :** toutes les entrées sont réinitialisées à 🔴 À revoir. Progression suivie par quiz.
 
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
-| 第～課 | だい～か | leçon | Lesson | 🟢 OK |
-| 文型 | ぶんけい | structure de phrase | sentence pattern | 🟢 OK |
-| 例文 | れいぶん | phrase d'exemple | example sentence | 🟢 OK |
+| 第～課 | だい～か | leçon | Lesson | 🔴 À revoir |
+| 文型 | ぶんけい | structure de phrase | sentence pattern | 🔴 À revoir |
+| 例文 | れいぶん | phrase d'exemple | example sentence | 🔴 À revoir |
 | 会話 | かいわ | conversation | conversation | 🔴 À revoir |
 | 練習 | れんしゅう | exercice | exercise | 🔴 À revoir |
 | 問題 | もんだい | question d'exercice | practice question | 🔴 À revoir |
