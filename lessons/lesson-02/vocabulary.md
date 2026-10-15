@@ -4,35 +4,35 @@
 
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
-| これ | これ | ceci (près de moi) | this | 🔴 À revoir |
-| それ | それ | cela (près de toi) | that (near listener) | 🔴 À revoir |
-| あれ | あれ | cela (là-bas) | that (over there) | 🔴 À revoir |
-| この～ | この～ | ce… (près de moi) | this… | 🔴 À revoir |
-| その～ | その～ | ce… (près de toi) | that… (near listener) | 🔴 À revoir |
-| あの～ | あの～ | ce… (là-bas) | that… (over there) | 🔴 À revoir |
-| 本 | ほん | livre | book | 🔴 À revoir |
+| これ | これ | ceci (près de moi) | this | 🟡 À réviser |
+| それ | それ | cela (près de toi) | that (near listener) | 🟡 À réviser |
+| あれ | あれ | cela (là-bas) | that (over there) | 🟡 À réviser |
+| この～ | この～ | ce… (près de moi) | this… | 🟡 À réviser |
+| その～ | その～ | ce… (près de toi) | that… (near listener) | 🟡 À réviser |
+| あの～ | あの～ | ce… (là-bas) | that… (over there) | 🟡 À réviser |
+| 本 | ほん | livre | book | 🟡 À réviser |
 | 辞書 | じしょ | dictionnaire | dictionary | 🔴 À revoir |
 | 雑誌 | ざっし | magazine | magazine | 🔴 À revoir |
 | 新聞 | しんぶん | journal | newspaper | 🔴 À revoir |
-| ノート | ノート | cahier | notebook | 🔴 À revoir |
+| ノート | ノート | cahier | notebook | 🟡 À réviser |
 | 手帳 | てちょう | agenda | personal organiser | 🔴 À revoir |
-| 名刺 | めいし | carte de visite | business card | 🔴 À revoir |
-| カード | カード | carte (de crédit, etc.) | card | 🔴 À revoir |
+| 名刺 | めいし | carte de visite | business card | 🟡 À réviser |
+| カード | カード | carte (de crédit, etc.) | card | 🟡 À réviser |
 | 鉛筆 | えんぴつ | crayon à papier | pencil | 🔴 À revoir |
-| ボールペン | ボールペン | stylo à bille | ballpoint pen | 🔴 À revoir |
+| ボールペン | ボールペン | stylo à bille | ballpoint pen | 🟡 À réviser |
 | シャープペンシル | シャープペンシル | porte-mine | mechanical pencil | 🔴 À revoir |
-| 鍵 | かぎ | clé | key | 🔴 À revoir |
-| 時計 | とけい | montre, horloge | watch, clock | 🔴 À revoir |
-| 傘 | かさ | parapluie | umbrella | 🔴 À revoir |
+| 鍵 | かぎ | clé | key | 🟡 À réviser |
+| 時計 | とけい | montre, horloge | watch, clock | 🟡 À réviser |
+| 傘 | かさ | parapluie | umbrella | 🟡 À réviser |
 | かばん | かばん | sac, mallette | bag, briefcase | 🔴 À revoir |
 | CD | シーディー | CD | CD | 🔴 À revoir |
-| テレビ | テレビ | télévision | television | 🔴 À revoir |
-| ラジオ | ラジオ | radio | radio | 🔴 À revoir |
+| テレビ | テレビ | télévision | television | 🟡 À réviser |
+| ラジオ | ラジオ | radio | radio | 🟡 À réviser |
 | カメラ | カメラ | appareil photo | camera | 🔴 À revoir |
 | コンピューター | コンピューター | ordinateur | computer | 🔴 À revoir |
-| 車 | くるま | voiture, véhicule | car, vehicle | 🔴 À revoir |
-| 机 | つくえ | bureau, table de travail | desk | 🔴 À revoir |
-| いす | いす | chaise | chair | 🔴 À revoir |
+| 車 | くるま | voiture, véhicule | car, vehicle | 🟡 À réviser |
+| 机 | つくえ | bureau, table de travail | desk | 🟡 À réviser |
+| いす | いす | chaise | chair | 🟡 À réviser |
 | チョコレート | チョコレート | chocolat | chocolate | 🔴 À revoir |
 | コーヒー | コーヒー | café | coffee | 🔴 À revoir |
 | お土産 | おみやげ | souvenir, cadeau | souvenir, present | 🔴 À revoir |
