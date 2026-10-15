@@ -1,43 +1,43 @@
 # Leçon 1 — Vocabulaire
 
-> **Maîtrise :** 🟢 OK (surligné bleu-vert/vert) · 🟡 À réviser (jaune) · 🔴 À revoir (rouge ou sans surlignage). Statuts initiaux estimés d'après les photos ; modifiables pendant les quiz.
+> **Maîtrise :** toutes les entrées sont réinitialisées à 🔴 À revoir. Progression suivie par quiz.
 
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
-| わたし | わたし | je, moi | I | 🟡 À réviser |
-| あなた | あなた | tu, vous | you | 🟡 À réviser |
-| あの人 | あのひと | cette personne, il/elle | that person | 🟡 À réviser |
-| あの方 | あのかた | cette personne (forme polie de あの人) | that person (polite) | 🟡 À réviser |
-| ～さん | ～さん | M./Mme (suffixe honorifique) | Mr./Ms. | 🟡 À réviser |
-| ～ちゃん | ～ちゃん | suffixe affectueux (enfant, proche) | affectionate suffix | 🟡 À réviser |
-| ～人 | ～じん | nationalité, habitant de | nationality suffix | 🟡 À réviser |
-| 先生 | せんせい | professeur (titre, pas pour désigner son propre métier) | teacher | 🟡 À réviser |
-| 教師 | きょうし | enseignant (profession) | teacher | 🟢 OK |
-| 学生 | がくせい | étudiant | student | 🟡 À réviser |
-| 会社員 | かいしゃいん | employé d'entreprise | company employee | 🟡 À réviser |
-| 社員 | しゃいん | employé d'une entreprise précise | company employee | 🟢 OK |
-| 銀行員 | ぎんこういん | employé de banque | bank employee | 🟢 OK |
-| 医者 | いしゃ | médecin | doctor | 🟡 À réviser |
-| 研究者 | けんきゅうしゃ | chercheur | researcher | 🟢 OK |
-| 大学 | だいがく | université | university | 🟢 OK |
-| 病院 | びょういん | hôpital | hospital | 🟡 À réviser |
-| だれ | だれ | qui | who | 🟡 À réviser |
-| どなた | どなた | qui (poli) | who (polite) | 🟡 À réviser |
-| ～歳 | ～さい | ans (âge) | years old | 🟡 À réviser |
-| 何歳 | なんさい | quel âge | how old | 🟡 À réviser |
-| おいくつ | おいくつ | quel âge (poli) | how old (polite) | 🟡 À réviser |
-| はい | はい | oui | yes | 🟡 À réviser |
-| いいえ | いいえ | non | no | 🟡 À réviser |
+| わたし | わたし | je, moi | I | 🔴 À revoir |
+| あなた | あなた | tu, vous | you | 🔴 À revoir |
+| あの人 | あのひと | cette personne, il/elle | that person | 🔴 À revoir |
+| あの方 | あのかた | cette personne (forme polie de あの人) | that person (polite) | 🔴 À revoir |
+| ～さん | ～さん | M./Mme (suffixe honorifique) | Mr./Ms. | 🔴 À revoir |
+| ～ちゃん | ～ちゃん | suffixe affectueux (enfant, proche) | affectionate suffix | 🔴 À revoir |
+| ～人 | ～じん | nationalité, habitant de | nationality suffix | 🔴 À revoir |
+| 先生 | せんせい | professeur (titre, pas pour désigner son propre métier) | teacher | 🔴 À revoir |
+| 教師 | きょうし | enseignant (profession) | teacher | 🔴 À revoir |
+| 学生 | がくせい | étudiant | student | 🔴 À revoir |
+| 会社員 | かいしゃいん | employé d'entreprise | company employee | 🔴 À revoir |
+| 社員 | しゃいん | employé d'une entreprise précise | company employee | 🔴 À revoir |
+| 銀行員 | ぎんこういん | employé de banque | bank employee | 🔴 À revoir |
+| 医者 | いしゃ | médecin | doctor | 🔴 À revoir |
+| 研究者 | けんきゅうしゃ | chercheur | researcher | 🔴 À revoir |
+| 大学 | だいがく | université | university | 🔴 À revoir |
+| 病院 | びょういん | hôpital | hospital | 🔴 À revoir |
+| だれ | だれ | qui | who | 🔴 À revoir |
+| どなた | どなた | qui (poli) | who (polite) | 🔴 À revoir |
+| ～歳 | ～さい | ans (âge) | years old | 🔴 À revoir |
+| 何歳 | なんさい | quel âge | how old | 🔴 À revoir |
+| おいくつ | おいくつ | quel âge (poli) | how old (polite) | 🔴 À revoir |
+| はい | はい | oui | yes | 🔴 À revoir |
+| いいえ | いいえ | non | no | 🔴 À revoir |
 
 ## Expressions et conversation
 
 | Japonais | Lecture | Français | English | Maîtrise |
 |---|---|---|---|---|
-| 初めまして。 | はじめまして | Enchanté (première rencontre) | How do you do? | 🟡 À réviser |
-| ～から来ました。 | ～からきました | Je viens de… | I'm from… | 🟡 À réviser |
-| どうぞよろしくお願いします。 | どうぞよろしくおねがいします | Ravi de faire votre connaissance | Pleased to meet you | 🟡 À réviser |
-| 失礼ですが、 | しつれいですが | Excusez-moi, mais… | Excuse me, but… | 🟢 OK |
-| お名前は？ | おなまえは？ | Comment vous appelez-vous ? | May I have your name? | 🟡 À réviser |
+| 初めまして。 | はじめまして | Enchanté (première rencontre) | How do you do? | 🔴 À revoir |
+| ～から来ました。 | ～からきました | Je viens de… | I'm from… | 🔴 À revoir |
+| どうぞよろしくお願いします。 | どうぞよろしくおねがいします | Ravi de faire votre connaissance | Pleased to meet you | 🔴 À revoir |
+| 失礼ですが、 | しつれいですが | Excusez-moi, mais… | Excuse me, but… | 🔴 À revoir |
+| お名前は？ | おなまえは？ | Comment vous appelez-vous ? | May I have your name? | 🔴 À revoir |
 | こちらは～さんです。 | こちらは～さんです | Voici M./Mme… | This is Mr./Ms.… | 🔴 À revoir |
 
 ## Pays et noms propres (exemples du livre)
