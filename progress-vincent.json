@@ -1612,6 +1612,332 @@
       "successful_dates": [],
       "last_reviewed": "2026-10-15",
       "last_result": "incorrect"
+    },
+    "lesson-04:vocabulary:美術館": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "美術館",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:今": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "今",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:～時": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "～時",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:～分": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "～分",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:半": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "半",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:今晩": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "今晩",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:映画": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "映画",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:月曜日": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "月曜日",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:火曜日": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "火曜日",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:水曜日": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "水曜日",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:木曜日": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "木曜日",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:土曜日": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "土曜日",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:日曜日": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "日曜日",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:何曜日": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "何曜日",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:～から": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "～から",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:～まで": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "～まで",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:～と～": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "～と～",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:そちら": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "そちら",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:ニューヨーク": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "ニューヨーク",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:ロンドン": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "ロンドン",
+      "status": "yellow",
+      "correct_total": 1,
+      "incorrect_total": 0,
+      "progress_streak": 1,
+      "successful_dates": [
+        "2026-10-15"
+      ],
+      "last_reviewed": "2026-10-15",
+      "last_result": "correct"
+    },
+    "lesson-04:vocabulary:郵便局": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "郵便局",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-04:vocabulary:図書館": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "図書館",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-04:vocabulary:休み": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "休み",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-04:vocabulary:昼休み": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "昼休み",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-04:vocabulary:試験": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "試験",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
+    },
+    "lesson-04:vocabulary:会議": {
+      "source": "lessons/lesson-04/vocabulary.md",
+      "japanese": "会議",
+      "status": "red",
+      "correct_total": 0,
+      "incorrect_total": 1,
+      "progress_streak": 0,
+      "successful_dates": [],
+      "last_reviewed": "2026-10-15",
+      "last_result": "incorrect"
     }
   }
 }
