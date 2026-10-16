@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Maquettes mobile-first de Kuma Libre, application de révision du vocabulaire japonais."
+    />
+    <title>Kuma Libre — Maquettes UI V2</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-view="board">
+    <svg class="icon-library" aria-hidden="true">
+      <symbol id="icon-menu" viewBox="0 0 24 24">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </symbol>
+      <symbol id="icon-arrow-left" viewBox="0 0 24 24">
+        <path d="m15 18-6-6 6-6" />
+      </symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24">
+        <path d="m6 6 12 12M18 6 6 18" />
+      </symbol>
+      <symbol id="icon-volume" viewBox="0 0 24 24">
+        <path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z" />
+        <path d="M15 9.5a4 4 0 0 1 0 5M17.8 7a7.4 7.4 0 0 1 0 10" />
+      </symbol>
+      <symbol id="icon-mic" viewBox="0 0 24 24">
+        <rect x="9" y="3" width="6" height="11" rx="3" />
+        <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m5 12.5 4.2 4.2L19 7" />
+      </symbol>
+      <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+        <path d="m9 18 6-6-6-6" />
+      </symbol>
+      <symbol id="icon-book" viewBox="0 0 24 24">
+        <path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22V5.5Z" />
+        <path d="M4 5.5V22M8 6h8M8 10h6" />
+      </symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24">
+        <path d="M4 20V10h4v10M10 20V4h4v16M16 20v-7h4v7M3 20h18" />
+      </symbol>
+      <symbol id="icon-user" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4.5 21a7.5 7.5 0 0 1 15 0" />
+      </symbol>
+      <symbol id="icon-shuffle" viewBox="0 0 24 24">
+        <path d="M4 7h3.5c4 0 5 10 9 10H20M17 4l3 3-3 3M4 17h3.5c1.6 0 2.7-1.6 3.8-3.5M17 14l3 3-3 3" />
+      </symbol>
+      <symbol id="icon-list" viewBox="0 0 24 24">
+        <path d="M8 6h12M8 12h12M8 18h12" />
+        <circle cx="4" cy="6" r="1" />
+        <circle cx="4" cy="12" r="1" />
+        <circle cx="4" cy="18" r="1" />
+      </symbol>
+    </svg>
+
+    <header class="review-header">
+      <div class="review-brand">
+        <span class="brand-mark brand-mark--small" aria-hidden="true">
+          <span class="brand-ear brand-ear--left"></span>
+          <span class="brand-ear brand-ear--right"></span>
+          <span class="brand-face">く</span>
+        </span>
+        <div>
+          <strong>Kuma Libre</strong>
+          <span>Exploration UI · version 02</span>
+        </div>
+      </div>
+
+      <div class="view-switch" aria-label="Mode d'affichage">
+        <button type="button" class="view-switch__button is-active" data-view-mode="board">Planche</button>
+        <button type="button" class="view-switch__button" data-view-mode="focus">Prototype</button>
+      </div>
+    </header>
+
+    <section class="design-intro">
+      <div>
+        <p class="eyebrow">Direction plus expressive</p>
+        <h1>Une révision qui donne envie de revenir.</h1>
+        <p>
+          Une interface plus graphique et chaleureuse, portée par Kuma et des interactions tactiles. Le jeu reste
+          léger&nbsp;: aucun compteur artificiel ne détourne l’attention du vocabulaire.
+        </p>
+      </div>
+      <div class="design-principles" aria-label="Principes de conception">
+        <span>Plus illustré</span>
+        <span>Retour immédiat</span>
+        <span>Toujours simple</span>
+        <span>Kuma comme repère</span>
+      </div>
+    </section>
+
+    <nav class="screen-nav" aria-label="Écrans de la maquette">
+      <button type="button" data-go="home">01 Accueil</button>
+      <button type="button" data-go="config">02 Configuration</button>
+      <button type="button" data-go="quiz">03 Question</button>
+      <button type="button" data-go="correct">04 Correct</button>
+      <button type="button" data-go="incorrect">05 Erreur</button>
+      <button type="button" data-go="progress">06 Progression</button>
+      <button type="button" data-go="menu">07 Menu</button>
+      <button type="button" data-go="complete">08 Fin de passe</button>
+      <button type="button" data-go="desktop">09 Bureau</button>
+    </nav>
+
+    <main class="artboard-grid" id="mockup-board">
+      <article class="artboard is-selected" data-screen="home">
+        <header class="artboard__header">
+          <span>01</span>
+          <div>
+            <h2>Accueil</h2>
+            <p>Une reprise immédiate, un seul choix secondaire.</p>
+          </div>
+        </header>
+
+        <div class="phone-frame">
+          <div class="phone-speaker"></div>
+          <section class="app-screen home-screen">
+            <header class="app-header">
+              <a class="app-brand" href="#" aria-label="Kuma Libre">
+                <span class="brand-mark" aria-hidden="true">
+                  <span class="brand-ear brand-ear--left"></span>
+                  <span class="brand-ear brand-ear--right"></span>
+                  <span class="brand-face">く</span>
+                </span>
+                <span>Kuma Libre</span>
+              </a>
+              <button class="icon-button" type="button" aria-label="Ouvrir le menu" data-go="menu">
+                <svg><use href="#icon-menu"></use></svg>
+              </button>
+            </header>
+
+            <div class="home-hero">
+              <div class="kuma-guide" aria-hidden="true">
+                <span class="kuma-spark kuma-spark--one">✦</span>
+                <span class="kuma-spark kuma-spark--two">✦</span>
+                <div class="kuma-bubble">いっしょに<br /><strong>やろう！</strong></div>
+                <div class="kuma-mascot">
+                  <span class="kuma-ear kuma-ear--left"></span>
+                  <span class="kuma-ear kuma-ear--right"></span>
+                  <span class="kuma-head">
+                    <i class="kuma-eye kuma-eye--left"></i>
+                    <i class="kuma-eye kuma-eye--right"></i>
+                    <i class="kuma-muzzle"><b></b></i>
+                    <i class="kuma-cheek kuma-cheek--left"></i>
+                    <i class="kuma-cheek kuma-cheek--right"></i>
+                  </span>
+                  <span class="kuma-body"><i></i></span>
+                </div>
+              </div>
+              <p class="eyebrow">Révision du jour</p>
+              <h3>Prêt pour<br />une petite passe&nbsp;?</h3>
+              <p>Quelques minutes suffisent pour faire avancer ton japonais.</p>
+            </div>
+
+            <div class="session-card">
+              <div class="session-card__topline">
+                <span class="book-icon"><svg><use href="#icon-book"></use></svg></span>
+                <div>
+                  <strong>Minna no Nihongo · Volume 1</strong>
+                  <span>Leçons 1 à 6</span>
+                </div>
+              </div>
+
+              <div class="direction-summary">
+                <span>日本語</span>
+                <span class="direction-arrow">→</span>
+                <span>Sens</span>
+              </div>
+
+              <div class="session-card__count">
+                <strong>42</strong>
+                <span>mots non maîtrisés</span>
+              </div>
+
+              <button class="button button--primary button--wide" type="button" data-go="quiz">
+                  C’est parti !
+                <svg><use href="#icon-arrow-right"></use></svg>
+              </button>
+              <button class="text-button" type="button" data-go="config">Configurer le quiz</button>
+            </div>
+
+            <div class="mini-progress">
+              <div class="mini-progress__title">
+                <span>Progression générale</span>
+                <button type="button" data-go="progress">Voir</button>
+              </div>
+              <div class="dual-progress">
+                <span title="Compréhension : 68 %" style="--value: 68%"></span>
+                <span title="Production : 41 %" style="--value: 41%"></span>
+              </div>
+              <div class="mini-progress__legend">
+                <span><i class="dot dot--ink"></i>Comprendre 68 %</span>
+                <span><i class="dot dot--brand"></i>Retrouver 41 %</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="artboard" data-screen="config">
+        <header class="artboard__header">
+          <span>02</span>
+          <div>
+            <h2>Configuration</h2>
+            <p>Les réglages du quiz, regroupés avant la passe.</p>
+          </div>
+        </header>
+
+        <div class="phone-frame">
+          <div class="phone-speaker"></div>
+          <section class="app-screen config-screen">
+            <header class="app-header app-header--title">
+              <button class="icon-button" type="button" aria-label="Retour" data-go="home">
+                <svg><use href="#icon-arrow-left"></use></svg>
+              </button>
+              <strong>Configurer</strong>
+              <span class="header-spacer"></span>
+            </header>
+
+            <div class="screen-scroll">
+              <div class="form-section">
+                <label class="field-label" for="book-select">Ouvrage</label>
+                <button id="book-select" class="select-card" type="button">
+                  <span class="book-icon"><svg><use href="#icon-book"></use></svg></span>
+                  <span>
+                    <strong>Minna no Nihongo</strong>
+                    <small>Volume 1 · 18 leçons</small>
+                  </span>
+                  <svg><use href="#icon-arrow-right"></use></svg>
+                </button>
+              </div>
+
+              <div class="form-section">
+                <div class="field-label-row">
+                  <span class="field-label">Leçons</span>
+                  <button class="tiny-link" type="button">Tout sélectionner</button>
+                </div>
+                <div class="lesson-grid" data-multi-choice>
+                  <button type="button" aria-pressed="true">1</button>
+                  <button type="button" aria-pressed="true">2</button>
+                  <button type="button" aria-pressed="true">3</button>
+                  <button type="button" aria-pressed="true">4</button>
+                  <button type="button" aria-pressed="true">5</button>
+                  <button type="button" aria-pressed="true">6</button>
+                  <button type="button" aria-pressed="false">7</button>
+                  <button type="button" aria-pressed="false">8</button>
+                  <button type="button" class="lesson-more">+10</button>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <span class="field-label">Sens du quiz</span>
+                <div class="segmented-control segmented-control--direction" data-choice-group>
+                  <button type="button" aria-pressed="true">
+                    <span class="jp-label">日本語</span>
+                    <span>→ Sens</span>
+                  </button>
+                  <button type="button" aria-pressed="false">
+                    <span>Sens →</span>
+                    <span class="jp-label">日本語</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <span class="field-label">Mots à inclure</span>
+                <div class="status-options" data-multi-choice>
+                  <button class="status-option status-option--red" type="button" aria-pressed="true">
+                    <i></i><span><strong>Rouge</strong><small>Non maîtrisé</small></span><svg><use href="#icon-check"></use></svg>
+                  </button>
+                  <button class="status-option status-option--yellow" type="button" aria-pressed="true">
+                    <i></i><span><strong>Jaune</strong><small>En cours</small></span><svg><use href="#icon-check"></use></svg>
+                  </button>
+                  <button class="status-option status-option--green" type="button" aria-pressed="false">
+                    <i></i><span><strong>Vert</strong><small>Maîtrisé</small></span><svg><use href="#icon-check"></use></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <span class="field-label">Ordre</span>
+                <div class="segmented-control" data-choice-group>
+                  <button type="button" aria-pressed="true"><svg><use href="#icon-shuffle"></use></svg>Aléatoire</button>
+                  <button type="button" aria-pressed="false"><svg><use href="#icon-list"></use></svg>Dans l’ordre</button>
+                </div>
+              </div>
+            </div>
+
+            <footer class="sticky-action">
+              <span><strong data-question-count>84</strong> questions</span>
+              <button class="button button--primary" type="button" data-go="quiz">Commencer</button>
+            </footer>
+          </section>
+        </div>
+      </article>
+
+      <article class="artboard" data-screen="quiz">
+        <header class="artboard__header">
+          <span>03</span>
+          <div>
+            <h2>Question</h2>
+            <p>Ludique autour, concentré au moment de répondre.</p>
+          </div>
+        </header>
+
+        <div class="phone-frame">
+          <div class="phone-speaker"></div>
+          <section class="app-screen quiz-screen">
+            <header class="quiz-header">
+              <button class="icon-button icon-button--subtle" type="button" aria-label="Quitter" data-go="home">
+                <svg><use href="#icon-close"></use></svg>
+              </button>
+              <div class="quiz-progress">
+                <span><strong>12</strong> / 84</span>
+                <div><i style="--value: 14%"></i></div>
+              </div>
+              <button class="icon-button icon-button--subtle" type="button" aria-label="Ouvrir le menu" data-go="menu">
+                <svg><use href="#icon-menu"></use></svg>
+              </button>
+            </header>
+
+            <div class="quiz-context">
+              <span>Leçon 6</span>
+              <span>日本語 → Sens</span>
+            </div>
+
+            <div class="question-block">
+              <button class="sound-button" type="button" aria-label="Écouter la question">
+                <svg><use href="#icon-volume"></use></svg>
+              </button>
+              <p class="japanese-question" lang="ja">食べます</p>
+              <p class="japanese-reading" lang="ja">たべます</p>
+            </div>
+
+            <div class="answer-area">
+              <label for="answer-empty">Ta réponse</label>
+              <div class="answer-input">
+                <input id="answer-empty" type="text" placeholder="Français ou English" />
+                <button type="button" aria-label="Dicter la réponse"><svg><use href="#icon-mic"></use></svg></button>
+              </div>
+              <button class="button button--primary button--wide" type="button" data-go="correct">Valider</button>
+              <button class="unknown-answer" type="button" data-go="incorrect">Je ne sais pas</button>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="artboard" data-screen="correct">
+        <header class="artboard__header">
+          <span>04</span>
+          <div>
+            <h2>Réponse correcte</h2>
+            <p>Confirmation courte, variantes visibles sans modal.</p>
+          </div>
+        </header>
+
+        <div class="phone-frame">
+          <div class="phone-speaker"></div>
+          <section class="app-screen quiz-screen quiz-screen--feedback">
+            <header class="quiz-header">
+              <button class="icon-button icon-button--subtle" type="button" aria-label="Quitter" data-go="home">
+                <svg><use href="#icon-close"></use></svg>
+              </button>
+              <div class="quiz-progress">
+                <span><strong>12</strong> / 84</span>
+                <div><i style="--value: 14%"></i></div>
+              </div>
+              <span class="header-spacer"></span>
+            </header>
+
+            <div class="quiz-context">
+              <span>Leçon 6</span>
+              <span>日本語 → Sens</span>
+            </div>
+
+            <div class="question-block question-block--compact">
+              <button class="sound-button" type="button" aria-label="Écouter la question">
+                <svg><use href="#icon-volume"></use></svg>
+              </button>
+              <p class="japanese-question" lang="ja">食べます</p>
+              <p class="japanese-reading" lang="ja">たべます</p>
+            </div>
+
+            <div class="answer-area">
+              <label for="answer-correct">Ta réponse</label>
+              <div class="answer-input answer-input--correct">
+                <input id="answer-correct" type="text" value="manger" readonly />
+                <span class="input-status"><svg><use href="#icon-check"></use></svg></span>
+              </div>
+
+              <div class="feedback-card feedback-card--correct" role="status">
+                <div class="feedback-title">
+                  <span><svg><use href="#icon-check"></use></svg></span>
+                  <div><strong>Bonne réponse</strong><small>La progression passe en jaune.</small></div>
+                </div>
+                <dl class="answer-details">
+                  <div><dt>Significations</dt><dd>manger · to eat</dd></div>
+                  <div><dt>Formes</dt><dd lang="ja">食べます · たべます</dd></div>
+                  <div><dt>Rōmaji</dt><dd>tabemasu</dd></div>
+                </dl>
+              </div>
+
+              <button class="button button--primary button--wide" type="button" data-go="quiz">
+                Question suivante
+                <svg><use href="#icon-arrow-right"></use></svg>
+              </button>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="artboard" data-screen="incorrect">
+        <header class="artboard__header">
+          <span>05</span>
+          <div>
+            <h2>Réponse incorrecte</h2>
+            <p>La solution est placée sous la réponse donnée.</p>
+          </div>
+        </header>
+
+        <div class="phone-frame">
+          <div class="phone-speaker"></div>
+          <section class="app-screen quiz-screen quiz-screen--feedback">
+            <header class="quiz-header">
+              <button class="icon-button icon-button--subtle" type="button" aria-label="Quitter" data-go="home">
+                <svg><use href="#icon-close"></use></svg>
+              </button>
+              <div class="quiz-progress">
+                <span><strong>12</strong> / 84</span>
+                <div><i style="--value: 14%"></i></div>
+              </div>
+              <span class="header-spacer"></span>
+            </header>
+
+            <div class="quiz-context">
+              <span>Leçon 6</span>
+              <span>日本語 → Sens</span>
+            </div>
+
+            <div class="question-block question-block--compact">
+              <button class="sound-button" type="button" aria-label="Écouter la question">
+                <svg><use href="#icon-volume"></use></svg>
+              </button>
+              <p class="japanese-question" lang="ja">食べます</p>
+              <p class="japanese-reading" lang="ja">たべます</p>
+            </div>
+
+            <div class="answer-area">
+              <label for="answer-incorrect">Ta réponse</label>
+              <div class="answer-input answer-input--incorrect">
+                <input id="answer-incorrect" type="text" value="boire" readonly />
+                <span class="input-status input-status--incorrect"><svg><use href="#icon-close"></use></svg></span>
+              </div>
+
+              <div class="feedback-card feedback-card--incorrect" role="status">
+                <div class="feedback-title">
+                  <span><svg><use href="#icon-close"></use></svg></span>
+                  <div><strong>À revoir</strong><small>Ce mot reste rouge.</small></div>
+                </div>
+                <dl class="answer-details">
+                  <div><dt>Réponse attendue</dt><dd>manger · to eat</dd></div>
+                  <div><dt>Formes</dt><dd lang="ja">食べます · たべます</dd></div>
+                  <div><dt>Rōmaji</dt><dd>tabemasu</dd></div>
+                </dl>
+                <button class="feedback-link" type="button">Ma réponse devrait être acceptée</button>
+              </div>
+
+              <button class="button button--primary button--wide" type="button" data-go="quiz">
+                Question suivante
+                <svg><use href="#icon-arrow-right"></use></svg>
+              </button>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="artboard" data-screen="progress">
+        <header class="artboard__header">
+          <span>06</span>
+          <div>
+            <h2>Progression</h2>
+            <p>Deux directions et un résultat global, sans graphiques inutiles.</p>
+          </div>
+        </header>
+
+        <div class="phone-frame">
+          <div class="phone-speaker"></div>
+          <section class="app-screen progress-screen">
+            <header class="app-header app-header--title">
+              <button class="icon-button" type="button" aria-label="Retour" data-go="home">
+                <svg><use href="#icon-arrow-left"></use></svg>
+              </button>
+              <strong>Progression</strong>
+              <button class="icon-button" type="button" aria-label="Ouvrir le menu" data-go="menu">
+                <svg><use href="#icon-menu"></use></svg>
+              </button>
+            </header>
+
+            <div class="screen-scroll">
+              <div class="progress-book-title">
+                <span class="book-icon"><svg><use href="#icon-book"></use></svg></span>
+                <div><strong>Minna no Nihongo</strong><small>Volume 1 · 18 leçons</small></div>
+              </div>
+
+              <div class="mastery-card">
+                <div class="mastery-card__score">
+                  <div class="mastery-ring" style="--value: 34"><span>34<small>%</small></span></div>
+                  <div><span>Maîtrise globale</span><strong>128 mots</strong><small>verts dans les deux sens</small></div>
+                </div>
+                <div class="direction-progress-list">
+                  <div>
+                    <span><b>日本語 → Sens</b><em>68 %</em></span>
+                    <i><u style="--value: 68%"></u></i>
+                  </div>
+                  <div>
+                    <span><b>Sens → 日本語</b><em>41 %</em></span>
+                    <i><u style="--value: 41%"></u></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="lesson-list-title"><strong>Par leçon</strong><span>18 leçons</span></div>
+              <div class="lesson-list">
+                <button type="button">
+                  <span class="lesson-number">01</span>
+                  <span class="lesson-info"><strong>Leçon 1</strong><small>24 mots · 18 maîtrisés</small></span>
+                  <span class="lesson-percent">75 %</span>
+                  <svg><use href="#icon-arrow-right"></use></svg>
+                </button>
+                <button type="button">
+                  <span class="lesson-number">02</span>
+                  <span class="lesson-info"><strong>Leçon 2</strong><small>34 mots · 17 maîtrisés</small></span>
+                  <span class="lesson-percent">50 %</span>
+                  <svg><use href="#icon-arrow-right"></use></svg>
+                </button>
+                <button type="button">
+                  <span class="lesson-number">03</span>
+                  <span class="lesson-info"><strong>Leçon 3</strong><small>46 mots · 14 maîtrisés</small></span>
+                  <span class="lesson-percent">30 %</span>
+                  <svg><use href="#icon-arrow-right"></use></svg>
+                </button>
+                <button type="button">
+                  <span class="lesson-number">04</span>
+                  <span class="lesson-info"><strong>Leçon 4</strong><small>51 mots · 8 maîtrisés</small></span>
+                  <span class="lesson-percent">16 %</span>
+                  <svg><use href="#icon-arrow-right"></use></svg>
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="artboard" data-screen="menu">
+        <header class="artboard__header">
+          <span>07</span>
+          <div>
+            <h2>Menu secondaire</h2>
+            <p>Le burger garde les destinations rares hors du quiz.</p>
+          </div>
+        </header>
+
+        <div class="phone-frame">
+          <div class="phone-speaker"></div>
+          <section class="app-screen menu-screen">
+            <div class="menu-backdrop" data-go="home"></div>
+            <aside class="menu-drawer">
+              <div class="menu-drawer__header">
+                <a class="app-brand" href="#">
+                  <span class="brand-mark" aria-hidden="true">
+                    <span class="brand-ear brand-ear--left"></span>
+                    <span class="brand-ear brand-ear--right"></span>
+                    <span class="brand-face">く</span>
+                  </span>
+                  <span>Kuma Libre</span>
+                </a>
+                <button class="icon-button" type="button" aria-label="Fermer le menu" data-go="home">
+                  <svg><use href="#icon-close"></use></svg>
+                </button>
+              </div>
+
+              <nav class="drawer-nav">
+                <button class="is-current" type="button" data-go="home">
+                  <span><svg><use href="#icon-book"></use></svg></span>
+                  Réviser
+                </button>
+                <button type="button" data-go="progress">
+                  <span><svg><use href="#icon-chart"></use></svg></span>
+                  Progression
+                </button>
+                <button type="button">
+                  <span><svg><use href="#icon-user"></use></svg></span>
+                  Compte
+                </button>
+              </nav>
+
+              <div class="drawer-account">
+                <div class="avatar">V</div>
+                <div><strong>Vincent</strong><span>Progression synchronisée</span></div>
+                <svg><use href="#icon-arrow-right"></use></svg>
+              </div>
+              <p class="drawer-version">Kuma Libre · Prototype UI 02</p>
+            </aside>
+          </section>
+        </div>
+      </article>
+
+      <article class="artboard" data-screen="complete">
+        <header class="artboard__header">
+          <span>08</span>
+          <div>
+            <h2>Fin de passe</h2>
+            <p>Un bilan compact, sans remettre les erreurs dans la même passe.</p>
+          </div>
+        </header>
+
+        <div class="phone-frame">
+          <div class="phone-speaker"></div>
+          <section class="app-screen completion-screen">
+            <header class="app-header app-header--title">
+              <span class="header-spacer"></span>
+              <strong>Passe terminée</strong>
+              <button class="icon-button" type="button" aria-label="Fermer" data-go="home">
+                <svg><use href="#icon-close"></use></svg>
+              </button>
+            </header>
+
+            <div class="completion-hero">
+              <div class="kuma-celebration" aria-hidden="true">
+                <span class="celebration-ray celebration-ray--one"></span>
+                <span class="celebration-ray celebration-ray--two"></span>
+                <span class="celebration-ray celebration-ray--three"></span>
+                <div class="kuma-mascot kuma-mascot--small">
+                  <span class="kuma-ear kuma-ear--left"></span>
+                  <span class="kuma-ear kuma-ear--right"></span>
+                  <span class="kuma-head">
+                    <i class="kuma-eye kuma-eye--left"></i>
+                    <i class="kuma-eye kuma-eye--right"></i>
+                    <i class="kuma-muzzle"><b></b></i>
+                    <i class="kuma-cheek kuma-cheek--left"></i>
+                    <i class="kuma-cheek kuma-cheek--right"></i>
+                  </span>
+                  <span class="kuma-body"><i></i></span>
+                </div>
+              </div>
+              <p class="eyebrow">Leçons 1 à 6</p>
+              <h3>すごい！ Bien joué.</h3>
+              <p>Ta progression est enregistrée. Les erreurs reviendront lors d’une prochaine passe.</p>
+            </div>
+
+            <div class="completion-stats">
+              <div><strong>84</strong><span>mots vus</span></div>
+              <div><strong>61</strong><span>corrects</span></div>
+              <div><strong>23</strong><span>à revoir</span></div>
+            </div>
+
+            <div class="progress-change">
+              <span>Compréhension japonaise</span>
+              <div><i style="--value: 68%"></i></div>
+              <p><strong>68 %</strong><em>+ 6 % pendant cette passe</em></p>
+            </div>
+
+            <div class="completion-actions">
+              <button class="button button--primary button--wide" type="button" data-go="config">Encore une passe</button>
+              <button class="button button--secondary button--wide" type="button" data-go="home">Retour à l’accueil</button>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="artboard artboard--wide" data-screen="desktop">
+        <header class="artboard__header">
+          <span>09</span>
+          <div>
+            <h2>Adaptation bureau</h2>
+              <p>La même énergie visuelle, avec une zone de travail toujours contenue.</p>
+          </div>
+        </header>
+
+        <div class="desktop-frame">
+          <header class="desktop-header">
+            <a class="app-brand" href="#">
+              <span class="brand-mark" aria-hidden="true">
+                <span class="brand-ear brand-ear--left"></span>
+                <span class="brand-ear brand-ear--right"></span>
+                <span class="brand-face">く</span>
+              </span>
+              <span>Kuma Libre</span>
+            </a>
+            <nav><button type="button">Réviser</button><button type="button" data-go="progress">Progression</button></nav>
+            <button class="desktop-avatar" type="button">V</button>
+          </header>
+          <div class="desktop-quiz">
+            <div class="quiz-context"><span>Leçon 6</span><span>日本語 → Sens</span></div>
+            <div class="desktop-progress"><span>Question 12 sur 84</span><i><u style="--value: 14%"></u></i></div>
+            <div class="question-block">
+              <button class="sound-button" type="button" aria-label="Écouter la question"><svg><use href="#icon-volume"></use></svg></button>
+              <p class="japanese-question" lang="ja">食べます</p>
+              <p class="japanese-reading" lang="ja">たべます</p>
+            </div>
+            <div class="answer-area">
+              <label for="desktop-answer">Ta réponse</label>
+              <div class="answer-input"><input id="desktop-answer" placeholder="Français ou English" /><button type="button"><svg><use href="#icon-mic"></use></svg></button></div>
+              <button class="button button--primary button--wide" type="button" data-go="correct">Valider ma réponse</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="review-footer">
+      <p>Version 02 — une piste plus joyeuse et illustrative, toujours mobile-first et centrée sur le quiz.</p>
+      <div class="palette" aria-label="Palette proposée">
+        <span style="--swatch: #322c63" title="Aubergine"></span>
+        <span style="--swatch: #fff9ef" title="Crème"></span>
+        <span style="--swatch: #6c63e8" title="Indigo"></span>
+        <span style="--swatch: #40c6a4" title="Menthe"></span>
+        <span style="--swatch: #ffc857" title="Soleil"></span>
+        <span style="--swatch: #ff765e" title="Corail"></span>
+      </div>
+    </footer>
+
+    <script src="mockups.js"></script>
+  </body>
+</html>

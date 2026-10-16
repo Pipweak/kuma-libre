@@ -1,49 +1,26 @@
 # Maquettes UI — Kuma Libre
 
-Ce dossier contient une proposition visuelle mobile-first destinée à guider la future application React. Il ne contient aucun composant de production et ne dépend d'aucune bibliothèque.
+Ce dossier conserve les directions visuelles successives de l'application. Chaque version présente le même parcours afin de comparer la personnalité graphique sans déplacer les décisions fonctionnelles.
+
+## Versions
+
+### [Version 1 — calme et éditoriale](v1/index.html)
+
+Une interface sobre, chaleureuse et presque silencieuse. Les contrastes sont doux, les composants sont fins et le vocabulaire reste au premier plan.
+
+- [Aperçu de la planche](v1/preview-board.png)
+- [Planche complète](v1/preview-full.png)
+- [Notes de conception](v1/README.md)
+
+### [Version 2 — ludique et illustrée](v2/index.html)
+
+Une piste plus graphique inspirée des conventions générales des applications d'apprentissage : couleurs franches, volumes tactiles, feedback très lisible et présence d'un guide Kuma original. Elle évite volontairement les mécaniques de jeu envahissantes.
+
+- `preview-board.png` : aperçu de la planche ;
+- `preview-full.png` : planche complète ;
+- `preview-mobile.png` : accueil en mode prototype ;
+- [Notes de conception](v2/README.md)
 
 ## Consultation
 
-Ouvrir `index.html` dans un navigateur. Deux modes sont disponibles :
-
-- **Planche** : tous les écrans sont visibles pour les comparer ;
-- **Prototype** : un seul écran est affiché et les boutons permettent de parcourir le flux.
-
-En mode Prototype, les flèches gauche et droite du clavier passent également d'un écran à l'autre.
-
-Un écran peut être ouvert directement avec des paramètres, par exemple `index.html?view=focus&screen=config`.
-
-Deux captures sont également fournies :
-
-- `preview-board.png` pour un aperçu rapide de la partie supérieure ;
-- `preview-full.png` pour la planche complète en une image.
-
-## Écrans proposés
-
-1. accueil et reprise rapide ;
-2. configuration de la passe ;
-3. question sans correction ;
-4. réponse correcte ;
-5. réponse incorrecte ;
-6. progression dans les deux sens ;
-7. menu secondaire ;
-8. fin de passe ;
-9. adaptation bureau de l'écran de quiz.
-
-## Principes de la proposition
-
-- le quiz demeure l'action centrale ;
-- une seule action principale est mise en avant à la fois ;
-- les réglages restent en dehors de l'écran de question ;
-- les résultats utilisent une icône et un libellé en plus de la couleur ;
-- la progression distingue compréhension, production et maîtrise globale ;
-- la version bureau conserve une colonne de lecture étroite au lieu d'étirer le contenu ;
-- aucun framework ou asset distant n'est nécessaire pour consulter les maquettes.
-
-## Points encore à confirmer
-
-- présence définitive du bouton `Je ne sais pas` ;
-- règle exacte de passage du jaune au vert ;
-- affichage systématique ou facultatif des kana sous les kanji ;
-- identité finale du logo et validation de la palette ;
-- contenu exact du bilan de fin de passe.
+Ouvrir le fichier `index.html` d'une version dans un navigateur. Le mode **Planche** affiche tous les écrans ; le mode **Prototype** permet de parcourir le flux écran par écran.
