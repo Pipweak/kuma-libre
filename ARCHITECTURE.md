@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** proposition initiale validée pour guider le démarrage du projet.  
-> **Version :** 2 — 15 octobre 2026.
+> **Version :** 3 — 15 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -134,23 +134,52 @@ Avant de démarrer, l'utilisateur peut configurer le quiz sans exposer des régl
 
 - ouvrage ;
 - une, plusieurs ou toutes les leçons de l'ouvrage ;
-- sens de révision ;
-- périmètre de maîtrise : uniquement les mots rouges et jaunes, ou tous les mots en incluant les verts ;
+- sens de révision : japonais vers signification ou signification vers japonais ;
+- statuts à inclure : rouge, jaune et/ou vert, avec des raccourcis pour les mots non maîtrisés et pour tous les mots ;
 - ordre des questions : aléatoire ou ordre du corpus et des leçons.
 
 La configuration doit proposer des valeurs par défaut permettant de commencer rapidement. Pour un visiteur, la configuration courante reste en mémoire pendant l'utilisation de la page. Pour un utilisateur connecté, la dernière configuration pourra être enregistrée avec ses préférences dans Supabase. Elle ne doit pas devenir une seconde source de progression dans `localStorage`.
+
+Le sens est présenté par un contrôle compact et explicite, par exemple `Japonais → sens` et `Sens → japonais`. Des drapeaux peuvent renforcer le repère visuel, mais ne doivent pas remplacer les libellés et les flèches.
+
+### 4.5 Composition d'une session
+
+Le nombre de questions n'est pas imposé indépendamment de la sélection. Au démarrage, le moteur construit une liste fixe contenant toutes les entrées qui correspondent à l'ouvrage, aux leçons, au sens et aux statuts choisis. L'interface affiche le nombre obtenu avant de commencer.
+
+Dans une passe :
+
+- chaque entrée sélectionnée apparaît une fois ;
+- l'ordre suit le corpus ou un mélange aléatoire selon la configuration ;
+- la progression utilisée pour filtrer une entrée est celle du sens sélectionné ;
+- une erreur met à jour la progression, mais la même entrée ne revient pas pendant cette passe ;
+- l'entrée pourra être reproposée lors d'une session ultérieure.
 
 ## 5. Modèle du corpus
 
 Les fichiers Markdown existants utilisent plusieurs formats de tableaux. Ils restent adaptés à la lecture et à l'édition humaine, mais ne doivent pas être analysés directement par l'application dans le navigateur.
 
-Un script exécuté au build convertit les différentes formes de tableaux vers un modèle unique.
+Un script exécuté au build convertit les différentes formes de tableaux vers un modèle unique. Les ouvrages et les leçons possèdent leurs propres métadonnées afin que l'interface puisse construire la bibliothèque sans déduire sa navigation des chemins de fichiers.
 
 ```ts
+type BookDefinition = {
+  id: string;
+  title: string;
+  volume?: string;
+  order: number;
+};
+
+type LessonDefinition = {
+  id: string;
+  bookId: string;
+  number: number;
+  title?: string;
+  order: number;
+};
+
 type VocabularyEntry = {
   id: string;
   bookId: string;
-  lesson: number;
+  lessonId?: string;
   section: "vocabulary" | "conversation" | "proper-name" | "useful-word" | "reference";
   kana: string[];
   kanji: string[];
@@ -182,7 +211,9 @@ Un identifiant construit uniquement à partir du mot japonais n'est pas suffisan
 Le build doit échouer lorsqu'une donnée structurante est invalide, notamment en cas de :
 
 - doublon d'identifiant ;
-- numéro de leçon absent ;
+- ouvrage ou leçon référencé mais inconnu ;
+- entrée de leçon sans `lessonId`, hors contenu de référence explicitement rattaché à l'ouvrage ;
+- numéro ou ordre de leçon absent ;
 - entrée sans forme japonaise ;
 - entrée sans signification française et anglaise ;
 - section inconnue ;
@@ -190,6 +221,12 @@ Le build doit échouer lorsqu'une donnée structurante est invalide, notamment e
 - fichier généré qui n'est plus synchronisé avec les sources.
 
 Le fichier JSON généré est un artefact de build. Les Markdown restent les sources éditables de référence.
+
+### 5.3 Séparation du corpus et de la progression
+
+Les colonnes de maîtrise actuellement présentes dans certains fichiers Markdown sont des annotations historiques et ne font pas partie du corpus généré pour l'application. Elles ne doivent pas initialiser silencieusement la progression d'un nouvel utilisateur.
+
+La progression appartient exclusivement à l'utilisateur : elle réside en mémoire pour un visiteur et dans Supabase pour un compte connecté. Le fichier `progress-vincent.json` peut servir à une migration initiale explicite pour le compte concerné, mais ne constitue pas une troisième source de vérité et ne doit pas être livré comme progression par défaut.
 
 ## 6. Moteur de quiz
 
@@ -205,29 +242,59 @@ Ses responsabilités sont :
 - calculer les réponses acceptées ;
 - évaluer une réponse normalisée ;
 - produire le résultat de révision ;
-- éviter les répétitions immédiates inutiles ;
-- réintroduire périodiquement les mots déjà maîtrisés.
+- éviter toute répétition d'une même entrée dans la passe courante ;
+- inclure les mots maîtrisés uniquement lorsque la configuration de la session le demande.
 
 React orchestre l'expérience utilisateur, mais ne porte pas directement les règles de sélection, de validation ou de progression.
 
 ## 7. Progression
 
-La première version conserve la logique actuellement décrite dans `progress-vincent.json` :
+Chaque entrée possède deux progressions indépendantes :
 
-- une première réussite fait passer le mot de rouge à jaune ;
-- trois réussites sur trois dates locales distinctes font passer le mot au vert ;
-- une erreur fait redescendre le mot d'un niveau ;
-- une erreur remet à zéro la série utilisée pour atteindre le vert ;
-- une seule réussite par mot et par date locale compte dans cette série.
+- **compréhension** : japonais vers signification française ou anglaise ;
+- **production** : signification française et anglaise vers japonais.
 
-Cette règle doit être implémentée comme une fonction pure et couverte par des tests unitaires. Elle pourra être remplacée plus tard par un algorithme de répétition espacée sans modifier l'interface du quiz.
+Une réussite ou une erreur dans un sens ne modifie jamais la progression de l'autre sens. Le français et l'anglais ne possèdent pas de progressions séparées : une signification correcte dans l'une de ces langues valide la même progression de compréhension. De même, le rōmaji, les kana et les kanji acceptés alimentent tous la progression de production.
 
-### 7.1 Historique et état courant
+La base de fonctionnement validée est :
+
+- rouge signifie « non maîtrisé », sans distinguer un mot jamais présenté d'un mot encore jamais réussi ;
+- l'absence de progression enregistrée pour un sens équivaut à rouge dans ce sens ;
+- une erreur rouge laisse l'entrée rouge ;
+- une première réussite fait passer l'entrée de rouge à jaune ;
+- une erreur jaune laisse l'entrée jaune ;
+- le seuil de réussites permettant de passer de jaune à vert reste à préciser ;
+- une réussite verte laisse l'entrée verte ;
+- une erreur verte fait redescendre l'entrée à jaune.
+
+L'effet d'une erreur jaune sur le compteur menant au vert ainsi que la nature exacte du seuil — réussites totales, consécutives ou réparties sur plusieurs jours — restent des décisions ouvertes. La règle finale doit être implémentée comme une fonction pure et couverte par des tests unitaires. Elle pourra évoluer vers une répétition espacée sans modifier l'interface du quiz.
+
+### 7.1 Progression globale dérivée
+
+La progression globale d'une entrée n'est pas stockée. Elle est calculée à partir de ses deux directions en retenant le niveau le plus faible :
+
+```text
+vert   + vert   = vert
+vert   + jaune  = jaune
+vert   + rouge  = rouge
+jaune  + jaune  = jaune
+jaune  + rouge  = rouge
+```
+
+Une entrée est donc globalement maîtrisée uniquement lorsqu'elle est verte dans les deux sens.
+
+Pour un ouvrage ou une leçon, l'interface peut calculer trois indicateurs simples :
+
+- pourcentage vert en compréhension ;
+- pourcentage vert en production ;
+- pourcentage d'entrées vertes dans les deux sens.
+
+### 7.2 Historique et état courant
 
 Deux concepts sont conservés séparément :
 
 - **événement de révision** : tentative immuable contenant la question, la réponse et le résultat ;
-- **progression du mot** : résumé courant utilisé pour sélectionner rapidement les prochaines questions.
+- **progression d'une direction** : résumé courant d'une entrée et d'un sens, utilisé pour sélectionner rapidement les prochaines questions.
 
 L'historique permet de recalculer la progression, d'afficher des statistiques et de faire évoluer l'algorithme.
 
@@ -278,7 +345,7 @@ Il n'existe pas de fallback silencieux vers d'anciennes données locales.
 
 ### 9.1 `profiles`
 
-Informations publiques minimales associées au compte :
+Informations privées minimales associées au compte :
 
 - `user_id` ;
 - `display_name` facultatif ;
@@ -286,14 +353,26 @@ Informations publiques minimales associées au compte :
 - `created_at` ;
 - `updated_at`.
 
-### 9.2 `review_events`
+### 9.2 `user_preferences`
+
+Préférences facultatives synchronisées pour éviter de surcharger le stockage local :
+
+- `user_id` ;
+- dernière configuration de quiz ;
+- langue préférée pour une réponse vocale à une question japonaise ;
+- lecture automatique et vitesse de synthèse ;
+- `updated_at`.
+
+Ces préférences ne contiennent aucune progression et peuvent être réinitialisées sans perdre l'historique de révision.
+
+### 9.3 `review_events`
 
 Historique immuable des tentatives :
 
 - `id` ;
 - `user_id` ;
 - `word_id` ;
-- `mode` ;
+- `direction` : `japanese_to_meaning` ou `meaning_to_japanese` ;
 - `prompt_snapshot` ;
 - `submitted_answer` ;
 - `normalized_answer` ;
@@ -301,25 +380,28 @@ Historique immuable des tentatives :
 - `response_time_ms` facultatif ;
 - `reviewed_at`.
 
-### 9.3 `word_progress`
+### 9.4 `word_progress`
 
-État courant d'une entrée pour un utilisateur :
+État courant d'une entrée, d'un sens et d'un utilisateur :
 
 - `user_id` ;
 - `word_id` ;
+- `direction` : `japanese_to_meaning` ou `meaning_to_japanese` ;
 - `status` : `red`, `yellow` ou `green` ;
 - `correct_total` ;
 - `incorrect_total` ;
-- `progress_streak` ;
-- `successful_dates` ;
 - `last_reviewed_at` ;
 - `last_result`.
 
-La paire `(user_id, word_id)` est unique.
+Le compteur ou les dates éventuellement nécessaires au passage de jaune à vert seront ajoutés après validation de la règle exacte. L'historique immuable permet entre-temps de recalculer l'état.
 
-### 9.4 Mise à jour atomique
+Le triplet `(user_id, word_id, direction)` est unique. Aucune colonne de progression globale n'est stockée : elle est toujours dérivée des deux directions.
+
+### 9.5 Mise à jour atomique
 
 L'enregistrement de l'événement et la mise à jour de la progression doivent idéalement s'effectuer dans une seule transaction Postgres, exposée par une fonction Supabase RPC. Cela évite qu'un événement soit enregistré sans que la progression soit mise à jour, ou inversement.
+
+L'identifiant d'une tentative est généré avant l'appel et sert de clé d'idempotence. Une nouvelle tentative avec le même identifiant ne doit pas modifier deux fois la progression. En cas d'échec réseau, l'interface conserve la tentative en mémoire et permet de réessayer sans avancer silencieusement.
 
 ## 10. Sécurité
 
@@ -340,12 +422,14 @@ L'interface est conçue mobile-first. Le produit doit rester immédiatement iden
 ### 11.1 Écrans initiaux
 
 - **Accueil** : démarrage immédiat d'une révision et accès à sa configuration ;
-- **Bibliothèque / configuration du quiz** : ouvrage, leçons, sens, périmètre de maîtrise et ordre des questions ;
+- **Bibliothèque / configuration du quiz** : ouvrage, leçons, sens, statuts de maîtrise et ordre des questions ;
 - **Quiz** : question, lecture vocale, input, dictée, validation et correction ;
-- **Progression** : état par leçon et répartition rouge/jaune/vert ;
+- **Progression** : compréhension, production et maîtrise globale par ouvrage et par leçon ;
 - **Compte** : connexion, identité et déconnexion.
 
 La navigation secondaire peut être regroupée derrière un menu compact, notamment sur mobile. La configuration du quiz reste toutefois accessible directement depuis l'accueil, car elle fait partie du parcours principal.
+
+Le sens du quiz utilise un switch ou un contrôle segmenté présentant clairement `Japonais → sens` et `Sens → japonais`. Les drapeaux restent décoratifs et sont toujours accompagnés de texte ou de flèches afin de ne pas rendre le contrôle ambigu ou inaccessible.
 
 ### 11.2 Écran de quiz
 
@@ -385,9 +469,10 @@ Le passage à la question suivante n'est pas automatique. L'utilisateur doit avo
 
 L'écran de progression reste séparé du quiz et accessible depuis la navigation secondaire. Sa première version affiche uniquement :
 
-- la progression globale d'un ouvrage ;
-- la progression de chaque leçon ;
-- la répartition rouge, jaune et vert lorsque l'utilisateur ouvre le détail d'une leçon.
+- la progression en compréhension japonaise ;
+- la progression en production japonaise ;
+- la maîtrise globale dérivée des deux sens ;
+- ces mêmes informations par leçon lorsque l'utilisateur ouvre le détail d'un ouvrage.
 
 Pendant le quiz, seule la progression de la session courante est affichée. Les graphiques détaillés, classements et mécanismes de gamification ne doivent pas encombrer ce parcours.
 
@@ -515,7 +600,7 @@ kuma-libre/
 │   ├── features/
 │   │   ├── auth/
 │   │   ├── practice/
-│   │   ├── lesson-selection/
+│   │   ├── quiz-configuration/
 │   │   └── progress-dashboard/
 │   ├── infrastructure/
 │   │   ├── supabase/
@@ -595,7 +680,9 @@ Vitest couvre en priorité :
 - la génération du rōmaji ;
 - la sélection des questions ;
 - les transitions rouge/jaune/vert ;
-- les règles liées aux dates locales.
+- l'indépendance des deux directions de progression ;
+- le calcul de la maîtrise globale ;
+- la composition et l'ordre d'une passe sans répétition.
 
 ### 16.2 Tests de composants
 
@@ -617,6 +704,7 @@ Playwright couvre un petit nombre de parcours essentiels :
 - configurer l'inclusion ou l'exclusion des mots verts ;
 - choisir un ordre aléatoire ou séquentiel ;
 - répondre dans chaque sens ;
+- constater des progressions différentes pour un même mot selon le sens ;
 - se connecter ;
 - enregistrer une réponse ;
 - retrouver la progression après rechargement ;
@@ -627,6 +715,7 @@ Playwright couvre un petit nombre de parcours essentiels :
 ### Phase 1 — Corpus
 
 - définir définitivement le schéma normalisé ;
+- définir les métadonnées des ouvrages et des leçons ;
 - créer les identifiants stables ;
 - écrire l'importeur Markdown ;
 - générer le JSON ;
@@ -635,13 +724,14 @@ Playwright couvre un petit nombre de parcours essentiels :
 ### Phase 2 — MVP React local
 
 - initialiser React, TypeScript et Vite ;
-- créer la sélection des leçons ;
-- permettre d'inclure tous les mots ou seulement les mots non maîtrisés ;
+- créer la sélection de l'ouvrage et des leçons ;
+- permettre de choisir les statuts rouge, jaune et/ou vert à inclure ;
 - proposer l'ordre aléatoire ou l'ordre des leçons ;
+- construire une passe fixe sans répétition immédiate des erreurs ;
 - implémenter les deux modes de quiz ;
 - accepter les différentes réponses ;
 - implémenter les états de réponse et de correction mobile-first ;
-- gérer une progression de session en mémoire ;
+- gérer en mémoire les deux progressions indépendantes et leur résultat global ;
 - mettre en place le design responsive initial.
 
 ### Phase 3 — Comptes et synchronisation
@@ -651,13 +741,13 @@ Playwright couvre un petit nombre de parcours essentiels :
 - créer les tables et politiques RLS ;
 - implémenter le repository Supabase ;
 - sauvegarder l'historique et la progression ;
+- afficher la progression minimale par sens, globale et par leçon ;
 - déployer sur Cloudflare Pages.
 
-### Phase 4 — Expérience d'étude
+### Phase 4 — Expérience d'étude avancée
 
-- tableau de progression ;
-- statistiques par leçon ;
-- filtres par statut de maîtrise ;
+- statistiques détaillées ;
+- filtres de consultation dans l'écran de progression ;
 - amélioration de la sélection des prochains mots ;
 - installation éventuelle en PWA.
 
@@ -687,11 +777,17 @@ Ces éléments restent possibles, mais ne doivent pas retarder une première exp
 
 ## 19. Décisions encore ouvertes
 
-- nom et identité visuelle de l'application ;
 - Tailwind CSS ou SCSS/CSS Modules ;
 - présentation exacte des kana et kanji dans les questions ;
 - génération automatique ou stockage explicite du rōmaji ;
+- seuil exact de passage du jaune au vert : réussites totales, consécutives ou réparties sur plusieurs jours ;
+- effet d'une erreur jaune sur le compteur menant au vert ;
+- présence et effet exact d'une action `Je ne sais pas` dans le quiz ;
 - comportement précis lorsqu'un utilisateur reconnaît lui-même un synonyme ;
+- migration éventuelle de `progress-vincent.json`, qui ne distingue pas les deux directions ;
+- partage ou non de la maîtrise lorsqu'un même mot apparaît dans plusieurs ouvrages ;
+- comportement lorsqu'un visiteur se connecte au milieu d'une session en mémoire ;
+- reprise éventuelle d'une longue passe interrompue ;
 - choix du magic link ou de l'OTP pour la connexion email ;
 - installation PWA dès le MVP ou dans une phase ultérieure ;
 - éventuelle adoption de TanStack Query après intégration de Supabase.
