@@ -1,4 +1,4 @@
-# Minna no Nihongo — Base de révision 🇯🇵
+# Kuma Libre — Révision du japonais 🇯🇵
 
 Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Minna no Nihongo — Shokyū I*.
 

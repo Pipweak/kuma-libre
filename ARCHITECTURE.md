@@ -452,7 +452,7 @@ L'implémentation initiale utilisera les capacités du navigateur. Une autre imp
 L'application peut rester dans un dépôt unique sans introduire immédiatement un monorepo complexe.
 
 ```text
-minna-no-nihongo/
+kuma-libre/
 ├── lessons/                         # Sources Markdown par leçon
 ├── reference/                       # Références complémentaires
 ├── scripts/
