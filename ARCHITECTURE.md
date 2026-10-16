@@ -1,7 +1,7 @@
-# Architecture cible — Application de révision du japonais
+# Architecture cible — Kuma Libre
 
 > **Statut :** proposition initiale validée pour guider le démarrage du projet.  
-> **Version :** 1 — 15 octobre 2026.  
+> **Version :** 2 — 15 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -12,8 +12,9 @@ Le premier corpus provient du volume actuellement transcrit de *Minna no Nihongo
 
 L'application doit notamment permettre :
 
-- de sélectionner une ou plusieurs leçons ;
+- de sélectionner un ouvrage puis une ou plusieurs leçons ;
 - de réviser dans les deux sens, japonais vers signification et signification vers japonais ;
+- de configurer le périmètre et l'ordre des questions sans alourdir l'écran de quiz ;
 - d'accepter plusieurs réponses correctes pour une même question ;
 - de suivre la maîtrise de chaque entrée ;
 - d'utiliser le site sans compte ;
@@ -42,6 +43,7 @@ L'application sera un outil d'étude indépendant, avec son propre nom, son prop
 | Données métier dans `localStorage` | Non |
 | Styling | À décider entre Tailwind CSS et SCSS/CSS Modules |
 | Audio | Amélioration progressive après le MVP |
+| Approche UI | Mobile-first, centrée sur un quiz volontairement minimal |
 
 ## 3. Vue générale
 
@@ -126,6 +128,18 @@ La normalisation ne doit pas transformer arbitrairement le sens d'une réponse. 
 
 Pour les traductions, l'interface pourra permettre à l'utilisateur de se compter correct lorsqu'un synonyme légitime n'a pas encore été enregistré. Cette action devra rester visible dans l'historique afin d'améliorer ultérieurement le corpus.
 
+### 4.4 Configuration d'une session
+
+Avant de démarrer, l'utilisateur peut configurer le quiz sans exposer des réglages secondaires sur l'écran de question :
+
+- ouvrage ;
+- une, plusieurs ou toutes les leçons de l'ouvrage ;
+- sens de révision ;
+- périmètre de maîtrise : uniquement les mots rouges et jaunes, ou tous les mots en incluant les verts ;
+- ordre des questions : aléatoire ou ordre du corpus et des leçons.
+
+La configuration doit proposer des valeurs par défaut permettant de commencer rapidement. Pour un visiteur, la configuration courante reste en mémoire pendant l'utilisation de la page. Pour un utilisateur connecté, la dernière configuration pourra être enregistrée avec ses préférences dans Supabase. Elle ne doit pas devenir une seconde source de progression dans `localStorage`.
+
 ## 5. Modèle du corpus
 
 Les fichiers Markdown existants utilisent plusieurs formats de tableaux. Ils restent adaptés à la lecture et à l'édition humaine, mais ne doivent pas être analysés directement par l'application dans le navigateur.
@@ -184,7 +198,9 @@ Le moteur de quiz appartient au domaine et ne doit dépendre ni de React ni de S
 Ses responsabilités sont :
 
 - filtrer le corpus par livre, leçon et section ;
+- filtrer les entrées selon leur niveau de maîtrise, avec ou sans les mots verts ;
 - choisir le prochain mot selon la progression ;
+- respecter l'ordre aléatoire ou séquentiel choisi pour la session ;
 - produire une question dans l'un des deux modes ;
 - calculer les réponses acceptées ;
 - évaluer une réponse normalisée ;
@@ -319,13 +335,17 @@ Les règles suivantes sont obligatoires :
 
 ## 11. Interface envisagée
 
+L'interface est conçue mobile-first. Le produit doit rester immédiatement identifiable comme un quiz : les fonctions de navigation et de consultation ne doivent pas concurrencer la question, l'input et l'action principale.
+
 ### 11.1 Écrans initiaux
 
-- **Accueil** : présentation courte et démarrage d'une révision ;
-- **Configuration du quiz** : leçons, sections et sens de révision ;
+- **Accueil** : démarrage immédiat d'une révision et accès à sa configuration ;
+- **Bibliothèque / configuration du quiz** : ouvrage, leçons, sens, périmètre de maîtrise et ordre des questions ;
 - **Quiz** : question, lecture vocale, input, dictée, validation et correction ;
 - **Progression** : état par leçon et répartition rouge/jaune/vert ;
 - **Compte** : connexion, identité et déconnexion.
+
+La navigation secondaire peut être regroupée derrière un menu compact, notamment sur mobile. La configuration du quiz reste toutefois accessible directement depuis l'accueil, car elle fait partie du parcours principal.
 
 ### 11.2 Écran de quiz
 
@@ -338,12 +358,38 @@ L'écran principal reste volontairement simple :
 - champ de réponse automatiquement focalisé ;
 - bouton de microphone intégré au champ lorsqu'il est disponible ;
 - validation par le bouton ou la touche Entrée ;
-- retour correct/incorrect ;
-- affichage de toutes les réponses acceptées ;
-- action permettant de reconnaître un synonyme légitime ;
-- passage à la question suivante.
+- zone de correction affichée sous l'input après validation ;
+- passage explicite à la question suivante.
 
 L'interface doit être utilisable au clavier et avec un lecteur d'écran. Les états correct, incorrect et maîtrise ne doivent pas dépendre uniquement de la couleur.
+
+### 11.3 États de réponse et correction
+
+Une question possède deux états d'interface clairement distincts :
+
+1. **Réponse** : l'input est modifiable, le microphone est disponible et l'action principale est `Valider` ;
+2. **Correction** : l'input conserve la réponse donnée mais devient non modifiable, le microphone est désactivé et l'action principale devient `Question suivante`.
+
+Après validation, le résultat apparaît directement sous l'input, à proximité de l'endroit où se trouve déjà le regard de l'utilisateur :
+
+- une réponse correcte affiche une confirmation courte ainsi que les autres formes acceptées utiles ;
+- une réponse incorrecte affiche un libellé explicite, la réponse donnée et la solution attendue ;
+- les formes japonaises pertinentes et les significations française et anglaise peuvent être rappelées dans la correction ;
+- l'action permettant de signaler un synonyme légitime reste secondaire et discrète.
+
+Le résultat ne doit jamais être communiqué uniquement par une couleur : une icône et un texte accompagnent les états vert et rouge. La mise en page réserve autant que possible une zone stable à la correction afin d'éviter un saut vertical important sur mobile.
+
+Le passage à la question suivante n'est pas automatique. L'utilisateur doit avoir le temps de lire la solution. La touche Entrée valide la réponse dans le premier état, puis passe à la question suivante dans le second. Le changement d'état peut utiliser une animation courte et non bloquante, et le résultat doit être annoncé par une zone accessible de type `aria-live`.
+
+### 11.4 Progression sans surcharge
+
+L'écran de progression reste séparé du quiz et accessible depuis la navigation secondaire. Sa première version affiche uniquement :
+
+- la progression globale d'un ouvrage ;
+- la progression de chaque leçon ;
+- la répartition rouge, jaune et vert lorsque l'utilisateur ouvre le détail d'une leçon.
+
+Pendant le quiz, seule la progression de la session courante est affichée. Les graphiques détaillés, classements et mécanismes de gamification ne doivent pas encombrer ce parcours.
 
 ## 12. Audio et reconnaissance vocale
 
@@ -558,6 +604,8 @@ React Testing Library couvre :
 - la validation au clavier ;
 - les états correct et incorrect ;
 - l'affichage des solutions ;
+- le verrouillage de l'input et du microphone pendant la correction ;
+- le remplacement de `Valider` par `Question suivante` ;
 - les configurations de quiz ;
 - les états connecté et non connecté.
 
@@ -566,6 +614,8 @@ React Testing Library couvre :
 Playwright couvre un petit nombre de parcours essentiels :
 
 - lancer un quiz anonyme ;
+- configurer l'inclusion ou l'exclusion des mots verts ;
+- choisir un ordre aléatoire ou séquentiel ;
 - répondre dans chaque sens ;
 - se connecter ;
 - enregistrer une réponse ;
@@ -586,8 +636,11 @@ Playwright couvre un petit nombre de parcours essentiels :
 
 - initialiser React, TypeScript et Vite ;
 - créer la sélection des leçons ;
+- permettre d'inclure tous les mots ou seulement les mots non maîtrisés ;
+- proposer l'ordre aléatoire ou l'ordre des leçons ;
 - implémenter les deux modes de quiz ;
 - accepter les différentes réponses ;
+- implémenter les états de réponse et de correction mobile-first ;
 - gérer une progression de session en mémoire ;
 - mettre en place le design responsive initial.
 
