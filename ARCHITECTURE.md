@@ -18,7 +18,7 @@ L'application doit notamment permettre :
 - de suivre la maîtrise de chaque entrée ;
 - d'utiliser le site sans compte ;
 - de sauvegarder et synchroniser la progression après connexion ;
-- d'ajouter ultérieurement la prononciation et la reconnaissance vocale.
+- d'ajouter ultérieurement la lecture vocale des questions et la dictée des réponses.
 
 L'application sera un outil d'étude indépendant, avec son propre nom, son propre logo et sa propre interface. Aucun scan du manuel ne sera publié.
 
@@ -323,7 +323,7 @@ Les règles suivantes sont obligatoires :
 
 - **Accueil** : présentation courte et démarrage d'une révision ;
 - **Configuration du quiz** : leçons, sections et sens de révision ;
-- **Quiz** : question, input, microphone futur, validation et correction ;
+- **Quiz** : question, lecture vocale, input, dictée, validation et correction ;
 - **Progression** : état par leçon et répartition rouge/jaune/vert ;
 - **Compte** : connexion, identité et déconnexion.
 
@@ -334,8 +334,9 @@ L'écran principal reste volontairement simple :
 - progression de la session ;
 - leçon ou source de la question ;
 - question centrale lisible ;
+- bouton permettant d'écouter ou de réécouter la question ;
 - champ de réponse automatiquement focalisé ;
-- bouton de microphone lorsqu'il est disponible ;
+- bouton de microphone intégré au champ lorsqu'il est disponible ;
 - validation par le bouton ou la touche Entrée ;
 - retour correct/incorrect ;
 - affichage de toutes les réponses acceptées ;
@@ -346,28 +347,105 @@ L'interface doit être utilisable au clavier et avec un lecteur d'écran. Les é
 
 ## 12. Audio et reconnaissance vocale
 
-L'audio est ajouté après stabilisation du quiz textuel.
+La fonctionnalité vocale est une amélioration progressive ajoutée après stabilisation du quiz textuel. Elle comporte uniquement deux capacités : faire entendre la question et dicter une réponse dans l'input.
 
-### 12.1 Synthèse vocale
+Les commandes vocales telles que « suivant », « répète » ou « valide » ne sont pas prévues. L'évaluation de la qualité de la prononciation n'est pas non plus un objectif du produit.
 
-La synthèse vocale permet :
+### 12.1 Lecture vocale de la question
 
-- d'écouter un mot ou une expression japonaise ;
-- de créer un mode écoute vers signification ;
-- de répéter la prononciation à la demande.
+Un bouton haut-parleur placé près de la question permet de l'écouter ou de la réécouter. Une option utilisateur pourra également déclencher automatiquement la lecture lors de l'affichage d'une nouvelle question.
 
-### 12.2 Reconnaissance vocale
+La langue de synthèse dépend du sens du quiz :
 
-La reconnaissance vocale :
+- une question japonaise est prononcée en japonais ;
+- une question française est prononcée en français ;
+- l'anglais affiché entre parenthèses n'est pas nécessairement prononcé lorsque le français est la langue principale de la question.
 
-- utilise la langue correspondant à la réponse attendue ;
-- écrit la transcription dans le même champ que la saisie clavier ;
-- passe par le même normalisateur et le même validateur ;
-- reste optionnelle lorsque le navigateur ne la prend pas en charge.
+Lorsque des kanji sont affichés, l'application peut transmettre les kana au synthétiseur pour imposer la bonne lecture :
 
-Une transcription japonaise peut retourner des kana ou des kanji. Elle doit donc être comparée à toutes les représentations acceptées de l'entrée.
+```text
+Affiché : 医者
+Prononcé : いしゃ
+```
 
-L'accès aux API vocales du navigateur doit passer par une abstraction afin de pouvoir ajouter ultérieurement un autre fournisseur sans modifier le moteur de quiz.
+Les marqueurs utiles à l'étude mais inutiles à l'oral, comme `～`, les groupes verbaux ou certaines annotations entre crochets, doivent être retirés du texte prononcé.
+
+La lecture vocale et la liste des voix disponibles dépendent du navigateur et du système. L'utilisateur doit pouvoir régler au minimum l'activation de la lecture automatique et sa vitesse.
+
+### 12.2 Dictée vocale de la réponse
+
+Le bouton microphone est intégré à l'input, selon un comportement proche des applications de messagerie :
+
+1. l'utilisateur active le microphone ;
+2. l'application demande l'autorisation si nécessaire ;
+3. l'interface indique clairement que l'écoute est active ;
+4. la transcription provisoire peut être affichée dans l'input ;
+5. la transcription finale est insérée dans ce même input ;
+6. l'input reprend le focus ;
+7. l'utilisateur peut corriger le texte ;
+8. l'utilisateur valide avec Entrée ou avec le bouton de validation.
+
+La dictée ne valide jamais automatiquement la réponse.
+
+La langue de reconnaissance dépend de la réponse attendue :
+
+- réponse japonaise : `ja-JP` ;
+- réponse française : `fr-FR` ;
+- réponse anglaise : variante anglaise configurée, par exemple `en-CA` ou `en-US`.
+
+Lorsque la question est en japonais, l'utilisateur choisit sa langue de réponse vocale préférée entre le français et l'anglais. La saisie au clavier continue dans tous les cas à accepter les deux langues.
+
+Une réponse japonaise parlée peut être transcrite en kana ou en kanji. Le texte final est traité comme une saisie clavier ordinaire et comparé à toutes les représentations acceptées de l'entrée.
+
+### 12.3 Intégration avec l'input
+
+Le clavier et le microphone alimentent exactement le même état de réponse. Le moteur de quiz ne connaît pas l'origine du texte :
+
+```text
+Clavier --------+
+                +--> input --> normalisation --> validation manuelle
+Microphone -----+
+```
+
+Une fois la transcription terminée, elle devient du texte normal librement modifiable. Les règles de normalisation et de validation existantes s'appliquent sans branche métier spécifique à la voix.
+
+### 12.4 États et erreurs
+
+Le composant de dictée gère explicitement les états suivants :
+
+```text
+idle -> permission -> listening -> transcribing -> ready
+```
+
+Il doit également représenter les cas `permission-denied`, `no-speech`, `unsupported`, `network-error` et `cancelled` avec un message compréhensible.
+
+Le quiz reste entièrement utilisable au clavier si la reconnaissance vocale est absente, refusée ou défaillante.
+
+### 12.5 Contraintes techniques et confidentialité
+
+- la synthèse vocale est arrêtée avant l'activation du microphone afin que l'application ne transcrive pas sa propre voix ;
+- l'application ne conserve pas d'enregistrement audio ;
+- seule la transcription finale alimente l'input ;
+- la réponse n'est enregistrée dans l'historique qu'après validation explicite de l'utilisateur ;
+- l'accès aux API vocales passe par des adaptateurs afin de pouvoir changer de fournisseur sans modifier le moteur de quiz.
+
+Interfaces envisagées :
+
+```ts
+interface SpeechSynthesizer {
+  isSupported(): boolean;
+  speak(text: string, options: { language: string; rate?: number }): Promise<void>;
+  stop(): void;
+}
+
+interface SpeechRecognizer {
+  isSupported(): boolean;
+  listen(options: { language: string; maxAlternatives?: number }): Promise<string>;
+  cancel(): void;
+}
+```
+
+L'implémentation initiale utilisera les capacités du navigateur. Une autre implémentation pourra être ajoutée plus tard si leur qualité ou leur compatibilité devient insuffisante.
 
 ## 13. Organisation du code cible
 
@@ -532,9 +610,11 @@ Playwright couvre un petit nombre de parcours essentiels :
 
 ### Phase 5 — Voix
 
-- synthèse vocale japonaise ;
-- mode écoute ;
-- reconnaissance vocale ;
+- bouton de lecture ou de relecture de la question ;
+- lecture automatique facultative ;
+- synthèse vocale dans la langue de la question ;
+- dictée vocale vers l'input sans validation automatique ;
+- choix de la langue de réponse vocale lorsque nécessaire ;
 - gestion explicite des navigateurs non compatibles.
 
 ## 18. Hors périmètre de la première version
@@ -546,6 +626,8 @@ Playwright couvre un petit nombre de parcours essentiels :
 - génération automatique de nouveaux cours ;
 - application mobile native ;
 - reconnaissance vocale serveur ;
+- commandes vocales de navigation ou de validation ;
+- évaluation automatique de la prononciation ;
 - algorithme avancé de répétition espacée.
 
 Ces éléments restent possibles, mais ne doivent pas retarder une première expérience de quiz utilisable.
