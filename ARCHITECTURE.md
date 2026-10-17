@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** proposition initiale validée pour guider le démarrage du projet.  
-> **Version :** 4 — 17 octobre 2026.
+> **Version :** 5 — 17 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -19,6 +19,7 @@ L'application doit notamment permettre :
 - de suivre la maîtrise de chaque entrée ;
 - d'utiliser le site sans compte ;
 - de sauvegarder et synchroniser la progression après connexion ;
+- d'utiliser l'interface en français, en anglais ou en espagnol ;
 - d'ajouter ultérieurement la lecture vocale des questions et la dictée des réponses.
 
 L'application sera un outil d'étude indépendant, avec son propre nom, son propre logo et sa propre interface. Aucun scan du manuel ne sera publié.
@@ -41,6 +42,8 @@ L'application sera un outil d'étude indépendant, avec son propre nom, son prop
 | Progression des visiteurs | Mémoire de la page uniquement |
 | Progression des utilisateurs connectés | Supabase, source de vérité unique |
 | Données métier dans `localStorage` | Non |
+| Langues de l'interface | Français, anglais et espagnol |
+| Langues des significations | Français, anglais et espagnol dans le corpus |
 | Fondation visuelle | Variables CSS sémantiques partagées, avec alias SCSS sans duplication |
 | Styling des composants | À décider entre Tailwind CSS et SCSS/CSS Modules |
 | Audio | Amélioration progressive après le MVP |
@@ -71,7 +74,7 @@ Le corpus de vocabulaire est public et statique. Les données personnelles et la
 
 ## 4. Modes de quiz
 
-Le produit expose deux modes principaux. Les langues française et anglaise ne constituent pas deux directions séparées : elles représentent deux réponses ou deux formulations possibles de la même signification.
+Le produit expose deux modes principaux. Les langues française, anglaise et espagnole ne constituent pas trois directions séparées : elles représentent plusieurs réponses ou formulations possibles de la même signification.
 
 ### 4.1 Japonais vers signification
 
@@ -81,21 +84,22 @@ L'application affiche une forme japonaise, par exemple :
 医者（いしゃ）
 ```
 
-L'utilisateur peut répondre en français ou en anglais :
+L'utilisateur peut répondre en français, en anglais ou en espagnol :
 
 ```text
 médecin
 doctor
+médico
 ```
 
 Une entrée peut posséder plusieurs traductions ou synonymes valides dans chaque langue.
 
 ### 4.2 Signification vers japonais
 
-L'application affiche simultanément le français et l'anglais, par exemple :
+L'application affiche la langue d'interface comme signification principale et peut montrer les autres traductions disponibles comme aides secondaires, par exemple en français :
 
 ```text
-médecin (doctor)
+médecin (doctor · médico)
 ```
 
 L'utilisateur peut répondre avec une représentation japonaise valide :
@@ -120,7 +124,7 @@ La validation suit les étapes suivantes :
 
 1. normalisation Unicode ;
 2. suppression des espaces superflus ;
-3. normalisation de la casse pour le français, l'anglais et le rōmaji ;
+3. normalisation de la casse pour le français, l'anglais, l'espagnol et le rōmaji ;
 4. normalisation de la ponctuation pertinente ;
 5. comparaison avec toutes les réponses acceptées pour le mode courant ;
 6. affichage des autres réponses valides après validation.
@@ -141,7 +145,7 @@ Avant de démarrer, l'utilisateur peut configurer le quiz sans exposer des régl
 
 La configuration doit proposer des valeurs par défaut permettant de commencer rapidement. Pour un visiteur, la configuration courante reste en mémoire pendant l'utilisation de la page. Pour un utilisateur connecté, la dernière configuration pourra être enregistrée avec ses préférences dans Supabase. Elle ne doit pas devenir une seconde source de progression dans `localStorage`.
 
-Le sens est présenté par un contrôle compact et explicite, par exemple `Japonais → sens` et `Sens → japonais`. Des drapeaux peuvent renforcer le repère visuel, mais ne doivent pas remplacer les libellés et les flèches.
+Le sens est présenté par deux cartes compactes et explicites : `Comprendre` pour aller du japonais vers les significations et `Produire` pour aller des significations vers le japonais. Les drapeaux et la flèche renforcent le repère visuel, mais un libellé textuel et un nom accessible restent obligatoires.
 
 ### 4.5 Composition d'une session
 
@@ -159,7 +163,11 @@ Dans une passe :
 
 Les fichiers Markdown existants utilisent plusieurs formats de tableaux. Ils restent adaptés à la lecture et à l'édition humaine, mais ne doivent pas être analysés directement par l'application dans le navigateur.
 
+L'état actuel et la migration nécessaire pour l'espagnol sont détaillés dans [`reference/corpus-i18n-audit.md`](reference/corpus-i18n-audit.md).
+
 Un script exécuté au build convertit les différentes formes de tableaux vers un modèle unique. Les ouvrages et les leçons possèdent leurs propres métadonnées afin que l'interface puisse construire la bibliothèque sans déduire sa navigation des chemins de fichiers.
+
+Les intitulés thématiques de leçon ne doivent jamais être inventés par l'interface. Tant qu'aucun titre éditorial n'est défini dans les métadonnées, le libellé de repli est simplement `Leçon 01`, `Leçon 02`, etc. Le nombre d'entrées est calculé à partir du corpus généré. Ces données publiques appartiennent au JSON statique, pas à Supabase ; Supabase ne contient que les données propres à l'utilisateur.
 
 ```ts
 type BookDefinition = {
@@ -173,8 +181,9 @@ type LessonDefinition = {
   id: string;
   bookId: string;
   number: number;
-  title?: string;
+  titles?: Partial<Record<"fr" | "en" | "es", string>>;
   order: number;
+  entryCount: number;
 };
 
 type VocabularyEntry = {
@@ -188,6 +197,7 @@ type VocabularyEntry = {
   meanings: {
     fr: string[];
     en: string[];
+    es: string[];
   };
   notes?: string[];
   source: {
@@ -216,7 +226,7 @@ Le build doit échouer lorsqu'une donnée structurante est invalide, notamment e
 - entrée de leçon sans `lessonId`, hors contenu de référence explicitement rattaché à l'ouvrage ;
 - numéro ou ordre de leçon absent ;
 - entrée sans forme japonaise ;
-- entrée sans signification française et anglaise ;
+- entrée sans signification française, anglaise ou espagnole une fois la migration trilingue activée ;
 - section inconnue ;
 - ligne Markdown impossible à convertir ;
 - fichier généré qui n'est plus synchronisé avec les sources.
@@ -252,10 +262,10 @@ React orchestre l'expérience utilisateur, mais ne porte pas directement les rè
 
 Chaque entrée possède deux progressions indépendantes :
 
-- **compréhension** : japonais vers signification française ou anglaise ;
-- **production** : signification française et anglaise vers japonais.
+- **compréhension** : japonais vers signification française, anglaise ou espagnole ;
+- **production** : signification française, anglaise ou espagnole vers japonais.
 
-Une réussite ou une erreur dans un sens ne modifie jamais la progression de l'autre sens. Le français et l'anglais ne possèdent pas de progressions séparées : une signification correcte dans l'une de ces langues valide la même progression de compréhension. De même, le rōmaji, les kana et les kanji acceptés alimentent tous la progression de production.
+Une réussite ou une erreur dans un sens ne modifie jamais la progression de l'autre sens. Le français, l'anglais et l'espagnol ne possèdent pas de progressions séparées : une signification correcte dans l'une de ces langues valide la même progression de compréhension. De même, le rōmaji, les kana et les kanji acceptés alimentent tous la progression de production.
 
 La base de fonctionnement validée est :
 
@@ -360,6 +370,7 @@ Préférences facultatives synchronisées pour éviter de surcharger le stockage
 
 - `user_id` ;
 - dernière configuration de quiz ;
+- langue de l'interface : `fr`, `en` ou `es` ;
 - langue préférée pour une réponse vocale à une question japonaise ;
 - lecture automatique et vitesse de synthèse ;
 - `updated_at`.
@@ -426,11 +437,12 @@ L'interface est conçue mobile-first. Le produit doit rester immédiatement iden
 - **Bibliothèque / configuration du quiz** : ouvrage, leçons, sens, statuts de maîtrise et ordre des questions ;
 - **Quiz** : question, lecture vocale, input, dictée, validation et correction ;
 - **Progression** : compréhension, production et maîtrise globale par ouvrage et par leçon ;
+- **Langue** : choix entre français, anglais et espagnol ;
 - **Compte** : connexion, identité et déconnexion.
 
-La navigation secondaire peut être regroupée derrière un menu compact, notamment sur mobile. La configuration du quiz reste toutefois accessible directement depuis l'accueil, car elle fait partie du parcours principal.
+La navigation secondaire peut être regroupée derrière le bouton de profil, notamment sur mobile. Lorsqu'aucune image de profil n'existe, ce bouton affiche l'initiale du prénom dans un cercle. Le futur upload et recadrage d'avatar restent différés. La configuration du quiz reste toutefois accessible directement depuis l'accueil, car elle fait partie du parcours principal.
 
-Le sens du quiz utilise un switch ou un contrôle segmenté présentant clairement `Japonais → sens` et `Sens → japonais`. Les drapeaux restent décoratifs et sont toujours accompagnés de texte ou de flèches afin de ne pas rendre le contrôle ambigu ou inaccessible.
+Le sens du quiz utilise deux cartes présentant `Comprendre` et `Produire`, avec une flèche et des repères de langue. Les drapeaux restent décoratifs et sont toujours accompagnés de texte ou d'un nom accessible afin de ne pas rendre le contrôle ambigu.
 
 ### 11.2 Écran de quiz
 
@@ -459,7 +471,7 @@ Après validation, le résultat apparaît directement sous l'input, à proximit�
 
 - une réponse correcte affiche une confirmation courte ainsi que les autres formes acceptées utiles ;
 - une réponse incorrecte affiche un libellé explicite, la réponse donnée et la solution attendue ;
-- les formes japonaises pertinentes et les significations française et anglaise peuvent être rappelées dans la correction ;
+- les formes japonaises pertinentes et les significations française, anglaise et espagnole peuvent être rappelées dans la correction ;
 - l'action permettant de signaler un synonyme légitime reste secondaire et discrète.
 
 Le résultat ne doit jamais être communiqué uniquement par une couleur : une icône et un texte accompagnent les états vert et rouge. La mise en page réserve autant que possible une zone stable à la correction afin d'éviter un saut vertical important sur mobile.
@@ -477,6 +489,19 @@ L'écran de progression reste séparé du quiz et accessible depuis la navigatio
 
 Pendant le quiz, seule la progression de la session courante est affichée. Les graphiques détaillés, classements et mécanismes de gamification ne doivent pas encombrer ce parcours.
 
+### 11.5 Internationalisation
+
+Les textes de l'interface ne sont pas écrits directement dans les composants React. Ils utilisent des catalogues typés pour les locales `fr`, `en` et `es`, avec le français comme langue de repli temporaire pendant le développement. Les nombres, dates et pluriels passent par `Intl`.
+
+La langue de l'interface et les langues acceptées par le moteur de quiz sont deux concepts distincts :
+
+- la locale choisie définit les menus, les libellés et la signification principale affichée ;
+- le corpus conserve les traductions françaises, anglaises et espagnoles ;
+- la validation d'une réponse japonaise vers signification peut accepter toute traduction déclarée dans ces langues ;
+- l'affichage éventuel de traductions secondaires reste une préférence du quiz et ne crée pas une nouvelle direction de progression.
+
+Le choix est disponible dans le menu du profil et synchronisé dans `user_preferences` pour un compte connecté. Les drapeaux ne sont jamais la seule information accessible : chaque option conserve le nom de la langue.
+
 ## 12. Audio et reconnaissance vocale
 
 La fonctionnalité vocale est une amélioration progressive ajoutée après stabilisation du quiz textuel. Elle comporte uniquement deux capacités : faire entendre la question et dicter une réponse dans l'input.
@@ -487,11 +512,15 @@ Les commandes vocales telles que « suivant », « répète » ou « valide » n
 
 Un bouton haut-parleur placé près de la question permet de l'écouter ou de la réécouter. Une option utilisateur pourra également déclencher automatiquement la lecture lors de l'affichage d'une nouvelle question.
 
+La première implémentation ne dépend d'aucun fichier audio et n'ajoute aucune colonne de son au corpus ou à Supabase. Elle utilise la synthèse vocale du navigateur, via `window.speechSynthesis`, à partir du texte déjà présent dans le corpus. Pour le japonais, la forme kana sert de texte à prononcer même lorsque le kanji est affiché. Le contrôle `Écouter` est masqué ou désactivé avec une explication lorsque le navigateur ne fournit pas de voix compatible.
+
 La langue de synthèse dépend du sens du quiz :
 
 - une question japonaise est prononcée en japonais ;
 - une question française est prononcée en français ;
-- l'anglais affiché entre parenthèses n'est pas nécessairement prononcé lorsque le français est la langue principale de la question.
+- une question anglaise est prononcée en anglais ;
+- une question espagnole est prononcée en espagnol ;
+- les traductions secondaires ne sont pas nécessairement prononcées lorsque seule la signification principale constitue la question.
 
 Lorsque des kanji sont affichés, l'application peut transmettre les kana au synthétiseur pour imposer la bonne lecture :
 
@@ -523,9 +552,10 @@ La langue de reconnaissance dépend de la réponse attendue :
 
 - réponse japonaise : `ja-JP` ;
 - réponse française : `fr-FR` ;
-- réponse anglaise : variante anglaise configurée, par exemple `en-CA` ou `en-US`.
+- réponse anglaise : variante anglaise configurée, par exemple `en-CA` ou `en-US` ;
+- réponse espagnole : variante espagnole configurée, par exemple `es-ES` ou `es-MX`.
 
-Lorsque la question est en japonais, l'utilisateur choisit sa langue de réponse vocale préférée entre le français et l'anglais. La saisie au clavier continue dans tous les cas à accepter les deux langues.
+Lorsque la question est en japonais, l'utilisateur choisit sa langue de réponse vocale préférée entre le français, l'anglais et l'espagnol. La saisie au clavier continue dans tous les cas à accepter les traductions déclarées dans les trois langues.
 
 Une réponse japonaise parlée peut être transcrite en kana ou en kanji. Le texte final est traité comme une saisie clavier ordinaire et comparé à toutes les représentations acceptées de l'entrée.
 
@@ -717,6 +747,7 @@ Playwright couvre un petit nombre de parcours essentiels :
 
 - définir définitivement le schéma normalisé ;
 - définir les métadonnées des ouvrages et des leçons ;
+- ajouter et relire les traductions espagnoles de l'ensemble du corpus avant d'activer la locale espagnole en production ;
 - créer les identifiants stables ;
 - écrire l'importeur Markdown ;
 - générer le JSON ;
@@ -733,6 +764,7 @@ Playwright couvre un petit nombre de parcours essentiels :
 - accepter les différentes réponses ;
 - implémenter les états de réponse et de correction mobile-first ;
 - gérer en mémoire les deux progressions indépendantes et leur résultat global ;
+- mettre en place les catalogues d'interface français, anglais et espagnol ;
 - mettre en place le design responsive initial.
 
 ### Phase 3 — Comptes et synchronisation
@@ -769,6 +801,7 @@ Playwright couvre un petit nombre de parcours essentiels :
 - gamification complexe ;
 - génération automatique de nouveaux cours ;
 - application mobile native ;
+- upload et recadrage d'un avatar personnalisé dans la première version ;
 - reconnaissance vocale serveur ;
 - commandes vocales de navigation ou de validation ;
 - évaluation automatique de la prononciation ;
@@ -786,6 +819,7 @@ Ces éléments restent possibles, mais ne doivent pas retarder une première exp
 - présence et effet exact d'une action `Je ne sais pas` dans le quiz ;
 - comportement précis lorsqu'un utilisateur reconnaît lui-même un synonyme ;
 - migration éventuelle de `progress-vincent.json`, qui ne distingue pas les deux directions ;
+- règle d'affichage des traductions secondaires dans une question lorsque trois langues sont disponibles ;
 - partage ou non de la maîtrise lorsqu'un même mot apparaît dans plusieurs ouvrages ;
 - comportement lorsqu'un visiteur se connecte au milieu d'une session en mémoire ;
 - reprise éventuelle d'une longue passe interrompue ;

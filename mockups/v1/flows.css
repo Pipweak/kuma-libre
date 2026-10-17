@@ -768,9 +768,9 @@ main {
 }
 
 .mini-wordmark-logo {
-  width: 96px;
-  height: 28px;
-  background-size: 159% auto;
+  width: 112px;
+  height: 30px;
+  background-size: 145% auto;
 }
 
 .mini-ui-icon {
@@ -782,6 +782,23 @@ main {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.8;
+}
+
+.mini-avatar {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--green);
+  font-size: 0.5rem;
+  font-weight: 820;
+}
+
+.profile-trigger {
+  padding: 0;
+  border-color: transparent !important;
 }
 
 .tiny-eyebrow {
@@ -844,7 +861,7 @@ main {
   height: 160px;
   margin-bottom: 8px;
   background-position: 50% 45%;
-  background-size: 225px auto;
+  background-size: 215px auto;
 }
 
 .loader-view p,
@@ -1316,21 +1333,23 @@ main {
 }
 
 .mini-lesson em {
+  display: grid;
+  justify-items: end;
+  gap: 1px;
+  color: var(--ink);
   font-size: 0.48rem;
   font-style: normal;
   font-weight: 780;
 }
 
-.mini-lesson em.green {
-  color: var(--green);
+.mini-lesson em strong {
+  font-size: 0.52rem;
 }
 
-.mini-lesson em.yellow {
-  color: var(--yellow);
-}
-
-.mini-lesson em.red {
-  color: var(--red);
+.mini-lesson em small {
+  color: var(--ink-soft);
+  font-size: 0.36rem;
+  font-weight: 620;
 }
 
 .mini-lesson > i {
@@ -1419,8 +1438,7 @@ main {
   gap: 8px;
 }
 
-.lesson-pills,
-.status-row {
+.lesson-pills {
   display: flex;
   gap: 5px;
 }
@@ -1486,20 +1504,125 @@ main {
   color: var(--ink-soft);
 }
 
-.status-row b {
+.direction-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.direction-options button {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+  min-height: 58px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  color: var(--ink-soft);
+  background: #fff;
+}
+
+.direction-options button.selected {
+  color: var(--ink);
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  box-shadow: 0 0 0 1px var(--brand);
+}
+
+.direction-options button > small {
+  font-size: 0.45rem;
+  font-weight: 800;
+}
+
+.direction-options button > span {
   display: flex;
-  flex: 1;
+  min-width: 0;
   align-items: center;
+  justify-content: center;
   gap: 4px;
-  min-height: 35px;
-  padding: 5px;
+}
+
+.direction-options em {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  font-style: normal;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.direction-options .language-flag {
+  width: 14px;
+  height: 9px;
+}
+
+.language-flag {
+  display: block;
+  width: 18px;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgb(23 33 29 / 12%);
+}
+
+.direction-options i {
+  color: var(--brand-dark);
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.status-options {
+  display: grid;
+  gap: 5px;
+}
+
+.status-options label {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 6px 8px;
   border: 1px solid var(--line);
   border-radius: 9px;
   background: #fff;
-  font-size: 0.44rem;
 }
 
-.status-row i {
+.status-options input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.mock-checkbox {
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  color: #fff;
+  background: #fff;
+  font-size: 0.42rem;
+  font-weight: 900;
+}
+
+.status-options input:checked + .mock-checkbox {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.status-options b {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.48rem;
+}
+
+.status-options b i {
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -2112,6 +2235,11 @@ main {
   text-align: left;
 }
 
+.mini-drawer nav .mini-ui-icon {
+  width: 15px;
+  height: 15px;
+}
+
 .mini-drawer nav button.active {
   color: var(--ink);
   background: var(--brand-soft);
@@ -2209,6 +2337,82 @@ main {
 
 .two-progress.compact {
   padding: 9px 11px;
+}
+
+.language-copy {
+  padding: 20px 14px 14px;
+}
+
+.language-copy h4 {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.language-copy p {
+  max-width: 210px;
+  margin: 7px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.5rem;
+  line-height: 1.55;
+}
+
+.language-options {
+  display: grid;
+  gap: 7px;
+  padding: 0 13px;
+}
+
+.language-options button {
+  display: grid;
+  grid-template-columns: 30px 1fr 1fr 20px;
+  align-items: center;
+  gap: 7px;
+  min-height: 50px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #fff;
+  text-align: left;
+}
+
+.language-options button.selected {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+}
+
+.language-options button > span {
+  display: grid;
+  place-items: center;
+}
+
+.language-options .language-flag {
+  width: 24px;
+  height: 16px;
+}
+
+.language-options strong {
+  font-size: 0.55rem;
+}
+
+.language-options small {
+  color: var(--ink-soft);
+  font-size: 0.42rem;
+}
+
+.language-options b {
+  color: var(--brand-dark);
+  font-size: 0.62rem;
+  text-align: center;
+}
+
+.language-note {
+  margin: 12px 14px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  color: var(--ink-soft);
+  background: var(--surface-strong);
+  font-size: 0.44rem;
+  line-height: 1.5;
 }
 
 .profile {

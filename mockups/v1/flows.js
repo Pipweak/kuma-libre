@@ -1,5 +1,5 @@
 const MAP_WIDTH = 2060;
-const MAP_HEIGHT = 1100;
+const MAP_HEIGHT = 1200;
 const NODE_WIDTH = 194;
 const NODE_HEIGHT = 74;
 
@@ -24,20 +24,21 @@ const routeNodes = [
   { id: "quiz", label: "Question du quiz", meta: "réponse puis validation", x: 1070, y: 480, type: "quiz", lane: "quick-review" },
   { id: "empty", label: "Aucune question", meta: "modifier la sélection", x: 1070, y: 600, type: "state", lane: "custom-review" },
   { id: "lesson-detail", label: "Détail d’une leçon", meta: "vocabulaire + progrès", x: 1070, y: 720, type: "app", lane: "lesson-review" },
-  { id: "progress", label: "Progression", meta: "global + par leçon", x: 1070, y: 840, type: "app", lane: "progress-path" },
-  { id: "account", label: "Compte", meta: "profil + déconnexion", x: 1070, y: 950, type: "app", lane: "account-logout" },
+  { id: "progress", label: "Progression", meta: "global + par leçon", x: 1070, y: 810, type: "app", lane: "progress-path" },
+  { id: "language", label: "Langue", meta: "français, anglais ou espagnol", x: 1070, y: 910, type: "app", lane: "language-settings" },
+  { id: "account", label: "Compte", meta: "profil + déconnexion", x: 1070, y: 1010, type: "app", lane: "account-logout" },
   { id: "correct", label: "Réponse correcte", meta: "solution + progression", x: 1340, y: 400, type: "state", lane: "quick-review" },
   { id: "incorrect", label: "Réponse incorrecte", meta: "solution attendue", x: 1340, y: 520, type: "state", lane: "quick-review" },
   { id: "exit", label: "Quitter la passe ?", meta: "confirmation", x: 1340, y: 640, type: "state", lane: "resume-session" },
   { id: "lesson-config", label: "Configuration préremplie", meta: "leçon déjà sélectionnée", x: 1340, y: 745, type: "app", lane: "lesson-review" },
-  { id: "logout", label: "Confirmer la déconnexion", meta: "fermeture de session", x: 1340, y: 950, type: "state", lane: "account-logout" },
+  { id: "logout", label: "Confirmer la déconnexion", meta: "fermeture de session", x: 1340, y: 1010, type: "state", lane: "account-logout" },
   { id: "complete", label: "Fin de passe", meta: "bilan + prochaine action", x: 1590, y: 460, type: "quiz", lane: "quick-review" },
   { id: "lesson-quiz", label: "Quiz de la leçon", meta: "moteur de quiz commun", x: 1590, y: 745, type: "quiz", lane: "lesson-review" },
-  { id: "public-return", label: "Retour accueil public", meta: "utilisateur déconnecté", x: 1590, y: 950, type: "public", lane: "account-logout" },
+  { id: "public-return", label: "Retour accueil public", meta: "utilisateur déconnecté", x: 1590, y: 1010, type: "public", lane: "account-logout" },
   { id: "home-again", label: "Accueil / nouvelle passe", meta: "sortie du quiz", x: 1840, y: 460, type: "app", lane: "quick-review" },
   { id: "new-config", label: "Nouvelle configuration", meta: "autre passe", x: 1840, y: 565, type: "app", lane: "custom-review" },
-  { id: "not-found", label: "Page introuvable", meta: "route inconnue", x: 540, y: 1015, type: "state", lane: "not-found" },
-  { id: "safe-return", label: "Retour sûr", meta: "public ou connecté", x: 800, y: 1015, type: "app", lane: "not-found" }
+  { id: "not-found", label: "Page introuvable", meta: "route inconnue", x: 540, y: 1110, type: "state", lane: "not-found" },
+  { id: "safe-return", label: "Retour sûr", meta: "public ou connecté", x: 800, y: 1110, type: "app", lane: "not-found" }
 ];
 
 const routeEdges = [
@@ -74,6 +75,7 @@ const routeEdges = [
   { from: "lesson-config", to: "lesson-quiz" },
   { from: "lesson-quiz", to: "complete" },
   { from: "menu", to: "progress" },
+  { from: "menu", to: "language" },
   { from: "menu", to: "account" },
   { from: "progress", to: "lesson-detail", label: "ouvrir une leçon" },
   { from: "account", to: "logout" },
@@ -97,7 +99,7 @@ const screenTemplates = {
         <span class="tiny-eyebrow">VOCABULAIRE JAPONAIS</span>
         <h4>Révise un peu.<br />Retiens vraiment.</h4>
         <p>Des quiz simples pour travailler chaque mot dans les deux sens.</p>
-        <div class="sample-word"><small>日本語</small><strong>食べます</strong><span>manger · to eat</span></div>
+        <div class="sample-word"><small>日本語</small><strong>食べます</strong><span>manger · to eat · comer</span></div>
       </div>
       <div class="screen-bottom">
         <button class="mini-primary">Se connecter</button>
@@ -168,34 +170,32 @@ const screenTemplates = {
 
   home: () => `
     <div class="product-screen app-view home-view">
-      ${miniBrand("☰")}
+      ${miniBrand("Profil")}
       <div class="welcome"><span class="tiny-eyebrow">BON RETOUR VINCENT</span><h4>Qu’est-ce qu’on révise&nbsp;?</h4></div>
       <div class="quick-card">
-        <div><small>RÉVISION RAPIDE</small><strong>10 mots à travailler</strong><span>日本語 → Sens · rouges et jaunes</span></div>
+        <div><small>RÉVISION RAPIDE</small><strong>10 mots à travailler</strong><span>Comprendre · non maîtrisés et à revoir</span></div>
         <button class="mini-primary">Commencer</button>
         <button class="mini-link">Configurer</button>
       </div>
       <div class="section-row"><strong>Leçons</strong><button>Voir tout</button></div>
       <div class="lesson-preview">
-        ${lessonRow("01", "Fondations", "75 %", "green")}
-        ${lessonRow("02", "Objets du quotidien", "50 %", "yellow")}
-        ${lessonRow("03", "Lieux et directions", "30 %", "red")}
+        ${lessonRow("01", "44 entrées", "75 %")}
+        ${lessonRow("02", "46 entrées", "50 %")}
+        ${lessonRow("03", "49 entrées", "30 %")}
       </div>
     </div>`,
 
   homeLessons: () => `
     <div class="product-screen app-view home-view">
-      ${miniBrand("☰")}
+      ${miniBrand("Profil")}
       <div class="compact-quick"><span><small>Révision rapide</small><strong>10 mots à travailler</strong></span><button>Commencer</button></div>
-      <div class="section-row"><strong>Ton parcours</strong><span>3 / 50 leçons</span></div>
+      <div class="section-row"><strong>Ton parcours</strong><span>18 leçons dans le corpus</span></div>
       <div class="lesson-group">
-        <header><span><small>BLOC 01</small><strong>Premiers échanges</strong></span><b>34 %</b></header>
-        ${lessonRow("01", "Se présenter", "75 %", "green")}
-        ${lessonRow("02", "Parler des objets", "50 %", "yellow")}
-        ${lessonRow("03", "Se repérer", "30 %", "red")}
-        ${lessonRow("04", "L’heure et les jours", "16 %", "red")}
+        ${lessonRow("01", "44 entrées", "75 %")}
+        ${lessonRow("02", "46 entrées", "50 %")}
+        ${lessonRow("03", "49 entrées", "30 %")}
+        ${lessonRow("04", "60 entrées", "16 %")}
       </div>
-      <div class="collapsed-group"><span><small>BLOC 02</small><strong>Vie quotidienne</strong></span><b>⌄</b></div>
     </div>`,
 
   config: (lessonMode = false) => `
@@ -204,26 +204,26 @@ const screenTemplates = {
       <div class="config-scroll">
         <div class="mini-section"><label>Leçons</label><div class="lesson-pills"><b class="selected">${lessonMode ? "06" : "01"}</b>${lessonMode ? "" : "<b class='selected'>02</b><b class='selected'>03</b><b>04</b><b>+46</b>"}</div></div>
         ${lessonMode ? "<div class='context-note'><strong>Leçon 06 présélectionnée</strong><span>Tu peux encore modifier le périmètre.</span></div>" : ""}
-        <div class="mini-section"><label>Sens du quiz</label><div class="mini-segment"><b>日本語 → Sens</b><span>Sens → 日本語</span></div></div>
-        <div class="mini-section"><label>Mots à inclure</label><div class="status-row"><b><i class="red"></i>Rouges ✓</b><b><i class="yellow"></i>Jaunes ✓</b><b><i class="green"></i>Verts</b></div></div>
+        <div class="mini-section"><label>Sens du quiz</label><div class="direction-options"><button class="selected" aria-pressed="true" aria-label="Comprendre : japonais vers français, anglais ou espagnol"><small>Comprendre</small><span>${languageFlag("ja")}<i>→</i><em>${languageFlag("fr")}${languageFlag("en")}${languageFlag("es")}</em></span></button><button aria-pressed="false" aria-label="Produire : français, anglais ou espagnol vers japonais"><small>Produire</small><span><em>${languageFlag("fr")}${languageFlag("en")}${languageFlag("es")}</em><i>→</i>${languageFlag("ja")}</span></button></div></div>
+        <div class="mini-section"><label>Mots à inclure</label><div class="status-options"><label><input type="checkbox" checked /><span class="mock-checkbox">✓</span><b><i class="red"></i>Non maîtrisés</b></label><label><input type="checkbox" checked /><span class="mock-checkbox">✓</span><b><i class="yellow"></i>À revoir</b></label><label><input type="checkbox" /><span class="mock-checkbox"></span><b><i class="green"></i>Maîtrisés</b></label></div></div>
         <div class="mini-section"><label>Ordre</label><div class="mini-segment"><b>Aléatoire</b><span>Dans l’ordre</span></div></div>
       </div>
-      <div class="config-action"><span><strong>${lessonMode ? "32" : "84"}</strong> questions</span><button class="mini-primary">Commencer</button></div>
+      <div class="config-action"><span><strong>${lessonMode ? "55" : "84"}</strong> questions</span><button class="mini-primary">Commencer</button></div>
     </div>`,
 
   emptyConfig: () => `
     <div class="product-screen app-view config-view">
       ${miniHeader("Configurer", "←")}
-      <div class="empty-state"><span class="round-icon">0</span><h4>Aucun mot ne correspond.</h4><p>Essaie d’ajouter les mots jaunes ou de sélectionner une autre leçon.</p><button class="mini-secondary">Modifier les filtres</button></div>
+      <div class="empty-state"><span class="round-icon">0</span><h4>Aucun mot ne correspond.</h4><p>Essaie d’inclure les mots « À revoir » ou de sélectionner une autre leçon.</p><button class="mini-secondary">Modifier les filtres</button></div>
       <div class="config-action disabled"><span><strong>0</strong> question</span><button>Commencer</button></div>
     </div>`,
 
   quiz: () => `
     <div class="product-screen app-view quiz-view">
-      <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button>☰</button></div>
-      <div class="quiz-tags"><span>Leçon 06</span><span>日本語 → Sens</span></div>
+      <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button></div>
+      <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
       <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
-      <div class="answer-box"><label>Ta réponse</label><div><input placeholder="Français ou English" readonly /><button>●</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
+      <div class="answer-box"><label>Ta réponse</label><div><input placeholder="FR, EN ou ES" readonly /><button>●</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
     </div>`,
 
   correct: () => `
@@ -231,7 +231,7 @@ const screenTemplates = {
       <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><b></b></div>
       <div class="compact-question"><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
       <div class="answer-box"><label>Ta réponse</label><div class="answer-correct"><input value="manger" readonly /><b>✓</b></div></div>
-      <div class="result-card result-card--correct"><header><b>✓</b><span><strong>Bonne réponse</strong><small>La progression passe en jaune.</small></span></header><dl><div><dt>Significations</dt><dd>manger · to eat</dd></div><div><dt>Formes</dt><dd>食べます · たべます</dd></div></dl></div>
+      <div class="result-card result-card--correct"><header><b>✓</b><span><strong>Bonne réponse</strong><small>Ce mot passe à « À revoir ».</small></span></header><dl><div><dt>Significations</dt><dd>manger · to eat · comer</dd></div><div><dt>Formes</dt><dd>食べます · たべます</dd></div></dl></div>
       <button class="mini-primary bottom-button">Question suivante</button>
     </div>`,
 
@@ -240,7 +240,7 @@ const screenTemplates = {
       <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><b></b></div>
       <div class="compact-question"><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
       <div class="answer-box"><label>Ta réponse</label><div class="answer-incorrect"><input value="boire" readonly /><b>×</b></div></div>
-      <div class="result-card result-card--incorrect"><header><b>×</b><span><strong>À revoir</strong><small>Ce mot reste rouge.</small></span></header><dl><div><dt>Réponse attendue</dt><dd>manger · to eat</dd></div><div><dt>Formes</dt><dd>食べます · たべます</dd></div></dl></div>
+      <div class="result-card result-card--incorrect"><header><b>×</b><span><strong>À retravailler</strong><small>Ce mot reste non maîtrisé.</small></span></header><dl><div><dt>Réponse attendue</dt><dd>manger · to eat · comer</dd></div><div><dt>Formes</dt><dd>食べます · たべます</dd></div></dl></div>
       <button class="mini-primary bottom-button">Question suivante</button>
     </div>`,
 
@@ -255,15 +255,15 @@ const screenTemplates = {
 
   lesson: () => `
     <div class="product-screen app-view lesson-view">
-      ${miniHeader("Leçon 06", "←", "☰")}
-      <div class="lesson-summary"><span class="lesson-big-number">06</span><div><small>PREMIERS ÉCHANGES</small><h4>Actions du quotidien</h4><p>32 mots</p></div></div>
+      ${miniHeader("Leçon 06", "←", "Profil")}
+      <div class="lesson-summary"><span class="lesson-big-number">06</span><div><small>CORPUS ACTUEL</small><h4>Leçon 06</h4><p>55 entrées de vocabulaire</p></div></div>
       <div class="two-progress"><div><span>Comprendre <b>68 %</b></span><i><u style="width: 68%"></u></i></div><div><span>Produire <b>41 %</b></span><i><u style="width: 41%"></u></i></div></div>
       <button class="mini-primary lesson-cta">Réviser cette leçon</button>
-      <div class="vocab-head"><strong>Vocabulaire</strong><span>32 entrées</span></div>
+      <div class="vocab-head"><strong>Vocabulaire</strong><span>55 entrées</span></div>
       <div class="vocab-list">
-        ${vocabRow("食べます", "たべます · tabemasu", "manger · to eat", "yellow", "red")}
-        ${vocabRow("飲みます", "のみます · nomimasu", "boire · to drink", "green", "yellow")}
-        ${vocabRow("見ます", "みます · mimasu", "regarder · to watch", "red", "red")}
+        ${vocabRow("食べます", "たべます · tabemasu", "manger · to eat · comer", "yellow", "red")}
+        ${vocabRow("飲みます", "のみます · nomimasu", "boire · to drink · beber", "green", "yellow")}
+        ${vocabRow("見ます", "みます · mimasu", "regarder · to watch · mirar", "red", "red")}
       </div>
     </div>`,
 
@@ -273,22 +273,34 @@ const screenTemplates = {
       <div class="mini-backdrop"></div>
       <aside class="mini-drawer">
         ${miniBrand("×")}
-        <nav><button class="active">▣ <span>Réviser</span></button><button>▥ <span>Progression</span></button><button>○ <span>Compte</span></button></nav>
+        <nav><button class="active">${uiIcon("book")}<span>Réviser</span></button><button>${uiIcon("chart")}<span>Progression</span></button><button>${uiIcon("globe")}<span>Langue</span></button><button>${uiIcon("user")}<span>Compte</span></button></nav>
         <div class="mini-account"><i>V</i><span><strong>Vincent</strong><small>Progression synchronisée</small></span></div>
       </aside>
     </div>`,
 
+  language: () => `
+    <div class="product-screen app-view language-view">
+      ${miniHeader("Langue", "←", "Profil")}
+      <div class="language-copy"><span class="tiny-eyebrow">LANGUE DE L’APPLICATION</span><h4>Choisis ta langue.</h4><p>Les menus et les textes de l’interface seront traduits.</p></div>
+      <div class="language-options">
+        <button class="selected"><span>${languageFlag("fr")}</span><strong>Français</strong><small>Français</small><b>✓</b></button>
+        <button><span>${languageFlag("en")}</span><strong>English</strong><small>Anglais</small><b></b></button>
+        <button><span>${languageFlag("es")}</span><strong>Español</strong><small>Espagnol</small><b></b></button>
+      </div>
+      <p class="language-note">Ce choix définit aussi la traduction principale affichée dans les quiz.</p>
+    </div>`,
+
   progress: () => `
     <div class="product-screen app-view progress-view">
-      ${miniHeader("Progression", "←", "☰")}
-      <div class="mastery"><div class="ring"><span>34<small>%</small></span></div><span><small>MAÎTRISE GLOBALE</small><strong>128 mots</strong><em>verts dans les deux sens</em></span></div>
+      ${miniHeader("Progression", "←", "Profil")}
+      <div class="mastery"><div class="ring"><span>34<small>%</small></span></div><span><small>MAÎTRISE GLOBALE</small><strong>128 mots</strong><em>maîtrisés dans les deux sens</em></span></div>
       <div class="two-progress compact"><div><span>Comprendre <b>68 %</b></span><i><u style="width:68%"></u></i></div><div><span>Produire <b>41 %</b></span><i><u style="width:41%"></u></i></div></div>
-      <div class="vocab-head"><strong>Par leçon</strong><span>50 leçons</span></div>
+      <div class="vocab-head"><strong>Par leçon</strong><span>18 leçons</span></div>
       <div class="lesson-preview">
-        ${lessonRow("01", "Se présenter", "75 %", "green")}
-        ${lessonRow("02", "Parler des objets", "50 %", "yellow")}
-        ${lessonRow("03", "Se repérer", "30 %", "red")}
-        ${lessonRow("04", "L’heure et les jours", "16 %", "red")}
+        ${lessonRow("01", "44 entrées", "75 %")}
+        ${lessonRow("02", "46 entrées", "50 %")}
+        ${lessonRow("03", "49 entrées", "30 %")}
+        ${lessonRow("04", "60 entrées", "16 %")}
       </div>
     </div>`,
 
@@ -319,11 +331,11 @@ const screenTemplates = {
 
   resumeHome: () => `
     <div class="product-screen app-view home-view">
-      ${miniBrand("☰")}
+      ${miniBrand("Profil")}
       <div class="welcome"><span class="tiny-eyebrow">PASSE EN COURS</span><h4>Tu étais à la question 12.</h4></div>
-      <div class="quick-card resume-card"><div><small>LEÇONS 01 À 06</small><strong>72 questions restantes</strong><span>日本語 → Sens</span></div><i><u style="width:14%"></u></i><button class="mini-primary">Reprendre</button><button class="mini-link">Abandonner cette passe</button></div>
+      <div class="quick-card resume-card"><div><small>LEÇONS 01 À 06</small><strong>72 questions restantes</strong><span>Comprendre</span></div><i><u style="width:14%"></u></i><button class="mini-primary">Reprendre</button><button class="mini-link">Abandonner cette passe</button></div>
       <div class="section-row"><strong>Leçons</strong><button>Voir tout</button></div>
-      <div class="lesson-preview">${lessonRow("01", "Fondations", "75 %", "green")}${lessonRow("02", "Objets du quotidien", "50 %", "yellow")}</div>
+      <div class="lesson-preview">${lessonRow("01", "44 entrées", "75 %")}${lessonRow("02", "46 entrées", "50 %")}</div>
     </div>`,
 
   notFound: () => `
@@ -392,22 +404,29 @@ const flows = [
     steps: [step("home", "Accueil"), step("menu", "Menu"), step("progress", "Progression", "/app/progress"), step("lesson", "Détail d’une leçon")]
   },
   {
-    id: "account-logout",
+    id: "language-settings",
     number: "09",
+    title: "Changer la langue de l’application",
+    description: "La langue de l’interface et la traduction principale du quiz sont synchronisées avec le compte.",
+    steps: [step("home", "Accueil"), step("menu", "Menu"), step("language", "Choix de la langue", "/app/language")]
+  },
+  {
+    id: "account-logout",
+    number: "10",
     title: "Compte et déconnexion",
     description: "La déconnexion ramène sur la page publique sans conserver de progression métier locale.",
     steps: [step("home", "Accueil"), step("menu", "Menu"), step("account", "Compte", "/app/account"), step("logout", "Confirmation"), step("landing", "Accueil public")]
   },
   {
     id: "protected-link",
-    number: "10",
+    number: "11",
     title: "Ouvrir un lien protégé sans session",
     description: "La destination demandée est conservée et restaurée après la connexion.",
     steps: [step("protected", "Leçon 06 demandée", "/app/lessons/06"), step("login", "Connexion"), step("callback", "Callback"), step("lesson", "Retour à la leçon 06")]
   },
   {
     id: "resume-session",
-    number: "11",
+    number: "12",
     title: "Interrompre puis reprendre une passe",
     description: "Cette branche dépend de la décision de conserver ou non les longues passes interrompues.",
     open: true,
@@ -415,7 +434,7 @@ const flows = [
   },
   {
     id: "not-found",
-    number: "12",
+    number: "13",
     title: "Route inconnue",
     description: "Le retour mène à l’accueil public ou connecté selon la session disponible.",
     steps: [step("notFound", "Page introuvable"), branch([step("landing", "Accueil public"), step("home", "Accueil connecté")], "Selon la session")]
@@ -427,6 +446,10 @@ function uiIcon(name) {
     user: '<circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path>',
     arrowLeft: '<path d="m15 18-6-6 6-6"></path>',
     menu: '<path d="M4 7h16M4 12h16M4 17h16"></path>',
+    close: '<path d="m7 7 10 10M17 7 7 17"></path>',
+    book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21V5.5ZM20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5A2.5 2.5 0 0 1 20 21V5.5Z"></path>',
+    chart: '<path d="M5 20V10M12 20V4M19 20v-7"></path>',
+    globe: '<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path>',
     volume: '<path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z"></path><path d="M15 9.5a4 4 0 0 1 0 5M17.8 7a7.4 7.4 0 0 1 0 10"></path>'
   };
 
@@ -435,10 +458,27 @@ function uiIcon(name) {
 
 function miniBrand(action) {
   const isLoginAction = action === "Connexion";
-  const actionLabel = isLoginAction ? "Se connecter" : "Ouvrir le menu";
-  const actionContent = isLoginAction ? uiIcon("user") : uiIcon("menu");
+  const isCloseAction = action === "×";
+  const actionLabel = isLoginAction ? "Se connecter" : isCloseAction ? "Fermer le menu" : "Ouvrir le menu du profil";
+  const actionContent = isLoginAction ? uiIcon("user") : isCloseAction ? uiIcon("close") : avatarMark();
+  const actionClass = !isLoginAction && !isCloseAction ? ' class="profile-trigger"' : "";
 
-  return `<div class="mini-brand"><span class="mini-wordmark-logo kl-brand-art kl-brand-art--wordmark" role="img" aria-label="Kuma Libre"></span><button aria-label="${actionLabel}">${actionContent}</button></div>`;
+  return `<div class="mini-brand"><span class="mini-wordmark-logo kl-brand-art kl-brand-art--wordmark" role="img" aria-label="Kuma Libre"></span><button${actionClass} aria-label="${actionLabel}">${actionContent}</button></div>`;
+}
+
+function avatarMark() {
+  return '<span class="mini-avatar" aria-hidden="true">V</span>';
+}
+
+function languageFlag(code) {
+  const flags = {
+    ja: '<rect width="24" height="16" rx="2" fill="#fff"></rect><circle cx="12" cy="8" r="4" fill="#bc002d"></circle>',
+    fr: '<rect width="8" height="16" fill="#0055a4"></rect><rect x="8" width="8" height="16" fill="#fff"></rect><rect x="16" width="8" height="16" fill="#ef4135"></rect>',
+    en: '<rect width="24" height="16" rx="2" fill="#21468b"></rect><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="4"></path><path d="M0 0 24 16M24 0 0 16" stroke="#cf142b" stroke-width="1.6"></path><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5"></path><path d="M12 0v16M0 8h24" stroke="#cf142b" stroke-width="2.6"></path>',
+    es: '<rect width="24" height="16" rx="2" fill="#aa151b"></rect><rect y="4" width="24" height="8" fill="#f1bf00"></rect>'
+  };
+
+  return `<svg class="language-flag" viewBox="0 0 24 16" aria-hidden="true">${flags[code]}</svg>`;
 }
 
 function miniHeader(title, left = "", right = "") {
@@ -446,14 +486,14 @@ function miniHeader(title, left = "", right = "") {
     ? `<button aria-label="Retour">${uiIcon("arrowLeft")}</button>`
     : '<button aria-hidden="true" tabindex="-1"></button>';
   const rightButton = right
-    ? `<button aria-label="Ouvrir le menu">${uiIcon("menu")}</button>`
+    ? `<button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button>`
     : '<button aria-hidden="true" tabindex="-1"></button>';
 
   return `<div class="mini-header">${leftButton}<strong>${title}</strong>${rightButton}</div>`;
 }
 
-function lessonRow(number, title, percent, status) {
-  return `<button class="mini-lesson"><b>${number}</b><span><strong>${title}</strong><small>Progression globale</small></span><em class="${status}">${percent}</em><i>›</i></button>`;
+function lessonRow(number, entryCount, percent) {
+  return `<button class="mini-lesson"><b>${number}</b><span><strong>Leçon ${number}</strong><small>${entryCount}</small></span><em><strong>${percent}</strong><small>maîtrisés</small></em><i>›</i></button>`;
 }
 
 function vocabRow(japanese, reading, meaning, understand, produce) {
