@@ -27,6 +27,8 @@ La page `flows.html` complète les écrans isolés avec :
 - les états publics, connectés, de quiz, d'authentification et de reprise ;
 - des liens entre chaque nœud de la carte et le parcours correspondant.
 
+Les remarques formulées pendant la lecture de cette planche sont suivies dans [`REVIEW-NOTES.md`](REVIEW-NOTES.md).
+
 Deux captures sont également fournies :
 
 - `preview-board.png` pour un aperçu rapide de la partie supérieure ;

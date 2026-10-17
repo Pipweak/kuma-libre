@@ -727,14 +727,20 @@ main {
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 8px;
   min-height: 52px;
   padding: 15px 13px 7px;
 }
 
-.mini-brand > strong,
+.mini-brand {
+  grid-template-columns: 1fr auto;
+}
+
+.mini-header {
+  grid-template-columns: 28px 1fr 28px;
+}
+
 .mini-header > strong {
   font-size: 0.66rem;
   font-weight: 790;
@@ -761,24 +767,21 @@ main {
   border-color: transparent;
 }
 
-.mini-logo {
-  display: block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: var(--surface);
-  background-image: url("../design-system/assets/kuma-bear-wink.png");
-  background-position: 50% 43%;
-  background-repeat: no-repeat;
-  background-size: 188% auto;
+.mini-wordmark-logo {
+  width: 96px;
+  height: 28px;
+  background-size: 159% auto;
 }
 
-.mini-wordmark {
-  display: inline-flex;
-  gap: 0.12em;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  letter-spacing: -0.04em;
+.mini-ui-icon {
+  display: block;
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .tiny-eyebrow {
@@ -836,21 +839,12 @@ main {
   text-align: center;
 }
 
-.loader-bear {
-  display: block;
-  width: 112px;
-  height: 112px;
-  margin-bottom: 24px;
-  border-radius: 50%;
-  background-color: var(--surface);
-  background-image: url("../design-system/assets/kuma-bear-wink.png");
-  background-position: 50% 43%;
-  background-repeat: no-repeat;
-  background-size: 188% auto;
-}
-
-.loader-view > strong {
-  font-size: 0.96rem;
+.loader-logo {
+  width: 170px;
+  height: 160px;
+  margin-bottom: 8px;
+  background-position: 50% 45%;
+  background-size: 225px auto;
 }
 
 .loader-view p,
@@ -1662,15 +1656,24 @@ main {
 
 .word-question button {
   display: grid;
-  width: 34px;
-  height: 34px;
+  grid-template-columns: auto auto;
+  width: auto;
+  height: 32px;
   margin-bottom: 18px;
   place-items: center;
+  gap: 5px;
+  padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 50%;
+  border-radius: 999px;
   color: var(--brand-dark);
   background: #fff;
-  font-size: 0.5rem;
+  font-size: 0.48rem;
+  font-weight: 760;
+}
+
+.word-question .mini-ui-icon {
+  width: 13px;
+  height: 13px;
 }
 
 .word-question strong,

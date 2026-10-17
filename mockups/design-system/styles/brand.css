@@ -6,6 +6,22 @@
   text-decoration: none;
 }
 
+.kl-brand-art {
+  display: block;
+  flex: 0 0 auto;
+  background-color: var(--kl-color-surface);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.kl-brand-art--wordmark {
+  background-image: url("../assets/kuma-wordmark.png");
+}
+
+.kl-brand-art--stacked {
+  background-image: url("../assets/kuma-logo-stacked.png");
+}
+
 .kl-brand__bear {
   display: block;
   width: 2.75rem;

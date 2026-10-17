@@ -84,8 +84,7 @@ const routeEdges = [
 const screenTemplates = {
   loader: () => `
     <div class="product-screen loader-view">
-      <div class="loader-bear" role="img" aria-label="Kuma, la mascotte de Kuma Libre"></div>
-      <strong>Kuma Libre</strong>
+      <div class="loader-logo kl-brand-art kl-brand-art--stacked" role="img" aria-label="Kuma Libre"></div>
       <p>Préparation de ta révision…</p>
       <i class="loading-line"><u></u></i>
       <small>Mascotte provisoire · animation à étudier plus tard</small>
@@ -223,7 +222,7 @@ const screenTemplates = {
     <div class="product-screen app-view quiz-view">
       <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button>☰</button></div>
       <div class="quiz-tags"><span>Leçon 06</span><span>日本語 → Sens</span></div>
-      <div class="word-question"><button>◖))</button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
+      <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
       <div class="answer-box"><label>Ta réponse</label><div><input placeholder="Français ou English" readonly /><button>●</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
     </div>`,
 
@@ -423,12 +422,34 @@ const flows = [
   }
 ];
 
+function uiIcon(name) {
+  const paths = {
+    user: '<circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path>',
+    arrowLeft: '<path d="m15 18-6-6 6-6"></path>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"></path>',
+    volume: '<path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z"></path><path d="M15 9.5a4 4 0 0 1 0 5M17.8 7a7.4 7.4 0 0 1 0 10"></path>'
+  };
+
+  return `<svg class="mini-ui-icon" viewBox="0 0 24 24" aria-hidden="true">${paths[name]}</svg>`;
+}
+
 function miniBrand(action) {
-  return `<div class="mini-brand"><span class="mini-logo" aria-hidden="true"></span><strong class="mini-wordmark"><span>Kuma</span><span>Libre</span></strong><button>${action}</button></div>`;
+  const isLoginAction = action === "Connexion";
+  const actionLabel = isLoginAction ? "Se connecter" : "Ouvrir le menu";
+  const actionContent = isLoginAction ? uiIcon("user") : uiIcon("menu");
+
+  return `<div class="mini-brand"><span class="mini-wordmark-logo kl-brand-art kl-brand-art--wordmark" role="img" aria-label="Kuma Libre"></span><button aria-label="${actionLabel}">${actionContent}</button></div>`;
 }
 
 function miniHeader(title, left = "", right = "") {
-  return `<div class="mini-header"><button>${left}</button><strong>${title}</strong><button>${right}</button></div>`;
+  const leftButton = left
+    ? `<button aria-label="Retour">${uiIcon("arrowLeft")}</button>`
+    : '<button aria-hidden="true" tabindex="-1"></button>';
+  const rightButton = right
+    ? `<button aria-label="Ouvrir le menu">${uiIcon("menu")}</button>`
+    : '<button aria-hidden="true" tabindex="-1"></button>';
+
+  return `<div class="mini-header">${leftButton}<strong>${title}</strong>${rightButton}</div>`;
 }
 
 function lessonRow(number, title, percent, status) {
