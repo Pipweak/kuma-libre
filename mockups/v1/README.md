@@ -13,10 +13,19 @@ En mode Prototype, les flèches gauche et droite du clavier passent également d
 
 Un écran peut être ouvert directement avec des paramètres, par exemple `index.html?view=focus&screen=config`.
 
+La page `flows.html` complète les écrans isolés avec :
+
+- une carte globale des destinations et embranchements ;
+- douze parcours détaillés sous forme de storyboards horizontaux ;
+- les états publics, connectés, de quiz, d'authentification et de reprise ;
+- des liens entre chaque nœud de la carte et le parcours correspondant.
+
 Deux captures sont également fournies :
 
 - `preview-board.png` pour un aperçu rapide de la partie supérieure ;
 - `preview-full.png` pour la planche complète en une image.
+- `flows-preview.png` pour un aperçu de la cartographie et des premiers parcours.
+- `flows-full.png` pour une vue d'ensemble des douze storyboards.
 
 ## Écrans proposés
 

@@ -168,6 +168,25 @@ svg {
   background: rgb(255 255 255 / 50%);
 }
 
+.flow-link {
+  margin-left: auto;
+  margin-right: 12px;
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  background: rgb(255 255 255 / 50%);
+  font-size: 0.72rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.flow-link:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+  background: #fff;
+}
+
 .view-switch__button {
   padding: 8px 14px;
   border-radius: 999px;
@@ -1756,6 +1775,12 @@ body[data-view="focus"] .review-footer {
   .view-switch__button {
     padding: 7px 11px;
     font-size: 0.7rem;
+  }
+
+  .flow-link {
+    margin-right: 7px;
+    padding: 7px 10px;
+    font-size: 0.66rem;
   }
 
   .design-intro {

@@ -10,6 +10,7 @@ Une interface sobre, chaleureuse et presque silencieuse. Les contrastes sont dou
 
 - [Aperçu de la planche](v1/preview-board.png)
 - [Planche complète](v1/preview-full.png)
+- [Carte et storyboards de navigation](v1/flows.html)
 - [Notes de conception](v1/README.md)
 
 ### [Version 2 — ludique et illustrée](v2/index.html)
