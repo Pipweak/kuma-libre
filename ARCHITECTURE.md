@@ -537,6 +537,8 @@ La lecture vocale et la liste des voix disponibles dépendent du navigateur et d
 
 Le bouton microphone est intégré à l'input, selon un comportement proche des applications de messagerie :
 
+Ce contrôle démarre une session temporaire de reconnaissance vocale, pas un enregistrement audio destiné à être sauvegardé ou réécouté.
+
 1. l'utilisateur active le microphone ;
 2. l'application demande l'autorisation si nécessaire ;
 3. l'interface indique clairement que l'écoute est active ;

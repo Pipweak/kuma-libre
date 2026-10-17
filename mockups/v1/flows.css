@@ -1851,6 +1851,21 @@ main {
   font-size: 0.54rem;
 }
 
+.answer-box > div .mini-microphone {
+  width: 30px;
+  height: 30px;
+  margin-right: 4px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
+}
+
+.answer-box > div .mini-microphone .mini-ui-icon {
+  width: 15px;
+  height: 15px;
+}
+
 .answer-box .mini-link {
   margin-top: -2px;
 }

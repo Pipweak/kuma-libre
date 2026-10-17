@@ -223,7 +223,7 @@ const screenTemplates = {
       <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button></div>
       <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
       <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
-      <div class="answer-box"><label>Ta réponse</label><div><input placeholder="FR, EN ou ES" readonly /><button>●</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
+      <div class="answer-box"><label>Ta réponse</label><div><input placeholder="FR, EN ou ES" readonly /><button class="mini-microphone" type="button" aria-label="Dicter ma réponse" title="Dicter ma réponse">${uiIcon("microphone")}</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
     </div>`,
 
   correct: () => `
@@ -450,7 +450,8 @@ function uiIcon(name) {
     book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21V5.5ZM20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5A2.5 2.5 0 0 1 20 21V5.5Z"></path>',
     chart: '<path d="M5 20V10M12 20V4M19 20v-7"></path>',
     globe: '<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path>',
-    volume: '<path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z"></path><path d="M15 9.5a4 4 0 0 1 0 5M17.8 7a7.4 7.4 0 0 1 0 10"></path>'
+    volume: '<path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z"></path><path d="M15 9.5a4 4 0 0 1 0 5M17.8 7a7.4 7.4 0 0 1 0 10"></path>',
+    microphone: '<rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6"></path>'
   };
 
   return `<svg class="mini-ui-icon" viewBox="0 0 24 24" aria-hidden="true">${paths[name]}</svg>`;

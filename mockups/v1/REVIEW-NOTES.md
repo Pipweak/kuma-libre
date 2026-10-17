@@ -45,3 +45,11 @@ Les icônes simples sont dessinées en SVG inline. Une dépendance comme Font Aw
 
 Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audit.md`](../../reference/corpus-i18n-audit.md).
 
+## Passe du 17 octobre 2026 — dictée vocale
+
+### Intégré
+
+- **Réponse vocale** : remplacer le point rouge ambigu dans le champ de réponse par une vraie icône de microphone, nommée `Dicter ma réponse` pour les technologies d'assistance.
+- **Comportement attendu** : le microphone lance la reconnaissance vocale, puis insère la transcription dans le même input que la saisie clavier. Le texte reste modifiable et n'est validé que par une action explicite de l'utilisateur.
+- **Confidentialité** : le contrôle ne représente pas un enregistrement audio persistant. Aucun fichier sonore n'est stocké dans l'application ou dans sa base de données.
+
