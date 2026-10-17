@@ -53,3 +53,11 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 - **Comportement attendu** : le microphone lance la reconnaissance vocale, puis insère la transcription dans le même input que la saisie clavier. Le texte reste modifiable et n'est validé que par une action explicite de l'utilisateur.
 - **Confidentialité** : le contrôle ne représente pas un enregistrement audio persistant. Aucun fichier sonore n'est stocké dans l'application ou dans sa base de données.
 
+## Passe du 17 octobre 2026 — langue du quiz
+
+### Intégré
+
+- **Sens du quiz** : ne plus afficher simultanément les drapeaux français, anglais et espagnol. La carte montre le japonais et uniquement la langue active.
+- **Réactivité** : la sélection de `Français`, `English` ou `Español` dans l'écran Langue met à jour les deux cartes de sens dans toutes les configurations de quiz de la planche.
+- **Accessibilité** : le nom accessible de chaque carte est également actualisé, par exemple `Comprendre : japonais vers anglais`.
+

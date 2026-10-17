@@ -2,6 +2,13 @@ const MAP_WIDTH = 2060;
 const MAP_HEIGHT = 1200;
 const NODE_WIDTH = 194;
 const NODE_HEIGHT = 74;
+let selectedQuizLocale = "fr";
+
+const quizLocaleNames = {
+  fr: "français",
+  en: "anglais",
+  es: "espagnol"
+};
 
 const routeNodes = [
   { id: "boot", label: "Chargement initial", meta: "session + application", x: 40, y: 470, type: "state", lane: "launch-anonymous" },
@@ -204,7 +211,7 @@ const screenTemplates = {
       <div class="config-scroll">
         <div class="mini-section"><label>Leçons</label><div class="lesson-pills"><b class="selected">${lessonMode ? "06" : "01"}</b>${lessonMode ? "" : "<b class='selected'>02</b><b class='selected'>03</b><b>04</b><b>+46</b>"}</div></div>
         ${lessonMode ? "<div class='context-note'><strong>Leçon 06 présélectionnée</strong><span>Tu peux encore modifier le périmètre.</span></div>" : ""}
-        <div class="mini-section"><label>Sens du quiz</label><div class="direction-options"><button class="selected" aria-pressed="true" aria-label="Comprendre : japonais vers français, anglais ou espagnol"><small>Comprendre</small><span>${languageFlag("ja")}<i>→</i><em>${languageFlag("fr")}${languageFlag("en")}${languageFlag("es")}</em></span></button><button aria-pressed="false" aria-label="Produire : français, anglais ou espagnol vers japonais"><small>Produire</small><span><em>${languageFlag("fr")}${languageFlag("en")}${languageFlag("es")}</em><i>→</i>${languageFlag("ja")}</span></button></div></div>
+        <div class="mini-section"><label>Sens du quiz</label><div class="direction-options"><button class="selected" data-quiz-direction="understand" aria-pressed="true" aria-label="Comprendre : japonais vers ${quizLocaleNames[selectedQuizLocale]}"><small>Comprendre</small><span>${languageFlag("ja")}<i>→</i><em data-quiz-locale>${languageFlag(selectedQuizLocale)}</em></span></button><button data-quiz-direction="produce" aria-pressed="false" aria-label="Produire : ${quizLocaleNames[selectedQuizLocale]} vers japonais"><small>Produire</small><span><em data-quiz-locale>${languageFlag(selectedQuizLocale)}</em><i>→</i>${languageFlag("ja")}</span></button></div></div>
         <div class="mini-section"><label>Mots à inclure</label><div class="status-options"><label><input type="checkbox" checked /><span class="mock-checkbox">✓</span><b><i class="red"></i>Non maîtrisés</b></label><label><input type="checkbox" checked /><span class="mock-checkbox">✓</span><b><i class="yellow"></i>À revoir</b></label><label><input type="checkbox" /><span class="mock-checkbox"></span><b><i class="green"></i>Maîtrisés</b></label></div></div>
         <div class="mini-section"><label>Ordre</label><div class="mini-segment"><b>Aléatoire</b><span>Dans l’ordre</span></div></div>
       </div>
@@ -283,9 +290,9 @@ const screenTemplates = {
       ${miniHeader("Langue", "←", "Profil")}
       <div class="language-copy"><span class="tiny-eyebrow">LANGUE DE L’APPLICATION</span><h4>Choisis ta langue.</h4><p>Les menus et les textes de l’interface seront traduits.</p></div>
       <div class="language-options">
-        <button class="selected"><span>${languageFlag("fr")}</span><strong>Français</strong><small>Français</small><b>✓</b></button>
-        <button><span>${languageFlag("en")}</span><strong>English</strong><small>Anglais</small><b></b></button>
-        <button><span>${languageFlag("es")}</span><strong>Español</strong><small>Espagnol</small><b></b></button>
+        ${languageOption("fr", "Français", "Français")}
+        ${languageOption("en", "English", "Anglais")}
+        ${languageOption("es", "Español", "Espagnol")}
       </div>
       <p class="language-note">Ce choix définit aussi la traduction principale affichée dans les quiz.</p>
     </div>`,
@@ -482,6 +489,11 @@ function languageFlag(code) {
   return `<svg class="language-flag" viewBox="0 0 24 16" aria-hidden="true">${flags[code]}</svg>`;
 }
 
+function languageOption(code, nativeName, frenchName) {
+  const isSelected = code === selectedQuizLocale;
+  return `<button data-locale="${code}" class="${isSelected ? "selected" : ""}" aria-pressed="${isSelected}"><span>${languageFlag(code)}</span><strong>${nativeName}</strong><small>${frenchName}</small><b>${isSelected ? "✓" : ""}</b></button>`;
+}
+
 function miniHeader(title, left = "", right = "") {
   const leftButton = left
     ? `<button aria-label="Retour">${uiIcon("arrowLeft")}</button>`
@@ -663,6 +675,34 @@ function setupZoom() {
   requestAnimationFrame(fit);
 }
 
+function setupLanguageSelection() {
+  document.querySelectorAll(".language-options button[data-locale]").forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedQuizLocale = button.dataset.locale;
+
+      document.querySelectorAll(".language-options button[data-locale]").forEach((option) => {
+        const isSelected = option.dataset.locale === selectedQuizLocale;
+        option.classList.toggle("selected", isSelected);
+        option.setAttribute("aria-pressed", String(isSelected));
+        option.querySelector("b").textContent = isSelected ? "✓" : "";
+      });
+
+      document.querySelectorAll("[data-quiz-locale]").forEach((flag) => {
+        flag.innerHTML = languageFlag(selectedQuizLocale);
+      });
+
+      document.querySelectorAll('[data-quiz-direction="understand"]').forEach((direction) => {
+        direction.setAttribute("aria-label", `Comprendre : japonais vers ${quizLocaleNames[selectedQuizLocale]}`);
+      });
+
+      document.querySelectorAll('[data-quiz-direction="produce"]').forEach((direction) => {
+        direction.setAttribute("aria-label", `Produire : ${quizLocaleNames[selectedQuizLocale]} vers japonais`);
+      });
+    });
+  });
+}
+
 renderRouteMap();
 renderStoryboards();
 setupZoom();
+setupLanguageSelection();

@@ -145,7 +145,7 @@ Avant de démarrer, l'utilisateur peut configurer le quiz sans exposer des régl
 
 La configuration doit proposer des valeurs par défaut permettant de commencer rapidement. Pour un visiteur, la configuration courante reste en mémoire pendant l'utilisation de la page. Pour un utilisateur connecté, la dernière configuration pourra être enregistrée avec ses préférences dans Supabase. Elle ne doit pas devenir une seconde source de progression dans `localStorage`.
 
-Le sens est présenté par deux cartes compactes et explicites : `Comprendre` pour aller du japonais vers les significations et `Produire` pour aller des significations vers le japonais. Les drapeaux et la flèche renforcent le repère visuel, mais un libellé textuel et un nom accessible restent obligatoires.
+Le sens est présenté par deux cartes compactes et explicites : `Comprendre` pour aller du japonais vers la signification dans la langue active et `Produire` pour aller de cette langue vers le japonais. Chaque carte affiche uniquement le drapeau japonais et celui de la langue sélectionnée dans les réglages. La flèche renforce le repère visuel, mais un libellé textuel et un nom accessible restent obligatoires.
 
 ### 4.5 Composition d'une session
 
@@ -442,7 +442,7 @@ L'interface est conçue mobile-first. Le produit doit rester immédiatement iden
 
 La navigation secondaire peut être regroupée derrière le bouton de profil, notamment sur mobile. Lorsqu'aucune image de profil n'existe, ce bouton affiche l'initiale du prénom dans un cercle. Le futur upload et recadrage d'avatar restent différés. La configuration du quiz reste toutefois accessible directement depuis l'accueil, car elle fait partie du parcours principal.
 
-Le sens du quiz utilise deux cartes présentant `Comprendre` et `Produire`, avec une flèche et des repères de langue. Les drapeaux restent décoratifs et sont toujours accompagnés de texte ou d'un nom accessible afin de ne pas rendre le contrôle ambigu.
+Le sens du quiz utilise deux cartes présentant `Comprendre` et `Produire`, avec une flèche, le drapeau japonais et un seul drapeau de traduction. Ce dernier réagit au choix effectué dans les réglages de langue : français, anglais ou espagnol. Les drapeaux restent décoratifs et sont toujours accompagnés de texte ou d'un nom accessible afin de ne pas rendre le contrôle ambigu.
 
 ### 11.2 Écran de quiz
 
