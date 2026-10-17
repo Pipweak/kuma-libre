@@ -2,11 +2,13 @@
 
 Ce dossier conserve les directions visuelles successives de l'application. Chaque version présente le même parcours afin de comparer la personnalité graphique sans déplacer les décisions fonctionnelles.
 
+Le dossier [`design-system`](design-system/README.md) centralise désormais l’identité commune : palette sémantique, fontes, espacements, rayons, ombres et mascotte SVG animable. La V1 consomme directement ces fondations.
+
 ## Versions
 
-### [Version 1 — calme et éditoriale](v1/index.html)
+### [Version 1 — calme, éditoriale et chaleureuse](v1/index.html)
 
-Une interface sobre, chaleureuse et presque silencieuse. Les contrastes sont doux, les composants sont fins et le vocabulaire reste au premier plan.
+Une interface sobre et mobile-first, habillée avec l’identité crème, anthracite, vermillon et brun de Kuma Libre. Les composants restent fins et le vocabulaire demeure au premier plan.
 
 - [Aperçu de la planche](v1/preview-board.png)
 - [Planche complète](v1/preview-full.png)

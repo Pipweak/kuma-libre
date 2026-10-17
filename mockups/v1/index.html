@@ -59,13 +59,9 @@
 
     <header class="review-header">
       <div class="review-brand">
-        <span class="brand-mark brand-mark--small" aria-hidden="true">
-          <span class="brand-ear brand-ear--left"></span>
-          <span class="brand-ear brand-ear--right"></span>
-          <span class="brand-face">く</span>
-        </span>
+        <img class="brand-mark brand-mark--small" src="../design-system/assets/kuma-bear.svg" alt="" />
         <div>
-          <strong>Kuma Libre</strong>
+          <strong class="brand-wordmark"><span>Kuma</span><span>Libre</span></strong>
           <span>Exploration UI · version 01</span>
         </div>
       </div>
@@ -122,12 +118,8 @@
           <section class="app-screen home-screen">
             <header class="app-header">
               <a class="app-brand" href="#" aria-label="Kuma Libre">
-                <span class="brand-mark" aria-hidden="true">
-                  <span class="brand-ear brand-ear--left"></span>
-                  <span class="brand-ear brand-ear--right"></span>
-                  <span class="brand-face">く</span>
-                </span>
-                <span>Kuma Libre</span>
+                <img class="brand-mark" src="../design-system/assets/kuma-bear.svg" alt="" />
+                <span class="brand-wordmark"><span>Kuma</span><span>Libre</span></span>
               </a>
               <button class="icon-button" type="button" aria-label="Ouvrir le menu" data-go="menu">
                 <svg><use href="#icon-menu"></use></svg>
@@ -555,12 +547,8 @@
             <aside class="menu-drawer">
               <div class="menu-drawer__header">
                 <a class="app-brand" href="#">
-                  <span class="brand-mark" aria-hidden="true">
-                    <span class="brand-ear brand-ear--left"></span>
-                    <span class="brand-ear brand-ear--right"></span>
-                    <span class="brand-face">く</span>
-                  </span>
-                  <span>Kuma Libre</span>
+                  <img class="brand-mark" src="../design-system/assets/kuma-bear.svg" alt="" />
+                  <span class="brand-wordmark"><span>Kuma</span><span>Libre</span></span>
                 </a>
                 <button class="icon-button" type="button" aria-label="Fermer le menu" data-go="home">
                   <svg><use href="#icon-close"></use></svg>
@@ -652,12 +640,8 @@
         <div class="desktop-frame">
           <header class="desktop-header">
             <a class="app-brand" href="#">
-              <span class="brand-mark" aria-hidden="true">
-                <span class="brand-ear brand-ear--left"></span>
-                <span class="brand-ear brand-ear--right"></span>
-                <span class="brand-face">く</span>
-              </span>
-              <span>Kuma Libre</span>
+              <img class="brand-mark" src="../design-system/assets/kuma-bear.svg" alt="" />
+              <span class="brand-wordmark"><span>Kuma</span><span>Libre</span></span>
             </a>
             <nav><button type="button">Réviser</button><button type="button" data-go="progress">Progression</button></nav>
             <button class="desktop-avatar" type="button">V</button>
@@ -681,14 +665,14 @@
     </main>
 
     <footer class="review-footer">
-      <p>Maquettes de travail — les contenus, couleurs et proportions restent ajustables avant l’implémentation React.</p>
+      <p>Maquettes de travail — identité Kuma Libre appliquée via les tokens partagés du design system.</p>
       <div class="palette" aria-label="Palette proposée">
-        <span style="--swatch: #17211d" title="Encre"></span>
-        <span style="--swatch: #f6f2e9" title="Papier"></span>
-        <span style="--swatch: #ee6b4d" title="Corail"></span>
-        <span style="--swatch: #2c7a67" title="Vert"></span>
-        <span style="--swatch: #d9a72e" title="Jaune"></span>
-        <span style="--swatch: #c64f4c" title="Rouge"></span>
+        <span style="--swatch: var(--kl-charcoal-900)" title="Anthracite"></span>
+        <span style="--swatch: var(--kl-cream-100)" title="Crème"></span>
+        <span style="--swatch: var(--kl-red-500)" title="Vermillon"></span>
+        <span style="--swatch: var(--kl-brown-500)" title="Brun Kuma"></span>
+        <span style="--swatch: var(--kl-green-500)" title="Vert succès"></span>
+        <span style="--swatch: var(--kl-gold-500)" title="Or progression"></span>
       </div>
     </footer>
 

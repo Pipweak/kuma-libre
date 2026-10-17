@@ -2,6 +2,13 @@
 
 Ce dossier contient une proposition visuelle mobile-first destinée à guider la future application React. Il ne contient aucun composant de production et ne dépend d'aucune bibliothèque.
 
+La direction visuelle est partagée avec les autres futurs écrans via `../design-system` :
+
+- variables CSS primitives et sémantiques ;
+- pont SCSS sans duplication des valeurs ;
+- Fredoka pour les titres, Nunito Sans pour l’interface et Noto Sans JP pour le japonais ;
+- mascotte SVG avec yeux indépendants et clignement respectueux de `prefers-reduced-motion`.
+
 ## Consultation
 
 Ouvrir `index.html` dans un navigateur. Deux modes sont disponibles :
@@ -47,12 +54,13 @@ Deux captures sont également fournies :
 - les résultats utilisent une icône et un libellé en plus de la couleur ;
 - la progression distingue compréhension, production et maîtrise globale ;
 - la version bureau conserve une colonne de lecture étroite au lieu d'étirer le contenu ;
-- aucun framework ou asset distant n'est nécessaire pour consulter les maquettes.
+- aucun framework n'est nécessaire pour consulter les maquettes ;
+- les fontes web utilisent Google Fonts dans ce prototype, avec des fallbacks système lorsque la connexion n’est pas disponible.
 
 ## Points encore à confirmer
 
 - présence définitive du bouton `Je ne sais pas` ;
 - règle exacte de passage du jaune au vert ;
 - affichage systématique ou facultatif des kana sous les kanji ;
-- identité finale du logo et validation de la palette ;
+- validation finale de la mascotte vectorielle, du mot-symbole et de leurs proportions ;
 - contenu exact du bilan de fin de passe.

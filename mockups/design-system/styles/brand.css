@@ -1,0 +1,42 @@
+.kl-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--kl-color-text);
+  text-decoration: none;
+}
+
+.kl-brand__bear {
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.kl-brand__wordmark {
+  font-family: var(--kl-font-display);
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.kl-brand__wordmark-kuma {
+  color: var(--kl-color-text);
+}
+
+.kl-brand__wordmark-libre {
+  color: var(--kl-color-action);
+}
+
+.kl-brand--compact .kl-brand__bear {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.kl-brand--compact .kl-brand__wordmark {
+  font-size: 0.95rem;
+}
+

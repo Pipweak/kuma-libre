@@ -1,0 +1,93 @@
+:root {
+  color-scheme: light;
+
+  /* Primitive palette — extracted and rationalised from the visual references. */
+  --kl-cream-50: #fffdf8;
+  --kl-cream-100: #fcf8f1;
+  --kl-cream-200: #f6ecde;
+  --kl-cream-300: #eadbc7;
+  --kl-charcoal-700: #4f4c49;
+  --kl-charcoal-800: #343332;
+  --kl-charcoal-900: #232323;
+  --kl-red-100: #f9e5df;
+  --kl-red-300: #e9a092;
+  --kl-red-500: #c83a36;
+  --kl-red-600: #b52f2d;
+  --kl-red-700: #942522;
+  --kl-brown-100: #f1dfca;
+  --kl-brown-300: #bd8154;
+  --kl-brown-500: #92542e;
+  --kl-brown-600: #7b4226;
+  --kl-brown-700: #63331f;
+  --kl-peach-100: #fce9df;
+  --kl-peach-300: #f3b7a7;
+  --kl-green-100: #e9f2ec;
+  --kl-green-500: #46775f;
+  --kl-green-600: #35634e;
+  --kl-gold-100: #fcf0cf;
+  --kl-gold-500: #c58b2b;
+  --kl-danger-100: #fae9e7;
+  --kl-danger-500: #b94a43;
+  --kl-blue-100: #edf3f5;
+  --kl-blue-500: #537382;
+
+  /* Semantic colour roles — components should consume these names. */
+  --kl-color-canvas: var(--kl-cream-100);
+  --kl-color-canvas-accent: var(--kl-cream-200);
+  --kl-color-surface: var(--kl-cream-50);
+  --kl-color-surface-strong: #ffffff;
+  --kl-color-text: var(--kl-charcoal-900);
+  --kl-color-text-muted: var(--kl-charcoal-700);
+  --kl-color-border: #e4d9cc;
+  --kl-color-border-strong: #cfc0b0;
+  --kl-color-action: var(--kl-red-500);
+  --kl-color-action-hover: var(--kl-red-600);
+  --kl-color-action-active: var(--kl-red-700);
+  --kl-color-action-soft: var(--kl-red-100);
+  --kl-color-brand-bear: var(--kl-brown-500);
+  --kl-color-brand-sun: var(--kl-red-500);
+  --kl-color-success: var(--kl-green-500);
+  --kl-color-success-soft: var(--kl-green-100);
+  --kl-color-warning: var(--kl-gold-500);
+  --kl-color-warning-soft: var(--kl-gold-100);
+  --kl-color-danger: var(--kl-danger-500);
+  --kl-color-danger-soft: var(--kl-danger-100);
+  --kl-color-info: var(--kl-blue-500);
+  --kl-color-info-soft: var(--kl-blue-100);
+
+  /* Type roles. */
+  --kl-font-display: "Fredoka", "Arial Rounded MT Bold", ui-rounded, system-ui, sans-serif;
+  --kl-font-body: "Nunito Sans", Avenir, "Segoe UI", system-ui, sans-serif;
+  --kl-font-japanese: "Noto Sans JP", "Yu Gothic UI", "Hiragino Sans", sans-serif;
+  --kl-weight-regular: 400;
+  --kl-weight-medium: 600;
+  --kl-weight-bold: 700;
+  --kl-weight-black: 800;
+
+  /* Geometry and elevation. */
+  --kl-radius-sm: 10px;
+  --kl-radius-md: 16px;
+  --kl-radius-lg: 24px;
+  --kl-radius-xl: 32px;
+  --kl-radius-pill: 999px;
+  --kl-shadow-sm: 0 8px 24px rgb(86 52 31 / 8%);
+  --kl-shadow-md: 0 18px 52px rgb(86 52 31 / 12%);
+  --kl-shadow-lg: 0 26px 80px rgb(86 52 31 / 15%);
+
+  /* 4px spacing scale. */
+  --kl-space-1: 0.25rem;
+  --kl-space-2: 0.5rem;
+  --kl-space-3: 0.75rem;
+  --kl-space-4: 1rem;
+  --kl-space-5: 1.25rem;
+  --kl-space-6: 1.5rem;
+  --kl-space-8: 2rem;
+  --kl-space-10: 2.5rem;
+  --kl-space-12: 3rem;
+  --kl-space-16: 4rem;
+
+  --kl-motion-fast: 140ms;
+  --kl-motion-standard: 220ms;
+  --kl-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+

@@ -1,28 +1,32 @@
+@import url("../design-system/styles/fonts.css");
+@import url("../design-system/styles/tokens.css");
+@import url("../design-system/styles/brand.css");
+
 :root {
-  color-scheme: light;
-  --ink: #17211d;
-  --ink-soft: #53605a;
-  --paper: #f6f2e9;
-  --surface: #fffdf8;
-  --surface-strong: #ffffff;
-  --line: #dedbd2;
-  --line-strong: #c9c7bf;
-  --brand: #ee6b4d;
-  --brand-dark: #d5563c;
-  --brand-soft: #fff0ea;
-  --green: #2c7a67;
-  --green-soft: #e7f3ee;
-  --yellow: #d9a72e;
-  --yellow-soft: #fff7db;
-  --red: #c64f4c;
-  --red-soft: #fcebea;
-  --shadow: 0 22px 70px rgb(23 33 29 / 12%);
-  --shadow-soft: 0 10px 30px rgb(23 33 29 / 8%);
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-jp: "Yu Gothic UI", "Hiragino Sans", "Noto Sans JP", var(--font-sans);
+  --ink: var(--kl-color-text);
+  --ink-soft: var(--kl-color-text-muted);
+  --paper: var(--kl-color-canvas);
+  --surface: var(--kl-color-surface);
+  --surface-strong: var(--kl-color-surface-strong);
+  --line: var(--kl-color-border);
+  --line-strong: var(--kl-color-border-strong);
+  --brand: var(--kl-color-action);
+  --brand-dark: var(--kl-color-action-hover);
+  --brand-soft: var(--kl-color-action-soft);
+  --green: var(--kl-color-success);
+  --green-soft: var(--kl-color-success-soft);
+  --yellow: var(--kl-color-warning);
+  --yellow-soft: var(--kl-color-warning-soft);
+  --red: var(--kl-color-danger);
+  --red-soft: var(--kl-color-danger-soft);
+  --shadow: var(--kl-shadow-lg);
+  --shadow-soft: var(--kl-shadow-sm);
+  --radius-sm: var(--kl-radius-sm);
+  --radius-md: var(--kl-radius-md);
+  --radius-lg: var(--kl-radius-lg);
+  --font-display: var(--kl-font-display);
+  --font-sans: var(--kl-font-body);
+  --font-jp: var(--kl-font-japanese);
 }
 
 * {
@@ -37,11 +41,18 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    radial-gradient(circle at 5% 5%, rgb(238 107 77 / 9%), transparent 28rem),
-    radial-gradient(circle at 95% 15%, rgb(44 122 103 / 7%), transparent 30rem),
+    radial-gradient(circle at 5% 5%, rgb(200 58 54 / 10%), transparent 28rem),
+    radial-gradient(circle at 95% 15%, rgb(146 84 46 / 8%), transparent 30rem),
     var(--paper);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
 }
 
 button,
@@ -86,8 +97,8 @@ svg {
   justify-content: space-between;
   min-height: 76px;
   padding: 14px clamp(20px, 4vw, 64px);
-  border-bottom: 1px solid rgb(23 33 29 / 8%);
-  background: rgb(246 242 233 / 88%);
+  border-bottom: 1px solid rgb(99 51 31 / 8%);
+  background: rgb(252 248 241 / 90%);
   backdrop-filter: blur(18px);
 }
 
@@ -103,61 +114,40 @@ svg {
 }
 
 .review-brand strong {
+  font-family: var(--font-display);
   font-size: 0.96rem;
   letter-spacing: -0.01em;
 }
 
-.review-brand span:last-child {
+.review-brand > div > span:last-child {
   color: var(--ink-soft);
   font-size: 0.74rem;
 }
 
 .brand-mark {
-  position: relative;
-  display: inline-grid;
+  display: block;
   flex: 0 0 auto;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  border-radius: 50%;
-  color: #fff;
-  background: var(--ink);
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .brand-mark--small {
-  width: 38px;
-  height: 38px;
+  width: 46px;
+  height: 46px;
 }
 
-.brand-ear {
-  position: absolute;
-  z-index: -1;
-  top: -2px;
-  width: 13px;
-  height: 13px;
-  border: 3px solid var(--paper);
-  border-radius: 50%;
-  background: var(--ink);
+.brand-wordmark {
+  display: inline-flex;
+  gap: 0.12em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
 }
 
-.app-screen .brand-ear,
-.desktop-frame .brand-ear {
-  border-color: var(--surface);
-}
-
-.brand-ear--left {
-  left: 0;
-}
-
-.brand-ear--right {
-  right: 0;
-}
-
-.brand-face {
-  font-family: var(--font-jp);
-  font-size: 1rem;
-  font-weight: 800;
-  transform: translateY(-1px);
+.brand-wordmark > span:last-child {
+  color: var(--brand);
 }
 
 .view-switch {
@@ -582,12 +572,12 @@ svg {
 
 .button--primary {
   color: #fff;
-  background: var(--ink);
-  box-shadow: 0 8px 20px rgb(23 33 29 / 15%);
+  background: var(--brand);
+  box-shadow: 0 8px 20px rgb(200 58 54 / 22%);
 }
 
 .button--primary:hover {
-  background: #26312c;
+  background: var(--brand-dark);
 }
 
 .button--secondary {

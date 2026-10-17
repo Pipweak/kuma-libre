@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** proposition initiale validée pour guider le démarrage du projet.  
-> **Version :** 3 — 15 octobre 2026.
+> **Version :** 4 — 17 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -41,7 +41,8 @@ L'application sera un outil d'étude indépendant, avec son propre nom, son prop
 | Progression des visiteurs | Mémoire de la page uniquement |
 | Progression des utilisateurs connectés | Supabase, source de vérité unique |
 | Données métier dans `localStorage` | Non |
-| Styling | À décider entre Tailwind CSS et SCSS/CSS Modules |
+| Fondation visuelle | Variables CSS sémantiques partagées, avec alias SCSS sans duplication |
+| Styling des composants | À décider entre Tailwind CSS et SCSS/CSS Modules |
 | Audio | Amélioration progressive après le MVP |
 | Approche UI | Mobile-first, centrée sur un quiz volontairement minimal |
 
