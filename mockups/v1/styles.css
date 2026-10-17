@@ -1,4 +1,3 @@
-@import url("../design-system/styles/fonts.css");
 @import url("../design-system/styles/tokens.css");
 @import url("../design-system/styles/brand.css");
 
@@ -46,13 +45,6 @@ body {
     var(--paper);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
 }
 
 button,
@@ -114,7 +106,6 @@ svg {
 }
 
 .review-brand strong {
-  font-family: var(--font-display);
   font-size: 0.96rem;
   letter-spacing: -0.01em;
 }
@@ -129,7 +120,12 @@ svg {
   flex: 0 0 auto;
   width: 42px;
   height: 42px;
-  object-fit: contain;
+  border-radius: 50%;
+  background-color: var(--surface);
+  background-image: url("../design-system/assets/kuma-bear-wink.png");
+  background-position: 50% 43%;
+  background-repeat: no-repeat;
+  background-size: 188% auto;
 }
 
 .brand-mark--small {
@@ -140,7 +136,7 @@ svg {
 .brand-wordmark {
   display: inline-flex;
   gap: 0.12em;
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;

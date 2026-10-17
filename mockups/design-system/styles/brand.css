@@ -11,11 +11,16 @@
   width: 2.75rem;
   height: 2.75rem;
   flex: 0 0 auto;
-  object-fit: contain;
+  border-radius: 50%;
+  background-color: var(--kl-color-surface);
+  background-image: url("../assets/kuma-bear-wink.png");
+  background-position: 50% 43%;
+  background-repeat: no-repeat;
+  background-size: 188% auto;
 }
 
 .kl-brand__wordmark {
-  font-family: var(--kl-font-display);
+  font-family: var(--kl-font-body);
   font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: -0.035em;

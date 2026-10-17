@@ -84,11 +84,11 @@ const routeEdges = [
 const screenTemplates = {
   loader: () => `
     <div class="product-screen loader-view">
-      <img class="loader-bear" src="../design-system/assets/kuma-bear.svg" alt="Kuma, la mascotte de Kuma Libre" />
+      <div class="loader-bear" role="img" aria-label="Kuma, la mascotte de Kuma Libre"></div>
       <strong>Kuma Libre</strong>
       <p>Préparation de ta révision…</p>
       <i class="loading-line"><u></u></i>
-      <small>Animation SVG · mouvement réduit respecté</small>
+      <small>Mascotte provisoire · animation à étudier plus tard</small>
     </div>`,
 
   landing: () => `
@@ -424,7 +424,7 @@ const flows = [
 ];
 
 function miniBrand(action) {
-  return `<div class="mini-brand"><img class="mini-logo" src="../design-system/assets/kuma-bear.svg" alt="" /><strong class="mini-wordmark"><span>Kuma</span><span>Libre</span></strong><button>${action}</button></div>`;
+  return `<div class="mini-brand"><span class="mini-logo" aria-hidden="true"></span><strong class="mini-wordmark"><span>Kuma</span><span>Libre</span></strong><button>${action}</button></div>`;
 }
 
 function miniHeader(title, left = "", right = "") {

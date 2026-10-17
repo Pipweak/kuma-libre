@@ -56,9 +56,9 @@
   --kl-color-info-soft: var(--kl-blue-100);
 
   /* Type roles. */
-  --kl-font-display: "Fredoka", "Arial Rounded MT Bold", ui-rounded, system-ui, sans-serif;
-  --kl-font-body: "Nunito Sans", Avenir, "Segoe UI", system-ui, sans-serif;
-  --kl-font-japanese: "Noto Sans JP", "Yu Gothic UI", "Hiragino Sans", sans-serif;
+  --kl-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --kl-font-display: var(--kl-font-body);
+  --kl-font-japanese: "Yu Gothic UI", "Hiragino Sans", "Noto Sans JP", var(--kl-font-body);
   --kl-weight-regular: 400;
   --kl-weight-medium: 600;
   --kl-weight-bold: 700;
