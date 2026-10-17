@@ -102,12 +102,11 @@ button {
   display: block;
   width: 46px;
   height: 46px;
-  border-radius: 50%;
-  background-color: var(--surface);
+  background-color: transparent;
   background-image: url("../design-system/assets/kuma-bear-wink.png");
-  background-position: 50% 43%;
+  background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-size: 188% auto;
+  background-size: contain;
 }
 
 .brand-wordmark {

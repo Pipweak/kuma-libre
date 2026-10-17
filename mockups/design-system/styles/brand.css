@@ -9,9 +9,13 @@
 .kl-brand-art {
   display: block;
   flex: 0 0 auto;
-  background-color: var(--kl-color-surface);
+  background-color: transparent;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+}
+
+.kl-brand-art--horizontal {
+  background-image: url("../assets/kuma-logo-horizontal.png");
 }
 
 .kl-brand-art--wordmark {
@@ -27,12 +31,11 @@
   width: 2.75rem;
   height: 2.75rem;
   flex: 0 0 auto;
-  border-radius: 50%;
-  background-color: var(--kl-color-surface);
+  background-color: transparent;
   background-image: url("../assets/kuma-bear-wink.png");
-  background-position: 50% 43%;
+  background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-size: 188% auto;
+  background-size: contain;
 }
 
 .kl-brand__wordmark {

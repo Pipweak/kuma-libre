@@ -6,10 +6,11 @@ Ce dossier transforme les références visuelles générées en fondations réut
 
 - `styles/tokens.css` contient la palette primitive et les rôles sémantiques, la typographie, les espacements, les rayons et les ombres.
 - `styles/tokens.scss` expose des alias SCSS vers les variables CSS, sans recopier les valeurs hexadécimales.
-- `styles/brand.css` fournit les variantes réutilisables de la marque, dont les deux compositions raster validées pour les maquettes.
-- `assets/kuma-bear-wink.png` est la référence raster provisoire de la mascotte avec son clin d’œil.
-- `assets/kuma-wordmark.png` contient le mot-symbole horizontal sans la mascotte.
-- `assets/kuma-logo-stacked.png` contient la composition verticale utilisée pendant le chargement.
+- `styles/brand.css` fournit les variantes réutilisables de la marque.
+- `assets/kuma-bear-wink.png` est la référence raster transparente de la mascotte avec son clin d’œil.
+- `assets/kuma-wordmark.png` contient le mot-symbole transparent sans la mascotte.
+- `assets/kuma-logo-horizontal.png` contient la composition horizontale transparente avec la mascotte.
+- `assets/kuma-logo-stacked.png` contient la composition verticale transparente utilisée pendant le chargement.
 
 ## Direction retenue
 
@@ -25,6 +26,7 @@ Pour afficher directement les compositions générées :
 
 ```html
 <span class="kl-brand-art kl-brand-art--wordmark" role="img" aria-label="Kuma Libre"></span>
+<span class="kl-brand-art kl-brand-art--horizontal" role="img" aria-label="Kuma Libre"></span>
 <span class="kl-brand-art kl-brand-art--stacked" role="img" aria-label="Kuma Libre"></span>
 ```
 
