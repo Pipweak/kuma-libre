@@ -3,7 +3,7 @@
     "skipToContent": "Skip to main content"
   },
   "foundation": {
-    "description": "The React foundation, routing, internationalization, and quality checks are now operational.",
+    "description": "The React foundation, design system, and first shared components are now operational.",
     "title": "Technical foundation ready"
   },
   "landing": {

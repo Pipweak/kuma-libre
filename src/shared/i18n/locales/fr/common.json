@@ -3,7 +3,7 @@
     "skipToContent": "Aller au contenu principal"
   },
   "foundation": {
-    "description": "Le socle React, le routing, l’internationalisation et les contrôles qualité sont maintenant opérationnels.",
+    "description": "Le socle React, le design system et les premiers composants partagés sont maintenant opérationnels.",
     "title": "Fondation technique en place"
   },
   "landing": {

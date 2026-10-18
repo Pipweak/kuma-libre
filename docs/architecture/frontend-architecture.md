@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 3 — 17 octobre 2026.
+> **Version :** 4 — 18 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -297,8 +297,10 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 - `lucide-react` fournit les icônes génériques importées individuellement.
 - Les drapeaux japonais, français, anglais et espagnol sont de petits SVG internes accompagnés d'un libellé accessible.
 - Les logos de fournisseurs et les assets Kuma Libre restent des assets de marque séparés.
+- `src/assets/brand` contient les PNG transparents de production ; `BrandLogo` conserve leurs dimensions intrinsèques et utilise `object-contain` afin d'éviter tout recadrage.
 - Tailwind gère en priorité layout, espacements, responsive et états simples.
-- Les variables CSS du design system restent la source des couleurs, rayons, ombres et espacements.
+- `src/shared/styles/tokens.css` est la source canonique des couleurs, rayons, ombres, espacements, polices et variables de thème Tailwind.
+- `src/shared/styles/_tokens.scss` constitue le pont vers les modules SCSS sans recopier les valeurs primitives.
 - Les animations et composants complexes utilisent des modules SCSS colocalisés avec une imbrication peu profonde.
 
 ## 11. Tests attendus
@@ -324,16 +326,18 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 
 ### État du socle
 
-La première étape est initialisée sur la branche `chore/react-foundation` avec :
+Les deux premières étapes sont initialisées avec :
 
 - React, TypeScript strict et Vite ;
 - React Router en Data Mode ;
 - i18next et les premiers catalogues FR, EN et ES ;
-- Tailwind CSS via son plugin Vite et Sass disponible pour les futurs modules SCSS ;
+- Tailwind CSS via son plugin Vite, les tokens visuels canoniques et le pont vers les modules SCSS ;
+- les assets PNG transparents de la marque et le composant `BrandLogo` sans recadrage ;
+- les premières primitives partagées `Button`, `IconButton`, `Card` et `Spinner`, avec leurs états accessibles et leurs tests ;
 - Vitest, React Testing Library, couverture V8, Playwright et axe ;
 - ESLint, Prettier, audit npm et une CI GitHub composée des checks `quality` et `e2e`.
 
-Le design system complet, le corpus normalisé, le moteur de quiz et Supabase restent volontairement hors de cette première tranche.
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé, le moteur de quiz et Supabase restent hors de cette tranche.
 
 ## 13. Qualité et synchronisation documentaire
 

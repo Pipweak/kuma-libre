@@ -3,7 +3,7 @@
     "skipToContent": "Ir al contenido principal"
   },
   "foundation": {
-    "description": "La base de React, el enrutamiento, la internacionalización y los controles de calidad ya están operativos.",
+    "description": "La base de React, el sistema de diseño y los primeros componentes compartidos ya están operativos.",
     "title": "Base técnica preparada"
   },
   "landing": {

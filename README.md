@@ -27,6 +27,15 @@ npm run security:audit
 
 `npm run quality` exécute les contrôles locaux obligatoires hors Playwright et audit réseau. La CI GitHub ajoute l'audit des dépendances et les parcours Playwright sur Chromium.
 
+### Design system applicatif
+
+- [`src/shared/styles/tokens.css`](src/shared/styles/tokens.css) est la source canonique des couleurs, espacements, rayons, ombres, typographies et variables Tailwind de Kuma Libre.
+- [`src/shared/styles/_tokens.scss`](src/shared/styles/_tokens.scss) expose ces mêmes tokens aux modules SCSS sans dupliquer leurs valeurs.
+- [`src/shared/ui`](src/shared/ui) contient les premières primitives accessibles et réutilisables : `BrandLogo`, `Button`, `IconButton`, `Card` et `Spinner`.
+- [`src/assets/brand`](src/assets/brand) contient les déclinaisons PNG transparentes de la marque utilisées par l'application. Le composant `BrandLogo` en préserve toujours les proportions.
+
+Tailwind reste le choix principal pour la mise en page et les états simples. Les modules SCSS sont réservés aux besoins spécifiques, notamment les animations et l'imbrication locale.
+
 ## Leçons
 
 - [Leçon 1 — Vocabulaire](lessons/lesson-01/vocabulary.md)

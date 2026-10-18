@@ -25,7 +25,7 @@ export function LanguageSelector(): ReactElement {
         return (
           <button
             aria-pressed={isSelected}
-            className="min-h-11 rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-semibold text-stone-800 transition-colors hover:border-red-500 hover:text-red-700 focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:outline-none aria-pressed:border-red-600 aria-pressed:bg-red-600 aria-pressed:text-white"
+            className="rounded-pill border-line-strong bg-surface-strong text-ink ease-kl-out hover:border-action hover:text-action focus-visible:ring-action aria-pressed:border-action aria-pressed:bg-action min-h-11 border px-4 py-2 text-sm font-semibold transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none aria-pressed:text-white"
             key={locale}
             onClick={() => {
               handleLanguageChange(locale);

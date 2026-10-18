@@ -4,13 +4,16 @@ Ce dossier transforme les références visuelles générées en fondations réut
 
 ## Source de vérité
 
-- `styles/tokens.css` contient la palette primitive et les rôles sémantiques, la typographie, les espacements, les rayons et les ombres.
-- `styles/tokens.scss` expose des alias SCSS vers les variables CSS, sans recopier les valeurs hexadécimales.
+- [`../../src/shared/styles/tokens.css`](../../src/shared/styles/tokens.css) est la source canonique de la palette, des rôles sémantiques, de la typographie, des espacements, des rayons, des ombres et du thème Tailwind.
+- [`../../src/shared/styles/_tokens.scss`](../../src/shared/styles/_tokens.scss) expose les mêmes tokens aux modules SCSS, sans recopier les valeurs hexadécimales.
+- `styles/tokens.css` et `styles/tokens.scss` restent des points d'entrée de compatibilité pour les maquettes HTML et redirigent vers les sources applicatives.
 - `styles/brand.css` fournit les variantes réutilisables de la marque.
 - `assets/kuma-bear-wink.png` est la référence raster transparente de la mascotte avec son clin d’œil.
 - `assets/kuma-wordmark.png` contient le mot-symbole transparent sans la mascotte.
 - `assets/kuma-logo-horizontal.png` contient la composition horizontale transparente avec la mascotte.
 - `assets/kuma-logo-stacked.png` contient la composition verticale transparente utilisée pendant le chargement.
+
+Les copies de production se trouvent dans [`../../src/assets/brand`](../../src/assets/brand). Leur contenu reste identique aux références transparentes de ce dossier.
 
 ## Direction retenue
 
