@@ -3,6 +3,7 @@ coverage
 node_modules
 playwright-report
 test-results
+src/generated/corpus.json
 mockups/design-system/assets
 lessons
 mockups

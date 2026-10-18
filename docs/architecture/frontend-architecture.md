@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 4 — 18 octobre 2026.
+> **Version :** 5 — 18 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -73,11 +73,7 @@ kuma-libre/
 ├── docs/                            # Architecture détaillée et mémoire de conception
 ├── scripts/
 │   └── corpus/
-│       ├── parse-markdown.ts
-│       ├── normalize-entry.ts
-│       └── validate-corpus.ts
-├── generated/
-│   └── corpus.json                  # Artefact de build non édité manuellement
+│       └── generate-corpus.ts       # CLI de génération et de validation
 ├── src/
 │   ├── app/
 │   │   ├── router/
@@ -93,7 +89,7 @@ kuma-libre/
 │   │   ├── speech/
 │   │   └── preferences/
 │   ├── domain/
-│   │   ├── vocabulary/
+│   │   ├── vocabulary/              # Import, types et validation du corpus
 │   │   ├── quiz/
 │   │   └── progress/
 │   ├── infrastructure/
@@ -120,7 +116,7 @@ kuma-libre/
     └── e2e/
 ```
 
-Le chemin définitif du JSON généré sera choisi lors de l'initialisation. Il ne doit exister qu'à un seul emplacement consommé par l'application.
+Le chemin canonique du JSON généré est `src/generated/corpus.json`. Il s'agit d'un artefact versionné et déterministe, consommé en lecture seule par l'application et jamais édité manuellement.
 
 ## 5. Règles de dépendance
 
@@ -326,7 +322,7 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 
 ### État du socle
 
-Les deux premières étapes sont initialisées avec :
+Les trois premières étapes sont initialisées avec :
 
 - React, TypeScript strict et Vite ;
 - React Router en Data Mode ;
@@ -336,8 +332,10 @@ Les deux premières étapes sont initialisées avec :
 - les premières primitives partagées `Button`, `IconButton`, `Card` et `Spinner`, avec leurs états accessibles et leurs tests ;
 - Vitest, React Testing Library, couverture V8, Playwright et axe ;
 - ESLint, Prettier, audit npm et une CI GitHub composée des checks `quality` et `e2e`.
+- l'importeur pur des formats Markdown historiques, les identifiants stables, les catégories et l'artefact `src/generated/corpus.json` ;
+- les validations structurelles exécutées au build et le contrôle séparé `corpus:validate-ready` pour suivre la migration des traductions espagnoles et des lectures manquantes.
 
-Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé, le moteur de quiz et Supabase restent hors de cette tranche.
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Le moteur de quiz et Supabase restent hors de cette tranche.
 
 ## 13. Qualité et synchronisation documentaire
 
