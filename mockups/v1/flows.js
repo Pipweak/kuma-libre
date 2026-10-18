@@ -1,5 +1,5 @@
 const MAP_WIDTH = 2060;
-const MAP_HEIGHT = 1200;
+const MAP_HEIGHT = 1420;
 const NODE_WIDTH = 194;
 const NODE_HEIGHT = 74;
 let selectedQuizLocale = "fr";
@@ -10,21 +10,26 @@ const quizLocaleNames = {
   es: "espagnol"
 };
 
+const exampleMeanings = {
+  fr: "manger",
+  en: "to eat",
+  es: "comer"
+};
+
 const routeNodes = [
   { id: "boot", label: "Chargement initial", meta: "session + application", x: 40, y: 470, type: "state", lane: "launch-anonymous" },
   { id: "gate", label: "Session connue ?", meta: "décision automatique", x: 280, y: 470, type: "decision", lane: "launch-connected" },
   { id: "landing", label: "Accueil public", meta: "présentation + connexion", x: 540, y: 120, type: "public", lane: "launch-anonymous" },
   { id: "login", label: "Choix de connexion", meta: "Google ou email", x: 780, y: 120, type: "public", lane: "auth-google" },
   { id: "google", label: "Google OAuth", meta: "fournisseur externe", x: 1040, y: 45, type: "public", lane: "auth-google" },
-  { id: "email", label: "Adresse email", meta: "magic link ou OTP", x: 1040, y: 180, type: "public", lane: "auth-email", open: true },
+  { id: "email", label: "Adresse email", meta: "magic link", x: 1040, y: 180, type: "public", lane: "auth-email" },
   { id: "inbox", label: "Vérifie tes emails", meta: "attente du lien", x: 1280, y: 180, type: "state", lane: "auth-email" },
   { id: "callback", label: "Retour d’authentification", meta: "création de session", x: 1520, y: 110, type: "state", lane: "auth-google" },
   { id: "auth-error", label: "Erreur de connexion", meta: "message + réessayer", x: 1280, y: 310, type: "state", lane: "auth-email" },
   { id: "home-after-auth", label: "Accueil connecté", meta: "destination après login", x: 1800, y: 110, type: "app", lane: "quick-review" },
   { id: "protected", label: "Lien protégé", meta: "leçon, quiz ou progrès", x: 540, y: 295, type: "state", lane: "protected-link" },
   { id: "home", label: "Accueil connecté", meta: "point de départ principal", x: 540, y: 550, type: "app", lane: "launch-connected" },
-  { id: "resume", label: "Reprendre la passe", meta: "session interrompue", x: 800, y: 365, type: "quiz", lane: "resume-session", open: true },
-  { id: "quick", label: "Révision rapide", meta: "10 mots proposés", x: 800, y: 480, type: "quiz", lane: "quick-review", open: true },
+  { id: "quick", label: "Révision rapide", meta: "jusqu’à 10 rouges puis jaunes", x: 800, y: 480, type: "quiz", lane: "quick-review" },
   { id: "config", label: "Configurer le quiz", meta: "leçons, sens, statuts", x: 800, y: 600, type: "app", lane: "custom-review" },
   { id: "lessons", label: "Parcours de leçons", meta: "groupes + progression", x: 800, y: 720, type: "app", lane: "lesson-review" },
   { id: "menu", label: "Menu secondaire", meta: "navigation globale", x: 800, y: 870, type: "state", lane: "progress-path" },
@@ -34,9 +39,15 @@ const routeNodes = [
   { id: "progress", label: "Progression", meta: "global + par leçon", x: 1070, y: 810, type: "app", lane: "progress-path" },
   { id: "language", label: "Langue", meta: "français, anglais ou espagnol", x: 1070, y: 910, type: "app", lane: "language-settings" },
   { id: "account", label: "Compte", meta: "profil + déconnexion", x: 1070, y: 1010, type: "app", lane: "account-logout" },
+  { id: "quiz-produce", label: "Question · Produire", meta: "langue active vers japonais", x: 1070, y: 1120, type: "quiz", lane: "produce-japanese" },
+  { id: "produce-correct", label: "Correction japonaise", meta: "romaji, kana ou kanji", x: 1340, y: 1120, type: "state", lane: "produce-japanese" },
   { id: "correct", label: "Réponse correcte", meta: "solution + progression", x: 1340, y: 400, type: "state", lane: "quick-review" },
   { id: "incorrect", label: "Réponse incorrecte", meta: "solution attendue", x: 1340, y: 520, type: "state", lane: "quick-review" },
-  { id: "exit", label: "Quitter la passe ?", meta: "confirmation", x: 1340, y: 640, type: "state", lane: "resume-session" },
+  { id: "exit", label: "Quitter la passe ?", meta: "aucune reprise", x: 1340, y: 640, type: "state", lane: "exit-session" },
+  { id: "voice-listening", label: "Dictée en cours", meta: "durée + annuler + arrêter", x: 1340, y: 760, type: "state", lane: "voice-dictation" },
+  { id: "voice-transcribing", label: "Transcription", meta: "traitement temporaire", x: 1590, y: 750, type: "state", lane: "voice-dictation" },
+  { id: "voice-ready", label: "Texte inséré", meta: "modifiable avant validation", x: 1840, y: 700, type: "quiz", lane: "voice-dictation" },
+  { id: "voice-error", label: "Micro indisponible", meta: "réessayer ou clavier", x: 1840, y: 820, type: "state", lane: "voice-dictation" },
   { id: "lesson-config", label: "Configuration préremplie", meta: "leçon déjà sélectionnée", x: 1340, y: 745, type: "app", lane: "lesson-review" },
   { id: "logout", label: "Confirmer la déconnexion", meta: "fermeture de session", x: 1340, y: 1010, type: "state", lane: "account-logout" },
   { id: "complete", label: "Fin de passe", meta: "bilan + prochaine action", x: 1590, y: 460, type: "quiz", lane: "quick-review" },
@@ -44,8 +55,8 @@ const routeNodes = [
   { id: "public-return", label: "Retour accueil public", meta: "utilisateur déconnecté", x: 1590, y: 1010, type: "public", lane: "account-logout" },
   { id: "home-again", label: "Accueil / nouvelle passe", meta: "sortie du quiz", x: 1840, y: 460, type: "app", lane: "quick-review" },
   { id: "new-config", label: "Nouvelle configuration", meta: "autre passe", x: 1840, y: 565, type: "app", lane: "custom-review" },
-  { id: "not-found", label: "Page introuvable", meta: "route inconnue", x: 540, y: 1110, type: "state", lane: "not-found" },
-  { id: "safe-return", label: "Retour sûr", meta: "public ou connecté", x: 800, y: 1110, type: "app", lane: "not-found" }
+  { id: "not-found", label: "Page introuvable", meta: "route inconnue", x: 540, y: 1310, type: "state", lane: "not-found" },
+  { id: "safe-return", label: "Retour sûr", meta: "public ou connecté", x: 800, y: 1310, type: "app", lane: "not-found" }
 ];
 
 const routeEdges = [
@@ -61,22 +72,29 @@ const routeEdges = [
   { from: "email", to: "auth-error", label: "erreur" },
   { from: "callback", to: "home-after-auth" },
   { from: "protected", to: "login", label: "session absente" },
-  { from: "home", to: "resume", label: "reprendre" },
   { from: "home", to: "quick", label: "rapide" },
   { from: "home", to: "config", label: "configurer" },
   { from: "home", to: "lessons", label: "leçons" },
   { from: "home", to: "menu", label: "menu" },
-  { from: "resume", to: "quiz" },
   { from: "quick", to: "quiz" },
   { from: "config", to: "quiz", label: "questions trouvées" },
+  { from: "config", to: "quiz-produce", label: "produire" },
   { from: "config", to: "empty", label: "0 question" },
   { from: "quiz", to: "correct", label: "correct" },
   { from: "quiz", to: "incorrect", label: "incorrect" },
   { from: "quiz", to: "exit", label: "quitter" },
+  { from: "quiz", to: "voice-listening", label: "micro" },
+  { from: "voice-listening", to: "voice-transcribing", label: "arrêter" },
+  { from: "voice-transcribing", to: "voice-ready", label: "succès" },
+  { from: "voice-transcribing", to: "voice-error", label: "erreur" },
+  { from: "voice-error", to: "voice-listening", label: "réessayer" },
   { from: "correct", to: "complete", label: "suivante / fin" },
   { from: "incorrect", to: "complete", label: "suivante / fin" },
+  { from: "quiz-produce", to: "produce-correct", label: "valider" },
+  { from: "produce-correct", to: "complete", label: "suivante / fin" },
   { from: "complete", to: "home-again" },
   { from: "complete", to: "new-config", label: "nouvelle passe" },
+  { from: "exit", to: "home-again", label: "confirmer" },
   { from: "lessons", to: "lesson-detail" },
   { from: "lesson-detail", to: "lesson-config", label: "réviser" },
   { from: "lesson-config", to: "lesson-quiz" },
@@ -106,7 +124,7 @@ const screenTemplates = {
         <span class="tiny-eyebrow">VOCABULAIRE JAPONAIS</span>
         <h4>Révise un peu.<br />Retiens vraiment.</h4>
         <p>Des quiz simples pour travailler chaque mot dans les deux sens.</p>
-        <div class="sample-word"><small>日本語</small><strong>食べます</strong><span>manger · to eat · comer</span></div>
+        <div class="sample-word"><small>日本語</small><strong>食べます</strong><span>manger</span></div>
       </div>
       <div class="screen-bottom">
         <button class="mini-primary">Se connecter</button>
@@ -180,7 +198,7 @@ const screenTemplates = {
       ${miniBrand("Profil")}
       <div class="welcome"><span class="tiny-eyebrow">BON RETOUR VINCENT</span><h4>Qu’est-ce qu’on révise&nbsp;?</h4></div>
       <div class="quick-card">
-        <div><small>RÉVISION RAPIDE</small><strong>10 mots à travailler</strong><span>Comprendre · non maîtrisés et à revoir</span></div>
+        <div><small>RÉVISION RAPIDE</small><strong>Jusqu’à 10 mots</strong><span>Rouges, puis jaunes si nécessaire</span></div>
         <button class="mini-primary">Commencer</button>
         <button class="mini-link">Configurer</button>
       </div>
@@ -195,7 +213,7 @@ const screenTemplates = {
   homeLessons: () => `
     <div class="product-screen app-view home-view">
       ${miniBrand("Profil")}
-      <div class="compact-quick"><span><small>Révision rapide</small><strong>10 mots à travailler</strong></span><button>Commencer</button></div>
+      <div class="compact-quick"><span><small>Révision rapide</small><strong>Jusqu’à 10 mots</strong></span><button>Commencer</button></div>
       <div class="section-row"><strong>Ton parcours</strong><span>18 leçons dans le corpus</span></div>
       <div class="lesson-group">
         ${lessonRow("01", "44 entrées", "75 %")}
@@ -205,17 +223,17 @@ const screenTemplates = {
       </div>
     </div>`,
 
-  config: (lessonMode = false) => `
+  config: (lessonMode = false, direction = "understand") => `
     <div class="product-screen app-view config-view">
       ${miniHeader(lessonMode ? "Réviser la leçon 06" : "Configurer", "←")}
       <div class="config-scroll">
         <div class="mini-section"><label>Leçons</label><div class="lesson-pills"><b class="selected">${lessonMode ? "06" : "01"}</b>${lessonMode ? "" : "<b class='selected'>02</b><b class='selected'>03</b><b>04</b><b>+46</b>"}</div></div>
         ${lessonMode ? "<div class='context-note'><strong>Leçon 06 présélectionnée</strong><span>Tu peux encore modifier le périmètre.</span></div>" : ""}
-        <div class="mini-section"><label>Sens du quiz</label><div class="direction-options"><button class="selected" data-quiz-direction="understand" aria-pressed="true" aria-label="Comprendre : japonais vers ${quizLocaleNames[selectedQuizLocale]}"><small>Comprendre</small><span>${languageFlag("ja")}<i>→</i><em data-quiz-locale>${languageFlag(selectedQuizLocale)}</em></span></button><button data-quiz-direction="produce" aria-pressed="false" aria-label="Produire : ${quizLocaleNames[selectedQuizLocale]} vers japonais"><small>Produire</small><span><em data-quiz-locale>${languageFlag(selectedQuizLocale)}</em><i>→</i>${languageFlag("ja")}</span></button></div></div>
+        <div class="mini-section"><label>Sens du quiz</label><div class="direction-options"><button class="${direction === "understand" ? "selected" : ""}" data-quiz-direction="understand" aria-pressed="${direction === "understand"}" aria-label="Comprendre : japonais vers ${quizLocaleNames[selectedQuizLocale]}"><small>Comprendre</small><span>${languageFlag("ja")}<i>→</i><em data-quiz-locale>${languageFlag(selectedQuizLocale)}</em></span></button><button class="${direction === "produce" ? "selected" : ""}" data-quiz-direction="produce" aria-pressed="${direction === "produce"}" aria-label="Produire : ${quizLocaleNames[selectedQuizLocale]} vers japonais"><small>Produire</small><span><em data-quiz-locale>${languageFlag(selectedQuizLocale)}</em><i>→</i>${languageFlag("ja")}</span></button></div></div>
         <div class="mini-section"><label>Mots à inclure</label><div class="status-options"><label><input type="checkbox" checked /><span class="mock-checkbox">✓</span><b><i class="red"></i>Non maîtrisés</b></label><label><input type="checkbox" checked /><span class="mock-checkbox">✓</span><b><i class="yellow"></i>À revoir</b></label><label><input type="checkbox" /><span class="mock-checkbox"></span><b><i class="green"></i>Maîtrisés</b></label></div></div>
         <div class="mini-section"><label>Ordre</label><div class="mini-segment"><b>Aléatoire</b><span>Dans l’ordre</span></div></div>
       </div>
-      <div class="config-action"><span><strong>${lessonMode ? "55" : "84"}</strong> questions</span><button class="mini-primary">Commencer</button></div>
+      <div class="config-action"><span><strong>${lessonMode ? "97" : "84"}</strong> questions</span><button class="mini-primary">Commencer</button></div>
     </div>`,
 
   emptyConfig: () => `
@@ -230,7 +248,39 @@ const screenTemplates = {
       <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button></div>
       <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
       <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
-      <div class="answer-box"><label>Ta réponse</label><div><input placeholder="FR, EN ou ES" readonly /><button class="mini-microphone" type="button" aria-label="Dicter ma réponse" title="Dicter ma réponse">${uiIcon("microphone")}</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
+      <div class="answer-box"><label>Ta réponse</label><div><input placeholder="FR, EN ou ES" /><button class="mini-microphone" type="button" aria-label="Dicter ma réponse" title="Dicter ma réponse">${uiIcon("microphone")}</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
+    </div>`,
+
+  voiceListening: () => `
+    <div class="product-screen app-view quiz-view voice-quiz-view">
+      <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button></div>
+      <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
+      <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
+      <div class="answer-box voice-answer-box"><label>Dictée en cours</label><div class="voice-recorder" role="status" aria-live="polite"><span class="voice-live"><i></i><b>0:04</b></span><span class="voice-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><button class="voice-cancel" type="button">Annuler</button><button class="voice-stop" type="button" aria-label="Arrêter la dictée"><i></i></button></div><p class="voice-help">Parle normalement. Rien n’est envoyé avant validation.</p><button class="mini-primary" disabled>Valider</button></div>
+    </div>`,
+
+  voiceTranscribing: () => `
+    <div class="product-screen app-view quiz-view voice-quiz-view">
+      <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button></div>
+      <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
+      <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
+      <div class="answer-box voice-answer-box"><label>Ta réponse</label><div class="voice-processing" role="status" aria-live="polite"><i></i><span><strong>Transcription…</strong><small>Quelques secondes seulement</small></span></div><button class="mini-primary" disabled>Valider</button><button class="mini-link">Annuler</button></div>
+    </div>`,
+
+  voiceReady: () => `
+    <div class="product-screen app-view quiz-view voice-quiz-view">
+      <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button></div>
+      <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
+      <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
+      <div class="answer-box voice-answer-box"><label>Ta réponse</label><div><input value="manger" aria-describedby="voice-ready-note" /><button class="mini-microphone" type="button" aria-label="Recommencer la dictée">${uiIcon("microphone")}</button></div><p class="voice-status voice-status--ready" id="voice-ready-note"><b>✓</b> Transcription ajoutée · tu peux la modifier</p><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
+    </div>`,
+
+  voiceError: () => `
+    <div class="product-screen app-view quiz-view voice-quiz-view">
+      <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button></div>
+      <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
+      <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
+      <div class="answer-box voice-answer-box"><label>Ta réponse</label><div><input placeholder="Écris ta réponse" /><button class="mini-microphone has-error" type="button" aria-label="Réessayer la dictée">${uiIcon("microphone")}</button></div><div class="voice-status voice-status--error" role="alert"><b>!</b><span><strong>Microphone non autorisé</strong><small>Autorise-le dans ton navigateur ou utilise le clavier.</small></span></div><button class="mini-secondary">Réessayer</button><button class="mini-primary">Valider</button></div>
     </div>`,
 
   correct: () => `
@@ -251,6 +301,23 @@ const screenTemplates = {
       <button class="mini-primary bottom-button">Question suivante</button>
     </div>`,
 
+  quizProduce: () => `
+    <div class="product-screen app-view quiz-view">
+      <div class="quiz-top"><button>×</button><span><small>4 / 36</small><i><u style="width: 11%"></u></i></span><button class="profile-trigger" aria-label="Ouvrir le menu du profil">${avatarMark()}</button></div>
+      <div class="quiz-tags"><span>Leçon 06</span><span>Produire</span></div>
+      <div class="word-question meaning-question"><button class="mini-audio-button" aria-label="Écouter la signification dans la langue active">${uiIcon("volume")}<span>Écouter</span></button><span class="prompt-language" data-active-language>${languageFlag(selectedQuizLocale)} ${quizLocaleNames[selectedQuizLocale]}</span><strong data-active-meaning>${exampleMeanings[selectedQuizLocale]}</strong><small>Trouve le mot japonais</small></div>
+      <div class="answer-box"><label>Ta réponse en japonais</label><div><input placeholder="Romaji, kana ou kanji" /><button class="mini-microphone" type="button" aria-label="Dicter ma réponse en japonais">${uiIcon("microphone")}</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
+    </div>`,
+
+  produceCorrect: () => `
+    <div class="product-screen app-view quiz-view quiz-feedback">
+      <div class="quiz-top"><button>×</button><span><small>4 / 36</small><i><u style="width: 11%"></u></i></span><b></b></div>
+      <div class="compact-question meaning-question"><span class="prompt-language" data-active-language>${languageFlag(selectedQuizLocale)} ${quizLocaleNames[selectedQuizLocale]}</span><strong data-active-meaning>${exampleMeanings[selectedQuizLocale]}</strong></div>
+      <div class="answer-box"><label>Ta réponse</label><div class="answer-correct"><input value="たべます" readonly /><b>✓</b></div></div>
+      <div class="result-card result-card--correct"><header><b>✓</b><span><strong>Bonne réponse</strong><small>Les autres écritures acceptées restent visibles.</small></span></header><dl><div><dt>Formes</dt><dd>食べます · たべます · tabemasu</dd></div><div><dt>Significations</dt><dd>manger · to eat · comer</dd></div></dl></div>
+      <button class="mini-primary bottom-button">Question suivante</button>
+    </div>`,
+
   complete: () => `
     <div class="product-screen app-view complete-view">
       ${miniHeader("Passe terminée", "")}
@@ -263,15 +330,16 @@ const screenTemplates = {
   lesson: () => `
     <div class="product-screen app-view lesson-view">
       ${miniHeader("Leçon 06", "←", "Profil")}
-      <div class="lesson-summary"><span class="lesson-big-number">06</span><div><small>CORPUS ACTUEL</small><h4>Leçon 06</h4><p>55 entrées de vocabulaire</p></div></div>
+      <div class="lesson-summary"><span class="lesson-big-number">06</span><div><small>CORPUS ACTUEL</small><h4>Leçon 06</h4><p>97 entrées · 2 catégories</p></div></div>
       <div class="two-progress"><div><span>Comprendre <b>68 %</b></span><i><u style="width: 68%"></u></i></div><div><span>Produire <b>41 %</b></span><i><u style="width: 41%"></u></i></div></div>
       <button class="mini-primary lesson-cta">Réviser cette leçon</button>
       <div class="vocab-head"><strong>Vocabulaire</strong><span>55 entrées</span></div>
       <div class="vocab-list">
-        ${vocabRow("食べます", "たべます · tabemasu", "manger · to eat · comer", "yellow", "red")}
-        ${vocabRow("飲みます", "のみます · nomimasu", "boire · to drink · beber", "green", "yellow")}
-        ${vocabRow("見ます", "みます · mimasu", "regarder · to watch · mirar", "red", "red")}
+        ${vocabRow("食べます", "たべます · tabemasu", { fr: "manger", en: "to eat", es: "comer" }, "yellow", "red")}
+        ${vocabRow("飲みます", "のみます · nomimasu", { fr: "boire", en: "to drink", es: "beber" }, "green", "yellow")}
+        ${vocabRow("見ます", "みます · mimasu", { fr: "regarder", en: "to watch", es: "mirar" }, "red", "red")}
       </div>
+      <button class="category-row"><span><strong>Mots utiles</strong><small>Useful Words and Information</small></span><b>42</b><i>›</i></button>
     </div>`,
 
   menu: () => `
@@ -294,7 +362,7 @@ const screenTemplates = {
         ${languageOption("en", "English", "Anglais")}
         ${languageOption("es", "Español", "Espagnol")}
       </div>
-      <p class="language-note">Ce choix définit aussi la traduction principale affichée dans les quiz.</p>
+      <p class="language-note">Ce choix définit la traduction affichée. En compréhension, une réponse FR, EN ou ES reste acceptée.</p>
     </div>`,
 
   progress: () => `
@@ -333,16 +401,7 @@ const screenTemplates = {
   exit: () => `
     <div class="product-screen app-view modal-view">
       <div class="fake-page quiz-fake"></div><div class="mini-backdrop"></div>
-      <div class="mini-modal"><span class="round-icon">Ⅱ</span><h4>Mettre la passe en pause&nbsp;?</h4><p>Tu pourras reprendre à la question 12 depuis l’accueil.</p><button class="mini-primary">Mettre en pause</button><button class="mini-secondary">Continuer le quiz</button></div>
-    </div>`,
-
-  resumeHome: () => `
-    <div class="product-screen app-view home-view">
-      ${miniBrand("Profil")}
-      <div class="welcome"><span class="tiny-eyebrow">PASSE EN COURS</span><h4>Tu étais à la question 12.</h4></div>
-      <div class="quick-card resume-card"><div><small>LEÇONS 01 À 06</small><strong>72 questions restantes</strong><span>Comprendre</span></div><i><u style="width:14%"></u></i><button class="mini-primary">Reprendre</button><button class="mini-link">Abandonner cette passe</button></div>
-      <div class="section-row"><strong>Leçons</strong><button>Voir tout</button></div>
-      <div class="lesson-preview">${lessonRow("01", "44 entrées", "75 %")}${lessonRow("02", "46 entrées", "50 %")}</div>
+      <div class="mini-modal"><span class="round-icon">×</span><h4>Quitter cette passe&nbsp;?</h4><p>Les 11 réponses déjà validées sont sauvegardées. La passe ne pourra pas être reprise.</p><button class="danger-button">Quitter la passe</button><button class="mini-secondary">Continuer le quiz</button></div>
     </div>`,
 
   notFound: () => `
@@ -370,8 +429,7 @@ const flows = [
     id: "auth-email",
     number: "03",
     title: "Connexion avec une adresse email",
-    description: "Proposition actuelle : magic link. Le choix magic link ou OTP reste ouvert.",
-    open: true,
+    description: "Un magic link sécurisé est envoyé par email, puis le callback ouvre l’espace connecté.",
     steps: [step("landing", "Accueil public"), step("login", "Méthodes"), step("email", "Adresse email"), branch([step("inbox", "Email envoyé"), step("authError", "Erreur d’envoi")], "Envoi réussi ou erreur"), step("callback", "Callback"), step("home", "Accueil connecté")]
   },
   {
@@ -385,8 +443,7 @@ const flows = [
     id: "quick-review",
     number: "05",
     title: "Révision rapide depuis l’accueil",
-    description: "Le raccourci proposé lance dix mots à travailler avec les dernières préférences.",
-    open: true,
+    description: "Le raccourci prend jusqu’à dix mots : rouges en priorité, puis jaunes. Il reste plus court si nécessaire et n’ajoute jamais de vert.",
     steps: [step("home", "Accueil connecté"), step("quiz", "Question"), branch([step("correct", "Bonne réponse"), step("incorrect", "Erreur")], "Selon la réponse"), step("complete", "Fin de passe"), branch([step("home", "Retour accueil"), step("config", "Nouvelle passe")], "Action choisie")]
   },
   {
@@ -432,16 +489,29 @@ const flows = [
     steps: [step("protected", "Leçon 06 demandée", "/app/lessons/06"), step("login", "Connexion"), step("callback", "Callback"), step("lesson", "Retour à la leçon 06")]
   },
   {
-    id: "resume-session",
+    id: "exit-session",
     number: "12",
-    title: "Interrompre puis reprendre une passe",
-    description: "Cette branche dépend de la décision de conserver ou non les longues passes interrompues.",
-    open: true,
-    steps: [step("quiz", "Question 12"), step("exit", "Quitter"), step("resumeHome", "Accueil · passe en cours"), step("quiz", "Reprise question 12"), step("complete", "Fin")]
+    title: "Quitter une passe en cours",
+    description: "Les réponses déjà validées restent enregistrées, mais la liste des questions et la position ne sont pas sauvegardées dans le MVP.",
+    steps: [step("quiz", "Question 12"), step("exit", "Confirmation"), branch([step("home", "Quitter vers l’accueil"), step("quiz", "Continuer le quiz")], "Action choisie")]
+  },
+  {
+    id: "voice-dictation",
+    number: "13",
+    title: "Dicter une réponse",
+    description: "Une interaction mobile inspirée des messageries rend l’écoute explicite, puis replace une transcription modifiable dans l’input sans jamais la valider automatiquement.",
+    steps: [step("quiz", "Input prêt"), step("voiceListening", "Écoute en cours"), step("voiceTranscribing", "Transcription"), branch([step("voiceReady", "Texte modifiable"), step("voiceError", "Permission ou erreur")], "Résultat de la reconnaissance")]
+  },
+  {
+    id: "produce-japanese",
+    number: "14",
+    title: "Produire le japonais",
+    description: "La question utilise uniquement la langue active. La réponse accepte les formes romaji, kana et kanji déclarées pour l’entrée.",
+    steps: [step("configProduce", "Sens Produire sélectionné"), step("quizProduce", "Question dans la langue active"), step("produceCorrect", "Formes japonaises acceptées"), step("complete", "Bilan")]
   },
   {
     id: "not-found",
-    number: "13",
+    number: "15",
     title: "Route inconnue",
     description: "Le retour mène à l’accueil public ou connecté selon la session disponible.",
     steps: [step("notFound", "Page introuvable"), branch([step("landing", "Accueil public"), step("home", "Accueil connecté")], "Selon la session")]
@@ -509,8 +579,8 @@ function lessonRow(number, entryCount, percent) {
   return `<button class="mini-lesson"><b>${number}</b><span><strong>Leçon ${number}</strong><small>${entryCount}</small></span><em><strong>${percent}</strong><small>maîtrisés</small></em><i>›</i></button>`;
 }
 
-function vocabRow(japanese, reading, meaning, understand, produce) {
-  return `<div class="vocab-row"><div><strong>${japanese}</strong><small>${reading}</small></div><span>${meaning}</span><i class="status-pair"><b class="${understand}">C</b><b class="${produce}">P</b></i></div>`;
+function vocabRow(japanese, reading, meanings, understand, produce) {
+  return `<div class="vocab-row"><div><strong>${japanese}</strong><small>${reading}</small></div><span data-vocab-meanings data-fr="${meanings.fr}" data-en="${meanings.en}" data-es="${meanings.es}">${meanings[selectedQuizLocale]}</span><i class="status-pair"><b class="${understand}">C</b><b class="${produce}">P</b></i></div>`;
 }
 
 function step(screen, label, route = "") {
@@ -621,7 +691,11 @@ function renderFlowStep(item, index) {
 }
 
 function renderScreen(item) {
-  const factory = item.screen === "configLesson" ? () => screenTemplates.config(true) : screenTemplates[item.screen];
+  const factory = item.screen === "configLesson"
+    ? () => screenTemplates.config(true)
+    : item.screen === "configProduce"
+      ? () => screenTemplates.config(false, "produce")
+      : screenTemplates[item.screen];
   if (!factory) return "";
   return `
     <figure class="screen-step">
@@ -697,6 +771,18 @@ function setupLanguageSelection() {
 
       document.querySelectorAll('[data-quiz-direction="produce"]').forEach((direction) => {
         direction.setAttribute("aria-label", `Produire : ${quizLocaleNames[selectedQuizLocale]} vers japonais`);
+      });
+
+      document.querySelectorAll("[data-active-language]").forEach((label) => {
+        label.innerHTML = `${languageFlag(selectedQuizLocale)} ${quizLocaleNames[selectedQuizLocale]}`;
+      });
+
+      document.querySelectorAll("[data-active-meaning]").forEach((meaning) => {
+        meaning.textContent = exampleMeanings[selectedQuizLocale];
+      });
+
+      document.querySelectorAll("[data-vocab-meanings]").forEach((meaning) => {
+        meaning.textContent = meaning.dataset[selectedQuizLocale];
       });
     });
   });

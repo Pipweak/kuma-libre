@@ -21,17 +21,21 @@ Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Mi
 - [Leçon 14 — Vocabulaire](lessons/lesson-14/vocabulary.md)
 - [Leçon 15 — Vocabulaire](lessons/lesson-15/vocabulary.md)
 - [Leçon 16 — Vocabulaire](lessons/lesson-16/vocabulary.md)
+- [Leçon 17 — Vocabulaire](lessons/lesson-17/vocabulary.md)
+- [Leçon 18 — Vocabulaire](lessons/lesson-18/vocabulary.md)
 - [Glossaire des termes du manuel](reference/instruction-terms.md)
 
 ## Format
 
-Chaque entrée est une ligne de tableau Markdown : **Japonais | Lecture | Français | English | Maîtrise**.
+Chaque entrée est une ligne de tableau Markdown. Les anciennes transcriptions utilisent plusieurs formes de colonnes, notamment **Japonais | Lecture | Français | English | Maîtrise** et **Kana | Kanji | English | Français | Maîtrise**. Le futur importeur les convertira vers un même modèle JSON contenant les formes japonaises et les traductions `fr`, `en` et `es`.
 
-Les entrées sont regroupées par leçon et séparées en vocabulaire, expressions et noms propres. Lorsqu'une leçon comprend une section **III. Useful Words and Information**, elle est conservée dans un fichier `useful-words.md` distinct du vocabulaire principal. Les lectures de mots écrits en katakana restent en katakana. Les traductions françaises sont des aides à l'étude.
+Les entrées sont regroupées par leçon et par catégorie : vocabulaire principal, expressions, noms propres ou `useful-words`. `Useful Words and Information` est une catégorie de vocabulaire possible dans n'importe quelle leçon ; elle est conservée dans un fichier distinct lorsqu'elle existe et participe aux quiz de la leçon. Les lectures de mots écrits en katakana restent en katakana.
+
+Les traductions espagnoles ne sont pas encore présentes dans les tableaux historiques. Leur ajout au corpus fait partie de la préparation des données de l'application.
 
 ## Utilisation en révision
 
-Demander des quiz par leçon, japonais → français, français → japonais, ou kanji → lecture. Les fichiers sont la source des questions : aucun mot ne doit être présenté comme appartenant à une leçon sans figurer dans son fichier.
+La future application propose deux directions : japonais → signification et signification → japonais. Une réponse de signification peut être donnée en français, en anglais ou en espagnol. Une réponse japonaise peut utiliser les formes romaji, kana ou kanji déclarées. Les fichiers restent la source des questions : aucun mot ne doit être présenté comme appartenant à une leçon sans figurer dans son fichier.
 
 ## Méthode d'ajout
 
@@ -45,7 +49,7 @@ Chaque mot possède un champ **Maîtrise** :
 - 🟡 **À réviser** : surlignage jaune, mot à consolider.
 - 🔴 **À revoir** : surlignage rouge ou absence de surlignage, mot à réapprendre.
 
-Ces statuts sont un instantané des photos du livre et peuvent évoluer en fonction des réponses aux quiz. Les quiz donnent la priorité aux mots 🔴, puis 🟡, tout en réintroduisant régulièrement les mots 🟢.
+Ces statuts sont uniquement un instantané historique des photos et ne pilotent pas la progression de l'application. La progression utilisateur vit dans Supabase et distingue compréhension et production. Le fichier [`progress-vincent.json`](progress-vincent.json) conserve séparément la progression historique de Vincent pour la compréhension japonais → signification.
 
 ## Précision et limites de transcription
 
@@ -54,5 +58,20 @@ Ces statuts sont un instantané des photos du livre et peuvent évoluer en fonct
 - Les couleurs sont lues sur les photographies ; en cas de photo floue, leur attribution peut être incertaine.
 - Un mot sans surlignage est marqué « À revoir » suivant la convention choisie, ce qui n'est pas une mesure indépendante de connaissance.
 
-- [Leçon 17 — Vocabulaire](lessons/lesson-17/vocabulary.md)
-- [Leçon 18 — Vocabulaire](lessons/lesson-18/vocabulary.md)
+## Documents de conception
+
+- [Architecture cible](ARCHITECTURE.md)
+- [Architecture frontend et applicative](docs/architecture/frontend-architecture.md)
+- [Standards de qualité](docs/quality/README.md)
+- [Git Flow et cycle de release](docs/development/git-flow.md)
+- [Index de la documentation](docs/README.md)
+- [Synthèse des fondations de la V1 — 17 octobre 2026](docs/reflexion/2026-10-17-fondations-v1.md)
+- [Audit du corpus et de l'internationalisation](reference/corpus-i18n-audit.md)
+- [Maquettes et parcours UX](mockups/README.md)
+
+Les instructions destinées aux agents travaillant dans ce dépôt sont définies dans [`AGENTS.md`](AGENTS.md). Quatre skills locaux les complètent :
+
+- [développement Kuma Libre](.agents/skills/kuma-libre-development/SKILL.md) ;
+- [synchronisation automatique des features et de leur documentation](.agents/skills/kuma-libre-feature-sync/SKILL.md) ;
+- [contrôle qualité final](.agents/skills/kuma-libre-quality-gate/SKILL.md).
+- [Git Flow et cycle de release](.agents/skills/kuma-libre-git-flow/SKILL.md).
