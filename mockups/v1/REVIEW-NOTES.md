@@ -40,7 +40,7 @@ Les icônes simples sont dessinées en SVG inline. Une dépendance comme Font Aw
 
 ### Données à préparer
 
-- Ajouter les traductions espagnoles aux quelque 909 lignes de tableaux détectées dans les 19 fichiers de contenu, puis les faire relire avant d’activer la locale espagnole en production.
+- Ajouter les traductions espagnoles aux 904 entrées actuellement détectées dans les 19 fichiers de contenu, puis les contrôler avant d’activer la locale espagnole en production.
 - Ajouter des titres thématiques uniquement s’ils sont édités et validés dans les métadonnées du corpus ; ne jamais les déduire ou les inventer dans un composant.
 
 Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audit.md`](../../reference/corpus-i18n-audit.md).
@@ -52,6 +52,8 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 - **Réponse vocale** : remplacer le point rouge ambigu dans le champ de réponse par une vraie icône de microphone, nommée `Dicter ma réponse` pour les technologies d'assistance.
 - **Comportement attendu** : le microphone lance la reconnaissance vocale, puis insère la transcription dans le même input que la saisie clavier. Le texte reste modifiable et n'est validé que par une action explicite de l'utilisateur.
 - **Confidentialité** : le contrôle ne représente pas un enregistrement audio persistant. Aucun fichier sonore n'est stocké dans l'application ou dans sa base de données.
+- **Interaction mobile** : après un toucher sur le microphone, le compositeur prend la forme d'une barre d'écoute inspirée des applications de messagerie : point rouge, durée, onde, annulation et arrêt. Il passe ensuite par un état `Transcription…` avant de replacer le texte modifiable dans l'input.
+- **Erreurs** : une permission refusée ou une absence de parole affiche un message local, un bouton `Réessayer` et conserve la saisie clavier.
 
 ## Passe du 17 octobre 2026 — langue du quiz
 
@@ -60,4 +62,18 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 - **Sens du quiz** : ne plus afficher simultanément les drapeaux français, anglais et espagnol. La carte montre le japonais et uniquement la langue active.
 - **Réactivité** : la sélection de `Français`, `English` ou `Español` dans l'écran Langue met à jour les deux cartes de sens dans toutes les configurations de quiz de la planche.
 - **Accessibilité** : le nom accessible de chaque carte est également actualisé, par exemple `Comprendre : japonais vers anglais`.
+
+## Passe du 17 octobre 2026 — décisions consolidées
+
+### Intégré
+
+- **Accès** : aucun quiz n'est accessible sans compte dans le MVP.
+- **Leçons** : liste continue sans livre ni volume dans l'interface.
+- **Email** : connexion par magic link.
+- **Révision rapide** : dix mots maximum, rouges en priorité puis jaunes ; aucun mot vert et aucune obligation d'atteindre dix.
+- **Progression** : trois réussites non consécutives mènent au vert ; une erreur jaune ne retire rien ; une erreur verte ramène à deux réussites et la bonne réponse suivante remet au vert.
+- **Migration de Vincent** : `progress-vincent.json` représente uniquement la compréhension japonais vers signification ; la production démarre rouge.
+- **Session interrompue** : pas de reprise dans le MVP ; les réponses déjà validées restent sauvegardées.
+- **Styles futurs** : Tailwind majoritaire et modules SCSS imbriqués pour les besoins spécifiques.
+- **Catégories** : `useful-words` est une catégorie de vocabulaire possible dans toute leçon et participe aux quiz de la leçon.
 

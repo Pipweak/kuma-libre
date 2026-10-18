@@ -1813,6 +1813,31 @@ main {
   font-size: 0.55rem;
 }
 
+.meaning-question .prompt-language {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 7px;
+  color: var(--ink-soft);
+  font-size: 0.42rem;
+  font-weight: 720;
+  text-transform: capitalize;
+}
+
+.meaning-question .prompt-language .language-flag {
+  width: 18px;
+  height: 12px;
+}
+
+.meaning-question strong {
+  font-family: var(--font-sans);
+  font-size: 1.42rem;
+}
+
+.compact-question.meaning-question {
+  align-content: center;
+}
+
 .answer-box {
   display: grid;
   gap: 7px;
@@ -1867,6 +1892,186 @@ main {
 
 .answer-box .mini-link {
   margin-top: -2px;
+}
+
+.answer-box .mini-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.voice-quiz-view .word-question {
+  min-height: 142px;
+}
+
+.voice-answer-box {
+  gap: 6px;
+}
+
+.answer-box > div.voice-recorder {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 7px;
+  min-height: 44px;
+  padding: 4px 5px 4px 9px;
+  border-color: color-mix(in srgb, var(--brand) 48%, var(--line));
+  background: var(--brand-soft);
+  overflow: visible;
+}
+
+.voice-live {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--brand-dark);
+  font-size: 0.47rem;
+}
+
+.voice-live > i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 0 4px rgb(200 58 54 / 12%);
+  animation: voice-pulse 1.2s ease-out infinite;
+}
+
+.voice-wave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 44px;
+}
+
+.voice-wave i {
+  width: 2px;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--brand);
+  animation: voice-wave 0.8s ease-in-out infinite alternate;
+}
+
+.voice-wave i:nth-child(2n) {
+  height: 18px;
+  animation-delay: -0.32s;
+}
+
+.voice-wave i:nth-child(3n) {
+  height: 12px;
+  animation-delay: -0.58s;
+}
+
+.answer-box > div.voice-recorder .voice-cancel {
+  width: auto;
+  padding: 0 2px;
+  color: var(--ink-soft);
+  font-size: 0.42rem;
+  font-weight: 720;
+}
+
+.answer-box > div.voice-recorder .voice-stop {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--brand);
+}
+
+.voice-stop > i {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.voice-help,
+.voice-status {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.41rem;
+  line-height: 1.35;
+}
+
+.answer-box > div.voice-processing {
+  gap: 9px;
+  padding: 8px 10px;
+  border-color: var(--line);
+  background: #fff;
+}
+
+.voice-processing > i {
+  width: 17px;
+  height: 17px;
+  border: 2px solid var(--brand-soft);
+  border-top-color: var(--brand);
+  border-radius: 50%;
+  animation: voice-spin 0.75s linear infinite;
+}
+
+.voice-processing > span,
+.voice-status--error > span {
+  display: grid;
+  gap: 1px;
+}
+
+.voice-processing strong,
+.voice-status--error strong {
+  font-size: 0.47rem;
+}
+
+.voice-processing small,
+.voice-status--error small {
+  color: var(--ink-soft);
+  font-size: 0.39rem;
+  line-height: 1.25;
+}
+
+.voice-status--ready {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.voice-status--ready b {
+  margin-right: 3px;
+}
+
+.answer-box > div.voice-status--error {
+  align-items: flex-start;
+  gap: 7px;
+  padding: 7px 8px;
+  border-color: color-mix(in srgb, var(--red) 32%, var(--line));
+  background: var(--red-soft);
+}
+
+.voice-status--error > b {
+  display: grid;
+  flex: 0 0 19px;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--red);
+}
+
+.answer-box > div .mini-microphone.has-error {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--red-soft);
+}
+
+@keyframes voice-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(200 58 54 / 28%); }
+  100% { box-shadow: 0 0 0 7px rgb(200 58 54 / 0%); }
+}
+
+@keyframes voice-wave {
+  from { transform: scaleY(0.55); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes voice-spin {
+  to { transform: rotate(360deg); }
 }
 
 .compact-question {
@@ -2188,6 +2393,52 @@ main {
   border-radius: 50%;
   color: #fff;
   font-size: 0.4rem;
+}
+
+.category-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  width: calc(100% - 28px);
+  min-height: 48px;
+  margin: 9px 14px 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  background: var(--brand-soft);
+  text-align: left;
+}
+
+.category-row > span {
+  display: grid;
+  gap: 2px;
+}
+
+.category-row strong {
+  font-size: 0.52rem;
+}
+
+.category-row small {
+  color: var(--ink-soft);
+  font-size: 0.39rem;
+}
+
+.category-row > b {
+  display: grid;
+  min-width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--brand-dark);
+  background: #fff;
+  font-size: 0.43rem;
+}
+
+.category-row > i {
+  color: var(--ink-soft);
+  font-style: normal;
 }
 
 .menu-view,

@@ -19,6 +19,7 @@ Ce dossier transforme les références visuelles générées en fondations réut
 - **Action principale** : rouge vermillon.
 - **Fond** : crème chaud, avec des surfaces presque blanches.
 - **Mascotte** : brun caramel, museau crème, montagne et soleil rouge.
+- **Styles de l'application** : Tailwind CSS pour la majorité de la mise en page et des états simples ; modules SCSS colocalisés pour les styles spécifiques, les animations et l'imbrication contrôlée.
 
 La fonte du visuel généré n’est pas reprise pour l’instant. Le choix typographique final reste ouvert.
 
@@ -31,6 +32,24 @@ Pour afficher directement les compositions générées :
 ```
 
 La taille et le recadrage restent définis par le composant qui les utilise.
+
+## Cible React
+
+Les valeurs du design system restent centralisées dans les variables CSS sémantiques. Tailwind référence ces mêmes tokens au lieu de dupliquer la palette. Un composant nécessitant du SCSS utilise un fichier `Component.module.scss` et peut imbriquer ses variantes :
+
+```scss
+.answer {
+  &.correct {
+    border-color: var(--kl-color-success);
+  }
+
+  .icon {
+    margin-inline-end: var(--kl-space-2);
+  }
+}
+```
+
+L'imbrication reste courte et locale au composant. Aucun nouveau code métier ne dépend d'un grand fichier de styles global.
 
 ## Utilisation
 
