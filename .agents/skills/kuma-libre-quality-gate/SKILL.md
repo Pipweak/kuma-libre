@@ -68,3 +68,16 @@ Do not claim completion while a mandatory check fails. Report:
 - remaining risks or follow-up work.
 
 Also report the current work branch and intended pull request target. Do not approve a direct commit to `develop` or `main`.
+
+## Prepare the user validation handoff
+
+Before asking the user to validate or merge a pull request, provide a concrete, copy-pasteable validation procedure tailored to the actual change. Include:
+
+- any required checkout, pull or installation command;
+- the exact automated commands to run and the success output or condition to expect;
+- known expected failures or warnings, clearly separated from regressions;
+- manual and visual checks with the route, action and expected result when UI or navigation changed;
+- relevant desktop, mobile, keyboard or accessibility checks when they are affected;
+- an explicit statement that no visual test is required when the change has no visible effect.
+
+Do not use vague instructions such as “test the feature”. Keep the checklist proportionate to the PR. When the user reports a failure, diagnose and correct it in the same PR when appropriate, rerun the quality gate, and provide the updated validation procedure before requesting approval again.
