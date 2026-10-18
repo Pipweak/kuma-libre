@@ -19,7 +19,13 @@ export default tseslint.config(
   },
   js.configs.recommended,
   {
-    files: ['src/**/*.{ts,tsx}', 'tests/**/*.{ts,tsx}', 'playwright.config.ts', 'vite.config.ts'],
+    files: [
+      'scripts/**/*.ts',
+      'src/**/*.{ts,tsx}',
+      'tests/**/*.{ts,tsx}',
+      'playwright.config.ts',
+      'vite.config.ts',
+    ],
     extends: [...tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       globals: globals.browser,
