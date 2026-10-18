@@ -33,9 +33,10 @@ Use lowercase kebab-case slugs. Do not mix unrelated work on one branch.
 2. Apply `kuma-libre-quality-gate` and report unavailable checks honestly.
 3. Commit with Conventional Commits and push the work branch.
 4. Open a pull request targeting `develop`.
-5. Merge only after the required checks succeed and the work has been validated.
-6. Prefer squash merge for ordinary work, with a clean Conventional Commit PR title.
-7. Delete the work branch after merge.
+5. Give the user the exact validation commands, expected results and applicable manual or visual checklist defined by `kuma-libre-quality-gate`.
+6. Merge only after the required checks succeed and the work has been validated.
+7. Prefer squash merge for ordinary work, with a clean Conventional Commit PR title.
+8. Delete the work branch after merge.
 
 A completed feature does not automatically create a production release. Several validated changes may accumulate on `develop` before a release is cut.
 
@@ -64,4 +65,4 @@ Use one release branch per target version; RC iterations are distinguished by an
 
 Do not merge a pull request, publish a production release or move a production tag when validation is missing, checks fail, the target is ambiguous, or the action exceeds the user's authorization. Report the exact pending transition instead.
 
-At handoff, state the current branch, commit, pull request target, checks, tags and next protected transition.
+At handoff, state the current branch, commit, pull request target, checks, tags and next protected transition. Always include the user validation procedure: exact commands, expected results, applicable manual or visual checks, and an explicit “no visual test required” when appropriate.

@@ -12,6 +12,7 @@ Une modification est terminée lorsque tous les points applicables sont satisfai
 - les secrets, autorisations, entrées et politiques RLS concernés ont été vérifiés ;
 - les documents vivants, README et maquettes affectés sont synchronisés ;
 - le travail se trouve sur une branche dédiée et la pull request cible la branche définie par le Git Flow ;
+- la procédure de validation utilisateur indique les commandes exactes, les résultats attendus et les tests manuels ou visuels applicables, ou précise explicitement qu'aucun test visuel n'est nécessaire ;
 - les changements utilisateur sans rapport sont préservés ;
 - le compte rendu final cite les vérifications exécutées et les limites restantes.
 
