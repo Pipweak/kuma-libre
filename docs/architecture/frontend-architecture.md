@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
-> **Statut :** architecture technique de référence avant initialisation de l'application.
-> **Version :** 2 — 17 octobre 2026.
+> **Statut :** architecture technique de référence, initialisée dans l'application.
+> **Version :** 3 — 17 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -321,6 +321,19 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 7. Connecter la progression et les pages secondaires.
 8. Ajouter la synthèse et la dictée vocales.
 9. Déployer sur Cloudflare Pages.
+
+### État du socle
+
+La première étape est initialisée sur la branche `chore/react-foundation` avec :
+
+- React, TypeScript strict et Vite ;
+- React Router en Data Mode ;
+- i18next et les premiers catalogues FR, EN et ES ;
+- Tailwind CSS via son plugin Vite et Sass disponible pour les futurs modules SCSS ;
+- Vitest, React Testing Library, couverture V8, Playwright et axe ;
+- ESLint, Prettier, audit npm et une CI GitHub composée des checks `quality` et `e2e`.
+
+Le design system complet, le corpus normalisé, le moteur de quiz et Supabase restent volontairement hors de cette première tranche.
 
 ## 13. Qualité et synchronisation documentaire
 

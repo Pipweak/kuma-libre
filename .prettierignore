@@ -1,0 +1,15 @@
+dist
+coverage
+node_modules
+playwright-report
+test-results
+mockups/design-system/assets
+lessons
+mockups
+reference
+docs
+.agents
+AGENTS.md
+ARCHITECTURE.md
+README.md
+progress-vincent.json

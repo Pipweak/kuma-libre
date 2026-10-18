@@ -1,0 +1,28 @@
+{
+  "accessibility": {
+    "skipToContent": "Ir al contenido principal"
+  },
+  "foundation": {
+    "description": "La base de React, el enrutamiento, la internacionalización y los controles de calidad ya están operativos.",
+    "title": "Base técnica preparada"
+  },
+  "landing": {
+    "description": "Una experiencia pensada para móviles para repasar vocabulario japonés en ambos sentidos.",
+    "eyebrow": "Repaso de vocabulario japonés",
+    "title": "Kuma Libre"
+  },
+  "languageSelector": {
+    "label": "Idioma de la interfaz",
+    "prompt": "Elige el idioma de la interfaz"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "notFound": {
+    "backHome": "Volver al inicio",
+    "description": "La página solicitada no existe o se ha movido.",
+    "title": "Página no encontrada"
+  }
+}

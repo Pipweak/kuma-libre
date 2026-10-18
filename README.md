@@ -2,6 +2,31 @@
 
 Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Minna no Nihongo — Shokyū I*.
 
+## Développement de l'application
+
+Le socle applicatif utilise Node.js 22.13, npm, React, TypeScript, Vite, React Router en Data Mode, i18next, Tailwind CSS et Sass.
+
+```bash
+nvm use
+npm ci
+npm run dev
+```
+
+Contrôles disponibles :
+
+```bash
+npm run format:check
+npm run lint
+npm run typecheck
+npm run test:coverage
+npm run build
+npm run test:e2e
+npm run test:a11y
+npm run security:audit
+```
+
+`npm run quality` exécute les contrôles locaux obligatoires hors Playwright et audit réseau. La CI GitHub ajoute l'audit des dépendances et les parcours Playwright sur Chromium.
+
 ## Leçons
 
 - [Leçon 1 — Vocabulaire](lessons/lesson-01/vocabulary.md)
