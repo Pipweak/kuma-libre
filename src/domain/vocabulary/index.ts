@@ -1,6 +1,7 @@
 export { buildVocabularyCorpus, countEntriesByCategory, formatLessonId } from './buildCorpus';
 export { VOCABULARY_CATEGORIES } from './corpusMetadata';
 export { parseMarkdownVocabularySource } from './parseMarkdownVocabulary';
+export { areSerializedCorporaEquivalent, serializeVocabularyCorpus } from './serializeCorpus';
 export type {
   CorpusLocale,
   CorpusValidationIssue,

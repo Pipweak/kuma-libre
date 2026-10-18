@@ -3,8 +3,10 @@ import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  areSerializedCorporaEquivalent,
   buildVocabularyCorpus,
   countEntriesByCategory,
+  serializeVocabularyCorpus,
   type CorpusValidationIssue,
   type MarkdownCorpusSource,
   validateVocabularyCorpus,
@@ -24,7 +26,7 @@ async function main(): Promise<void> {
 
   throwWhenInvalid(structuralIssues, 'La validation structurelle du corpus a échoué');
 
-  const serializedCorpus = `${JSON.stringify(corpus, null, 2)}\n`;
+  const serializedCorpus = serializeVocabularyCorpus(corpus);
 
   if (command === 'generate') {
     await mkdir(dirname(GENERATED_CORPUS_PATH), { recursive: true });
@@ -36,7 +38,7 @@ async function main(): Promise<void> {
 
   if (command === 'check') {
     const committedCorpus = await readGeneratedCorpus();
-    if (committedCorpus !== serializedCorpus) {
+    if (!areSerializedCorporaEquivalent(committedCorpus, serializedCorpus)) {
       throw new Error(
         'src/generated/corpus.json n’est plus synchronisé. Exécutez « npm run corpus:generate ».',
       );
