@@ -6,9 +6,9 @@ export function RootLayout(): ReactElement {
   const { t } = useTranslation('common');
 
   return (
-    <div className="min-h-dvh bg-stone-50 text-stone-950">
+    <div className="bg-canvas text-ink min-h-dvh">
       <a
-        className="sr-only z-50 rounded-md bg-white px-4 py-2 focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+        className="rounded-control bg-surface-strong shadow-card focus:ring-action sr-only z-50 px-4 py-2 focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:ring-2 focus:outline-none"
         href="#main-content"
       >
         {t('accessibility.skipToContent')}

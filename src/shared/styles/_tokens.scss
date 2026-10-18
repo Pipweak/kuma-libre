@@ -1,0 +1,46 @@
+@use 'sass:map';
+
+$kl-color-canvas: var(--kl-color-canvas);
+$kl-color-surface: var(--kl-color-surface);
+$kl-color-text: var(--kl-color-text);
+$kl-color-text-muted: var(--kl-color-text-muted);
+$kl-color-border: var(--kl-color-border);
+$kl-color-action: var(--kl-color-action);
+$kl-color-action-hover: var(--kl-color-action-hover);
+$kl-color-action-soft: var(--kl-color-action-soft);
+$kl-color-success: var(--kl-color-success);
+$kl-color-warning: var(--kl-color-warning);
+$kl-color-danger: var(--kl-color-danger);
+
+$kl-font-display: var(--kl-font-display);
+$kl-font-body: var(--kl-font-body);
+$kl-font-japanese: var(--kl-font-japanese);
+
+$kl-radii: (
+  sm: var(--kl-radius-sm),
+  md: var(--kl-radius-md),
+  lg: var(--kl-radius-lg),
+  xl: var(--kl-radius-xl),
+  pill: var(--kl-radius-pill),
+);
+
+$kl-spaces: (
+  1: var(--kl-space-1),
+  2: var(--kl-space-2),
+  3: var(--kl-space-3),
+  4: var(--kl-space-4),
+  5: var(--kl-space-5),
+  6: var(--kl-space-6),
+  8: var(--kl-space-8),
+  10: var(--kl-space-10),
+  12: var(--kl-space-12),
+  16: var(--kl-space-16),
+);
+
+@function kl-radius($name) {
+  @return map.get($kl-radii, $name);
+}
+
+@function kl-space($step) {
+  @return map.get($kl-spaces, $step);
+}
