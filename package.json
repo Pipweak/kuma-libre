@@ -9,7 +9,10 @@
   "packageManager": "npm@10.9.2",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run corpus:check && tsc -b && vite build",
+    "corpus:check": "tsx scripts/corpus/generate-corpus.ts check",
+    "corpus:generate": "tsx scripts/corpus/generate-corpus.ts generate",
+    "corpus:validate-ready": "tsx scripts/corpus/generate-corpus.ts validate-ready",
     "preview": "vite preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -55,9 +58,11 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "sass": "^1.105.2",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.2",
     "vite": "^8.3.4",
-    "vitest": "^5.0.5"
+    "vitest": "^5.0.5",
+    "wanakana": "^5.3.1"
   }
 }

@@ -27,6 +27,18 @@ npm run security:audit
 
 `npm run quality` exécute les contrôles locaux obligatoires hors Playwright et audit réseau. La CI GitHub ajoute l'audit des dépendances et les parcours Playwright sur Chromium.
 
+### Génération du corpus
+
+Les fichiers Markdown de [`lessons`](lessons) sont les sources éditables. L'importeur les convertit en un artefact unique et déterministe, [`src/generated/corpus.json`](src/generated/corpus.json), qui ne doit jamais être modifié manuellement.
+
+```bash
+npm run corpus:generate        # régénère le JSON après une modification des Markdown
+npm run corpus:check           # vérifie que le JSON versionné est à jour et structurellement valide
+npm run corpus:validate-ready  # contrôle les données requises pour activer tous les quiz FR/EN/ES
+```
+
+`npm run build` exécute automatiquement `corpus:check`. Le contrôle `corpus:validate-ready` représente la cible de migration : il signale encore les traductions espagnoles et lectures japonaises absentes des sources, sans bloquer le socle structurel actuel. Ces données doivent être ajoutées dans les Markdown, puis le JSON doit être régénéré.
+
 ### Design system applicatif
 
 - [`src/shared/styles/tokens.css`](src/shared/styles/tokens.css) est la source canonique des couleurs, espacements, rayons, ombres, typographies et variables Tailwind de Kuma Libre.
@@ -61,7 +73,9 @@ Tailwind reste le choix principal pour la mise en page et les états simples. Le
 
 ## Format
 
-Chaque entrée est une ligne de tableau Markdown. Les anciennes transcriptions utilisent plusieurs formes de colonnes, notamment **Japonais | Lecture | Français | English | Maîtrise** et **Kana | Kanji | English | Français | Maîtrise**. Le futur importeur les convertira vers un même modèle JSON contenant les formes japonaises et les traductions `fr`, `en` et `es`.
+Chaque entrée est une ligne de tableau Markdown. Les anciennes transcriptions utilisent plusieurs formes de colonnes, notamment **Japonais | Lecture | Français | English | Maîtrise** et **Kana | Kanji | English | Français | Maîtrise**. L'importeur reconnaît ces formats historiques et les convertit vers un même modèle JSON contenant les formes japonaises et les traductions `fr`, `en` et `es`.
+
+La valeur complète d'une cellule de traduction est conservée comme libellé principal. Les variantes séparées explicitement par une virgule, une barre oblique ou un point-virgule deviennent aussi des réponses acceptées. Les formes rōmaji sont générées à partir des lectures déclarées ; une lecture absente reste une lacune de données et n'est jamais inventée par l'importeur.
 
 Les entrées sont regroupées par leçon et par catégorie : vocabulaire principal, expressions, noms propres ou `useful-words`. `Useful Words and Information` est une catégorie de vocabulaire possible dans n'importe quelle leçon ; elle est conservée dans un fichier distinct lorsqu'elle existe et participe aux quiz de la leçon. Les lectures de mots écrits en katakana restent en katakana.
 

@@ -1,20 +1,30 @@
 # Audit du corpus pour l’internationalisation
 
-> État observé le 17 octobre 2026.
+> État observé et validé par l'importeur le 18 octobre 2026.
 
 ## Situation actuelle
 
 - Le dépôt contient 18 dossiers de leçon et 19 fichiers Markdown de contenu ; la leçon 06 possède un fichier de vocabulaire et un fichier `useful-words`.
-- Un comptage mécanique des lignes structurées donne actuellement 904 entrées à normaliser. Le total définitif sera produit par l’importeur avec le détail des lignes acceptées, rejetées et dupliquées.
+- L'importeur normalise 904 entrées réparties dans 18 leçons, sans identifiant dupliqué : 701 entrées de vocabulaire, 96 expressions, 65 noms propres et 42 entrées `useful-words`.
 - Les traductions disponibles sont le français et l’anglais.
-- Aucune colonne espagnole structurée n’existe encore.
+- Les 904 entrées possèdent au moins une signification française et une signification anglaise.
+- Aucune colonne espagnole structurée n’existe encore : les 904 entrées sont donc signalées par le contrôle de préparation aux quiz trilingues.
+- 46 expressions ou noms propres écrits en japonais ne possèdent pas encore de lecture déclarée dans les sources ; ils n'ont par conséquent pas de rōmaji généré. L'importeur les signale sans inventer de prononciation.
 - Les leçons possèdent un numéro, mais aucun titre thématique éditorial fiable. L’interface doit donc afficher `Leçon 01`, `Leçon 02`, etc. tant que des métadonnées validées n’ont pas été ajoutées.
 - Aucun fichier audio ni URL audio n’existe dans le corpus.
-- Les fichiers n'utilisent pas tous les mêmes en-têtes de tableau. L'importeur doit reconnaître les formats historiques puis produire une représentation unique.
+- Les fichiers n'utilisent pas tous les mêmes en-têtes de tableau. L'importeur reconnaît les formats historiques puis produit une représentation unique dans `src/generated/corpus.json`.
 
 ## Sources de vérité
 
 Le corpus de vocabulaire, ses catégories et les métadonnées publiques de leçon restent dans les fichiers versionnés, puis sont convertis en JSON au build. Ils ne sont pas stockés dans les tables utilisateur Supabase. `useful-words` est une catégorie de vocabulaire possible dans toute leçon, pas une exception propre à la leçon 06.
+
+Les commandes de contrôle sont :
+
+- `npm run corpus:generate` pour régénérer l'artefact après une modification des sources ;
+- `npm run corpus:check` pour vérifier la structure et l'absence de décalage entre les Markdown et le JSON versionné ;
+- `npm run corpus:validate-ready` pour exiger en plus l'espagnol, les lectures kana nécessaires et le rōmaji. Ce dernier contrôle décrit actuellement les lacunes de migration et deviendra bloquant avant l'activation des quiz trilingues.
+
+La valeur complète d'une traduction reste le libellé d'affichage. Les alternatives séparées explicitement dans la cellule source par une virgule, une barre oblique ou un point-virgule sont aussi normalisées comme réponses acceptées.
 
 Supabase contient uniquement les données propres à l’utilisateur : profil, préférences, historique et progression. Les pourcentages affichés à côté des leçons sont calculés en croisant le corpus statique avec cette progression.
 
