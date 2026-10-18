@@ -1,0 +1,28 @@
+{
+  "accessibility": {
+    "skipToContent": "Aller au contenu principal"
+  },
+  "foundation": {
+    "description": "Le socle React, le routing, l’internationalisation et les contrôles qualité sont maintenant opérationnels.",
+    "title": "Fondation technique en place"
+  },
+  "landing": {
+    "description": "Une expérience mobile-first pour réviser le vocabulaire japonais dans les deux sens.",
+    "eyebrow": "Révision du japonais",
+    "title": "Kuma Libre"
+  },
+  "languageSelector": {
+    "label": "Langue de l’interface",
+    "prompt": "Choisir la langue de l’interface"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "notFound": {
+    "backHome": "Revenir à l’accueil",
+    "description": "La page demandée n’existe pas ou a été déplacée.",
+    "title": "Page introuvable"
+  }
+}

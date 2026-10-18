@@ -1,0 +1,28 @@
+{
+  "accessibility": {
+    "skipToContent": "Skip to main content"
+  },
+  "foundation": {
+    "description": "The React foundation, routing, internationalization, and quality checks are now operational.",
+    "title": "Technical foundation ready"
+  },
+  "landing": {
+    "description": "A mobile-first experience for practising Japanese vocabulary in both directions.",
+    "eyebrow": "Japanese vocabulary practice",
+    "title": "Kuma Libre"
+  },
+  "languageSelector": {
+    "label": "Interface language",
+    "prompt": "Choose the interface language"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "notFound": {
+    "backHome": "Return home",
+    "description": "The requested page does not exist or has been moved.",
+    "title": "Page not found"
+  }
+}
