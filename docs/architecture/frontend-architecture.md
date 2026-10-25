@@ -322,7 +322,7 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 
 ### État du socle
 
-Les trois premières étapes sont initialisées avec :
+Les quatre premières étapes sont initialisées avec :
 
 - React, TypeScript strict et Vite ;
 - React Router en Data Mode ;
@@ -334,8 +334,10 @@ Les trois premières étapes sont initialisées avec :
 - ESLint, Prettier, audit npm et une CI GitHub composée des checks `quality` et `e2e`.
 - l'importeur pur des formats Markdown historiques, les identifiants stables, les catégories et l'artefact `src/generated/corpus.json` ;
 - les validations structurelles exécutées au build et le contrôle séparé `corpus:validate-ready` pour suivre la migration des traductions espagnoles et des lectures manquantes.
+- le domaine pur `src/domain/quiz`, qui construit les sessions configurées et rapides, crée les questions dans les deux directions, normalise et valide les réponses, puis applique les transitions de maîtrise indépendantes ;
+- une source aléatoire injectable pour tester de manière déterministe la sélection prioritaire et le mélange des questions.
 
-Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Le moteur de quiz et Supabase restent hors de cette tranche.
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Le premier parcours React vertical et Supabase restent hors de cette tranche.
 
 ## 13. Qualité et synchronisation documentaire
 

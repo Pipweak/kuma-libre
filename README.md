@@ -48,6 +48,18 @@ npm run corpus:validate-ready  # contrôle les données requises pour activer to
 
 Tailwind reste le choix principal pour la mise en page et les états simples. Les modules SCSS sont réservés aux besoins spécifiques, notamment les animations et l'imbrication locale.
 
+### Moteur de quiz
+
+Le domaine pur [`src/domain/quiz`](src/domain/quiz) construit les sessions sans dépendre de React ni de Supabase. Il couvre :
+
+- les sessions configurées par leçon, catégorie, direction, niveau de maîtrise et ordre ;
+- la révision rapide de dix mots au maximum, avec priorité aux rouges puis aux jaunes ;
+- les questions de compréhension et de production avec toutes les réponses explicitement déclarées ;
+- la normalisation Unicode, des espaces, de la ponctuation, de la casse et des accents latins sans correction floue ;
+- les progressions indépendantes de compréhension et de production, ainsi que la maîtrise globale dérivée.
+
+Les fonctions acceptent une source aléatoire injectable afin que la sélection et le mélange restent entièrement testables. La future feature React orchestrera ces contrats sans dupliquer leurs règles.
+
 ## Leçons
 
 - [Leçon 1 — Vocabulaire](lessons/lesson-01/vocabulary.md)
@@ -83,7 +95,7 @@ Les traductions espagnoles ne sont pas encore présentes dans les tableaux histo
 
 ## Utilisation en révision
 
-La future application propose deux directions : japonais → signification et signification → japonais. Une réponse de signification peut être donnée en français, en anglais ou en espagnol. Une réponse japonaise peut utiliser les formes romaji, kana ou kanji déclarées. Les fichiers restent la source des questions : aucun mot ne doit être présenté comme appartenant à une leçon sans figurer dans son fichier.
+Le moteur propose deux directions : japonais → signification et signification → japonais. Une réponse de signification peut être donnée en français, en anglais ou en espagnol. Une réponse japonaise peut utiliser les formes romaji, kana ou kanji déclarées. Les fichiers restent la source des questions : aucun mot ne doit être présenté comme appartenant à une leçon sans figurer dans son fichier.
 
 ## Méthode d'ajout
 
