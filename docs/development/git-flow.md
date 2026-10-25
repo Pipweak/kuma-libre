@@ -51,8 +51,9 @@ Règles :
 4. utiliser des commits et titres de PR conformes à Conventional Commits ;
 5. appliquer la Definition of Done avant la fusion ;
 6. ouvrir la PR vers `develop` et attendre les contrôles requis ;
-7. utiliser de préférence un squash merge pour conserver un historique lisible ;
-8. supprimer la branche temporaire après fusion.
+7. fournir au validateur les commandes exactes, les résultats attendus et la checklist manuelle ou visuelle adaptée au changement ;
+8. utiliser de préférence un squash merge pour conserver un historique lisible ;
+9. supprimer la branche temporaire après fusion.
 
 Exemples de titres :
 
@@ -129,6 +130,8 @@ Pour chaque travail, l'agent doit annoncer :
 - le commit et la PR produits ;
 - la branche cible ;
 - les tags créés, le cas échéant ;
+- la procédure de validation utilisateur, avec commandes et résultats attendus ;
+- les vérifications manuelles ou visuelles applicables, ou la mention explicite qu'il n'y en a aucune ;
 - la prochaine transition nécessitant une validation.
 
 L'agent ne fusionne pas vers une branche protégée et ne publie pas une release lorsqu'une validation manque ou qu'un contrôle obligatoire échoue.

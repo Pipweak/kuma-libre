@@ -61,6 +61,8 @@ La synthèse datée [`docs/reflexion/2026-10-17-fondations-v1.md`](docs/reflexio
 - Mettre à jour les fichiers de traduction FR, EN et ES lorsqu'un libellé d'interface change.
 - Ne pas modifier les archives V1/V2 pour leur faire porter de nouvelles règles ; modifier `mockups/v1/flows.html`.
 - Préserver les changements utilisateur non liés et le dossier `.idea/`.
+- À la fin de chaque job ou avant de demander la validation d'une pull request, fournir une procédure de validation utilisateur directement exécutable : commandes exactes, résultats attendus et checklist manuelle ou visuelle adaptée au changement.
+- Indiquer explicitement qu'aucun test visuel n'est nécessaire lorsqu'aucune interface ou aucun parcours n'a changé. Signaler séparément les échecs attendus afin qu'ils ne soient pas confondus avec une régression.
 
 Les skills locaux [`kuma-libre-feature-sync`](.agents/skills/kuma-libre-feature-sync/SKILL.md) et [`kuma-libre-quality-gate`](.agents/skills/kuma-libre-quality-gate/SKILL.md) détaillent respectivement la synchronisation d'une feature et son contrôle qualité final.
 
