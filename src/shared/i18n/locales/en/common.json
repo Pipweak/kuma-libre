@@ -5,7 +5,8 @@
   "app": {
     "goToLessons": "Go to lessons",
     "loading": "Loading Kuma Libre",
-    "localPreview": "Local preview"
+    "loadingSession": "Checking the session",
+    "openAccount": "Open account"
   },
   "foundation": {
     "description": "The React foundation, design system, and first shared components are now operational.",
@@ -14,7 +15,8 @@
   "landing": {
     "description": "A mobile-first experience for practising Japanese vocabulary in both directions.",
     "eyebrow": "Japanese vocabulary practice",
-    "previewAction": "Try the review flow",
+    "continueAction": "Continue reviewing",
+    "signInAction": "Sign in",
     "title": "Kuma Libre"
   },
   "languageSelector": {

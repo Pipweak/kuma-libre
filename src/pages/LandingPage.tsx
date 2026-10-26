@@ -2,16 +2,14 @@ import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
-import { isAppPreviewEnabled } from '@/app/config/appPreview';
+import { useAuth } from '@/features/auth/useAuth';
 import { LanguageSelector } from '@/features/preferences/components/LanguageSelector';
 import { BrandLogo, Card } from '@/shared/ui';
 
 export function LandingPage(): ReactElement {
   const { t } = useTranslation('common');
-  const isLocalPreviewEnabled = isAppPreviewEnabled(
-    import.meta.env.DEV,
-    import.meta.env.VITE_ENABLE_APP_PREVIEW,
-  );
+  const { status } = useAuth();
+  const isAuthenticated = status === 'authenticated';
 
   return (
     <section className="bg-canvas min-h-dvh px-5 py-8 sm:px-8 sm:py-12">
@@ -33,14 +31,12 @@ export function LandingPage(): ReactElement {
           <p className="text-muted mt-2 leading-7">{t('foundation.description')}</p>
         </Card>
 
-        {isLocalPreviewEnabled ? (
-          <Link
-            className="bg-action hover:bg-action-hover focus-visible:ring-action rounded-control inline-flex min-h-12 w-fit items-center justify-center px-6 font-bold text-white shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-            to="/app/lessons"
-          >
-            {t('landing.previewAction')}
-          </Link>
-        ) : null}
+        <Link
+          className="bg-action hover:bg-action-hover focus-visible:ring-action rounded-control inline-flex min-h-12 w-fit items-center justify-center px-6 font-bold text-white shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+          to={isAuthenticated ? '/app' : '/auth'}
+        >
+          {isAuthenticated ? t('landing.continueAction') : t('landing.signInAction')}
+        </Link>
 
         <div className="space-y-3">
           <p className="text-muted text-sm font-semibold">{t('languageSelector.prompt')}</p>

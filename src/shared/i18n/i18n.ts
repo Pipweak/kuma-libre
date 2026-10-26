@@ -2,12 +2,15 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 import enCommon from '@/shared/i18n/locales/en/common.json';
+import enAuth from '@/shared/i18n/locales/en/auth.json';
 import enLessons from '@/shared/i18n/locales/en/lessons.json';
 import enQuiz from '@/shared/i18n/locales/en/quiz.json';
 import esCommon from '@/shared/i18n/locales/es/common.json';
+import esAuth from '@/shared/i18n/locales/es/auth.json';
 import esLessons from '@/shared/i18n/locales/es/lessons.json';
 import esQuiz from '@/shared/i18n/locales/es/quiz.json';
 import frCommon from '@/shared/i18n/locales/fr/common.json';
+import frAuth from '@/shared/i18n/locales/fr/auth.json';
 import frLessons from '@/shared/i18n/locales/fr/lessons.json';
 import frQuiz from '@/shared/i18n/locales/fr/quiz.json';
 
@@ -16,9 +19,9 @@ export const SUPPORTED_LOCALES = ['fr', 'en', 'es'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 const resources = {
-  en: { common: enCommon, lessons: enLessons, quiz: enQuiz },
-  es: { common: esCommon, lessons: esLessons, quiz: esQuiz },
-  fr: { common: frCommon, lessons: frLessons, quiz: frQuiz },
+  en: { auth: enAuth, common: enCommon, lessons: enLessons, quiz: enQuiz },
+  es: { auth: esAuth, common: esCommon, lessons: esLessons, quiz: esQuiz },
+  fr: { auth: frAuth, common: frCommon, lessons: frLessons, quiz: frQuiz },
 } as const;
 
 /**
