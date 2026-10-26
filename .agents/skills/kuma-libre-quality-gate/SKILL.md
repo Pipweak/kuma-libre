@@ -42,12 +42,15 @@ npm run lint
 npm run typecheck
 npm run test:coverage
 npm run build
+npm run test:database
 npm run test:e2e
 npm run test:a11y
 npm run performance:check
 ```
 
 Do not invent missing commands. If the project is not yet initialized or a check is unavailable, report it as not executable rather than as passed.
+
+`npm run test:database` nécessite Docker Desktop localement. Lorsque Docker est absent, ne pas présenter le contrôle comme réussi : signaler cette limite et vérifier le résultat du job GitHub `database` avant le handoff.
 
 ## Review non-functional quality
 

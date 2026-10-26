@@ -109,7 +109,7 @@ Pour `main` et `develop` :
 - résolution obligatoire des conversations de revue ;
 - aucune fusion si la Definition of Done n'est pas satisfaite.
 
-Depuis l'initialisation du socle React, les checks GitHub à rendre obligatoires dans les rulesets sont `quality` et `e2e`. Le premier regroupe formatage, lint, typecheck, couverture, build et audit des dépendances ; le second exécute les parcours navigateur et le contrôle axe sur Chromium.
+Les checks GitHub à rendre obligatoires dans les rulesets sont `database`, `quality` et `e2e`. `database` reconstruit Supabase depuis les migrations puis vérifie le schéma, la RLS et les RPC avec pgTAP. `quality` regroupe formatage, lint, typecheck, couverture, build et audit des dépendances. `e2e` s’exécute après les deux premiers et couvre les parcours navigateur ainsi que le contrôle axe sur Chromium.
 
 Une approbation externe peut devenir obligatoire lorsqu'un second mainteneur participe au projet. Elle ne doit pas empêcher artificiellement le travail d'un dépôt encore maintenu par une seule personne.
 
