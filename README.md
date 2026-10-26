@@ -27,6 +27,14 @@ npm run security:audit
 
 `npm run quality` exécute les contrôles locaux obligatoires hors Playwright et audit réseau. La CI GitHub ajoute l'audit des dépendances et les parcours Playwright sur Chromium.
 
+### Aperçu local du parcours de révision
+
+`npm run dev` affiche sur l'accueil le CTA **Tester le parcours de révision**. Cet aperçu permet de parcourir les 18 leçons réelles, consulter leur vocabulaire, configurer une passe, répondre, voir la correction et atteindre le bilan d'une session.
+
+Cette tranche verticale utilise le corpus généré, mais pas encore Supabase : tous les mots sont donc considérés non maîtrisés et aucune progression n'est persistée. Recharger une question renvoie vers la configuration, conformément à la règle V1 sur les passes interrompues.
+
+Les routes `/app/*` restent fermées dans un build de production ordinaire tant que l'authentification n'est pas branchée. `VITE_ENABLE_APP_PREVIEW=true` est réservé au build Playwright de la CI ; il ne doit pas être configuré sur le déploiement public.
+
 ### Génération du corpus
 
 Les fichiers Markdown de [`lessons`](lessons) sont les sources éditables. L'importeur les convertit en un artefact unique et déterministe, [`src/generated/corpus.json`](src/generated/corpus.json), qui ne doit jamais être modifié manuellement.
@@ -43,7 +51,7 @@ npm run corpus:validate-ready  # contrôle les données requises pour activer to
 
 - [`src/shared/styles/tokens.css`](src/shared/styles/tokens.css) est la source canonique des couleurs, espacements, rayons, ombres, typographies et variables Tailwind de Kuma Libre.
 - [`src/shared/styles/_tokens.scss`](src/shared/styles/_tokens.scss) expose ces mêmes tokens aux modules SCSS sans dupliquer leurs valeurs.
-- [`src/shared/ui`](src/shared/ui) contient les premières primitives accessibles et réutilisables : `BrandLogo`, `Button`, `IconButton`, `Card` et `Spinner`.
+- [`src/shared/ui`](src/shared/ui) contient les premières primitives accessibles et réutilisables : `BrandLogo`, `Button`, `IconButton`, `Card`, `FlagIcon`, `ProgressBar` et `Spinner`.
 - [`src/assets/brand`](src/assets/brand) contient les déclinaisons PNG transparentes de la marque utilisées par l'application. Le composant `BrandLogo` en préserve toujours les proportions.
 
 Tailwind reste le choix principal pour la mise en page et les états simples. Les modules SCSS sont réservés aux besoins spécifiques, notamment les animations et l'imbrication locale.
@@ -58,7 +66,7 @@ Le domaine pur [`src/domain/quiz`](src/domain/quiz) construit les sessions sans 
 - la normalisation Unicode, des espaces, de la ponctuation, de la casse et des accents latins sans correction floue ;
 - les progressions indépendantes de compréhension et de production, ainsi que la maîtrise globale dérivée.
 
-Les fonctions acceptent une source aléatoire injectable afin que la sélection et le mélange restent entièrement testables. La future feature React orchestrera ces contrats sans dupliquer leurs règles.
+Les fonctions acceptent une source aléatoire injectable afin que la sélection et le mélange restent entièrement testables. La feature React orchestre désormais ces contrats sans dupliquer leurs règles ; la persistance de progression sera connectée lors de l'intégration Supabase.
 
 ## Leçons
 

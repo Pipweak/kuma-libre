@@ -2,6 +2,11 @@
   "accessibility": {
     "skipToContent": "Aller au contenu principal"
   },
+  "app": {
+    "goToLessons": "Accéder aux leçons",
+    "loading": "Chargement de Kuma Libre",
+    "localPreview": "Aperçu local"
+  },
   "foundation": {
     "description": "Le socle React, le design system et les premiers composants partagés sont maintenant opérationnels.",
     "title": "Fondation technique en place"
@@ -9,6 +14,7 @@
   "landing": {
     "description": "Une expérience mobile-first pour réviser le vocabulaire japonais dans les deux sens.",
     "eyebrow": "Révision du japonais",
+    "previewAction": "Tester le parcours de révision",
     "title": "Kuma Libre"
   },
   "languageSelector": {

@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactElement } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type ReactElement } from 'react';
 
 import type { ButtonVariant } from '@/shared/ui/Button/Button';
 
@@ -24,14 +24,10 @@ const SIZE_STYLES: Record<IconButtonSize, string> = {
 };
 
 /** Icon-only button that requires an accessible label at compile time. */
-export function IconButton({
-  children,
-  className,
-  size = 'md',
-  type = 'button',
-  variant = 'ghost',
-  ...buttonProps
-}: IconButtonProps): ReactElement {
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
+  { children, className, size = 'md', type = 'button', variant = 'ghost', ...buttonProps },
+  ref,
+): ReactElement {
   return (
     <button
       {...buttonProps}
@@ -43,9 +39,10 @@ export function IconButton({
       ]
         .filter(Boolean)
         .join(' ')}
+      ref={ref}
       type={type}
     >
       {children}
     </button>
   );
-}
+});

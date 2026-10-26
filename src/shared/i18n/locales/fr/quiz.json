@@ -1,0 +1,79 @@
+{
+  "answer": {
+    "correct": "Bonne réponse",
+    "incorrect": "À retravailler",
+    "label": "Ta réponse",
+    "placeholderComprehension": "Français, anglais ou espagnol",
+    "placeholderProduction": "Rōmaji, kana ou kanji",
+    "skip": "Je ne sais pas",
+    "validate": "Valider"
+  },
+  "configuration": {
+    "back": "Retour à la leçon",
+    "description": "Choisis le périmètre de cette passe avant de commencer.",
+    "direction": "Sens du quiz",
+    "empty": "Aucun mot ne correspond à cette sélection.",
+    "emptyHint": "Ajoute les mots non maîtrisés ou choisis une autre leçon.",
+    "lessons": "Leçons",
+    "mastery": "Mots à inclure",
+    "order": "Ordre des questions",
+    "questionCount_one": "{{count}} question",
+    "questionCount_other": "{{count}} questions",
+    "start": "Commencer",
+    "title": "Configurer le quiz"
+  },
+  "correction": {
+    "expectedAnswer": "Réponse attendue",
+    "forms": "Formes japonaises",
+    "meanings": "Significations",
+    "next": "Question suivante",
+    "scoreGreen": "Ce mot est maintenant maîtrisé.",
+    "scoreRed": "Ce mot reste non maîtrisé.",
+    "scoreYellow": "Ce mot passe à « À revoir ».",
+    "yourAnswer": "Réponse donnée"
+  },
+  "direction": {
+    "comprehension": "Comprendre",
+    "comprehensionAccessible": "Comprendre : japonais vers {{language}}",
+    "production": "Produire",
+    "productionAccessible": "Produire : {{language}} vers japonais"
+  },
+  "exit": {
+    "cancel": "Continuer le quiz",
+    "confirm": "Quitter la passe",
+    "description": "La position de cette passe ne sera pas conservée.",
+    "open": "Quitter le quiz",
+    "title": "Quitter cette passe ?"
+  },
+  "languages": {
+    "en": "anglais",
+    "es": "espagnol",
+    "fr": "français",
+    "ja": "japonais"
+  },
+  "mastery": {
+    "green": "Maîtrisés",
+    "red": "Non maîtrisés",
+    "yellow": "À revoir"
+  },
+  "order": {
+    "corpus": "Dans l’ordre",
+    "random": "Aléatoire"
+  },
+  "question": {
+    "comprehensionHint": "Donne une signification",
+    "lesson": "Leçon {{number}}",
+    "productionHint": "Trouve le mot japonais",
+    "progress": "Question {{current}} sur {{total}}"
+  },
+  "result": {
+    "backToLessons": "Retour aux leçons",
+    "correct": "Correctes",
+    "description": "Les erreurs reviendront dans une prochaine passe.",
+    "incorrect": "À revoir",
+    "newSession": "Nouvelle passe",
+    "title": "Passe terminée",
+    "total": "Mots vus"
+  },
+  "sessionMissing": "Cette passe n’est plus disponible. Configure une nouvelle révision."
+}

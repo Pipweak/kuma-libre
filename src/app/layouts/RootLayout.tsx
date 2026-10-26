@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router';
+import { Outlet, ScrollRestoration } from 'react-router';
 
 export function RootLayout(): ReactElement {
   const { t } = useTranslation('common');
@@ -16,6 +16,7 @@ export function RootLayout(): ReactElement {
       <main id="main-content">
         <Outlet />
       </main>
+      <ScrollRestoration />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 5 — 18 octobre 2026.
+> **Version :** 6 — 25 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -62,6 +62,8 @@ Un serveur personnalisé deviendrait pertinent uniquement en cas de traitement a
 `/auth/callback` est une route technique. Le chargement, les corrections, les erreurs vocales, le menu et les confirmations de sortie sont des états ou des composants, pas des pages.
 
 Toutes les routes `/app/*` utilisent un layout protégé. Après authentification, l'utilisateur est renvoyé vers la destination initialement demandée.
+
+Pendant la tranche verticale précédant Supabase Auth, `AppLayout` joue le rôle de garde transitoire : les routes `/app/*` sont disponibles avec le serveur Vite de développement et dans le build E2E explicitement marqué, mais redirigent vers `/` dans un build de production ordinaire. Le drapeau `VITE_ENABLE_APP_PREVIEW` est réservé à la CI Playwright et ne constitue pas un mécanisme d'authentification. Il sera supprimé lorsque le vrai layout protégé sera connecté à Supabase.
 
 ## 4. Structure cible
 
@@ -322,22 +324,26 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 
 ### État du socle
 
-Les quatre premières étapes sont initialisées avec :
+Les cinq premières étapes sont initialisées avec :
 
 - React, TypeScript strict et Vite ;
 - React Router en Data Mode ;
 - i18next et les premiers catalogues FR, EN et ES ;
 - Tailwind CSS via son plugin Vite, les tokens visuels canoniques et le pont vers les modules SCSS ;
 - les assets PNG transparents de la marque et le composant `BrandLogo` sans recadrage ;
-- les premières primitives partagées `Button`, `IconButton`, `Card` et `Spinner`, avec leurs états accessibles et leurs tests ;
+- les premières primitives partagées `Button`, `IconButton`, `Card`, `FlagIcon`, `ProgressBar` et `Spinner`, avec leurs états accessibles et leurs tests ;
 - Vitest, React Testing Library, couverture V8, Playwright et axe ;
 - ESLint, Prettier, audit npm et une CI GitHub composée des checks `quality` et `e2e`.
 - l'importeur pur des formats Markdown historiques, les identifiants stables, les catégories et l'artefact `src/generated/corpus.json` ;
 - les validations structurelles exécutées au build et le contrôle séparé `corpus:validate-ready` pour suivre la migration des traductions espagnoles et des lectures manquantes.
 - le domaine pur `src/domain/quiz`, qui construit les sessions configurées et rapides, crée les questions dans les deux directions, normalise et valide les réponses, puis applique les transitions de maîtrise indépendantes ;
 - une source aléatoire injectable pour tester de manière déterministe la sélection prioritaire et le mélange des questions.
+- le premier parcours React vertical : liste continue des leçons réelles, détail du vocabulaire par catégorie, configuration du quiz, question, correction, confirmation de sortie et bilan ;
+- le chargement différé des pages applicatives afin que le corpus ne gonfle pas le JavaScript initial de l'accueil public ;
+- un fallback de chargement accessible et traduit pendant la résolution du premier chunk de route ;
+- des tests de composants sur les interactions critiques et un parcours Playwright desktop/mobile fondé sur une entrée réelle du corpus.
 
-Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Le premier parcours React vertical et Supabase restent hors de cette tranche.
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Dans l'aperçu local, la progression injectée est vide et reste volontairement non persistée : tous les mots apparaissent donc rouges. Supabase Auth, les profils, la progression distante et `record_review` constituent la prochaine tranche.
 
 ## 13. Qualité et synchronisation documentaire
 

@@ -62,6 +62,8 @@ jobs:
 
       - name: Build application
         run: npm run build
+        env:
+          VITE_ENABLE_APP_PREVIEW: 'true'
 
       - name: Run end-to-end and accessibility tests
         run: npm run test:e2e

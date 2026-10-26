@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { IconButton } from '@/shared/ui/IconButton/IconButton';
@@ -20,5 +21,17 @@ describe('IconButton', () => {
 
     expect(button.getAttribute('type')).toBe('button');
     expect(handleClick).toHaveBeenCalledOnce();
+  });
+
+  it('forwards its DOM reference', () => {
+    const reference = createRef<HTMLButtonElement>();
+
+    render(
+      <IconButton aria-label="Fermer" ref={reference}>
+        ×
+      </IconButton>,
+    );
+
+    expect(reference.current).toBe(screen.getByRole('button', { name: 'Fermer' }));
   });
 });
