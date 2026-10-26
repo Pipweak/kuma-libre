@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 6 — 25 octobre 2026.
+> **Version :** 7 — 26 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -61,9 +61,9 @@ Un serveur personnalisé deviendrait pertinent uniquement en cas de traitement a
 
 `/auth/callback` est une route technique. Le chargement, les corrections, les erreurs vocales, le menu et les confirmations de sortie sont des états ou des composants, pas des pages.
 
-Toutes les routes `/app/*` utilisent un layout protégé. Après authentification, l'utilisateur est renvoyé vers la destination initialement demandée.
+Toutes les routes `/app/*` utilisent `AppLayout` comme garde protégé. Sans session, il redirige vers `/auth` avec un paramètre `returnTo` limité aux chemins internes commençant par `/app`. Le callback valide à nouveau cette destination avant de la restaurer afin d'empêcher les redirections ouvertes.
 
-Pendant la tranche verticale précédant Supabase Auth, `AppLayout` joue le rôle de garde transitoire : les routes `/app/*` sont disponibles avec le serveur Vite de développement et dans le build E2E explicitement marqué, mais redirigent vers `/` dans un build de production ordinaire. Le drapeau `VITE_ENABLE_APP_PREVIEW` est réservé à la CI Playwright et ne constitue pas un mécanisme d'authentification. Il sera supprimé lorsque le vrai layout protégé sera connecté à Supabase.
+`AuthProvider` possède l'unique état de session React et dépend du contrat `AuthRepository`. `SupabaseAuthRepository` implémente Google, magic link, callback PKCE ou `token_hash`, renouvellement de session et déconnexion. `PreviewAuthRepository` fournit une session fictive uniquement au serveur Vite local sans configuration et au build E2E explicitement marqué. `UnavailableAuthRepository` maintient un build de production non configuré anonyme, avec une erreur utilisateur contrôlée. Le drapeau `VITE_ENABLE_APP_PREVIEW` reste strictement réservé à la CI Playwright et ne doit jamais être configuré dans un déploiement public.
 
 ## 4. Structure cible
 
@@ -222,8 +222,11 @@ Les dépendances externes sont représentées par des contrats plutôt que par d
 
 ```ts
 interface AuthRepository {
+  getSession(): Promise<AuthSession | null>;
+  onAuthStateChange(listener: AuthStateListener): () => void;
   signInWithGoogle(): Promise<void>;
   signInWithMagicLink(email: string): Promise<void>;
+  completeSignIn(callbackUrl: string): Promise<AuthSession>;
   signOut(): Promise<void>;
 }
 
@@ -239,6 +242,10 @@ interface SpeechRecognizer {
 ```
 
 Les implémentations initiales sont `SupabaseAuthRepository`, `SupabaseProgressRepository`, `WebSpeechRecognizer` et `WebSpeechSynthesizer`. Les tests peuvent les remplacer par des versions en mémoire.
+
+Le frontend configure Supabase exclusivement avec `VITE_SUPABASE_URL` et `VITE_SUPABASE_PUBLISHABLE_KEY`. Le client utilise PKCE, désactive l'échange automatique de l'URL afin que `/auth/callback` porte explicitement l'état d'interface, puis laisse le SDK persister et renouveler sa session technique. Aucune clé administrative et aucune donnée de progression ne passent par ce stockage.
+
+Le SDK `@supabase/supabase-js@2.118.0` possède actuellement une déclaration WebAuthn incompatible avec TypeScript 6 lorsque `skipLibCheck` reste désactivé. Le dépôt applique par `patch-package` le correctif de déclaration proposé dans la PR amont Supabase `#2629`. Le patch est supprimé dès sa publication dans une version stable ; il ne modifie pas le runtime.
 
 ## 8. Gestion de l'état
 
@@ -343,7 +350,7 @@ Les cinq premières étapes sont initialisées avec :
 - un fallback de chargement accessible et traduit pendant la résolution du premier chunk de route ;
 - des tests de composants sur les interactions critiques et un parcours Playwright desktop/mobile fondé sur une entrée réelle du corpus.
 
-Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Dans l'aperçu local, la progression injectée est vide et reste volontairement non persistée : tous les mots apparaissent donc rouges. Supabase Auth, les profils, la progression distante et `record_review` constituent la prochaine tranche.
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Supabase Auth est maintenant connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Dans l'aperçu local, la progression injectée reste vide et volontairement non persistée : tous les mots apparaissent donc rouges. Les migrations `profiles`, `user_preferences`, `review_events`, `word_progress`, leurs politiques RLS et la fonction `record_review` constituent la prochaine tranche.
 
 ## 13. Qualité et synchronisation documentaire
 

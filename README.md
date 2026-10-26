@@ -4,7 +4,7 @@ Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Mi
 
 ## Développement de l'application
 
-Le socle applicatif utilise Node.js 22.13, npm, React, TypeScript, Vite, React Router en Data Mode, i18next, Tailwind CSS et Sass.
+Le socle applicatif utilise Node.js 22.13, npm, React, TypeScript, Vite, React Router en Data Mode, Supabase Auth, i18next, Tailwind CSS et Sass.
 
 ```bash
 nvm use
@@ -27,13 +27,24 @@ npm run security:audit
 
 `npm run quality` exécute les contrôles locaux obligatoires hors Playwright et audit réseau. La CI GitHub ajoute l'audit des dépendances et les parcours Playwright sur Chromium.
 
-### Aperçu local du parcours de révision
+### Authentification et aperçu local
 
-`npm run dev` affiche sur l'accueil le CTA **Tester le parcours de révision**. Cet aperçu permet de parcourir les 18 leçons réelles, consulter leur vocabulaire, configurer une passe, répondre, voir la correction et atteindre le bilan d'une session.
+L'application propose Google et un magic link envoyé par email. Toutes les routes `/app/*` exigent une session ; lorsqu'une destination protégée est demandée, elle est restaurée après le callback d'authentification. Le SDK Supabase conserve uniquement les éléments techniques de session nécessaires à Auth.
 
-Cette tranche verticale utilise le corpus généré, mais pas encore Supabase : tous les mots sont donc considérés non maîtrisés et aucune progression n'est persistée. Recharger une question renvoie vers la configuration, conformément à la règle V1 sur les passes interrompues.
+Copier [`.env.example`](.env.example) vers `.env.local`, puis renseigner les valeurs publiques affichées par le panneau **Connect** du projet Supabase :
 
-Les routes `/app/*` restent fermées dans un build de production ordinaire tant que l'authentification n'est pas branchée. `VITE_ENABLE_APP_PREVIEW=true` est réservé au build Playwright de la CI ; il ne doit pas être configuré sur le déploiement public.
+```dotenv
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_your_public_key
+```
+
+La clé est publique et fonctionne avec la Row Level Security ; aucune clé `service_role` ne doit être placée dans un fichier frontend. Dans Supabase Auth, activer Google et email, puis autoriser au minimum les URLs de callback locale et déployée, par exemple `http://127.0.0.1:4173/auth/callback**`.
+
+Sans variables Supabase, `npm run dev` utilise le compte fictif `Vincent` afin de conserver un parcours local testable. Dès que les deux variables sont présentes, le serveur local utilise Supabase réellement. Un build de production non configuré reste anonyme et ne donne jamais accès aux routes protégées. `VITE_ENABLE_APP_PREVIEW=true` est réservé au build Playwright de la CI et ne doit jamais être défini sur Cloudflare Pages.
+
+La progression Supabase n'est pas encore connectée : tous les mots sont encore considérés non maîtrisés et aucune réponse n'est persistée. Recharger une question renvoie vers la configuration, conformément à la règle V1 sur les passes interrompues.
+
+`@supabase/supabase-js` est verrouillé sur `2.118.0`. Le `postinstall` applique temporairement le correctif de déclaration de la [PR Supabase #2629](https://github.com/supabase/supabase-js/pull/2629), nécessaire à TypeScript 6 avec `skipLibCheck: false`. Ce patch n'affecte aucun comportement d'exécution et devra être supprimé dès qu'une version stable du SDK intègre le correctif.
 
 ### Génération du corpus
 

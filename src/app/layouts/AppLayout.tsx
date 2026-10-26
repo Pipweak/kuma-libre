@@ -2,20 +2,27 @@ import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Navigate, Outlet, useLocation } from 'react-router';
 
-import { isAppPreviewEnabled } from '@/app/config/appPreview';
-import { BrandLogo } from '@/shared/ui';
+import { createLoginPath } from '@/features/auth/authNavigation';
+import { getUserInitial } from '@/features/auth/authPresentation';
+import { useAuth } from '@/features/auth/useAuth';
+import { BrandLogo, Spinner } from '@/shared/ui';
 
 export function AppLayout(): ReactElement {
   const { t } = useTranslation('common');
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
+  const { session, status } = useAuth();
   const isQuizSession = pathname === '/app/quiz';
-  const isLocalPreviewEnabled = isAppPreviewEnabled(
-    import.meta.env.DEV,
-    import.meta.env.VITE_ENABLE_APP_PREVIEW,
-  );
 
-  if (!isLocalPreviewEnabled) {
-    return <Navigate replace to="/" />;
+  if (status === 'initializing') {
+    return (
+      <div className="bg-canvas flex min-h-dvh items-center justify-center p-6">
+        <Spinner label={t('app.loadingSession')} size="lg" />
+      </div>
+    );
+  }
+
+  if (status === 'anonymous' || !session) {
+    return <Navigate replace to={createLoginPath(`${pathname}${search}`)} />;
   }
 
   return (
@@ -30,9 +37,13 @@ export function AppLayout(): ReactElement {
             >
               <BrandLogo className="w-32 sm:w-40" priority />
             </Link>
-            <span className="border-warning bg-warning-soft text-ink rounded-pill border px-3 py-1 text-xs font-bold">
-              {t('app.localPreview')}
-            </span>
+            <Link
+              aria-label={t('app.openAccount')}
+              className="bg-success focus-visible:ring-action flex size-11 items-center justify-center rounded-full font-black text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+              to="/app/account"
+            >
+              {getUserInitial(session.user.displayName, session.user.email)}
+            </Link>
           </div>
         </header>
       )}

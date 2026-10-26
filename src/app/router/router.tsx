@@ -17,6 +17,20 @@ export const router = createBrowserRouter([
         Component: LandingPage,
       },
       {
+        path: 'auth',
+        lazy: async () => {
+          const { LoginPage } = await import('@/pages/LoginPage');
+          return { Component: LoginPage };
+        },
+      },
+      {
+        path: 'auth/callback',
+        lazy: async () => {
+          const { AuthCallbackPage } = await import('@/pages/AuthCallbackPage');
+          return { Component: AuthCallbackPage };
+        },
+      },
+      {
         path: 'app',
         Component: AppLayout,
         children: [
@@ -57,6 +71,13 @@ export const router = createBrowserRouter([
             lazy: async () => {
               const { QuizResultPage } = await import('@/pages/QuizResultPage');
               return { Component: QuizResultPage };
+            },
+          },
+          {
+            path: 'account',
+            lazy: async () => {
+              const { AccountPage } = await import('@/pages/AccountPage');
+              return { Component: AccountPage };
             },
           },
         ],

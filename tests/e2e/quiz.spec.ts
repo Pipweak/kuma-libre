@@ -8,7 +8,7 @@ const FIRST_ENTRY = corpus.entries.find((entry) => entry.lessonId === FIRST_LESS
 test('reviews a real lesson vocabulary entry through the first correction', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Français' }).click();
-  await page.getByRole('link', { name: 'Tester le parcours de révision' }).click();
+  await page.getByRole('link', { name: 'Continuer à réviser' }).click();
 
   await expect(page.getByRole('heading', { level: 1, name: 'Ton parcours' })).toBeVisible();
   await page.getByRole('link', { name: /Leçon 01/ }).click();

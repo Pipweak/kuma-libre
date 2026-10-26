@@ -19,3 +19,12 @@ test('has no automatically detectable quiz-configuration violations', async ({ p
 
   expect(accessibilityScanResults.violations).toEqual([]);
 });
+
+test('has no automatically detectable account violations', async ({ page }) => {
+  await page.goto('/app/account');
+
+  await expect(page.getByRole('heading', { name: /Compte|Account|Cuenta/ })).toBeVisible();
+  const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+
+  expect(accessibilityScanResults.violations).toEqual([]);
+});
