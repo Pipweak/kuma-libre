@@ -25,7 +25,7 @@ npm run test:a11y
 npm run security:audit
 ```
 
-`npm run quality` exécute les contrôles locaux obligatoires hors Playwright et audit réseau. La CI GitHub ajoute l'audit des dépendances et les parcours Playwright sur Chromium.
+`npm run quality` exécute les contrôles locaux obligatoires hors Playwright, tests PostgreSQL et audit réseau. La CI GitHub ajoute l'audit des dépendances, les tests Supabase locaux et les parcours Playwright sur Chromium.
 
 ### Authentification et aperçu local
 
@@ -38,11 +38,26 @@ VITE_SUPABASE_URL=https://your-project-id.supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_your_public_key
 ```
 
-La clé est publique et fonctionne avec la Row Level Security ; aucune clé `service_role` ne doit être placée dans un fichier frontend. Dans Supabase Auth, activer Google et email, puis autoriser au minimum les URLs de callback locale et déployée, par exemple `http://127.0.0.1:4173/auth/callback**`.
+La clé est publique et fonctionne avec la Row Level Security ; aucune clé `service_role` ne doit être placée dans un fichier frontend. Dans Supabase Auth, activer Google et email, puis autoriser au minimum les URLs de callback locale et déployée, par exemple `http://127.0.0.1:4173/auth/callback`.
 
 Sans variables Supabase, `npm run dev` utilise le compte fictif `Vincent` afin de conserver un parcours local testable. Dès que les deux variables sont présentes, le serveur local utilise Supabase réellement. Un build de production non configuré reste anonyme et ne donne jamais accès aux routes protégées. `VITE_ENABLE_APP_PREVIEW=true` est réservé au build Playwright de la CI et ne doit jamais être défini sur Cloudflare Pages.
 
-La progression Supabase n'est pas encore connectée : tous les mots sont encore considérés non maîtrisés et aucune réponse n'est persistée. Recharger une question renvoie vers la configuration, conformément à la règle V1 sur les passes interrompues.
+Une session Supabase charge sa progression avant d’ouvrir l’espace protégé. Chaque réponse validée crée ensuite un événement immuable et met à jour atomiquement le score du sens travaillé. Une panne conserve la tentative courante en mémoire et permet de la renvoyer avec le même identifiant, sans double comptage. Recharger une question renvoie toujours vers la configuration, conformément à la règle V1 sur les passes interrompues ; les réponses déjà sauvegardées restent acquises.
+
+Sans variables Supabase, le repository d’aperçu conserve les scores uniquement en mémoire pour la durée de l’onglet. Il ne crée aucun fallback métier dans `localStorage`.
+
+### Base Supabase locale
+
+Les migrations, politiques RLS et tests SQL se trouvent dans [`supabase`](supabase). Leur exécution locale nécessite Docker Desktop :
+
+```bash
+npm run supabase:start
+npm run supabase:reset
+npm run test:database
+npm run supabase:stop -- --no-backup
+```
+
+La procédure de liaison et de déploiement vers un projet distant est documentée dans [`supabase/README.md`](supabase/README.md). Les migrations sont toujours appliquées avant de tester l’application avec de vraies variables Supabase.
 
 `@supabase/supabase-js` est verrouillé sur `2.118.0`. Le `postinstall` applique temporairement le correctif de déclaration de la [PR Supabase #2629](https://github.com/supabase/supabase-js/pull/2629), nécessaire à TypeScript 6 avec `skipLibCheck: false`. Ce patch n'affecte aucun comportement d'exécution et devra être supprimé dès qu'une version stable du SDK intègre le correctif.
 
@@ -77,7 +92,7 @@ Le domaine pur [`src/domain/quiz`](src/domain/quiz) construit les sessions sans 
 - la normalisation Unicode, des espaces, de la ponctuation, de la casse et des accents latins sans correction floue ;
 - les progressions indépendantes de compréhension et de production, ainsi que la maîtrise globale dérivée.
 
-Les fonctions acceptent une source aléatoire injectable afin que la sélection et le mélange restent entièrement testables. La feature React orchestre désormais ces contrats sans dupliquer leurs règles ; la persistance de progression sera connectée lors de l'intégration Supabase.
+Les fonctions acceptent une source aléatoire injectable afin que la sélection et le mélange restent entièrement testables. La feature React orchestre ces contrats sans dupliquer leurs règles. `ProgressProvider` charge les scores privés et `SupabaseProgressRepository` délègue l’écriture atomique à la RPC `record_review`.
 
 ## Leçons
 

@@ -5,8 +5,12 @@
   "app": {
     "goToLessons": "Go to lessons",
     "loading": "Loading Kuma Libre",
+    "loadingProgress": "Loading your progress",
     "loadingSession": "Checking the session",
-    "openAccount": "Open account"
+    "openAccount": "Open account",
+    "progressErrorDescription": "Your progress could not be loaded. Check your connection and try again.",
+    "progressErrorTitle": "Progress unavailable",
+    "retryProgress": "Try again"
   },
   "foundation": {
     "description": "The React foundation, design system, and first shared components are now operational.",

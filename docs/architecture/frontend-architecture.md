@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 7 — 26 octobre 2026.
+> **Version :** 8 — 26 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -64,6 +64,8 @@ Un serveur personnalisé deviendrait pertinent uniquement en cas de traitement a
 Toutes les routes `/app/*` utilisent `AppLayout` comme garde protégé. Sans session, il redirige vers `/auth` avec un paramètre `returnTo` limité aux chemins internes commençant par `/app`. Le callback valide à nouveau cette destination avant de la restaurer afin d'empêcher les redirections ouvertes.
 
 `AuthProvider` possède l'unique état de session React et dépend du contrat `AuthRepository`. `SupabaseAuthRepository` implémente Google, magic link, callback PKCE ou `token_hash`, renouvellement de session et déconnexion. `PreviewAuthRepository` fournit une session fictive uniquement au serveur Vite local sans configuration et au build E2E explicitement marqué. `UnavailableAuthRepository` maintient un build de production non configuré anonyme, avec une erreur utilisateur contrôlée. Le drapeau `VITE_ENABLE_APP_PREVIEW` reste strictement réservé à la CI Playwright et ne doit jamais être configuré dans un déploiement public.
+
+`ProgressProvider` attend ensuite une session authentifiée avant de charger `word_progress`. Il expose un snapshot en lecture seule aux pages, met ce snapshot à jour après chaque RPC réussie et bloque l’espace applicatif sur un état de chargement ou d’erreur explicite. L’aperçu local utilise `InMemoryProgressRepository` pour la durée de l’onglet uniquement ; un build public configuré utilise `SupabaseProgressRepository` et ne bascule jamais silencieusement vers une progression locale.
 
 ## 4. Structure cible
 
@@ -231,8 +233,9 @@ interface AuthRepository {
 }
 
 interface ProgressRepository {
-  getProgress(userId: string): Promise<WordProgress[]>;
-  recordReview(input: ReviewInput): Promise<WordProgress>;
+  getProgress(): Promise<ProgressByEntry>;
+  getHistory(options?: HistoryQuery): Promise<readonly ReviewEvent[]>;
+  recordReview(input: ReviewSubmission): Promise<DirectionProgress>;
 }
 
 interface SpeechRecognizer {
@@ -242,6 +245,8 @@ interface SpeechRecognizer {
 ```
 
 Les implémentations initiales sont `SupabaseAuthRepository`, `SupabaseProgressRepository`, `WebSpeechRecognizer` et `WebSpeechSynthesizer`. Les tests peuvent les remplacer par des versions en mémoire.
+
+Le client génère l’identifiant UUID d’une tentative avant l’appel. `record_review` déduit l’utilisateur avec `auth.uid()`, insère `review_events` et met à jour `word_progress` dans la même transaction. Une répétition strictement identique du même UUID retourne le score existant ; un contenu différent utilisant cet UUID est rejeté. La correction n’est révélée qu’après confirmation de la RPC. En cas d’échec, l’UI conserve l’objet `ReviewSubmission` et renvoie exactement le même identifiant.
 
 Le frontend configure Supabase exclusivement avec `VITE_SUPABASE_URL` et `VITE_SUPABASE_PUBLISHABLE_KEY`. Le client utilise PKCE, désactive l'échange automatique de l'URL afin que `/auth/callback` porte explicitement l'état d'interface, puis laisse le SDK persister et renouveler sa session technique. Aucune clé administrative et aucune donnée de progression ne passent par ce stockage.
 
@@ -266,6 +271,8 @@ idle -> answering -> validating -> correct/incorrect -> next-question -> complet
 ```
 
 Le store du quiz n'est pas global : il appartient au layout de la session. Un rechargement détruit cette session, conformément à la décision de ne pas reprendre une passe interrompue.
+
+Le snapshot de progression est global uniquement à l’espace authentifié. Il ne duplique pas la source de vérité : Supabase reste autoritaire et le Context React sert de vue courante pour filtrer les questions sans requête par composant.
 
 ## 9. Internationalisation
 
@@ -340,7 +347,7 @@ Les cinq premières étapes sont initialisées avec :
 - les assets PNG transparents de la marque et le composant `BrandLogo` sans recadrage ;
 - les premières primitives partagées `Button`, `IconButton`, `Card`, `FlagIcon`, `ProgressBar` et `Spinner`, avec leurs états accessibles et leurs tests ;
 - Vitest, React Testing Library, couverture V8, Playwright et axe ;
-- ESLint, Prettier, audit npm et une CI GitHub composée des checks `quality` et `e2e`.
+- ESLint, Prettier, audit npm et une CI GitHub composée des checks `database`, `quality` et `e2e`.
 - l'importeur pur des formats Markdown historiques, les identifiants stables, les catégories et l'artefact `src/generated/corpus.json` ;
 - les validations structurelles exécutées au build et le contrôle séparé `corpus:validate-ready` pour suivre la migration des traductions espagnoles et des lectures manquantes.
 - le domaine pur `src/domain/quiz`, qui construit les sessions configurées et rapides, crée les questions dans les deux directions, normalise et valide les réponses, puis applique les transitions de maîtrise indépendantes ;
@@ -350,7 +357,7 @@ Les cinq premières étapes sont initialisées avec :
 - un fallback de chargement accessible et traduit pendant la résolution du premier chunk de route ;
 - des tests de composants sur les interactions critiques et un parcours Playwright desktop/mobile fondé sur une entrée réelle du corpus.
 
-Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Supabase Auth est maintenant connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Dans l'aperçu local, la progression injectée reste vide et volontairement non persistée : tous les mots apparaissent donc rouges. Les migrations `profiles`, `user_preferences`, `review_events`, `word_progress`, leurs politiques RLS et la fonction `record_review` constituent la prochaine tranche.
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Supabase Auth est connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Les migrations `profiles`, `user_preferences`, `review_events` et `word_progress`, leurs politiques RLS et la RPC idempotente `record_review` sont versionnées et testées par la CI. Le frontend charge les scores, filtre la configuration avec le sens sélectionné et persiste chaque réponse avant d’afficher la correction. L’aperçu sans configuration Supabase conserve ce comportement avec un repository en mémoire réinitialisé au rechargement. Les vues de synthèse globale et par leçon restent la prochaine tranche de l’étape 7.
 
 ## 13. Qualité et synchronisation documentaire
 
@@ -364,7 +371,7 @@ Les conventions exécutables et critères de fin sont définis dans [`../quality
 
 Toute évolution fonctionnelle doit synchroniser dans le même changement les implémentations, tests, clés i18n, documents vivants et maquettes réellement affectés. Le workflow détaillé se trouve dans le skill local [`kuma-libre-feature-sync`](../../.agents/skills/kuma-libre-feature-sync/SKILL.md), et le contrôle final dans [`kuma-libre-quality-gate`](../../.agents/skills/kuma-libre-quality-gate/SKILL.md).
 
-La future intégration continue devra au minimum exécuter les contrôles disponibles de formatage, lint, typecheck, couverture, build, parcours critiques et accessibilité. Les migrations et politiques RLS devront posséder leurs propres tests. Un contrôle absent est signalé comme non disponible jusqu'à son introduction ; il n'est pas simulé.
+L’intégration continue exécute le formatage, le lint, le typecheck, la couverture, le build, l’audit, les parcours critiques, l’accessibilité et les tests PostgreSQL. Le job `database` démarre la stack Supabase, réapplique les migrations puis vérifie le schéma, les privilèges, la RLS, les transitions de maîtrise et l’idempotence. Localement, ce job nécessite Docker Desktop ; son absence doit être signalée et ne doit jamais être maquillée par un faux succès.
 
 ## 14. Références techniques
 

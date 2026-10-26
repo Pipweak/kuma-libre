@@ -18,6 +18,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  database:
+    name: database
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Start local Supabase
+        run: npm run supabase:start
+
+      - name: Reset database from migrations
+        run: npm run supabase:reset
+
+      - name: Test schema, RLS, and record_review
+        run: npm run test:database
+
+      - name: Stop local Supabase
+        if: always()
+        run: npm run supabase:stop -- --no-backup
+
   quality:
     name: quality
     runs-on: ubuntu-latest
@@ -42,7 +71,9 @@ jobs:
 
   e2e:
     name: e2e
-    needs: quality
+    needs:
+      - database
+      - quality
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

@@ -60,6 +60,12 @@
     "corpus": "En orden",
     "random": "Aleatorio"
   },
+  "persistence": {
+    "errorDescription": "Tu respuesta no se guardó. Sigue visible y no se contará dos veces.",
+    "errorTitle": "No se puede guardar",
+    "retry": "Intentar guardar de nuevo",
+    "saving": "Guardando…"
+  },
   "question": {
     "comprehensionHint": "Da un significado",
     "lesson": "Lección {{number}}",

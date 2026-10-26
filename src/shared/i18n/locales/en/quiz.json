@@ -60,6 +60,12 @@
     "corpus": "In order",
     "random": "Random"
   },
+  "persistence": {
+    "errorDescription": "Your answer was not saved. It remains displayed and will not be counted twice.",
+    "errorTitle": "Unable to save",
+    "retry": "Try saving again",
+    "saving": "Saving…"
+  },
   "question": {
     "comprehensionHint": "Give a meaning",
     "lesson": "Lesson {{number}}",
