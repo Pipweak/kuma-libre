@@ -303,7 +303,7 @@ begin
     v_reviewed_at,
     p_result
   )
-  on conflict (user_id, word_id, direction) do update
+  on conflict on constraint word_progress_pkey do update
   set
     mastery_score = case
       when p_result = 'correct' then least(public.word_progress.mastery_score + 1, 3)
