@@ -1,0 +1,79 @@
+{
+  "answer": {
+    "correct": "Correct answer",
+    "incorrect": "Needs work",
+    "label": "Your answer",
+    "placeholderComprehension": "French, English, or Spanish",
+    "placeholderProduction": "Rōmaji, kana, or kanji",
+    "skip": "I don’t know",
+    "validate": "Check"
+  },
+  "configuration": {
+    "back": "Back to the lesson",
+    "description": "Choose the scope of this session before starting.",
+    "direction": "Quiz direction",
+    "empty": "No words match this selection.",
+    "emptyHint": "Include unknown words or choose another lesson.",
+    "lessons": "Lessons",
+    "mastery": "Words to include",
+    "order": "Question order",
+    "questionCount_one": "{{count}} question",
+    "questionCount_other": "{{count}} questions",
+    "start": "Start",
+    "title": "Configure the quiz"
+  },
+  "correction": {
+    "expectedAnswer": "Expected answer",
+    "forms": "Japanese forms",
+    "meanings": "Meanings",
+    "next": "Next question",
+    "scoreGreen": "This word is now mastered.",
+    "scoreRed": "This word is still not mastered.",
+    "scoreYellow": "This word is now marked “To review”.",
+    "yourAnswer": "Your answer"
+  },
+  "direction": {
+    "comprehension": "Understand",
+    "comprehensionAccessible": "Understand: Japanese to {{language}}",
+    "production": "Produce",
+    "productionAccessible": "Produce: {{language}} to Japanese"
+  },
+  "exit": {
+    "cancel": "Continue the quiz",
+    "confirm": "Leave session",
+    "description": "Your position in this session will not be kept.",
+    "open": "Leave quiz",
+    "title": "Leave this session?"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
+    "ja": "Japanese"
+  },
+  "mastery": {
+    "green": "Mastered",
+    "red": "Not mastered",
+    "yellow": "To review"
+  },
+  "order": {
+    "corpus": "In order",
+    "random": "Random"
+  },
+  "question": {
+    "comprehensionHint": "Give a meaning",
+    "lesson": "Lesson {{number}}",
+    "productionHint": "Find the Japanese word",
+    "progress": "Question {{current}} of {{total}}"
+  },
+  "result": {
+    "backToLessons": "Back to lessons",
+    "correct": "Correct",
+    "description": "Mistakes will return in a future session.",
+    "incorrect": "To review",
+    "newSession": "New session",
+    "title": "Session complete",
+    "total": "Words seen"
+  },
+  "sessionMissing": "This session is no longer available. Configure a new review."
+}

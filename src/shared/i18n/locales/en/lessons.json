@@ -1,0 +1,18 @@
+{
+  "backToLessons": "Back to lessons",
+  "categoryCount_one": "{{count}} category",
+  "categoryCount_other": "{{count}} categories",
+  "corpusLabel": "Current corpus",
+  "description": "Choose a lesson to browse its vocabulary or start a review.",
+  "entryCount_one": "{{count}} entry",
+  "entryCount_other": "{{count}} entries",
+  "lessonLabel": "Lesson {{number}}",
+  "notFound": {
+    "description": "This lesson does not exist in the current corpus.",
+    "title": "Lesson not found"
+  },
+  "reviewLesson": "Review this lesson",
+  "title": "Your path",
+  "translationUnavailable": "Translation in progress",
+  "vocabulary": "Vocabulary"
+}

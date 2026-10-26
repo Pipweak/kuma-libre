@@ -1,0 +1,18 @@
+{
+  "backToLessons": "Volver a las lecciones",
+  "categoryCount_one": "{{count}} categoría",
+  "categoryCount_other": "{{count}} categorías",
+  "corpusLabel": "Corpus actual",
+  "description": "Elige una lección para consultar su vocabulario o empezar un repaso.",
+  "entryCount_one": "{{count}} entrada",
+  "entryCount_other": "{{count}} entradas",
+  "lessonLabel": "Lección {{number}}",
+  "notFound": {
+    "description": "Esta lección no existe en el corpus actual.",
+    "title": "Lección no encontrada"
+  },
+  "reviewLesson": "Repasar esta lección",
+  "title": "Tu recorrido",
+  "translationUnavailable": "Traducción en curso",
+  "vocabulary": "Vocabulario"
+}

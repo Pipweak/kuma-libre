@@ -1,0 +1,79 @@
+{
+  "answer": {
+    "correct": "Respuesta correcta",
+    "incorrect": "Hay que repasarla",
+    "label": "Tu respuesta",
+    "placeholderComprehension": "Francés, inglés o español",
+    "placeholderProduction": "Rōmaji, kana o kanji",
+    "skip": "No lo sé",
+    "validate": "Validar"
+  },
+  "configuration": {
+    "back": "Volver a la lección",
+    "description": "Elige el alcance de esta sesión antes de empezar.",
+    "direction": "Dirección del cuestionario",
+    "empty": "Ninguna palabra coincide con esta selección.",
+    "emptyHint": "Incluye palabras no dominadas o elige otra lección.",
+    "lessons": "Lecciones",
+    "mastery": "Palabras que se incluirán",
+    "order": "Orden de las preguntas",
+    "questionCount_one": "{{count}} pregunta",
+    "questionCount_other": "{{count}} preguntas",
+    "start": "Empezar",
+    "title": "Configurar el cuestionario"
+  },
+  "correction": {
+    "expectedAnswer": "Respuesta esperada",
+    "forms": "Formas japonesas",
+    "meanings": "Significados",
+    "next": "Pregunta siguiente",
+    "scoreGreen": "Esta palabra ahora está dominada.",
+    "scoreRed": "Esta palabra sigue sin dominarse.",
+    "scoreYellow": "Esta palabra pasa a «Para repasar».",
+    "yourAnswer": "Respuesta dada"
+  },
+  "direction": {
+    "comprehension": "Comprender",
+    "comprehensionAccessible": "Comprender: japonés a {{language}}",
+    "production": "Producir",
+    "productionAccessible": "Producir: {{language}} a japonés"
+  },
+  "exit": {
+    "cancel": "Continuar el cuestionario",
+    "confirm": "Salir de la sesión",
+    "description": "No se conservará tu posición en esta sesión.",
+    "open": "Salir del cuestionario",
+    "title": "¿Salir de esta sesión?"
+  },
+  "languages": {
+    "en": "inglés",
+    "es": "español",
+    "fr": "francés",
+    "ja": "japonés"
+  },
+  "mastery": {
+    "green": "Dominadas",
+    "red": "No dominadas",
+    "yellow": "Para repasar"
+  },
+  "order": {
+    "corpus": "En orden",
+    "random": "Aleatorio"
+  },
+  "question": {
+    "comprehensionHint": "Da un significado",
+    "lesson": "Lección {{number}}",
+    "productionHint": "Encuentra la palabra japonesa",
+    "progress": "Pregunta {{current}} de {{total}}"
+  },
+  "result": {
+    "backToLessons": "Volver a las lecciones",
+    "correct": "Correctas",
+    "description": "Los errores volverán en una próxima sesión.",
+    "incorrect": "Para repasar",
+    "newSession": "Nueva sesión",
+    "title": "Sesión terminada",
+    "total": "Palabras vistas"
+  },
+  "sessionMissing": "Esta sesión ya no está disponible. Configura un nuevo repaso."
+}

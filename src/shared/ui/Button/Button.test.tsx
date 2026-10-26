@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { Button } from '@/shared/ui/Button/Button';
@@ -34,5 +35,13 @@ describe('Button', () => {
 
     await user.click(button);
     expect(handleClick).not.toHaveBeenCalled();
+  });
+
+  it('forwards its DOM reference', () => {
+    const reference = createRef<HTMLButtonElement>();
+
+    render(<Button ref={reference}>Continuer</Button>);
+
+    expect(reference.current).toBe(screen.getByRole('button', { name: 'Continuer' }));
   });
 });

@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactElement } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type ReactElement } from 'react';
 
 import { Spinner } from '@/shared/ui/Spinner/Spinner';
 
@@ -27,17 +27,20 @@ const SIZE_STYLES: Record<ButtonSize, string> = {
 };
 
 /** Shared Kuma Libre action button with consistent variants, focus, and loading semantics. */
-export function Button({
-  children,
-  className,
-  disabled = false,
-  isLoading = false,
-  loadingLabel,
-  size = 'md',
-  type = 'button',
-  variant = 'primary',
-  ...buttonProps
-}: ButtonProps): ReactElement {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    children,
+    className,
+    disabled = false,
+    isLoading = false,
+    loadingLabel,
+    size = 'md',
+    type = 'button',
+    variant = 'primary',
+    ...buttonProps
+  },
+  ref,
+): ReactElement {
   const label = isLoading && loadingLabel ? loadingLabel : children;
 
   return (
@@ -53,10 +56,11 @@ export function Button({
         .filter(Boolean)
         .join(' ')}
       disabled={disabled || isLoading}
+      ref={ref}
       type={type}
     >
       {isLoading ? <Spinner size="sm" /> : null}
       {label}
     </button>
   );
-}
+});
