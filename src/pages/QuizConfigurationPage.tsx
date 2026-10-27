@@ -12,6 +12,7 @@ import {
   type QuizOrder,
 } from '@/domain/quiz';
 import { formatLessonNumber } from '@/features/lessons/lessonPresentation';
+import { useProgress } from '@/features/progress/useProgress';
 import type { QuizRouteState } from '@/features/quiz/navigation/quizNavigation';
 import { resolveSupportedLocale } from '@/shared/i18n/i18n';
 import { Button, Card, FlagIcon } from '@/shared/ui';
@@ -28,6 +29,7 @@ export function QuizConfigurationPage(): ReactElement {
   const { i18n, t } = useTranslation('quiz');
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { progress } = useProgress();
   const locale = resolveSupportedLocale(i18n.resolvedLanguage);
   const requestedLessonId = searchParams.get('lesson');
   const isSessionMissing = searchParams.get('session') === 'missing';
@@ -46,18 +48,14 @@ export function QuizConfigurationPage(): ReactElement {
 
   const sessionPreview = useMemo(
     () =>
-      buildQuizSession(
-        vocabularyCorpus.entries,
-        {},
-        {
-          direction,
-          includedMasteryLevels,
-          lessonIds: selectedLessonIds,
-          locale,
-          order: 'corpus',
-        },
-      ),
-    [direction, includedMasteryLevels, locale, selectedLessonIds],
+      buildQuizSession(vocabularyCorpus.entries, progress, {
+        direction,
+        includedMasteryLevels,
+        lessonIds: selectedLessonIds,
+        locale,
+        order: 'corpus',
+      }),
+    [direction, includedMasteryLevels, locale, progress, selectedLessonIds],
   );
 
   const toggleLesson = (lessonId: string): void => {
@@ -77,17 +75,13 @@ export function QuizConfigurationPage(): ReactElement {
   };
 
   const handleStart = (): void => {
-    const session = buildQuizSession(
-      vocabularyCorpus.entries,
-      {},
-      {
-        direction,
-        includedMasteryLevels,
-        lessonIds: selectedLessonIds,
-        locale,
-        order,
-      },
-    );
+    const session = buildQuizSession(vocabularyCorpus.entries, progress, {
+      direction,
+      includedMasteryLevels,
+      lessonIds: selectedLessonIds,
+      locale,
+      order,
+    });
 
     if (session.total === 0) {
       return;

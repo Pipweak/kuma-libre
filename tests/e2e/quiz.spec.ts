@@ -31,4 +31,10 @@ test('reviews a real lesson vocabulary entry through the first correction', asyn
   await page.getByRole('button', { name: 'Quitter la passe' }).click();
 
   await expect(page.getByRole('heading', { level: 1, name: 'Ton parcours' })).toBeVisible();
+  await page.getByRole('link', { name: /Leçon 01/ }).click();
+  await page.getByRole('link', { name: 'Réviser cette leçon' }).click();
+  await page.getByText('Non maîtrisés', { exact: true }).click();
+
+  await expect(page.getByRole('checkbox', { name: /Non maîtrisés/ })).not.toBeChecked();
+  await expect(page.getByText('1 question', { exact: true })).toBeVisible();
 });

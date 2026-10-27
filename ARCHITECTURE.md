@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** architecture cible validée pour guider le démarrage du projet.
-> **Version :** 7 — 17 octobre 2026.
+> **Version :** 8 — 26 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -412,7 +412,7 @@ Le triplet `(user_id, word_id, direction)` est unique. Aucune colonne de progres
 
 ### 9.5 Mise à jour atomique
 
-L'enregistrement de l'événement et la mise à jour de la progression doivent idéalement s'effectuer dans une seule transaction Postgres, exposée par une fonction Supabase RPC. Cela évite qu'un événement soit enregistré sans que la progression soit mise à jour, ou inversement.
+L'enregistrement de l'événement et la mise à jour de la progression s'effectuent dans une seule transaction Postgres, exposée par la fonction Supabase RPC `record_review`. Cela évite qu'un événement soit enregistré sans que la progression soit mise à jour, ou inversement.
 
 L'identifiant d'une tentative est généré avant l'appel et sert de clé d'idempotence. Une nouvelle tentative avec le même identifiant ne doit pas modifier deux fois la progression. En cas d'échec réseau, l'interface conserve la tentative en mémoire et permet de réessayer sans avancer silencieusement.
 

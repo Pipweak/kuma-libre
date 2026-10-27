@@ -1,11 +1,12 @@
 import type { ReactElement } from 'react';
 import { RouterProvider } from 'react-router/dom';
 
-import { createAuthRepository } from '@/app/config/createAuthRepository';
+import { createApplicationRepositories } from '@/app/config/createApplicationRepositories';
 import { router } from '@/app/router/router';
 import { AuthProvider } from '@/features/auth/AuthProvider';
+import { ProgressProvider } from '@/features/progress/ProgressProvider';
 
-const authRepository = createAuthRepository({
+const repositories = createApplicationRepositories({
   isDevelopment: import.meta.env.DEV,
   previewFlag: import.meta.env.VITE_ENABLE_APP_PREVIEW,
   publishableKey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
@@ -14,8 +15,10 @@ const authRepository = createAuthRepository({
 
 export function App(): ReactElement {
   return (
-    <AuthProvider repository={authRepository}>
-      <RouterProvider router={router} />
+    <AuthProvider repository={repositories.auth}>
+      <ProgressProvider repository={repositories.progress}>
+        <RouterProvider router={router} />
+      </ProgressProvider>
     </AuthProvider>
   );
 }

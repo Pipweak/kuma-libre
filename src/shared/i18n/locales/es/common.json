@@ -5,8 +5,12 @@
   "app": {
     "goToLessons": "Ir a las lecciones",
     "loading": "Cargando Kuma Libre",
+    "loadingProgress": "Cargando tu progreso",
     "loadingSession": "Comprobando la sesión",
-    "openAccount": "Abrir la cuenta"
+    "openAccount": "Abrir la cuenta",
+    "progressErrorDescription": "No se pudo cargar tu progreso. Comprueba tu conexión e inténtalo de nuevo.",
+    "progressErrorTitle": "Progreso no disponible",
+    "retryProgress": "Reintentar"
   },
   "foundation": {
     "description": "La base de React, el sistema de diseño y los primeros componentes compartidos ya están operativos.",

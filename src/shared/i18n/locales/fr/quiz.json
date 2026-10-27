@@ -60,6 +60,12 @@
     "corpus": "Dans l’ordre",
     "random": "Aléatoire"
   },
+  "persistence": {
+    "errorDescription": "Ta réponse n’a pas été enregistrée. Elle reste affichée et ne sera pas comptée deux fois.",
+    "errorTitle": "Enregistrement impossible",
+    "retry": "Réessayer l’enregistrement",
+    "saving": "Enregistrement…"
+  },
   "question": {
     "comprehensionHint": "Donne une signification",
     "lesson": "Leçon {{number}}",

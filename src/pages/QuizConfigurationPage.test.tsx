@@ -4,11 +4,14 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 
 import { vocabularyCorpus } from '@/app/data/vocabularyCorpus';
+import type { ProgressByEntry } from '@/domain/quiz';
+import { ProgressContext } from '@/features/progress/ProgressContext';
 import { QuizConfigurationPage } from '@/pages/QuizConfigurationPage';
 import { i18n } from '@/shared/i18n/i18n';
 
 function renderConfiguration(
   pathname = '/app/quiz/configure',
+  progress: ProgressByEntry = {},
 ): ReturnType<typeof createMemoryRouter> {
   const router = createMemoryRouter(
     [
@@ -18,7 +21,19 @@ function renderConfiguration(
     { initialEntries: [pathname] },
   );
 
-  render(<RouterProvider router={router} />);
+  render(
+    <ProgressContext.Provider
+      value={{
+        errorCode: null,
+        progress,
+        recordReview: () => Promise.reject(new Error('not used')),
+        reload: () => Promise.resolve(),
+        status: 'ready',
+      }}
+    >
+      <RouterProvider router={router} />
+    </ProgressContext.Provider>,
+  );
   return router;
 }
 
@@ -65,5 +80,17 @@ describe('QuizConfigurationPage', () => {
     renderConfiguration('/app/quiz/configure?session=missing');
 
     expect(screen.getByRole('status').textContent).toContain('Cette passe n’est plus disponible');
+  });
+
+  it('filters questions with the persisted direction-specific mastery', () => {
+    const lesson = vocabularyCorpus.lessons[0]!;
+    const masteredEntry = vocabularyCorpus.entries.find((entry) => entry.lessonId === lesson.id)!;
+    renderConfiguration(`/app/quiz/configure?lesson=${lesson.id}`, {
+      [masteredEntry.id]: {
+        comprehension: { correctCount: 3, incorrectCount: 0, score: 3 },
+      },
+    });
+
+    expect(screen.getByText(`${lesson.entryCount - 1} questions`)).toBeDefined();
   });
 });

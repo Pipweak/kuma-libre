@@ -34,6 +34,7 @@ const routeNodes = [
   { id: "lessons", label: "Parcours de leçons", meta: "groupes + progression", x: 800, y: 720, type: "app", lane: "lesson-review" },
   { id: "menu", label: "Menu secondaire", meta: "navigation globale", x: 800, y: 870, type: "state", lane: "progress-path" },
   { id: "quiz", label: "Question du quiz", meta: "réponse puis validation", x: 1070, y: 480, type: "quiz", lane: "quick-review" },
+  { id: "persistence-error", label: "Échec de sauvegarde", meta: "même tentative + réessayer", x: 1340, y: 280, type: "state", lane: "persistence-retry" },
   { id: "empty", label: "Aucune question", meta: "modifier la sélection", x: 1070, y: 600, type: "state", lane: "custom-review" },
   { id: "lesson-detail", label: "Détail d’une leçon", meta: "vocabulaire + progrès", x: 1070, y: 720, type: "app", lane: "lesson-review" },
   { id: "progress", label: "Progression", meta: "global + par leçon", x: 1070, y: 810, type: "app", lane: "progress-path" },
@@ -82,6 +83,8 @@ const routeEdges = [
   { from: "config", to: "empty", label: "0 question" },
   { from: "quiz", to: "correct", label: "correct" },
   { from: "quiz", to: "incorrect", label: "incorrect" },
+  { from: "quiz", to: "persistence-error", label: "réseau" },
+  { from: "persistence-error", to: "correct", label: "réessayer" },
   { from: "quiz", to: "exit", label: "quitter" },
   { from: "quiz", to: "voice-listening", label: "micro" },
   { from: "voice-listening", to: "voice-transcribing", label: "arrêter" },
@@ -249,6 +252,14 @@ const screenTemplates = {
       <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
       <div class="word-question"><button class="mini-audio-button" aria-label="Écouter le mot japonais">${uiIcon("volume")}<span>Écouter</span></button><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
       <div class="answer-box"><label>Ta réponse</label><div><input placeholder="FR, EN ou ES" /><button class="mini-microphone" type="button" aria-label="Dicter ma réponse" title="Dicter ma réponse">${uiIcon("microphone")}</button></div><button class="mini-primary">Valider</button><button class="mini-link">Je ne sais pas</button></div>
+    </div>`,
+
+  persistenceError: () => `
+    <div class="product-screen app-view quiz-view voice-quiz-view">
+      <div class="quiz-top"><button>×</button><span><small>12 / 84</small><i><u style="width: 14%"></u></i></span><b></b></div>
+      <div class="quiz-tags"><span>Leçon 06</span><span>Comprendre</span></div>
+      <div class="word-question"><strong lang="ja">食べます</strong><small lang="ja">たべます</small></div>
+      <div class="answer-box voice-answer-box"><label>Ta réponse</label><div><input value="manger" readonly /></div><div class="voice-status voice-status--error" role="alert"><b>!</b><span><strong>Enregistrement impossible</strong><small>Ta réponse reste affichée et ne sera pas comptée deux fois.</small></span></div><button class="mini-secondary">Réessayer l’enregistrement</button></div>
     </div>`,
 
   voiceListening: () => `
@@ -515,6 +526,13 @@ const flows = [
     title: "Route inconnue",
     description: "Le retour mène à l’accueil public ou connecté selon la session disponible.",
     steps: [step("notFound", "Page introuvable"), branch([step("landing", "Accueil public"), step("home", "Accueil connecté")], "Selon la session")]
+  },
+  {
+    id: "persistence-retry",
+    number: "16",
+    title: "Réessayer une réponse non sauvegardée",
+    description: "La correction n’est affichée qu’après sauvegarde. En cas de panne, la tentative reste en mémoire et le même identifiant est réutilisé pour éviter tout double comptage.",
+    steps: [step("quiz", "Réponse prête"), step("persistenceError", "Sauvegarde échouée"), step("correct", "Même tentative sauvegardée")]
   }
 ];
 

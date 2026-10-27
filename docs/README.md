@@ -8,6 +8,7 @@ Ce dossier complète les documents placés à la racine sans les remplacer.
 - [`architecture/frontend-architecture.md`](architecture/frontend-architecture.md) : découpage React, routes, composants, état, internationalisation et frontière backend.
 - [`../reference/corpus-i18n-audit.md`](../reference/corpus-i18n-audit.md) : état du corpus et migration trilingue.
 - [`../mockups/v1/flows.html`](../mockups/v1/flows.html) : référence fonctionnelle visuelle actuelle.
+- [`../supabase/README.md`](../supabase/README.md) : exécution locale, tests SQL et déploiement des migrations Supabase.
 
 ## Qualité et contribution
 

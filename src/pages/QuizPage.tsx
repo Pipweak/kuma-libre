@@ -5,8 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { Navigate, useLocation, useNavigate } from 'react-router';
 
 import { vocabularyCorpus } from '@/app/data/vocabularyCorpus';
-import { applyReviewResult, evaluateAnswer } from '@/domain/quiz';
+import { evaluateAnswer } from '@/domain/quiz';
+import type { ReviewSubmission } from '@/domain/progress';
 import { formatLessonNumber } from '@/features/lessons/lessonPresentation';
+import { useProgress } from '@/features/progress/useProgress';
 import { QuizCorrection } from '@/features/quiz/components/QuizCorrection';
 import { QuizQuestion } from '@/features/quiz/components/QuizQuestion';
 import {
@@ -21,8 +23,13 @@ export function QuizPage(): ReactElement {
   const { t } = useTranslation('quiz');
   const location = useLocation();
   const navigate = useNavigate();
+  const { recordReview } = useProgress();
   const [state, dispatch] = useReducer(quizReducer, INITIAL_QUIZ_STATE);
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
+  const [isSavingReview, setIsSavingReview] = useState(false);
+  const [pendingReview, setPendingReview] = useState<ReviewSubmission | null>(null);
+  const [reviewSaveFailed, setReviewSaveFailed] = useState(false);
+  const questionStartedAtRef = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const exitButtonRef = useRef<HTMLButtonElement>(null);
   const exitDialogRef = useRef<HTMLDivElement>(null);
@@ -31,6 +38,10 @@ export function QuizPage(): ReactElement {
 
   const routeState = isQuizRouteState(location.state) ? location.state : null;
   const currentQuestion = routeState?.session.questions[state.currentIndex];
+
+  useEffect(() => {
+    questionStartedAtRef.current = Date.now();
+  }, [state.currentIndex]);
 
   useEffect(() => {
     if (state.feedback === null) {
@@ -93,25 +104,59 @@ export function QuizPage(): ReactElement {
   const lessonNumber = lesson ? formatLessonNumber(lesson.number) : '';
   const isAnswerEmpty = state.answer.trim().length === 0;
 
+  const persistReview = async (review: ReviewSubmission): Promise<void> => {
+    if (isSavingReview) {
+      return;
+    }
+
+    setIsSavingReview(true);
+    setReviewSaveFailed(false);
+
+    try {
+      const transition = await recordReview(review);
+      dispatch({
+        feedback: {
+          answer: review.submittedAnswer,
+          isCorrect: review.result === 'correct',
+          isSkipped: review.result === 'skipped',
+          transition,
+        },
+        type: 'answer-evaluated',
+      });
+      setPendingReview(null);
+    } catch {
+      setReviewSaveFailed(true);
+    } finally {
+      setIsSavingReview(false);
+    }
+  };
+
   const submitAnswer = (isSkipped: boolean): void => {
-    if (state.feedback !== null || (!isSkipped && isAnswerEmpty)) {
+    if (
+      state.feedback !== null ||
+      isSavingReview ||
+      pendingReview !== null ||
+      (!isSkipped && isAnswerEmpty)
+    ) {
       return;
     }
 
     const evaluation = isSkipped
-      ? { isCorrect: false }
+      ? { isCorrect: false, normalizedAnswer: '' }
       : evaluateAnswer(state.answer, currentQuestion.acceptedAnswers);
-    const transition = applyReviewResult(undefined, evaluation.isCorrect);
+    const review: ReviewSubmission = {
+      direction: currentQuestion.direction,
+      entryId: currentQuestion.entryId,
+      id: crypto.randomUUID(),
+      normalizedAnswer: evaluation.normalizedAnswer,
+      promptSnapshot: currentQuestion.prompt,
+      responseTimeMs: Date.now() - questionStartedAtRef.current,
+      result: isSkipped ? 'skipped' : evaluation.isCorrect ? 'correct' : 'incorrect',
+      submittedAnswer: isSkipped ? '' : state.answer,
+    };
 
-    dispatch({
-      feedback: {
-        answer: isSkipped ? '' : state.answer,
-        isCorrect: evaluation.isCorrect,
-        isSkipped,
-        transition,
-      },
-      type: 'answer-evaluated',
-    });
+    setPendingReview(review);
+    void persistReview(review);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -134,6 +179,8 @@ export function QuizPage(): ReactElement {
       return;
     }
 
+    setPendingReview(null);
+    setReviewSaveFailed(false);
     dispatch({ type: 'next-question' });
   };
 
@@ -199,7 +246,7 @@ export function QuizPage(): ReactElement {
                 ? 'answer.placeholderComprehension'
                 : 'answer.placeholderProduction',
             )}
-            readOnly={state.feedback !== null}
+            readOnly={state.feedback !== null || isSavingReview || pendingReview !== null}
             ref={inputRef}
             value={state.answer}
           />
@@ -207,10 +254,33 @@ export function QuizPage(): ReactElement {
 
         {state.feedback === null ? (
           <div className="grid gap-2">
-            <Button disabled={isAnswerEmpty} size="lg" type="submit">
+            {reviewSaveFailed && pendingReview !== null ? (
+              <Card className="border-danger bg-danger-soft p-4" role="alert">
+                <p className="text-ink font-bold">{t('persistence.errorTitle')}</p>
+                <p className="text-muted mt-1 text-sm">{t('persistence.errorDescription')}</p>
+                <Button
+                  className="mt-4 w-full"
+                  onClick={() => {
+                    void persistReview(pendingReview);
+                  }}
+                  size="lg"
+                  variant="secondary"
+                >
+                  {t('persistence.retry')}
+                </Button>
+              </Card>
+            ) : null}
+            <Button
+              disabled={isAnswerEmpty || pendingReview !== null}
+              isLoading={isSavingReview}
+              loadingLabel={t('persistence.saving')}
+              size="lg"
+              type="submit"
+            >
               {t('answer.validate')}
             </Button>
             <Button
+              disabled={pendingReview !== null}
               onClick={() => {
                 submitAnswer(true);
               }}
