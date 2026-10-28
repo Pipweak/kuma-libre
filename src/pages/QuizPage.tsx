@@ -11,16 +11,20 @@ import { formatLessonNumber } from '@/features/lessons/lessonPresentation';
 import { useProgress } from '@/features/progress/useProgress';
 import { QuizCorrection } from '@/features/quiz/components/QuizCorrection';
 import { QuizQuestion } from '@/features/quiz/components/QuizQuestion';
+import { DictationInput } from '@/features/speech/components/DictationInput';
+import { QuestionAudioButton } from '@/features/speech/components/QuestionAudioButton';
+import { getAnswerSpeechLanguage } from '@/features/speech/speechPresentation';
 import {
   isQuizRouteState,
   type QuizResultRouteState,
 } from '@/features/quiz/navigation/quizNavigation';
 import { quizReducer } from '@/features/quiz/state/quizReducer';
 import { INITIAL_QUIZ_STATE } from '@/features/quiz/state/quizState';
+import { resolveSupportedLocale } from '@/shared/i18n/i18n';
 import { Button, Card, IconButton, ProgressBar } from '@/shared/ui';
 
 export function QuizPage(): ReactElement {
-  const { t } = useTranslation('quiz');
+  const { i18n, t } = useTranslation('quiz');
   const location = useLocation();
   const navigate = useNavigate();
   const { recordReview } = useProgress();
@@ -219,38 +223,45 @@ export function QuizPage(): ReactElement {
         </span>
       </div>
 
-      <QuizQuestion question={currentQuestion} />
+      <QuizQuestion
+        audioControl={
+          <QuestionAudioButton
+            key={`${currentQuestion.entryId}-${state.currentIndex}`}
+            question={currentQuestion}
+          />
+        }
+        question={currentQuestion}
+      />
 
       <form className="mt-auto space-y-4" onSubmit={handleSubmit}>
-        <div>
-          <label className="text-ink mb-2 block text-sm font-black" htmlFor="quiz-answer">
-            {t('answer.label')}
-          </label>
-          <input
-            aria-describedby={state.feedback === null ? undefined : 'quiz-correction'}
-            autoComplete="off"
-            className={[
-              'rounded-control bg-surface-strong text-ink placeholder:text-muted min-h-12 w-full border px-4 text-base shadow-sm transition-colors focus:outline-none',
-              state.feedback === null
-                ? 'border-line-strong focus:border-action focus:ring-action focus:ring-2'
-                : state.feedback.isCorrect
-                  ? 'border-success bg-success-soft'
-                  : 'border-danger bg-danger-soft',
-            ].join(' ')}
-            id="quiz-answer"
-            onChange={(event) => {
-              dispatch({ answer: event.target.value, type: 'answer-changed' });
-            }}
-            placeholder={t(
-              currentQuestion.direction === 'comprehension'
-                ? 'answer.placeholderComprehension'
-                : 'answer.placeholderProduction',
-            )}
-            readOnly={state.feedback !== null || isSavingReview || pendingReview !== null}
-            ref={inputRef}
-            value={state.answer}
-          />
-        </div>
+        <DictationInput
+          {...(state.feedback === null ? {} : { describedBy: 'quiz-correction' })}
+          className={
+            state.feedback === null
+              ? 'border-line-strong focus:border-action focus:ring-action focus:ring-2'
+              : state.feedback.isCorrect
+                ? 'border-success bg-success-soft'
+                : 'border-danger bg-danger-soft'
+          }
+          id="quiz-answer"
+          label={t('answer.label')}
+          language={getAnswerSpeechLanguage(
+            currentQuestion,
+            resolveSupportedLocale(i18n.resolvedLanguage ?? i18n.language),
+          )}
+          onValueChange={(answer) => {
+            dispatch({ answer, type: 'answer-changed' });
+          }}
+          placeholder={t(
+            currentQuestion.direction === 'comprehension'
+              ? 'answer.placeholderComprehension'
+              : 'answer.placeholderProduction',
+          )}
+          readOnly={state.feedback !== null || isSavingReview || pendingReview !== null}
+          ref={inputRef}
+          resetKey={`${currentQuestion.entryId}-${state.currentIndex}`}
+          value={state.answer}
+        />
 
         {state.feedback === null ? (
           <div className="grid gap-2">

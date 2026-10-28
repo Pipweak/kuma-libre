@@ -81,5 +81,28 @@
     "title": "Passe terminée",
     "total": "Mots vus"
   },
+  "speech": {
+    "cancel": "Annuler",
+    "cancelled": "Dictée annulée. Tu peux utiliser le clavier.",
+    "dictate": "Dicter ma réponse",
+    "errors": {
+      "network-error": "Reconnaissance vocale indisponible",
+      "no-speech": "Aucune parole détectée",
+      "permission-denied": "Microphone non autorisé",
+      "unsupported": "Dictée non prise en charge"
+    },
+    "keyboardAvailable": "Tu peux toujours répondre avec le clavier.",
+    "listen": "Écouter",
+    "listening": "Dictée en cours",
+    "listeningHelp": "Parle normalement. Aucun audio n’est conservé.",
+    "permission": "Autorisation du microphone…",
+    "playbackError": "La lecture vocale n’est pas disponible.",
+    "ready": "Transcription ajoutée · tu peux la modifier",
+    "retry": "Réessayer la dictée",
+    "stop": "Arrêter la dictée",
+    "stopPlayback": "Arrêter la lecture",
+    "transcribing": "Transcription…",
+    "transcribingHint": "Quelques secondes seulement"
+  },
   "sessionMissing": "Cette passe n’est plus disponible. Configure une nouvelle révision."
 }

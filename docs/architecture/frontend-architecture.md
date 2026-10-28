@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 9 — 26 octobre 2026.
+> **Version :** 10 — 28 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -241,12 +241,26 @@ interface ProgressRepository {
 }
 
 interface SpeechRecognizer {
-  start(locale: string): Promise<string>;
+  isSupported(): boolean;
+  start(options: {
+    language: string;
+    maxAlternatives?: number;
+    onListening: () => void;
+  }): Promise<string>;
+  stop(): void;
+  cancel(): void;
+}
+
+interface SpeechSynthesizer {
+  isSupported(): boolean;
+  speak(text: string, options: { language: string; rate?: number }): Promise<void>;
   stop(): void;
 }
 ```
 
-Les implémentations initiales sont `SupabaseAuthRepository`, `SupabaseProgressRepository`, `WebSpeechRecognizer` et `WebSpeechSynthesizer`. Les tests peuvent les remplacer par des versions en mémoire.
+Les implémentations initiales sont `SupabaseAuthRepository`, `SupabaseProgressRepository`, `WebSpeechRecognizer` et `WebSpeechSynthesizer`. `SpeechProvider` injecte les deux adaptateurs au niveau de l’application. Les tests les remplacent par des versions contrôlées et n’appellent jamais une vraie voix ou un vrai microphone.
+
+`WebSpeechSynthesizer` sélectionne une voix exacte pour la locale demandée, puis une voix de la même langue et enfin la voix par défaut. `WebSpeechRecognizer` normalise les erreurs propres aux navigateurs vers `permission-denied`, `no-speech`, `network-error`, `cancelled` ou `unsupported`. Le reducer local de `features/speech` pilote les états `permission`, `listening`, `transcribing`, `ready`, `error` et `cancelled`. Il ne connaît aucune règle de correction et transmet uniquement le texte final à l’input du quiz.
 
 Le client génère l’identifiant UUID d’une tentative avant l’appel. `record_review` déduit l’utilisateur avec `auth.uid()`, insère `review_events` et met à jour `word_progress` dans la même transaction. Une répétition strictement identique du même UUID retourne le score existant ; un contenu différent utilisant cet UUID est rejeté. La correction n’est révélée qu’après confirmation de la RPC. En cas d’échec, l’UI conserve l’objet `ReviewSubmission` et renvoie exactement le même identifiant.
 
@@ -337,12 +351,12 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 5. Livrer un premier parcours vertical : leçon, configuration, question et correction.
 6. Ajouter Supabase Auth, les migrations, la RLS et `record_review`.
 7. Connecter la progression et les pages secondaires.
-8. Ajouter la synthèse et la dictée vocales.
+8. Ajouter la synthèse et la dictée vocales. *(implémenté)*
 9. Déployer sur Cloudflare Pages.
 
 ### État du socle
 
-Les cinq premières étapes sont initialisées avec :
+Les huit premières étapes sont initialisées avec :
 
 - React, TypeScript strict et Vite ;
 - React Router en Data Mode ;
@@ -360,6 +374,8 @@ Les cinq premières étapes sont initialisées avec :
 - le chargement différé des pages applicatives afin que le corpus ne gonfle pas le JavaScript initial de l'accueil public ;
 - un fallback de chargement accessible et traduit pendant la résolution du premier chunk de route ;
 - des tests de composants sur les interactions critiques et un parcours Playwright desktop/mobile fondé sur une entrée réelle du corpus.
+- la synthèse vocale locale de la question, la dictée vers l’input sans validation automatique, les états accessibles inspirés des messageries mobiles et le repli clavier lorsque les API Web Speech sont absentes ;
+- des adaptateurs vocaux remplaçables, testés avec des dépendances contrôlées, sans stockage d’audio ni dépendance du domaine de quiz aux API navigateur.
 
 Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Supabase Auth est connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Les migrations `profiles`, `user_preferences`, `review_events` et `word_progress`, leurs politiques RLS et la RPC idempotente `record_review` sont versionnées et testées par la CI. Le frontend charge les scores, filtre la configuration avec le sens sélectionné et persiste chaque réponse avant d’afficher la correction. L’aperçu sans configuration Supabase conserve ce comportement avec un repository en mémoire réinitialisé au rechargement. Les synthèses globale et par leçon sont connectées à ce snapshot, la liste des leçons affiche la maîtrise dans les deux sens et chaque entrée expose ses deux scores sur trois. Le panneau du profil donne accès aux pages secondaires de progression, de langue et de compte.
 

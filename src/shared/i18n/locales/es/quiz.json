@@ -81,5 +81,28 @@
     "title": "Sesión terminada",
     "total": "Palabras vistas"
   },
+  "speech": {
+    "cancel": "Cancelar",
+    "cancelled": "Dictado cancelado. Puedes usar el teclado.",
+    "dictate": "Dictar mi respuesta",
+    "errors": {
+      "network-error": "El reconocimiento de voz no está disponible",
+      "no-speech": "No se detectó ninguna voz",
+      "permission-denied": "No se autorizó el micrófono",
+      "unsupported": "El dictado no es compatible"
+    },
+    "keyboardAvailable": "Siempre puedes responder con el teclado.",
+    "listen": "Escuchar",
+    "listening": "Dictado en curso",
+    "listeningHelp": "Habla con normalidad. No se guarda ningún audio.",
+    "permission": "Esperando el permiso del micrófono…",
+    "playbackError": "La reproducción de voz no está disponible.",
+    "ready": "Transcripción añadida · puedes modificarla",
+    "retry": "Reintentar el dictado",
+    "stop": "Detener el dictado",
+    "stopPlayback": "Detener la reproducción",
+    "transcribing": "Transcribiendo…",
+    "transcribingHint": "Solo tardará unos segundos"
+  },
   "sessionMissing": "Esta sesión ya no está disponible. Configura un nuevo repaso."
 }

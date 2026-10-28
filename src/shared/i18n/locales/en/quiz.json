@@ -81,5 +81,28 @@
     "title": "Session complete",
     "total": "Words seen"
   },
+  "speech": {
+    "cancel": "Cancel",
+    "cancelled": "Dictation cancelled. You can use the keyboard.",
+    "dictate": "Dictate my answer",
+    "errors": {
+      "network-error": "Voice recognition is unavailable",
+      "no-speech": "No speech was detected",
+      "permission-denied": "Microphone access was denied",
+      "unsupported": "Dictation is not supported"
+    },
+    "keyboardAvailable": "You can always answer with the keyboard.",
+    "listen": "Listen",
+    "listening": "Listening",
+    "listeningHelp": "Speak normally. No audio is stored.",
+    "permission": "Waiting for microphone permission…",
+    "playbackError": "Voice playback is unavailable.",
+    "ready": "Transcript added · you can edit it",
+    "retry": "Try dictation again",
+    "stop": "Stop dictation",
+    "stopPlayback": "Stop playback",
+    "transcribing": "Transcribing…",
+    "transcribingHint": "This should only take a few seconds"
+  },
   "sessionMissing": "This session is no longer available. Configure a new review."
 }

@@ -7,6 +7,8 @@ import type { QuizQuestion, QuizSession, ReviewTransition } from '@/domain/quiz'
 import type { ReviewSubmission } from '@/domain/progress';
 import { ProgressContext } from '@/features/progress/ProgressContext';
 import { QuizPage } from '@/pages/QuizPage';
+import { SpeechProvider } from '@/features/speech/SpeechProvider';
+import type { SpeechServices } from '@/features/speech/SpeechServices';
 import { i18n } from '@/shared/i18n/i18n';
 
 const QUESTION: QuizQuestion = {
@@ -36,6 +38,20 @@ const TRANSITION: ReviewTransition = {
   previous: { correctCount: 0, incorrectCount: 0, score: 0 },
 };
 
+const UNSUPPORTED_SPEECH_SERVICES: SpeechServices = {
+  recognizer: {
+    cancel: vi.fn(),
+    isSupported: () => false,
+    start: vi.fn().mockRejectedValue(new Error('unsupported')),
+    stop: vi.fn(),
+  },
+  synthesizer: {
+    isSupported: () => false,
+    speak: vi.fn().mockRejectedValue(new Error('unsupported')),
+    stop: vi.fn(),
+  },
+};
+
 function renderQuiz(
   state: unknown = { session: SESSION },
   recordReview = vi
@@ -61,7 +77,9 @@ function renderQuiz(
         status: 'ready',
       }}
     >
-      <RouterProvider router={router} />
+      <SpeechProvider services={UNSUPPORTED_SPEECH_SERVICES}>
+        <RouterProvider router={router} />
+      </SpeechProvider>
     </ProgressContext.Provider>,
   );
   return { recordReview, router };

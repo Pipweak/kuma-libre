@@ -5,6 +5,9 @@ import { createApplicationRepositories } from '@/app/config/createApplicationRep
 import { router } from '@/app/router/router';
 import { AuthProvider } from '@/features/auth/AuthProvider';
 import { ProgressProvider } from '@/features/progress/ProgressProvider';
+import { SpeechProvider } from '@/features/speech/SpeechProvider';
+import { WebSpeechRecognizer } from '@/infrastructure/speech/WebSpeechRecognizer';
+import { WebSpeechSynthesizer } from '@/infrastructure/speech/WebSpeechSynthesizer';
 
 const repositories = createApplicationRepositories({
   isDevelopment: import.meta.env.DEV,
@@ -13,11 +16,18 @@ const repositories = createApplicationRepositories({
   supabaseUrl: import.meta.env.VITE_SUPABASE_URL,
 });
 
+const speechServices = {
+  recognizer: new WebSpeechRecognizer(),
+  synthesizer: new WebSpeechSynthesizer(),
+};
+
 export function App(): ReactElement {
   return (
     <AuthProvider repository={repositories.auth}>
       <ProgressProvider repository={repositories.progress}>
-        <RouterProvider router={router} />
+        <SpeechProvider services={speechServices}>
+          <RouterProvider router={router} />
+        </SpeechProvider>
       </ProgressProvider>
     </AuthProvider>
   );
