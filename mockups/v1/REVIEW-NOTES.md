@@ -72,6 +72,7 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 - **Email** : connexion par magic link.
 - **Révision rapide** : dix mots maximum, rouges en priorité puis jaunes ; aucun mot vert et aucune obligation d'atteindre dix.
 - **Progression** : trois réussites non consécutives mènent au vert ; une erreur jaune ne retire rien ; une erreur verte ramène à deux réussites et la bonne réponse suivante remet au vert.
+- **Détail du vocabulaire** : chaque ligne affiche désormais les deux scores `C/P` sur 3 en plus de la couleur, afin que le niveau reste compréhensible sans dépendre uniquement du rouge, du jaune ou du vert.
 - **Migration de Vincent** : `progress-vincent.json` représente uniquement la compréhension japonais vers signification ; la production démarre rouge.
 - **Session interrompue** : pas de reprise dans le MVP ; les réponses déjà validées restent sauvegardées.
 - **Styles futurs** : Tailwind majoritaire et modules SCSS imbriqués pour les besoins spécifiques.

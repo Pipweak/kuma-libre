@@ -1,0 +1,23 @@
+{
+  "byLesson": "Por lección",
+  "comprehension": "Comprender",
+  "description": "Sigue por separado las palabras que entiendes y las que sabes producir en japonés.",
+  "entryStatus": "{{direction}}: {{status}}, puntuación {{score}} de 3",
+  "entryTotal_one": "de {{count}} entrada del corpus",
+  "entryTotal_other": "de {{count}} entradas del corpus",
+  "lessonCount_one": "{{count}} lección",
+  "lessonCount_other": "{{count}} lecciones",
+  "masteredLabel": "dominados",
+  "masteredInBoth_one": "{{count}} palabra dominada en ambos sentidos",
+  "masteredInBoth_other": "{{count}} palabras dominadas en ambos sentidos",
+  "mastery": {
+    "green": "Dominado",
+    "red": "No dominado",
+    "yellow": "Para repasar"
+  },
+  "overall": "Dominio global",
+  "percentageLabel": "{{label}}: {{percentage}}",
+  "production": "Producir",
+  "statusLegend": "C = comprender · P = producir · puntuación de 3",
+  "title": "Tu progreso"
+}

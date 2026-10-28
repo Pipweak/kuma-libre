@@ -46,6 +46,16 @@ Une session Supabase charge sa progression avant d’ouvrir l’espace protégé
 
 Sans variables Supabase, le repository d’aperçu conserve les scores uniquement en mémoire pour la durée de l’onglet. Il ne crée aucun fallback métier dans `localStorage`.
 
+### Progression et navigation secondaire
+
+Le bouton de profil du header ouvre un menu mobile donnant accès aux leçons, à la progression, à la langue de l'interface et au compte. L'écran de progression calcule à partir du snapshot Supabase :
+
+- le pourcentage de mots verts en compréhension ;
+- le pourcentage de mots verts en production ;
+- le pourcentage de mots verts dans les deux sens, globalement et par leçon.
+
+Ces agrégats sont dérivés à la volée et ne sont pas stockés. Le détail d'une leçon affiche les deux scores `C/P` sur `3` pour chaque entrée, avec un texte accessible en plus des couleurs rouge, jaune et verte.
+
 ### Base Supabase locale
 
 Les migrations, politiques RLS et tests SQL se trouvent dans [`supabase`](supabase). Leur exécution locale nécessite Docker Desktop :

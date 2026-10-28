@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Link, Navigate, Outlet, useLocation } from 'react-router';
 
 import { createLoginPath } from '@/features/auth/authNavigation';
-import { getUserInitial } from '@/features/auth/authPresentation';
 import { useAuth } from '@/features/auth/useAuth';
+import { ProfileMenu } from '@/features/navigation/components/ProfileMenu';
 import { useProgress } from '@/features/progress/useProgress';
 import { BrandLogo, Button, Card, Spinner } from '@/shared/ui';
 
@@ -66,13 +66,7 @@ export function AppLayout(): ReactElement {
             >
               <BrandLogo className="w-32 sm:w-40" priority />
             </Link>
-            <Link
-              aria-label={t('app.openAccount')}
-              className="bg-success focus-visible:ring-action flex size-11 items-center justify-center rounded-full font-black text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-              to="/app/account"
-            >
-              {getUserInitial(session.user.displayName, session.user.email)}
-            </Link>
+            <ProfileMenu user={session.user} />
           </div>
         </header>
       )}

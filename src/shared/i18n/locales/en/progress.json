@@ -1,0 +1,23 @@
+{
+  "byLesson": "By lesson",
+  "comprehension": "Understand",
+  "description": "Track separately the words you understand and those you can produce in Japanese.",
+  "entryStatus": "{{direction}}: {{status}}, score {{score}} out of 3",
+  "entryTotal_one": "out of {{count}} corpus entry",
+  "entryTotal_other": "out of {{count}} corpus entries",
+  "lessonCount_one": "{{count}} lesson",
+  "lessonCount_other": "{{count}} lessons",
+  "masteredLabel": "mastered",
+  "masteredInBoth_one": "{{count}} word mastered in both directions",
+  "masteredInBoth_other": "{{count}} words mastered in both directions",
+  "mastery": {
+    "green": "Mastered",
+    "red": "Not mastered",
+    "yellow": "To review"
+  },
+  "overall": "Overall mastery",
+  "percentageLabel": "{{label}}: {{percentage}}",
+  "production": "Produce",
+  "statusLegend": "C = comprehension · P = production · score out of 3",
+  "title": "Your progress"
+}

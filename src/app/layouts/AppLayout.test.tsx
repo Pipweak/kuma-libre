@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 
@@ -48,11 +49,18 @@ describe('AppLayout', () => {
     await i18n.changeLanguage('fr');
   });
 
-  it('shows the account identity around browsing pages', async () => {
+  it('opens the secondary navigation from the profile identity', async () => {
+    const user = userEvent.setup();
     renderLayoutAt('/app/lessons');
 
     expect(await screen.findByRole('link', { name: 'Accéder aux leçons' })).toBeDefined();
-    expect(screen.getByRole('link', { name: 'Ouvrir le compte' }).textContent).toBe('V');
+    const trigger = screen.getByRole('button', { name: 'Ouvrir le menu du profil' });
+    expect(trigger.textContent).toBe('V');
+    await user.click(trigger);
+    expect(screen.getByRole('dialog', { name: 'Menu' })).toBeDefined();
+    expect(screen.getByRole('link', { name: 'Progression' }).getAttribute('href')).toBe(
+      '/app/progress',
+    );
     expect(screen.getByRole('heading', { name: 'Leçons de test' })).toBeDefined();
   });
 

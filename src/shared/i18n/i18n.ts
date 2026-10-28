@@ -4,14 +4,17 @@ import { initReactI18next } from 'react-i18next';
 import enCommon from '@/shared/i18n/locales/en/common.json';
 import enAuth from '@/shared/i18n/locales/en/auth.json';
 import enLessons from '@/shared/i18n/locales/en/lessons.json';
+import enProgress from '@/shared/i18n/locales/en/progress.json';
 import enQuiz from '@/shared/i18n/locales/en/quiz.json';
 import esCommon from '@/shared/i18n/locales/es/common.json';
 import esAuth from '@/shared/i18n/locales/es/auth.json';
 import esLessons from '@/shared/i18n/locales/es/lessons.json';
+import esProgress from '@/shared/i18n/locales/es/progress.json';
 import esQuiz from '@/shared/i18n/locales/es/quiz.json';
 import frCommon from '@/shared/i18n/locales/fr/common.json';
 import frAuth from '@/shared/i18n/locales/fr/auth.json';
 import frLessons from '@/shared/i18n/locales/fr/lessons.json';
+import frProgress from '@/shared/i18n/locales/fr/progress.json';
 import frQuiz from '@/shared/i18n/locales/fr/quiz.json';
 
 export const SUPPORTED_LOCALES = ['fr', 'en', 'es'] as const;
@@ -19,9 +22,9 @@ export const SUPPORTED_LOCALES = ['fr', 'en', 'es'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 const resources = {
-  en: { auth: enAuth, common: enCommon, lessons: enLessons, quiz: enQuiz },
-  es: { auth: esAuth, common: esCommon, lessons: esLessons, quiz: esQuiz },
-  fr: { auth: frAuth, common: frCommon, lessons: frLessons, quiz: frQuiz },
+  en: { auth: enAuth, common: enCommon, lessons: enLessons, progress: enProgress, quiz: enQuiz },
+  es: { auth: esAuth, common: esCommon, lessons: esLessons, progress: esProgress, quiz: esQuiz },
+  fr: { auth: frAuth, common: frCommon, lessons: frLessons, progress: frProgress, quiz: frQuiz },
 } as const;
 
 /**

@@ -27,10 +27,26 @@
     "label": "Idioma de la interfaz",
     "prompt": "Elige el idioma de la interfaz"
   },
+  "languagePage": {
+    "description": "Elige el idioma de los menús, los botones y la traducción principal mostrada durante el cuestionario.",
+    "note": "En comprensión, se siguen aceptando las traducciones registradas en francés, inglés y español.",
+    "title": "Idioma"
+  },
   "languages": {
     "en": "English",
     "es": "Español",
     "fr": "Français"
+  },
+  "navigation": {
+    "account": "Cuenta",
+    "close": "Cerrar el menú del perfil",
+    "label": "Navegación de la aplicación",
+    "language": "Idioma",
+    "lessons": "Repasar",
+    "open": "Abrir el menú del perfil",
+    "progress": "Progreso",
+    "synchronized": "Progreso sincronizado",
+    "title": "Menú"
   },
   "notFound": {
     "backHome": "Volver al inicio",

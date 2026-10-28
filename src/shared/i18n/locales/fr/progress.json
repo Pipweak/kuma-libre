@@ -1,0 +1,23 @@
+{
+  "byLesson": "Par leçon",
+  "comprehension": "Comprendre",
+  "description": "Suis séparément les mots que tu comprends et ceux que tu sais produire en japonais.",
+  "entryStatus": "{{direction}} : {{status}}, score {{score}} sur 3",
+  "entryTotal_one": "sur {{count}} entrée du corpus",
+  "entryTotal_other": "sur {{count}} entrées du corpus",
+  "lessonCount_one": "{{count}} leçon",
+  "lessonCount_other": "{{count}} leçons",
+  "masteredLabel": "maîtrisés",
+  "masteredInBoth_one": "{{count}} mot maîtrisé dans les deux sens",
+  "masteredInBoth_other": "{{count}} mots maîtrisés dans les deux sens",
+  "mastery": {
+    "green": "Maîtrisé",
+    "red": "Non maîtrisé",
+    "yellow": "À revoir"
+  },
+  "overall": "Maîtrise globale",
+  "percentageLabel": "{{label}} : {{percentage}}",
+  "production": "Produire",
+  "statusLegend": "C = comprendre · P = produire · score sur 3",
+  "title": "Ta progression"
+}

@@ -32,6 +32,7 @@ test('reviews a real lesson vocabulary entry through the first correction', asyn
 
   await expect(page.getByRole('heading', { level: 1, name: 'Ton parcours' })).toBeVisible();
   await page.getByRole('link', { name: /Leçon 01/ }).click();
+  await expect(page.getByLabel('Comprendre : À revoir, score 1 sur 3')).toBeVisible();
   await page.getByRole('link', { name: 'Réviser cette leçon' }).click();
   await page.getByText('Non maîtrisés', { exact: true }).click();
 

@@ -27,10 +27,26 @@
     "label": "Interface language",
     "prompt": "Choose the interface language"
   },
+  "languagePage": {
+    "description": "Choose the language used for menus, buttons, and the main translation shown during quizzes.",
+    "note": "In comprehension quizzes, recorded French, English, and Spanish translations remain accepted.",
+    "title": "Language"
+  },
   "languages": {
     "en": "English",
     "es": "Español",
     "fr": "Français"
+  },
+  "navigation": {
+    "account": "Account",
+    "close": "Close profile menu",
+    "label": "Application navigation",
+    "language": "Language",
+    "lessons": "Review",
+    "open": "Open profile menu",
+    "progress": "Progress",
+    "synchronized": "Progress synchronized",
+    "title": "Menu"
   },
   "notFound": {
     "backHome": "Return home",

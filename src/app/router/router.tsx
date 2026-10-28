@@ -80,6 +80,20 @@ export const router = createBrowserRouter([
               return { Component: AccountPage };
             },
           },
+          {
+            path: 'progress',
+            lazy: async () => {
+              const { ProgressPage } = await import('@/pages/ProgressPage');
+              return { Component: ProgressPage };
+            },
+          },
+          {
+            path: 'settings/language',
+            lazy: async () => {
+              const { LanguagePage } = await import('@/pages/LanguagePage');
+              return { Component: LanguagePage };
+            },
+          },
         ],
       },
       {

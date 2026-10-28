@@ -13,4 +13,14 @@ describe('ProgressBar', () => {
     expect(screen.getByRole<HTMLProgressElement>('progressbar').value).toBe(0);
     expect((container.querySelector('[style]') as HTMLElement).style.width).toBe('0%');
   });
+
+  it('supports a visual value label and semantic tone', () => {
+    const { container } = render(
+      <ProgressBar label="Comprendre" max={100} tone="ink" value={68} valueLabel="68 %" />,
+    );
+
+    expect(screen.getByText('68 %')).toBeDefined();
+    expect(container.querySelector('.bg-ink')).not.toBeNull();
+    expect(screen.getByRole<HTMLProgressElement>('progressbar').value).toBe(68);
+  });
 });
