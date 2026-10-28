@@ -81,7 +81,7 @@ npm run corpus:check           # vérifie que le JSON versionné est à jour et 
 npm run corpus:validate-ready  # contrôle les données requises pour activer tous les quiz FR/EN/ES
 ```
 
-`npm run build` exécute automatiquement `corpus:check`. Le contrôle `corpus:validate-ready` représente la cible de migration : il signale encore les traductions espagnoles et lectures japonaises absentes des sources, sans bloquer le socle structurel actuel. Ces données doivent être ajoutées dans les Markdown, puis le JSON doit être régénéré.
+`npm run build` exécute automatiquement `corpus:validate-ready`. Ce contrôle vérifie que le JSON est synchronisé et que chaque entrée possède ses significations française, anglaise et espagnole ainsi que les lectures japonaises nécessaires aux quiz. Le corpus versionné satisfait désormais ce contrôle ; toute nouvelle entrée doit conserver cette couverture.
 
 ### Design system applicatif
 
@@ -147,7 +147,7 @@ La valeur complète d'une cellule de traduction est conservée comme libellé pr
 
 Les entrées sont regroupées par leçon et par catégorie : vocabulaire principal, expressions, noms propres ou `useful-words`. `Useful Words and Information` est une catégorie de vocabulaire possible dans n'importe quelle leçon ; elle est conservée dans un fichier distinct lorsqu'elle existe et participe aux quiz de la leçon. Les lectures de mots écrits en katakana restent en katakana.
 
-Les traductions espagnoles ne sont pas encore présentes dans les tableaux historiques. Leur ajout au corpus fait partie de la préparation des données de l'application.
+Les tableaux contiennent désormais une colonne espagnole contrôlée pour chaque entrée. Toute nouvelle donnée de vocabulaire doit fournir les significations française, anglaise et espagnole avant d'être activée dans les quiz.
 
 ## Utilisation en révision
 
@@ -169,8 +169,8 @@ Ces statuts sont uniquement un instantané historique des photos et ne pilotent 
 
 ## Précision et limites de transcription
 
-- Les photos du manuel constituent la référence pour l'appartenance des mots à une leçon. La transcription doit reprendre uniquement les graphies, lectures et équivalents anglais imprimés sur la photo, sans ajouter de graphies alternatives. Les traductions françaises sont la seule colonne ajoutée.
-- Les traductions françaises sont des reformulations pédagogiques vérifiées dans le contexte, et non le texte du livre.
+- Les photos du manuel constituent la référence pour l'appartenance des mots à une leçon. La transcription doit reprendre uniquement les graphies, lectures et équivalents anglais imprimés sur la photo, sans ajouter de graphies alternatives.
+- Les traductions françaises et espagnoles sont des reformulations pédagogiques vérifiées dans le contexte, et non le texte du livre.
 - Les couleurs sont lues sur les photographies ; en cas de photo floue, leur attribution peut être incertaine.
 - Un mot sans surlignage est marqué « À revoir » suivant la convention choisie, ce qui n'est pas une mesure indépendante de connaissance.
 

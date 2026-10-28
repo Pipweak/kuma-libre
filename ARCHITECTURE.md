@@ -786,6 +786,8 @@ Playwright couvre un petit nombre de parcours essentiels :
 
 ### Phase 1 — Corpus
 
+**Statut : terminée.** Le corpus normalisé contient 904 entrées trilingues et satisfait le contrôle de préparation aux quiz.
+
 - définir définitivement le schéma normalisé ;
 - définir les métadonnées des leçons et des catégories, dont `vocabulary` et `useful-words` ;
 - produire les traductions espagnoles de l'ensemble du corpus avec assistance IA, puis les contrôler dans leur contexte avant d'activer la locale espagnole en production ;

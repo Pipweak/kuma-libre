@@ -97,6 +97,26 @@ describe('parseMarkdownVocabularySource', () => {
     expect(entries[1]).toMatchObject({ kana: [], kanji: [], romaji: ['ATM'] });
   });
 
+  it('expands alternatives and optional parts inside an inline reading', () => {
+    const entries = parseMarkdownVocabularySource({
+      content: `| Japanese | English | Français | Español | Maîtrise |
+|---|---|---|---|---|
+| いい［お］天気ですね。（いい［お］てんきですね。） | nice weather | beau temps | buen tiempo | rouge |
+| 故郷（ふるさと／こきょう） | home town | pays natal | tierra natal | rouge |
+`,
+      file: 'lessons/lesson-11/vocabulary.md',
+    });
+
+    expect(entries[0]).toMatchObject({
+      kana: ['いいてんきですね。', 'いいおてんきですね。'],
+      romaji: ['iitenkidesune', 'iiotenkidesune'],
+    });
+    expect(entries[1]).toMatchObject({
+      kana: ['ふるさと', 'こきょう'],
+      romaji: ['furusato', 'kokyou'],
+    });
+  });
+
   it('rejects unsupported columns and malformed table rows', () => {
     expect(() =>
       parseMarkdownVocabularySource({

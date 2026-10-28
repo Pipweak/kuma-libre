@@ -306,7 +306,12 @@ function classifyJapaneseForms(
 
     if (parenthetical?.[2]) {
       const outside = `${parenthetical[1] ?? ''}${parenthetical[3] ?? ''}`.trim();
-      classifyJapaneseForms([outside, parenthetical[2]], kana, kanji, romaji);
+      classifyJapaneseForms(
+        [...expandJapaneseCell(outside), ...expandJapaneseCell(parenthetical[2])],
+        kana,
+        kanji,
+        romaji,
+      );
       continue;
     }
 

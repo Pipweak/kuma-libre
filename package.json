@@ -9,7 +9,7 @@
   "packageManager": "npm@10.9.2",
   "scripts": {
     "dev": "vite",
-    "build": "npm run corpus:check && tsc -b && vite build",
+    "build": "npm run corpus:validate-ready && tsc -b && vite build",
     "corpus:check": "tsx scripts/corpus/generate-corpus.ts check",
     "corpus:generate": "tsx scripts/corpus/generate-corpus.ts generate",
     "corpus:validate-ready": "tsx scripts/corpus/generate-corpus.ts validate-ready",
