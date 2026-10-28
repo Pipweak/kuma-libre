@@ -307,6 +307,8 @@ Pour l'ensemble du corpus ou une leçon, l'interface peut calculer trois indicat
 - pourcentage vert en production ;
 - pourcentage d'entrées vertes dans les deux sens.
 
+Ces pourcentages sont dérivés à la volée depuis les entrées du périmètre, arrondis à l'entier le plus proche et ne sont jamais stockés comme une progression concurrente. La liste des leçons affiche la maîtrise globale, tandis que le détail d'une leçon rappelle les deux pourcentages directionnels et la maîtrise globale. Chaque ligne de vocabulaire affiche également les scores compréhension/production sur `3`, en plus du code couleur, afin que l'état reste explicite sans dépendre uniquement de la couleur.
+
 ### 7.2 Historique et état courant
 
 Deux concepts sont conservés séparément :

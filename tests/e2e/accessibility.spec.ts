@@ -28,3 +28,19 @@ test('has no automatically detectable account violations', async ({ page }) => {
 
   expect(accessibilityScanResults.violations).toEqual([]);
 });
+
+test('has no automatically detectable progress or profile-menu violations', async ({ page }) => {
+  await page.goto('/app/progress');
+
+  await expect(
+    page.getByRole('heading', { name: /Ta progression|Your progress|Tu progreso/ }),
+  ).toBeVisible();
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+
+  await page
+    .getByRole('button', {
+      name: /Ouvrir le menu du profil|Open profile menu|Abrir el menú del perfil/,
+    })
+    .click();
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+});

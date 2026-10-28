@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 8 — 26 octobre 2026.
+> **Version :** 9 — 26 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -66,6 +66,8 @@ Toutes les routes `/app/*` utilisent `AppLayout` comme garde protégé. Sans ses
 `AuthProvider` possède l'unique état de session React et dépend du contrat `AuthRepository`. `SupabaseAuthRepository` implémente Google, magic link, callback PKCE ou `token_hash`, renouvellement de session et déconnexion. `PreviewAuthRepository` fournit une session fictive uniquement au serveur Vite local sans configuration et au build E2E explicitement marqué. `UnavailableAuthRepository` maintient un build de production non configuré anonyme, avec une erreur utilisateur contrôlée. Le drapeau `VITE_ENABLE_APP_PREVIEW` reste strictement réservé à la CI Playwright et ne doit jamais être configuré dans un déploiement public.
 
 `ProgressProvider` attend ensuite une session authentifiée avant de charger `word_progress`. Il expose un snapshot en lecture seule aux pages, met ce snapshot à jour après chaque RPC réussie et bloque l’espace applicatif sur un état de chargement ou d’erreur explicite. L’aperçu local utilise `InMemoryProgressRepository` pour la durée de l’onglet uniquement ; un build public configuré utilise `SupabaseProgressRepository` et ne bascule jamais silencieusement vers une progression locale.
+
+`summarizeProgress` calcule depuis ce snapshot les nombres et pourcentages verts en compréhension, en production et dans les deux sens. La fonction reste pure dans `domain/progress` ; les pages lui fournissent uniquement les identifiants du corpus ou de la leçon à résumer. Aucun agrégat global ou par leçon n'est persisté.
 
 ## 4. Structure cible
 
@@ -272,7 +274,9 @@ idle -> answering -> validating -> correct/incorrect -> next-question -> complet
 
 Le store du quiz n'est pas global : il appartient au layout de la session. Un rechargement détruit cette session, conformément à la décision de ne pas reprendre une passe interrompue.
 
-Le snapshot de progression est global uniquement à l’espace authentifié. Il ne duplique pas la source de vérité : Supabase reste autoritaire et le Context React sert de vue courante pour filtrer les questions sans requête par composant.
+Le snapshot de progression est global uniquement à l’espace authentifié. Il ne duplique pas la source de vérité : Supabase reste autoritaire et le Context React sert de vue courante pour filtrer les questions et produire les synthèses sans requête par composant.
+
+Le bouton de profil ouvre un panneau de navigation secondaire accessible et adapté au mobile. Il relie les leçons, la progression, la langue et le compte sans ajouter une barre de navigation permanente au parcours de quiz.
 
 ## 9. Internationalisation
 
@@ -357,7 +361,7 @@ Les cinq premières étapes sont initialisées avec :
 - un fallback de chargement accessible et traduit pendant la résolution du premier chunk de route ;
 - des tests de composants sur les interactions critiques et un parcours Playwright desktop/mobile fondé sur une entrée réelle du corpus.
 
-Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Supabase Auth est connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Les migrations `profiles`, `user_preferences`, `review_events` et `word_progress`, leurs politiques RLS et la RPC idempotente `record_review` sont versionnées et testées par la CI. Le frontend charge les scores, filtre la configuration avec le sens sélectionné et persiste chaque réponse avant d’afficher la correction. L’aperçu sans configuration Supabase conserve ce comportement avec un repository en mémoire réinitialisé au rechargement. Les vues de synthèse globale et par leçon restent la prochaine tranche de l’étape 7.
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Supabase Auth est connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Les migrations `profiles`, `user_preferences`, `review_events` et `word_progress`, leurs politiques RLS et la RPC idempotente `record_review` sont versionnées et testées par la CI. Le frontend charge les scores, filtre la configuration avec le sens sélectionné et persiste chaque réponse avant d’afficher la correction. L’aperçu sans configuration Supabase conserve ce comportement avec un repository en mémoire réinitialisé au rechargement. Les synthèses globale et par leçon sont connectées à ce snapshot, la liste des leçons affiche la maîtrise dans les deux sens et chaque entrée expose ses deux scores sur trois. Le panneau du profil donne accès aux pages secondaires de progression, de langue et de compte.
 
 ## 13. Qualité et synchronisation documentaire
 

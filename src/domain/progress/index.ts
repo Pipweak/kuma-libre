@@ -7,3 +7,4 @@ export {
   type ReviewOutcome,
   type ReviewSubmission,
 } from './progressTypes';
+export { summarizeProgress, type MasteryMetric, type ProgressSummary } from './progressSummary';

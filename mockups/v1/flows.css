@@ -2386,13 +2386,21 @@ main {
 }
 
 .status-pair b {
-  display: grid;
-  width: 17px;
-  height: 17px;
-  place-items: center;
-  border-radius: 50%;
+  display: flex;
+  min-width: 31px;
+  height: 19px;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 4px;
+  border-radius: 999px;
   color: #fff;
   font-size: 0.4rem;
+}
+
+.status-pair small {
+  color: inherit;
+  font-size: 0.34rem;
 }
 
 .category-row {

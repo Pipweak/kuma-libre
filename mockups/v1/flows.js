@@ -344,7 +344,7 @@ const screenTemplates = {
       <div class="lesson-summary"><span class="lesson-big-number">06</span><div><small>CORPUS ACTUEL</small><h4>Leçon 06</h4><p>97 entrées · 2 catégories</p></div></div>
       <div class="two-progress"><div><span>Comprendre <b>68 %</b></span><i><u style="width: 68%"></u></i></div><div><span>Produire <b>41 %</b></span><i><u style="width: 41%"></u></i></div></div>
       <button class="mini-primary lesson-cta">Réviser cette leçon</button>
-      <div class="vocab-head"><strong>Vocabulaire</strong><span>55 entrées</span></div>
+      <div class="vocab-head"><strong>Vocabulaire</strong><span>C/P · score sur 3</span></div>
       <div class="vocab-list">
         ${vocabRow("食べます", "たべます · tabemasu", { fr: "manger", en: "to eat", es: "comer" }, "yellow", "red")}
         ${vocabRow("飲みます", "のみます · nomimasu", { fr: "boire", en: "to drink", es: "beber" }, "green", "yellow")}
@@ -483,7 +483,7 @@ const flows = [
     number: "09",
     title: "Changer la langue de l’application",
     description: "La langue de l’interface et la traduction principale du quiz sont synchronisées avec le compte.",
-    steps: [step("home", "Accueil"), step("menu", "Menu"), step("language", "Choix de la langue", "/app/language")]
+    steps: [step("home", "Accueil"), step("menu", "Menu"), step("language", "Choix de la langue", "/app/settings/language")]
   },
   {
     id: "account-logout",
@@ -598,7 +598,8 @@ function lessonRow(number, entryCount, percent) {
 }
 
 function vocabRow(japanese, reading, meanings, understand, produce) {
-  return `<div class="vocab-row"><div><strong>${japanese}</strong><small>${reading}</small></div><span data-vocab-meanings data-fr="${meanings.fr}" data-en="${meanings.en}" data-es="${meanings.es}">${meanings[selectedQuizLocale]}</span><i class="status-pair"><b class="${understand}">C</b><b class="${produce}">P</b></i></div>`;
+  const scoreByStatus = { red: 0, yellow: 2, green: 3 };
+  return `<div class="vocab-row"><div><strong>${japanese}</strong><small>${reading}</small></div><span data-vocab-meanings data-fr="${meanings.fr}" data-en="${meanings.en}" data-es="${meanings.es}">${meanings[selectedQuizLocale]}</span><i class="status-pair"><b class="${understand}">C <small>${scoreByStatus[understand]}/3</small></b><b class="${produce}">P <small>${scoreByStatus[produce]}/3</small></b></i></div>`;
 }
 
 function step(screen, label, route = "") {

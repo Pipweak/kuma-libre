@@ -27,10 +27,26 @@
     "label": "Langue de l’interface",
     "prompt": "Choisir la langue de l’interface"
   },
+  "languagePage": {
+    "description": "Choisis la langue des menus, des boutons et la traduction principale affichée pendant le quiz.",
+    "note": "En compréhension, les traductions enregistrées en français, anglais et espagnol restent acceptées.",
+    "title": "Langue"
+  },
   "languages": {
     "en": "English",
     "es": "Español",
     "fr": "Français"
+  },
+  "navigation": {
+    "account": "Compte",
+    "close": "Fermer le menu du profil",
+    "label": "Navigation de l’application",
+    "language": "Langue",
+    "lessons": "Réviser",
+    "open": "Ouvrir le menu du profil",
+    "progress": "Progression",
+    "synchronized": "Progression synchronisée",
+    "title": "Menu"
   },
   "notFound": {
     "backHome": "Revenir à l’accueil",

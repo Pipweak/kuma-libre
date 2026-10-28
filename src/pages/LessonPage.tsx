@@ -4,17 +4,22 @@ import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router';
 
 import { vocabularyCorpus } from '@/app/data/vocabularyCorpus';
+import { summarizeProgress } from '@/domain/progress';
 import {
   formatLessonNumber,
   getJapaneseReading,
   getLocalizedMeaning,
   getPrimaryJapaneseForm,
 } from '@/features/lessons/lessonPresentation';
+import { MasteryStatusPair } from '@/features/progress/components/MasteryStatusPair';
+import { ProgressOverview } from '@/features/progress/components/ProgressOverview';
+import { useProgress } from '@/features/progress/useProgress';
 import { resolveSupportedLocale } from '@/shared/i18n/i18n';
 import { Card } from '@/shared/ui';
 
 export function LessonPage(): ReactElement {
-  const { i18n, t } = useTranslation('lessons');
+  const { i18n, t } = useTranslation(['lessons', 'progress']);
+  const { progress } = useProgress();
   const { lessonId } = useParams();
   const locale = resolveSupportedLocale(i18n.resolvedLanguage);
   const lesson = vocabularyCorpus.lessons.find((candidate) => candidate.id === lessonId);
@@ -37,6 +42,10 @@ export function LessonPage(): ReactElement {
     const categoryEntries = entries.filter((entry) => entry.categoryId === category.id);
     return categoryEntries.length === 0 ? [] : [{ category, entries: categoryEntries }];
   });
+  const lessonSummary = summarizeProgress(
+    entries.map((entry) => entry.id),
+    progress,
+  );
 
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
@@ -74,13 +83,20 @@ export function LessonPage(): ReactElement {
         </Link>
       </div>
 
+      <div className="mt-8">
+        <ProgressOverview summary={lessonSummary} />
+      </div>
+
       <div className="mt-10 space-y-8">
         {populatedCategories.map(({ category, entries: categoryEntries }) => (
           <section aria-labelledby={`category-${category.id}`} key={category.id}>
-            <div className="mb-3 flex items-end justify-between gap-4">
-              <h2 className="text-ink text-xl font-black" id={`category-${category.id}`}>
-                {category.labels[locale]}
-              </h2>
+            <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 className="text-ink text-xl font-black" id={`category-${category.id}`}>
+                  {category.labels[locale]}
+                </h2>
+                <p className="text-muted mt-1 text-xs">{t('progress:statusLegend')}</p>
+              </div>
               <span className="text-muted text-sm">
                 {t('entryCount', { count: categoryEntries.length })}
               </span>
@@ -92,7 +108,7 @@ export function LessonPage(): ReactElement {
 
                 return (
                   <article
-                    className="grid gap-2 px-4 py-4 sm:grid-cols-[minmax(10rem,0.8fr)_1.2fr] sm:items-center sm:gap-6 sm:px-5"
+                    className="grid gap-3 px-4 py-4 sm:grid-cols-[minmax(10rem,0.8fr)_1.2fr_auto] sm:items-center sm:gap-6 sm:px-5"
                     key={entry.id}
                   >
                     <div className="min-w-0">
@@ -112,6 +128,7 @@ export function LessonPage(): ReactElement {
                     >
                       {meaning ?? t('translationUnavailable')}
                     </p>
+                    <MasteryStatusPair progress={progress[entry.id]} />
                   </article>
                 );
               })}

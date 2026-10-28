@@ -3,5 +3,9 @@ export { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from '.
 export { Card, type CardProps, type CardTone } from './Card/Card';
 export { FlagIcon, type FlagCode, type FlagIconProps } from './FlagIcon/FlagIcon';
 export { IconButton, type IconButtonProps, type IconButtonSize } from './IconButton/IconButton';
-export { ProgressBar, type ProgressBarProps } from './ProgressBar/ProgressBar';
+export {
+  ProgressBar,
+  type ProgressBarProps,
+  type ProgressBarTone,
+} from './ProgressBar/ProgressBar';
 export { Spinner, type SpinnerProps, type SpinnerSize } from './Spinner/Spinner';
