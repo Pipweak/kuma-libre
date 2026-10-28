@@ -1,13 +1,14 @@
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { QuizQuestion as QuizQuestionContract } from '@/domain/quiz';
 
 export type QuizQuestionProps = {
+  audioControl?: ReactNode;
   question: QuizQuestionContract;
 };
 
-export function QuizQuestion({ question }: QuizQuestionProps): ReactElement {
+export function QuizQuestion({ audioControl, question }: QuizQuestionProps): ReactElement {
   const { t } = useTranslation('quiz');
 
   if (question.prompt.kind === 'meaning') {
@@ -17,6 +18,7 @@ export function QuizQuestion({ question }: QuizQuestionProps): ReactElement {
           {t(`languages.${question.prompt.locale}`)}
         </span>
         <strong className="text-ink text-3xl font-black sm:text-5xl">{question.prompt.text}</strong>
+        {audioControl}
         <span className="text-muted text-sm">{t('question.productionHint')}</span>
       </div>
     );
@@ -35,6 +37,7 @@ export function QuizQuestion({ question }: QuizQuestionProps): ReactElement {
           {reading}
         </span>
       ) : null}
+      {audioControl}
       <span className="text-muted mt-2 text-sm">{t('question.comprehensionHint')}</span>
     </div>
   );

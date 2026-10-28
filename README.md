@@ -104,6 +104,18 @@ Le domaine pur [`src/domain/quiz`](src/domain/quiz) construit les sessions sans 
 
 Les fonctions acceptent une source aléatoire injectable afin que la sélection et le mélange restent entièrement testables. La feature React orchestre ces contrats sans dupliquer leurs règles. `ProgressProvider` charge les scores privés et `SupabaseProgressRepository` délègue l’écriture atomique à la RPC `record_review`.
 
+### Lecture et dictée vocales
+
+Le quiz utilise les API vocales du navigateur, sans fichier audio ni traitement serveur :
+
+- **Écouter** lit la question avec une voix compatible avec sa langue ; le japonais est prononcé depuis la forme kana, même lorsqu’un kanji est affiché ;
+- le microphone transcrit une réponse dans le champ existant avec une locale adaptée au sens du quiz ;
+- le texte transcrit reste modifiable et n’est jamais validé automatiquement ;
+- aucun enregistrement audio n’est conservé par Kuma Libre ;
+- le clavier reste toujours utilisable et le microphone est masqué lorsque le navigateur ne prend pas la reconnaissance vocale en charge.
+
+Les voix installées et la reconnaissance vocale varient selon le navigateur et le système. L’adaptateur choisit automatiquement une voix exacte, puis une voix de la même langue, puis la voix par défaut. L’accès au microphone exige un contexte sécurisé en production (`https`) ; `http://127.0.0.1` reste accepté par les navigateurs pour le développement local.
+
 ## Leçons
 
 - [Leçon 1 — Vocabulaire](lessons/lesson-01/vocabulary.md)
