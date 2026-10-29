@@ -23,7 +23,7 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
-| Chargement initial | toutes | logo empilé complet, message annoncé, boucle légère, réduction de mouvement | Prêt à valider |
+| Chargement initial | toutes | shell visible avant React, logo empilé complet, message FR/EN/ES annoncé, boucle légère, réduction de mouvement | Prêt à valider |
 | Accueil public | `/` | mot-symbole seul, profil générique, hero, exemple réel, CTA, FR/EN/ES, mobile/desktop | Prêt à valider |
 | Explication | `/#how-it-works` | trois étapes lisibles, ancre clavier, cartes responsives | Prêt à valider |
 | Choix de connexion | `/auth` | retour, Google, email, légal, focus visible | Prêt à valider |

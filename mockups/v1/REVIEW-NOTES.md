@@ -88,6 +88,7 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 - **Performance** : privilégier `transform` et `opacity`, sans bloquer la navigation ni animer inutilement la mise en page.
 - **Accessibilité** : neutraliser les mouvements non essentiels avec `prefers-reduced-motion`; le focus, les annonces et les actions clavier restent immédiats.
 - **Chargement** : le logo empilé transparent respire légèrement et la barre progresse en boucle lente. Le logo conserve toujours son ratio complet.
+- **Premier affichage** : le chargement doit être rendu par le document HTML avant React afin de rester visible lorsque le bundle JavaScript est ralenti. Il disparaît dès que React est prêt, sans durée minimale imposée.
 - **Accueil public** : entrée discrète du hero et de l’exemple de vocabulaire, pression courte des CTA et élévation légère des cartes sur un pointeur compatible.
 - **Authentification** : transition courte entre les méthodes, l’email, la confirmation et le callback.
 - **Parcours connectés** : le panneau de profil, les modales, le quiz, la correction, la progression et la dictée recevront le même langage de mouvement pendant leur passe de fidélité respective.

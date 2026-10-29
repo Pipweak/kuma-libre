@@ -336,6 +336,7 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 - Les entrées utilisent en priorité `transform`; `opacity` reste réservé aux couches décoratives qui ne portent pas de texte. Une sortie reste plus courte que l’entrée correspondante et aucune navigation ne dépend de la fin d’une animation.
 - Les modules animés définissent leur comportement `prefers-reduced-motion`; la fondation globale neutralise également les animations non essentielles par sécurité.
 - `AppLoader` est le loader plein écran partagé : logo empilé non recadré, libellé annoncé et barre décorative. Les petits chargements d’action continuent d’utiliser `Spinner`.
+- `index.html` contient un shell de chargement initial minimal, stylé par la feuille globale chargée avant le JavaScript. Il reste visible tant que l’entrée React est indisponible, puis React le remplace sans temporisation artificielle.
 
 ## 11. Tests attendus
 

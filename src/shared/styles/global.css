@@ -28,6 +28,101 @@
   }
 }
 
+@layer components {
+  .initial-app-loader {
+    display: flex;
+    min-height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    padding: var(--kl-space-6);
+    background:
+      radial-gradient(circle at 50% 42%, rgb(200 58 54 / 8%), transparent 15rem),
+      var(--kl-color-canvas);
+  }
+
+  .initial-app-loader__content {
+    display: grid;
+    width: min(100%, 18rem);
+    justify-items: center;
+    text-align: center;
+    animation: initial-loader-enter var(--kl-motion-base) var(--kl-ease-enter) both;
+  }
+
+  .initial-app-loader__logo {
+    display: block;
+    width: min(13.5rem, 70vw);
+    height: auto;
+    max-width: 100%;
+    animation: initial-brand-breathe var(--kl-motion-loop) ease-in-out infinite alternate;
+    transform-origin: 50% 75%;
+  }
+
+  .initial-app-loader__label {
+    margin: var(--kl-space-6) 0 0;
+    color: var(--kl-color-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .initial-app-loader__label [data-initial-locale] {
+    display: none;
+  }
+
+  html[lang='fr'] .initial-app-loader__label [data-initial-locale='fr'],
+  html[lang='en'] .initial-app-loader__label [data-initial-locale='en'],
+  html[lang='es'] .initial-app-loader__label [data-initial-locale='es'] {
+    display: inline;
+  }
+
+  .initial-app-loader__track {
+    width: 6rem;
+    height: 0.25rem;
+    margin-top: var(--kl-space-5);
+    overflow: hidden;
+    border-radius: var(--kl-radius-pill);
+    background: var(--kl-color-border);
+  }
+
+  .initial-app-loader__indicator {
+    display: block;
+    width: 42%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--kl-color-action);
+    animation: initial-loader-progress var(--kl-motion-loop) ease-in-out infinite alternate;
+  }
+}
+
+@keyframes initial-loader-enter {
+  from {
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes initial-brand-breathe {
+  from {
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    transform: translateY(-0.25rem) scale(1.012);
+  }
+}
+
+@keyframes initial-loader-progress {
+  from {
+    transform: translateX(-5%);
+  }
+
+  to {
+    transform: translateX(145%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -36,5 +131,11 @@
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .initial-app-loader__indicator {
+    width: 100%;
+    opacity: 0.65;
+    transform: none;
   }
 }

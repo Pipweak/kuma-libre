@@ -534,6 +534,8 @@ Les emplacements prévus sont :
 - loader Kuma Libre et chargements de session ;
 - mise à jour de la progression et bilan de session.
 
+Le chargement initial commence dans le document HTML avant le téléchargement et l’exécution de React. Il reprend le logo empilé, un libellé FR/EN/ES dérivé de la langue du navigateur et la barre animée, puis disparaît naturellement lorsque React prend possession de la racine. Aucun délai minimal artificiel ne ralentit l’accès à l’application.
+
 Les animations privilégient `transform` et, pour les couches purement décoratives, `opacity`. Un conteneur de texte ne réduit pas son opacité pendant son entrée afin de conserver en permanence le contraste attendu. Les animations évitent les déplacements de mise en page et respectent systématiquement `prefers-reduced-motion`, qui supprime les mouvements non essentiels. Les focus clavier et annonces accessibles restent immédiats, sans attendre la fin d’une transition.
 
 ## 12. Audio et reconnaissance vocale
