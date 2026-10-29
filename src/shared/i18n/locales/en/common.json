@@ -3,6 +3,7 @@
     "skipToContent": "Skip to main content"
   },
   "app": {
+    "goToHome": "Go to the signed-in home",
     "goToLessons": "Go to lessons",
     "loading": "Loading Kuma Libre",
     "loadingProgress": "Loading your progress",
@@ -47,6 +48,11 @@
     "title": "Review a little. Remember for real."
   },
   "languageSelector": {
+    "descriptions": {
+      "en": "English interface",
+      "es": "Spanish interface",
+      "fr": "French interface"
+    },
     "label": "Interface language",
     "prompt": "Choose the interface language"
   },
@@ -68,12 +74,15 @@
     "lessons": "Review",
     "open": "Open profile menu",
     "progress": "Progress",
+    "back": "Back",
     "synchronized": "Progress synchronized",
     "title": "Menu"
   },
   "notFound": {
+    "backApp": "Return to the application",
     "backHome": "Return home",
     "description": "The requested page does not exist or has been moved.",
+    "eyebrow": "Path not found",
     "title": "Page not found"
   }
 }

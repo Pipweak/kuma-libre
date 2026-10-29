@@ -1,4 +1,3 @@
-import { ArrowLeft } from 'lucide-react';
 import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router';
@@ -49,15 +48,7 @@ export function LessonPage(): ReactElement {
 
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
-      <Link
-        className="text-muted hover:text-action focus-visible:ring-action rounded-control inline-flex min-h-11 items-center gap-2 font-semibold focus-visible:ring-2 focus-visible:outline-none"
-        to="/app/lessons"
-      >
-        <ArrowLeft aria-hidden="true" size={18} />
-        {t('backToLessons')}
-      </Link>
-
-      <div className="mt-4 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
+      <div className="grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
         <div className="flex items-center gap-5">
           <span className="bg-action-soft text-action rounded-panel flex size-20 shrink-0 items-center justify-center text-2xl font-black sm:size-24">
             {lessonNumber}
@@ -76,7 +67,7 @@ export function LessonPage(): ReactElement {
           </div>
         </div>
         <Link
-          className="bg-action hover:bg-action-hover focus-visible:ring-action rounded-control inline-flex min-h-12 items-center justify-center px-6 font-bold text-white shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+          className="bg-action hover:bg-action-hover focus-visible:ring-action rounded-control inline-flex min-h-12 items-center justify-center px-6 font-bold text-white shadow-sm transition-[background-color,transform,box-shadow] duration-[var(--kl-motion-fast)] ease-[var(--kl-ease-standard)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] motion-reduce:transform-none"
           to={`/app/quiz/configure?lesson=${lesson.id}`}
         >
           {t('reviewLesson')}
@@ -108,7 +99,7 @@ export function LessonPage(): ReactElement {
 
                 return (
                   <article
-                    className="grid gap-3 px-4 py-4 sm:grid-cols-[minmax(10rem,0.8fr)_1.2fr_auto] sm:items-center sm:gap-6 sm:px-5"
+                    className="grid grid-cols-[minmax(5.5rem,0.75fr)_minmax(6rem,1fr)_auto] items-center gap-2 px-3 py-4 sm:grid-cols-[minmax(10rem,0.8fr)_1.2fr_auto] sm:gap-6 sm:px-5"
                     key={entry.id}
                   >
                     <div className="min-w-0">

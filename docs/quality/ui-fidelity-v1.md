@@ -35,13 +35,14 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
-| Panneau de profil | application | overlay, glissement, fermeture, piège de focus, `Escape` | À faire |
-| Liste des leçons | `/app/lessons` | révision rapide, progression, cartes, mobile/desktop | À faire |
-| Détail d’une leçon | `/app/lessons/:lessonId` | vocabulaire réel, C/P, CTA préconfiguré, listes responsives | À faire |
-| Progression | `/app/progress` | global, directions, leçons, libellés non fondés uniquement sur la couleur | À faire |
-| Langue | `/app/settings/language` | FR/EN/ES, état sélectionné, mise à jour immédiate | À faire |
-| Compte et déconnexion | `/app/account` | initiale, identité, confirmation animée, erreurs | À faire |
-| Page inconnue | `*` | retour sûr public ou connecté | À faire |
+| Accueil connecté | `/app` | révision rapide réelle, trois premières leçons, CTA vers le parcours complet | Prêt à valider |
+| Panneau de profil | application | overlay, glissement gauche, fermeture, piège de focus, `Escape`, réduction de mouvement | Prêt à valider |
+| Liste des leçons | `/app/lessons` | révision rapide compacte, progression, cartes, mobile/desktop | Prêt à valider |
+| Détail d’une leçon | `/app/lessons/:lessonId` | vocabulaire réel, C/P, CTA préconfiguré, listes responsives | Prêt à valider |
+| Progression | `/app/progress` | global, directions, leçons, libellés non fondés uniquement sur la couleur | Prêt à valider |
+| Langue | `/app/settings/language` | FR/EN/ES avec drapeaux et sélection explicite, mise à jour immédiate | Prêt à valider |
+| Compte et déconnexion | `/app/account` | initiale, identité, confirmation animée, erreurs | Prêt à valider |
+| Page inconnue | `*` | retour sûr public ou connecté | Prêt à valider |
 
 ## Lot 3/3 — quiz et voix
 

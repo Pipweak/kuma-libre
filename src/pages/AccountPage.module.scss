@@ -1,0 +1,80 @@
+.overlay {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--kl-space-4);
+  background: rgb(35 35 35 / 42%);
+  backdrop-filter: blur(2px);
+  animation: overlay-in var(--kl-motion-base) var(--kl-ease-enter) both;
+
+  &.closing {
+    pointer-events: none;
+    animation: overlay-out var(--kl-motion-exit) var(--kl-ease-exit) forwards;
+
+    .dialog {
+      animation: dialog-out var(--kl-motion-exit) var(--kl-ease-exit) forwards;
+    }
+  }
+}
+
+.dialog {
+  width: 100%;
+  max-width: 28rem;
+  animation: dialog-in var(--kl-motion-base) var(--kl-ease-enter) both;
+}
+
+@keyframes overlay-in {
+  from {
+    background-color: transparent;
+    backdrop-filter: blur(0);
+  }
+}
+
+@keyframes overlay-out {
+  to {
+    background-color: transparent;
+    backdrop-filter: blur(0);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes dialog-out {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@media (width >= 640px) {
+  .overlay {
+    align-items: center;
+  }
+
+  @keyframes dialog-in {
+    from {
+      transform: translateY(0) scale(0.96);
+    }
+  }
+
+  @keyframes dialog-out {
+    to {
+      transform: translateY(0) scale(0.96);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .dialog,
+  .overlay.closing,
+  .overlay.closing .dialog {
+    animation-duration: 0.01ms;
+  }
+}

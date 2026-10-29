@@ -15,7 +15,7 @@ describe('LanguagePage', () => {
     render(<LanguagePage />);
 
     expect(screen.getByRole('heading', { name: 'Langue' })).toBeDefined();
-    await user.click(screen.getByRole('button', { name: 'Español' }));
+    await user.click(screen.getByRole('button', { name: /Español/ }));
     expect(screen.getByRole('heading', { name: 'Idioma' })).toBeDefined();
   });
 });

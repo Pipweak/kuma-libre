@@ -66,6 +66,15 @@
     "retry": "Intentar guardar de nuevo",
     "saving": "Guardando…"
   },
+  "quickReview": {
+    "available_one": "{{count}} palabra lista para repasar",
+    "available_other": "{{count}} palabras listas para repasar",
+    "configure": "Configurar",
+    "empty": "No hay palabras rojas o amarillas por ahora.",
+    "eyebrow": "Repaso rápido",
+    "start": "Empezar",
+    "title": "Hasta 10 palabras para practicar"
+  },
   "question": {
     "comprehensionHint": "Da un significado",
     "lesson": "Lección {{number}}",

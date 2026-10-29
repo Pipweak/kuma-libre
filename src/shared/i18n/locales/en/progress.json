@@ -5,6 +5,7 @@
   "entryStatus": "{{direction}}: {{status}}, score {{score}} out of 3",
   "entryTotal_one": "out of {{count}} corpus entry",
   "entryTotal_other": "out of {{count}} corpus entries",
+  "headerTitle": "Progress",
   "lessonCount_one": "{{count}} lesson",
   "lessonCount_other": "{{count}} lessons",
   "masteredLabel": "mastered",

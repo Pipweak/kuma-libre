@@ -1,4 +1,4 @@
-import { BookOpen, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
@@ -31,20 +31,21 @@ export function LessonProgressLink({
       className="focus-visible:ring-action rounded-card group block focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       to={`/app/lessons/${lessonId}`}
     >
-      <Card className="hover:border-action flex min-h-28 items-center gap-4 p-4 transition-colors">
-        <span className="bg-action-soft text-action-active rounded-card flex size-14 shrink-0 items-center justify-center text-lg font-black">
+      <Card className="hover:border-action flex min-h-16 items-center gap-3 p-3 transition-[border-color,transform,box-shadow] duration-[var(--kl-motion-fast)] ease-[var(--kl-ease-standard)] group-hover:-translate-y-0.5 group-hover:shadow-md motion-reduce:transform-none">
+        <span className="bg-action-soft text-action-active rounded-control flex size-10 shrink-0 items-center justify-center text-sm font-black">
           {lessonNumber}
         </span>
         <span className="min-w-0 flex-1">
-          <strong className="text-ink block text-base">{lessonLabel}</strong>
-          <small className="text-muted mt-1 flex items-center gap-1.5 text-sm">
-            <BookOpen aria-hidden="true" size={15} />
+          <strong className="text-ink block text-sm">{lessonLabel}</strong>
+          <small className="text-muted mt-0.5 block text-xs">
             {t('entryCount', { count: entryCount })}
           </small>
         </span>
         <span className="text-right">
           <strong className="text-ink block text-sm">{percentage}</strong>
-          <small className="text-muted mt-0.5 block text-xs">{t('progress:masteredLabel')}</small>
+          <small className="text-muted mt-0.5 hidden text-xs sm:block">
+            {t('progress:masteredLabel')}
+          </small>
         </span>
         <ChevronRight
           aria-hidden="true"

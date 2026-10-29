@@ -6,6 +6,12 @@
   "description": "Choose a lesson to browse its vocabulary or start a review.",
   "entryCount_one": "{{count}} entry",
   "entryCount_other": "{{count}} entries",
+  "home": {
+    "eyebrow": "Welcome back",
+    "lessons": "Lessons",
+    "title": "What shall we review?",
+    "viewAll": "View all"
+  },
   "lessonLabel": "Lesson {{number}}",
   "notFound": {
     "description": "This lesson does not exist in the current corpus.",

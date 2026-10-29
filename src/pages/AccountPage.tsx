@@ -1,23 +1,27 @@
-import { LogOut } from 'lucide-react';
+import { CheckCircle2, LogOut } from 'lucide-react';
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { getAuthErrorCode, getUserInitial } from '@/features/auth/authPresentation';
 import { useAuth } from '@/features/auth/useAuth';
 import { Button, Card } from '@/shared/ui';
 
+import styles from './AccountPage.module.scss';
+
 export function AccountPage(): ReactElement {
   const { t } = useTranslation('auth');
   const { session, signOut } = useAuth();
   const navigate = useNavigate();
-  const [isConfirming, setIsConfirming] = useState(false);
+  const [isDialogRendered, setIsDialogRendered] = useState(false);
+  const [isDialogClosing, setIsDialogClosing] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [errorKey, setErrorKey] = useState<string | null>(null);
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const signOutButtonRef = useRef<HTMLButtonElement>(null);
   const wasConfirmingRef = useRef(false);
   const user = session?.user;
+  const isConfirming = isDialogRendered && !isDialogClosing;
 
   useEffect(() => {
     if (isConfirming) {
@@ -29,10 +33,45 @@ export function AccountPage(): ReactElement {
     wasConfirmingRef.current = isConfirming;
   }, [isConfirming]);
 
+  useEffect(() => {
+    if (!isConfirming) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isConfirming]);
+
+  useEffect(() => {
+    if (!isDialogClosing) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setIsDialogRendered(false);
+      setIsDialogClosing(false);
+    }, 200);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [isDialogClosing]);
+
+  function openConfirmation(): void {
+    setIsDialogRendered(true);
+    setIsDialogClosing(false);
+  }
+
+  function closeConfirmation(): void {
+    setIsDialogClosing(true);
+  }
+
   function handleDialogKeyDown(event: KeyboardEvent<HTMLDivElement>): void {
     if (event.key === 'Escape' && !isSigningOut) {
       event.preventDefault();
-      setIsConfirming(false);
+      closeConfirmation();
       return;
     }
 
@@ -73,35 +112,32 @@ export function AccountPage(): ReactElement {
   }
 
   return (
-    <section className="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6 sm:py-12">
-      <Link className="text-action text-sm font-bold hover:underline" to="/app/lessons">
-        {t('account.back')}
-      </Link>
-      <h1 className="font-display text-ink mt-4 text-3xl font-black sm:text-4xl">
+    <section className="mx-auto w-full max-w-xl px-4 py-7 sm:px-6 sm:py-10">
+      <h1 className="font-display text-ink sr-only text-3xl font-black tracking-tight sm:not-sr-only sm:text-4xl">
         {t('account.title')}
       </h1>
 
       <Card className="mt-6 p-6 sm:p-8">
         {user ? (
-          <div className="flex items-center gap-4">
-            <span className="bg-success text-ink flex size-14 shrink-0 items-center justify-center rounded-full text-xl font-black">
+          <div className="text-center">
+            <span className="bg-success mx-auto flex size-20 items-center justify-center rounded-full text-2xl font-black text-white">
               {getUserInitial(user.displayName, user.email)}
             </span>
-            <div className="min-w-0">
-              <p className="text-ink truncate text-lg font-black">
+            <div className="mt-4 min-w-0">
+              <p className="text-ink truncate text-xl font-black">
                 {user.displayName || t('account.fallbackName')}
               </p>
-              <p className="text-muted truncate text-sm">{user.email}</p>
+              <p className="text-muted mt-1 truncate text-sm">{user.email}</p>
             </div>
           </div>
         ) : null}
 
-        <Button
-          className="mt-7 w-full sm:w-auto"
-          onClick={() => setIsConfirming(true)}
-          ref={signOutButtonRef}
-          variant="secondary"
-        >
+        <div className="border-line mt-7 flex items-center gap-3 border-y py-4">
+          <CheckCircle2 aria-hidden="true" className="text-success" size={21} />
+          <span className="text-ink text-sm font-bold">{t('account.synchronized')}</span>
+        </div>
+
+        <Button className="mt-7 w-full" onClick={openConfirmation} ref={signOutButtonRef}>
           <LogOut aria-hidden="true" size={18} />
           {t('account.signOut')}
         </Button>
@@ -116,15 +152,16 @@ export function AccountPage(): ReactElement {
         ) : null}
       </Card>
 
-      {isConfirming ? (
+      {isDialogRendered ? (
         <div
+          aria-hidden={isDialogClosing || undefined}
           aria-labelledby="sign-out-title"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
+          className={`${styles.overlay} ${isDialogClosing ? styles.closing : ''}`}
           onKeyDown={handleDialogKeyDown}
           role="dialog"
         >
-          <Card className="w-full max-w-md p-6">
+          <Card className={`${styles.dialog} p-6`}>
             <h2 className="font-display text-ink text-2xl font-black" id="sign-out-title">
               {t('account.confirmTitle')}
             </h2>
@@ -132,7 +169,7 @@ export function AccountPage(): ReactElement {
             <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
               <Button
                 disabled={isSigningOut}
-                onClick={() => setIsConfirming(false)}
+                onClick={closeConfirmation}
                 ref={cancelButtonRef}
                 variant="secondary"
               >

@@ -66,6 +66,15 @@
     "retry": "Réessayer l’enregistrement",
     "saving": "Enregistrement…"
   },
+  "quickReview": {
+    "available_one": "{{count}} mot prêt à réviser",
+    "available_other": "{{count}} mots prêts à réviser",
+    "configure": "Configurer",
+    "empty": "Aucun mot rouge ou jaune pour le moment.",
+    "eyebrow": "Révision rapide",
+    "start": "Commencer",
+    "title": "Jusqu’à 10 mots à travailler"
+  },
   "question": {
     "comprehensionHint": "Donne une signification",
     "lesson": "Leçon {{number}}",

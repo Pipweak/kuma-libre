@@ -1,6 +1,5 @@
-import { createBrowserRouter, Navigate } from 'react-router';
+import { createBrowserRouter } from 'react-router';
 
-import { AppLayout } from '@/app/layouts/AppLayout';
 import { RootLayout } from '@/app/layouts/RootLayout';
 import { RouteLoadingFallback } from '@/app/router/RouteLoadingFallback';
 import { LandingPage } from '@/pages/LandingPage';
@@ -32,11 +31,17 @@ export const router = createBrowserRouter([
       },
       {
         path: 'app',
-        Component: AppLayout,
+        lazy: async () => {
+          const { AppLayout } = await import('@/app/layouts/AppLayout');
+          return { Component: AppLayout };
+        },
         children: [
           {
             index: true,
-            element: <Navigate replace to="lessons" />,
+            lazy: async () => {
+              const { HomePage } = await import('@/pages/HomePage');
+              return { Component: HomePage };
+            },
           },
           {
             path: 'lessons',

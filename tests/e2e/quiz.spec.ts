@@ -20,7 +20,9 @@ test('reviews a real lesson vocabulary entry through the first correction', asyn
   await page.getByRole('button', { name: 'Français' }).click();
   await page.getByRole('link', { name: 'Continuer à réviser' }).click();
 
-  await expect(page.getByRole('heading', { level: 1, name: 'Ton parcours' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Qu’est-ce qu’on révise ?' }),
+  ).toBeVisible();
   await page.getByRole('link', { name: /Leçon 01/ }).click();
 
   await expect(page.getByRole('heading', { level: 1, name: 'Leçon 01' })).toBeVisible();
