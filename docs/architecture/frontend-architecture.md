@@ -327,7 +327,7 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 - `lucide-react` fournit les icônes génériques importées individuellement.
 - Les drapeaux japonais, français, anglais et espagnol sont de petits SVG internes accompagnés d'un libellé accessible.
 - Les logos de fournisseurs et les assets Kuma Libre restent des assets de marque séparés.
-- `src/assets/brand` contient les PNG transparents de production ; `BrandLogo` conserve leurs dimensions intrinsèques et utilise `object-contain` afin d'éviter tout recadrage.
+- `src/assets/brand` contient les PNG transparents de production ; `BrandLogo` conserve leurs dimensions intrinsèques et utilise `object-contain` afin d'éviter tout recadrage. Le mot-symbole original reste archivé sans être embarqué par le build, tandis que la variante `wordmark` utilise la V2 dans les headers : son canevas est recadré au plus près des pixels visibles avec une marge de sécurité transparente, sans modifier le dessin.
 - Tailwind gère en priorité layout, espacements, responsive et états simples.
 - `src/shared/styles/tokens.css` est la source canonique des couleurs, rayons, ombres, espacements, polices et variables de thème Tailwind.
 - `src/shared/styles/_tokens.scss` constitue le pont vers les modules SCSS sans recopier les valeurs primitives.

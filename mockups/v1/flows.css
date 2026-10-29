@@ -769,7 +769,7 @@ main {
 .mini-wordmark-logo {
   width: 112px;
   height: 30px;
-  background-size: 145% auto;
+  background-size: contain;
 }
 
 .mini-ui-icon {

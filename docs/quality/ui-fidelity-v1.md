@@ -9,7 +9,7 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 
 - mobile en priorité à `390 × 844` ou largeur équivalente ;
 - contrôle desktop à `1440 × 900` ;
-- aucun logo ou asset de marque recadré ;
+- aucun logo ou asset de marque tronqué ; le mot-symbole V2 utilise un canevas transparent resserré pour que son alignement visuel corresponde à la maquette ;
 - français, anglais et espagnol sans débordement bloquant ;
 - cibles tactiles d’au moins 44 px et focus clavier visible ;
 - durée principale de `250 ms`, micro-interactions de `150 ms`, sorties de `180 ms` ;
@@ -24,7 +24,7 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
 | Chargement initial | toutes | shell visible avant React, logo empilé complet, message FR/EN/ES annoncé, boucle légère, réduction de mouvement | Prêt à valider |
-| Accueil public | `/` | mot-symbole seul, profil générique, hero, exemple réel, CTA, FR/EN/ES, mobile/desktop | Prêt à valider |
+| Accueil public | `/` | mot-symbole V2 resserré et aligné sans troncature, profil générique, hero, exemple réel, CTA, FR/EN/ES, mobile/desktop | Prêt à valider |
 | Explication | `/#how-it-works` | trois étapes lisibles, ancre clavier, cartes responsives | Prêt à valider |
 | Choix de connexion | `/auth` | retour, Google, email, légal, focus visible | Prêt à valider |
 | Adresse email | `/auth` | transition depuis les méthodes, champ étiqueté, envoi et erreur | Prêt à valider |
