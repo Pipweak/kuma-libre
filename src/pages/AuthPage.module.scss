@@ -1,0 +1,90 @@
+@use '../shared/styles/_tokens.scss' as tokens;
+
+.page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 88% 12%, rgb(200 58 54 / 10%), transparent 16rem),
+    tokens.$kl-color-canvas;
+  animation: page-enter tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+.panel {
+  animation: panel-enter tokens.$kl-motion-base tokens.$kl-ease-enter 50ms both;
+}
+
+.view {
+  animation: view-enter tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+.callbackMark {
+  position: relative;
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  margin-inline: auto;
+  place-items: center;
+  border: 0.25rem solid var(--kl-color-border);
+  border-top-color: tokens.$kl-color-action;
+  border-radius: tokens.kl-radius(pill);
+  animation: callback-spin 1s linear infinite;
+
+  &::after {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: inherit;
+    background: tokens.$kl-color-text;
+    content: '';
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes view-enter {
+  from {
+    opacity: 0;
+    transform: translateX(0.4rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes callback-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .panel,
+  .view {
+    animation: none;
+  }
+
+  .callbackMark {
+    animation-duration: 1.4s;
+  }
+}

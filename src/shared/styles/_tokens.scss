@@ -16,6 +16,15 @@ $kl-font-display: var(--kl-font-display);
 $kl-font-body: var(--kl-font-body);
 $kl-font-japanese: var(--kl-font-japanese);
 
+$kl-motion-fast: var(--kl-motion-fast);
+$kl-motion-exit: var(--kl-motion-exit);
+$kl-motion-base: var(--kl-motion-base);
+$kl-motion-slow: var(--kl-motion-slow);
+$kl-motion-loop: var(--kl-motion-loop);
+$kl-ease-enter: var(--kl-ease-enter);
+$kl-ease-exit: var(--kl-ease-exit);
+$kl-ease-standard: var(--kl-ease-standard);
+
 $kl-radii: (
   sm: var(--kl-radius-sm),
   md: var(--kl-radius-md),

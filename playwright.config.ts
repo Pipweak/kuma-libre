@@ -8,7 +8,8 @@ export default defineConfig({
   ...(process.env.CI ? { workers: 1 } : {}),
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL: 'http://127.0.0.1:4178',
+    locale: 'fr-FR',
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
@@ -24,8 +25,10 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: process.env.CI ? 'npm run preview' : 'npm run dev',
-    url: 'http://127.0.0.1:4173',
-    reuseExistingServer: !process.env.CI,
+    command: process.env.CI
+      ? 'npm run preview -- --host 127.0.0.1 --port 4178 --strictPort'
+      : 'npm run dev -- --host 127.0.0.1 --port 4178 --strictPort',
+    url: 'http://127.0.0.1:4178',
+    reuseExistingServer: false,
   },
 });

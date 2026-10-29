@@ -332,6 +332,10 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 - `src/shared/styles/tokens.css` est la source canonique des couleurs, rayons, ombres, espacements, polices et variables de thème Tailwind.
 - `src/shared/styles/_tokens.scss` constitue le pont vers les modules SCSS sans recopier les valeurs primitives.
 - Les animations et composants complexes utilisent des modules SCSS colocalisés avec une imbrication peu profonde.
+- Les durées `fast`, `exit`, `base`, `slow` et `loop`, ainsi que les courbes `enter`, `exit` et `standard`, proviennent exclusivement des tokens CSS partagés.
+- Les entrées utilisent en priorité `transform` et `opacity`. Une sortie reste plus courte que l’entrée correspondante et aucune navigation ne dépend de la fin d’une animation.
+- Les modules animés définissent leur comportement `prefers-reduced-motion`; la fondation globale neutralise également les animations non essentielles par sécurité.
+- `AppLoader` est le loader plein écran partagé : logo empilé non recadré, libellé annoncé et barre décorative. Les petits chargements d’action continuent d’utiliser `Spinner`.
 
 ## 11. Tests attendus
 
@@ -363,7 +367,7 @@ Les huit premières étapes sont initialisées avec :
 - i18next et les premiers catalogues FR, EN et ES ;
 - Tailwind CSS via son plugin Vite, les tokens visuels canoniques et le pont vers les modules SCSS ;
 - les assets PNG transparents de la marque et le composant `BrandLogo` sans recadrage ;
-- les premières primitives partagées `Button`, `IconButton`, `Card`, `FlagIcon`, `ProgressBar` et `Spinner`, avec leurs états accessibles et leurs tests ;
+- les premières primitives partagées `Button`, `IconButton`, `Card`, `FlagIcon`, `ProgressBar`, `Spinner` et `AppLoader`, avec leurs états accessibles et leurs tests ;
 - Vitest, React Testing Library, couverture V8, Playwright et axe ;
 - ESLint, Prettier, audit npm et une CI GitHub composée des checks `database`, `quality` et `e2e`.
 - l'importeur pur des formats Markdown historiques, les identifiants stables, les catégories et l'artefact `src/generated/corpus.json` ;
@@ -377,7 +381,7 @@ Les huit premières étapes sont initialisées avec :
 - la synthèse vocale locale de la question, la dictée vers l’input sans validation automatique, les états accessibles inspirés des messageries mobiles et le repli clavier lorsque les API Web Speech sont absentes ;
 - des adaptateurs vocaux remplaçables, testés avec des dépendances contrôlées, sans stockage d’audio ni dépendance du domaine de quiz aux API navigateur.
 
-Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient actuellement les 904 entrées FR/EN des 18 leçons. Sa migration ES et l'ajout de 46 lectures absentes restent à effectuer avant l'activation complète des quiz trilingues. Supabase Auth est connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Les migrations `profiles`, `user_preferences`, `review_events` et `word_progress`, leurs politiques RLS et la RPC idempotente `record_review` sont versionnées et testées par la CI. Le frontend charge les scores, filtre la configuration avec le sens sélectionné et persiste chaque réponse avant d’afficher la correction. L’aperçu sans configuration Supabase conserve ce comportement avec un repository en mémoire réinitialisé au rechargement. Les synthèses globale et par leçon sont connectées à ce snapshot, la liste des leçons affiche la maîtrise dans les deux sens et chaque entrée expose ses deux scores sur trois. Le panneau du profil donne accès aux pages secondaires de progression, de langue et de compte.
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient 904 entrées trilingues prêtes pour le quiz dans 18 leçons, avec leurs formes japonaises et leur rōmaji stocké. Supabase Auth est connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Les migrations `profiles`, `user_preferences`, `review_events` et `word_progress`, leurs politiques RLS et la RPC idempotente `record_review` sont versionnées et testées par la CI. Le frontend charge les scores, filtre la configuration avec le sens sélectionné et persiste chaque réponse avant d’afficher la correction. L’aperçu sans configuration Supabase conserve ce comportement avec un repository en mémoire réinitialisé au rechargement. Les synthèses globale et par leçon sont connectées à ce snapshot, la liste des leçons affiche la maîtrise dans les deux sens et chaque entrée expose ses deux scores sur trois. Le panneau du profil donne accès aux pages secondaires de progression, de langue et de compte. La passe de fidélité visuelle V1 est suivie page par page dans [`../quality/ui-fidelity-v1.md`](../quality/ui-fidelity-v1.md).
 
 ## 13. Qualité et synchronisation documentaire
 

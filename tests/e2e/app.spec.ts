@@ -1,14 +1,16 @@
 import { expect, test } from '@playwright/test';
 
-test('loads the public foundation and switches language', async ({ page }) => {
+test('loads the public experience and switches language', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.getByRole('heading', { level: 1, name: 'Kuma Libre' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Révise un peu. Retiens vraiment.' }),
+  ).toBeVisible();
 
   await page.getByRole('button', { name: 'Español' }).click();
 
   await expect(
-    page.getByRole('heading', { level: 2, name: 'Base técnica preparada' }),
+    page.getByRole('heading', { level: 1, name: 'Repasa un poco. Recuérdalo de verdad.' }),
   ).toBeVisible();
 });
 

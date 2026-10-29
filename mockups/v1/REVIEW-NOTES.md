@@ -78,3 +78,19 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 - **Styles futurs** : Tailwind majoritaire et modules SCSS imbriqués pour les besoins spécifiques.
 - **Catégories** : `useful-words` est une catégorie de vocabulaire possible dans toute leçon et participe aux quiz de la leçon.
 
+## Passe du 29 octobre 2026 — mouvement et fidélité d’interface
+
+### Intégré
+
+- **Durée principale** : une ouverture, une transition d’état ou une apparition structurante dure `250 ms` par défaut.
+- **Micro-interactions** : pressions, survols et changements de couleur utilisent `150 ms`; une fermeture peut être raccourcie à `180 ms`.
+- **Courbes** : les entrées décélèrent pour apparaître immédiatement puis se poser en douceur; les sorties accélèrent et restent plus courtes.
+- **Performance** : privilégier `transform` et `opacity`, sans bloquer la navigation ni animer inutilement la mise en page.
+- **Accessibilité** : neutraliser les mouvements non essentiels avec `prefers-reduced-motion`; le focus, les annonces et les actions clavier restent immédiats.
+- **Chargement** : le logo empilé transparent respire légèrement et la barre progresse en boucle lente. Le logo conserve toujours son ratio complet.
+- **Accueil public** : entrée discrète du hero et de l’exemple de vocabulaire, pression courte des CTA et élévation légère des cartes sur un pointeur compatible.
+- **Authentification** : transition courte entre les méthodes, l’email, la confirmation et le callback.
+- **Parcours connectés** : le panneau de profil, les modales, le quiz, la correction, la progression et la dictée recevront le même langage de mouvement pendant leur passe de fidélité respective.
+
+La structure de navigation de `flows.html` ne change pas : cette passe précise la restitution et les transitions des écrans existants.
+
