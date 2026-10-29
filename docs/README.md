@@ -17,6 +17,7 @@ Ce dossier complète les documents placés à la racine sans les remplacer.
 - [`quality/testing-policy.md`](quality/testing-policy.md) : tests attendus selon le type de changement.
 - [`quality/performance-accessibility.md`](quality/performance-accessibility.md) : budgets de performance et exigences d'accessibilité.
 - [`quality/definition-of-done.md`](quality/definition-of-done.md) : contrôle final avant de déclarer un changement terminé.
+- [`quality/ui-fidelity-v1.md`](quality/ui-fidelity-v1.md) : suivi page par page du rendu, du responsive et des animations V1.
 - [`development/git-flow.md`](development/git-flow.md) : branches, pull requests, release candidates, tags et releases.
 
 ## Instructions pour les agents

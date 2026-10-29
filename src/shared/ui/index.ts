@@ -1,3 +1,4 @@
+export { AppLoader, type AppLoaderProps } from './AppLoader/AppLoader';
 export { BrandLogo, type BrandLogoProps, type BrandLogoVariant } from './BrandLogo/BrandLogo';
 export { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from './Button/Button';
 export { Card, type CardProps, type CardTone } from './Card/Card';

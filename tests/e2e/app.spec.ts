@@ -1,14 +1,47 @@
+import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-test('loads the public foundation and switches language', async ({ page }) => {
+test('shows the loading shell before React can start', async ({ page }) => {
+  let releaseEntryScript: (() => void) | undefined;
+  const entryScriptGate = new Promise<void>((resolve) => {
+    releaseEntryScript = resolve;
+  });
+
+  await page.route(/\/(?:src\/main\.tsx|assets\/index-[^/]+\.js)(?:\?.*)?$/, async (route) => {
+    await entryScriptGate;
+    await route.continue();
+  });
+
+  const navigation = page.goto('/');
+
+  try {
+    const initialLoader = page.locator('[data-initial-loader]');
+    await expect(initialLoader).toBeVisible();
+    await expect(initialLoader.getByText('Chargement de Kuma Libre')).toBeVisible();
+    await expect(initialLoader.getByText('Loading Kuma Libre')).toBeHidden();
+    await expect(initialLoader.getByText('Cargando Kuma Libre')).toBeHidden();
+    expect(
+      (await new AxeBuilder({ page }).include('[data-initial-loader]').analyze()).violations,
+    ).toEqual([]);
+  } finally {
+    releaseEntryScript?.();
+    await navigation;
+  }
+
+  await expect(page.locator('[data-initial-loader]')).toHaveCount(0);
+});
+
+test('loads the public experience and switches language', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.getByRole('heading', { level: 1, name: 'Kuma Libre' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Révise un peu. Retiens vraiment.' }),
+  ).toBeVisible();
 
   await page.getByRole('button', { name: 'Español' }).click();
 
   await expect(
-    page.getByRole('heading', { level: 2, name: 'Base técnica preparada' }),
+    page.getByRole('heading', { level: 1, name: 'Repasa un poco. Recuérdalo de verdad.' }),
   ).toBeVisible();
 });
 

@@ -6,7 +6,7 @@ import { createLoginPath } from '@/features/auth/authNavigation';
 import { useAuth } from '@/features/auth/useAuth';
 import { ProfileMenu } from '@/features/navigation/components/ProfileMenu';
 import { useProgress } from '@/features/progress/useProgress';
-import { BrandLogo, Button, Card, Spinner } from '@/shared/ui';
+import { AppLoader, BrandLogo, Button, Card } from '@/shared/ui';
 
 export function AppLayout(): ReactElement {
   const { t } = useTranslation('common');
@@ -16,11 +16,7 @@ export function AppLayout(): ReactElement {
   const isQuizSession = pathname === '/app/quiz';
 
   if (status === 'initializing') {
-    return (
-      <div className="bg-canvas flex min-h-dvh items-center justify-center p-6">
-        <Spinner label={t('app.loadingSession')} size="lg" />
-      </div>
-    );
+    return <AppLoader label={t('app.loadingSession')} />;
   }
 
   if (status === 'anonymous' || !session) {
@@ -28,11 +24,7 @@ export function AppLayout(): ReactElement {
   }
 
   if (progress.status === 'idle' || progress.status === 'loading') {
-    return (
-      <div className="bg-canvas flex min-h-dvh items-center justify-center p-6">
-        <Spinner label={t('app.loadingProgress')} size="lg" />
-      </div>
-    );
+    return <AppLoader label={t('app.loadingProgress')} />;
   }
 
   if (progress.status === 'error') {

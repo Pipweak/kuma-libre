@@ -12,16 +12,39 @@
     "progressErrorTitle": "Progreso no disponible",
     "retryProgress": "Reintentar"
   },
-  "foundation": {
-    "description": "La base de React, el sistema de diseño y los primeros componentes compartidos ya están operativos.",
-    "title": "Base técnica preparada"
-  },
   "landing": {
-    "description": "Una experiencia pensada para móviles para repasar vocabulario japonés en ambos sentidos.",
-    "eyebrow": "Repaso de vocabulario japonés",
+    "accountNote": "Se necesita una cuenta para iniciar un cuestionario y sincronizar tu progreso.",
     "continueAction": "Seguir repasando",
+    "description": "Cuestionarios sencillos para practicar cada palabra en ambos sentidos y seguir tu progreso.",
+    "eyebrow": "Vocabulario japonés",
+    "homeLabel": "Inicio de Kuma Libre",
+    "howAction": "¿Cómo funciona?",
+    "methodDescription": "Elige una lección, responde en ambos sentidos y encuentra enseguida las palabras que debes repasar.",
+    "methodEyebrow": "Una rutina sencilla",
+    "methodTitle": "Tres pasos para recordar mejor.",
+    "openApplication": "Abrir la aplicación",
+    "openAuthentication": "Abrir inicio de sesión",
+    "sample": {
+      "kana": "たべます",
+      "meaning": "comer",
+      "word": "食べます"
+    },
     "signInAction": "Iniciar sesión",
-    "title": "Kuma Libre"
+    "steps": {
+      "0": {
+        "description": "Selecciona una o varias lecciones de tu recorrido.",
+        "title": "Elige"
+      },
+      "1": {
+        "description": "Practica la comprensión y después la producción en japonés.",
+        "title": "Repasa"
+      },
+      "2": {
+        "description": "Sigue por separado lo que entiendes y lo que sabes producir.",
+        "title": "Progresa"
+      }
+    },
+    "title": "Repasa un poco. Recuérdalo de verdad."
   },
   "languageSelector": {
     "label": "Idioma de la interfaz",

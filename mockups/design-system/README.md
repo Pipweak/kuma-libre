@@ -9,7 +9,8 @@ Ce dossier transforme les références visuelles générées en fondations réut
 - `styles/tokens.css` et `styles/tokens.scss` restent des points d'entrée de compatibilité pour les maquettes HTML et redirigent vers les sources applicatives.
 - `styles/brand.css` fournit les variantes réutilisables de la marque.
 - `assets/kuma-bear-wink.png` est la référence raster transparente de la mascotte avec son clin d’œil.
-- `assets/kuma-wordmark.png` contient le mot-symbole transparent sans la mascotte.
+- `assets/kuma-wordmark.png` conserve le mot-symbole transparent original sans la mascotte.
+- `assets/kuma-wordmark-v2.png` est la variante de header au canevas transparent resserré, sans modification du dessin.
 - `assets/kuma-logo-horizontal.png` contient la composition horizontale transparente avec la mascotte.
 - `assets/kuma-logo-stacked.png` contient la composition verticale transparente utilisée pendant le chargement.
 

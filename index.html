@@ -8,10 +8,40 @@
       name="description"
       content="Kuma Libre, une application mobile-first de révision du vocabulaire japonais."
     />
+    <link rel="stylesheet" href="/src/shared/styles/global.css" />
     <title>Kuma Libre</title>
+    <script>
+      (() => {
+        const locale = navigator.language.toLowerCase().split('-')[0];
+        document.documentElement.lang = ['fr', 'en', 'es'].includes(locale) ? locale : 'fr';
+      })();
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <section class="initial-app-loader" data-initial-loader role="status">
+        <div class="initial-app-loader__content">
+          <img
+            alt=""
+            class="initial-app-loader__logo"
+            decoding="async"
+            draggable="false"
+            fetchpriority="high"
+            height="1402"
+            src="/src/assets/brand/kuma-logo-stacked.png"
+            width="1122"
+          />
+          <p class="initial-app-loader__label">
+            <span data-initial-locale="fr" lang="fr">Chargement de Kuma Libre</span>
+            <span data-initial-locale="en" lang="en">Loading Kuma Libre</span>
+            <span data-initial-locale="es" lang="es">Cargando Kuma Libre</span>
+          </p>
+          <span aria-hidden="true" class="initial-app-loader__track">
+            <span class="initial-app-loader__indicator"></span>
+          </span>
+        </div>
+      </section>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

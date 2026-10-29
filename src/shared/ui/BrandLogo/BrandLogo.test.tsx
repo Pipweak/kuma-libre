@@ -8,7 +8,7 @@ describe('BrandLogo', () => {
     ['bear', 1254, 1254, 'kuma-bear-wink'],
     ['horizontal', 1536, 1024, 'kuma-logo-horizontal'],
     ['stacked', 1122, 1402, 'kuma-logo-stacked'],
-    ['wordmark', 2172, 724, 'kuma-wordmark'],
+    ['wordmark', 1610, 328, 'kuma-wordmark-v2'],
   ] satisfies ReadonlyArray<readonly [BrandLogoVariant, number, number, string]>)(
     'preserves the intrinsic ratio of the %s asset',
     (variant, expectedWidth, expectedHeight, sourceFragment) => {
@@ -29,5 +29,6 @@ describe('BrandLogo', () => {
 
     expect(image?.getAttribute('alt')).toBe('');
     expect(image?.getAttribute('loading')).toBe('lazy');
+    expect(image?.getAttribute('src')).toContain('kuma-wordmark-v2');
   });
 });

@@ -1,3 +1,4 @@
+import { CircleAlert } from 'lucide-react';
 import { useEffect, useRef, useState, type ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useSearchParams } from 'react-router';
@@ -5,7 +6,9 @@ import { Link, useNavigate, useSearchParams } from 'react-router';
 import { resolveSafeReturnTo } from '@/features/auth/authNavigation';
 import { getAuthErrorCode } from '@/features/auth/authPresentation';
 import { useAuth } from '@/features/auth/useAuth';
-import { BrandLogo, Card, Spinner } from '@/shared/ui';
+import { Card } from '@/shared/ui';
+
+import styles from './AuthPage.module.scss';
 
 export function AuthCallbackPage(): ReactElement {
   const { t } = useTranslation('auth');
@@ -28,12 +31,14 @@ export function AuthCallbackPage(): ReactElement {
   }, [completeSignIn, navigate, returnTo]);
 
   return (
-    <section className="bg-canvas flex min-h-dvh items-center px-5 py-10">
-      <Card className="mx-auto w-full max-w-md p-8 text-center">
-        <BrandLogo alt="" aria-hidden="true" className="mx-auto w-36" priority />
+    <section className={`${styles.page} flex items-center px-5 py-10`}>
+      <Card className={`${styles.panel} mx-auto w-full max-w-md p-8 text-center sm:p-10`}>
         {errorKey ? (
           <>
-            <h1 className="font-display text-ink mt-7 text-3xl font-black">
+            <span className="bg-danger-soft text-danger mx-auto flex size-14 items-center justify-center rounded-full">
+              <CircleAlert aria-hidden="true" size={26} />
+            </span>
+            <h1 className="font-display text-ink mt-6 text-3xl font-black">
               {t('callback.errorTitle')}
             </h1>
             <p className="text-muted mt-3 leading-7" role="alert">
@@ -48,8 +53,12 @@ export function AuthCallbackPage(): ReactElement {
           </>
         ) : (
           <>
-            <Spinner className="mx-auto mt-8" label={t('callback.loading')} size="lg" />
-            <h1 className="font-display text-ink mt-5 text-3xl font-black">
+            <span
+              aria-label={t('callback.loading')}
+              className={styles.callbackMark}
+              role="status"
+            />
+            <h1 className="font-display text-ink mt-6 text-3xl font-black">
               {t('callback.title')}
             </h1>
             <p className="text-muted mt-3 leading-7">{t('callback.description')}</p>

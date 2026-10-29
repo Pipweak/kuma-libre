@@ -54,7 +54,8 @@ describe('LoginPage', () => {
       </AuthProvider>,
     );
 
-    await user.type(await screen.findByLabelText('Adresse email'), 'vincent@example.com');
+    await user.click(await screen.findByRole('button', { name: 'Continuer avec un email' }));
+    await user.type(screen.getByLabelText('Adresse email'), 'vincent@example.com');
     await user.click(screen.getByRole('button', { name: 'Recevoir le lien de connexion' }));
 
     expect(repository.signInWithMagicLink).toHaveBeenCalledWith(
@@ -63,6 +64,9 @@ describe('LoginPage', () => {
     );
     expect(await screen.findByRole('heading', { name: 'Vérifie ta boîte mail.' })).toBeDefined();
     expect(screen.getByText(/vincent@example.com/)).toBeDefined();
+
+    await user.click(screen.getByRole('button', { name: 'Renvoyer le lien' }));
+    expect(repository.signInWithMagicLink).toHaveBeenCalledTimes(2);
   });
 
   it('shows a localized configuration error instead of provider details', async () => {

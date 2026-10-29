@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** architecture cible validée pour guider le démarrage du projet.
-> **Version :** 8 — 26 octobre 2026.
+> **Version :** 9 — 29 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -49,6 +49,7 @@ L'application sera un outil d'étude indépendant, avec son propre nom, son prop
 | Styling des composants | Tailwind CSS majoritaire, complété par des modules SCSS imbriqués lorsque nécessaire |
 | Audio | Synthèse et reconnaissance vocales du navigateur, avec saisie clavier toujours disponible |
 | Approche UI | Mobile-first, centrée sur un quiz volontairement minimal |
+| Mouvement | Animations courtes, non bloquantes, pilotées par des tokens et désactivables via `prefers-reduced-motion` |
 
 ## 3. Vue générale
 
@@ -507,6 +508,35 @@ La langue de l'interface et les langues acceptées par le moteur de quiz sont de
 - les traductions des autres langues peuvent être rappelées après validation dans la correction, mais pas dans la question de production.
 
 Le choix est disponible dans le menu du profil et synchronisé dans `user_preferences` pour un compte connecté. Les drapeaux ne sont jamais la seule information accessible : chaque option conserve le nom de la langue.
+
+### 11.6 Mouvement et transitions
+
+Le mouvement sert uniquement à expliquer un changement d’état, confirmer une action ou préserver la continuité spatiale. Il ne doit jamais ralentir la réponse au clavier, masquer une information ou devenir nécessaire pour comprendre l’interface.
+
+Le système partagé utilise les durées suivantes :
+
+- `150 ms` pour les interactions immédiates comme la pression, le survol et un changement de couleur ;
+- `180 ms` pour une sortie rapide ;
+- `250 ms` comme durée principale pour une ouverture, un changement d’état ou l’apparition d’un contenu ;
+- `400 ms` au maximum pour une entrée plus ample et non bloquante ;
+- environ `1 400 ms` uniquement pour les boucles continues justifiées, comme le loader ou l’écoute du microphone.
+
+Une entrée utilise une courbe de décélération afin d’apparaître rapidement puis de se poser en douceur. Une sortie peut utiliser une accélération plus courte. Les animations continues et décoratives restent exceptionnelles.
+
+Les emplacements prévus sont :
+
+- ouverture et fermeture du panneau de profil et des modales ;
+- transitions entre les vues d’authentification ;
+- progression et changement de question du quiz ;
+- apparition de la correction correcte ou incorrecte ;
+- états d’écoute, transcription et erreur du microphone ;
+- pression des boutons et cartes interactives ;
+- loader Kuma Libre et chargements de session ;
+- mise à jour de la progression et bilan de session.
+
+Le chargement initial commence dans le document HTML avant le téléchargement et l’exécution de React. Il reprend le logo empilé, un libellé FR/EN/ES dérivé de la langue du navigateur et la barre animée, puis disparaît naturellement lorsque React prend possession de la racine. Aucun délai minimal artificiel ne ralentit l’accès à l’application.
+
+Les animations privilégient `transform` et, pour les couches purement décoratives, `opacity`. Un conteneur de texte ne réduit pas son opacité pendant son entrée afin de conserver en permanence le contraste attendu. Les animations évitent les déplacements de mise en page et respectent systématiquement `prefers-reduced-motion`, qui supprime les mouvements non essentiels. Les focus clavier et annonces accessibles restent immédiats, sans attendre la fin d’une transition.
 
 ## 12. Audio et reconnaissance vocale
 

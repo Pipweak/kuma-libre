@@ -12,16 +12,39 @@
     "progressErrorTitle": "Progress unavailable",
     "retryProgress": "Try again"
   },
-  "foundation": {
-    "description": "The React foundation, design system, and first shared components are now operational.",
-    "title": "Technical foundation ready"
-  },
   "landing": {
-    "description": "A mobile-first experience for practising Japanese vocabulary in both directions.",
-    "eyebrow": "Japanese vocabulary practice",
+    "accountNote": "An account is required to start a quiz and synchronize your progress.",
     "continueAction": "Continue reviewing",
+    "description": "Simple quizzes to practise every word in both directions and follow your progress.",
+    "eyebrow": "Japanese vocabulary",
+    "homeLabel": "Kuma Libre home",
+    "howAction": "How does it work?",
+    "methodDescription": "Choose a lesson, answer in both directions, and immediately find the words to review.",
+    "methodEyebrow": "A simple routine",
+    "methodTitle": "Three steps to remember more.",
+    "openApplication": "Open the application",
+    "openAuthentication": "Open sign in",
+    "sample": {
+      "kana": "たべます",
+      "meaning": "eat",
+      "word": "食べます"
+    },
     "signInAction": "Sign in",
-    "title": "Kuma Libre"
+    "steps": {
+      "0": {
+        "description": "Select one or more lessons from your learning path.",
+        "title": "Choose"
+      },
+      "1": {
+        "description": "Practise Japanese comprehension, then production.",
+        "title": "Review"
+      },
+      "2": {
+        "description": "Track separately what you understand and what you can produce.",
+        "title": "Progress"
+      }
+    },
+    "title": "Review a little. Remember for real."
   },
   "languageSelector": {
     "label": "Interface language",

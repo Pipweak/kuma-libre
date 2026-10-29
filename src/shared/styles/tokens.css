@@ -80,9 +80,18 @@
   --kl-space-12: 3rem;
   --kl-space-16: 4rem;
 
-  --kl-motion-fast: 140ms;
-  --kl-motion-standard: 220ms;
-  --kl-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --kl-motion-fast: 150ms;
+  --kl-motion-exit: 180ms;
+  --kl-motion-base: 250ms;
+  --kl-motion-slow: 400ms;
+  --kl-motion-loop: 1400ms;
+  --kl-ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --kl-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --kl-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Backward-compatible aliases while existing components migrate to the motion scale. */
+  --kl-motion-standard: var(--kl-motion-base);
+  --kl-ease-out: var(--kl-ease-enter);
 }
 
 @theme inline {
@@ -115,5 +124,8 @@
   --radius-pill: var(--kl-radius-pill);
   --shadow-card: var(--kl-shadow-sm);
   --shadow-panel: var(--kl-shadow-md);
-  --ease-kl-out: var(--kl-ease-out);
+  --ease-kl-enter: var(--kl-ease-enter);
+  --ease-kl-exit: var(--kl-ease-exit);
+  --ease-kl-standard: var(--kl-ease-standard);
+  --ease-kl-out: var(--kl-ease-enter);
 }

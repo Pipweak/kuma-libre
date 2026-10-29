@@ -13,7 +13,7 @@ describe('LandingPage', () => {
     await i18n.changeLanguage('fr');
   });
 
-  it('renders the localized public foundation page for an anonymous visitor', async () => {
+  it('renders the localized public experience for an anonymous visitor', async () => {
     render(
       <AuthProvider repository={new UnavailableAuthRepository()}>
         <MemoryRouter>
@@ -22,10 +22,16 @@ describe('LandingPage', () => {
       </AuthProvider>,
     );
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Kuma Libre' })).toBeDefined();
     expect(
-      screen.getByRole('heading', { level: 2, name: 'Fondation technique en place' }),
+      await screen.findByRole('heading', {
+        level: 1,
+        name: 'Révise un peu. Retiens vraiment.',
+      }),
     ).toBeDefined();
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Trois étapes pour mieux retenir.' }),
+    ).toBeDefined();
+    expect(screen.getByText('食べます')).toBeDefined();
     expect(screen.getByRole('group', { name: 'Langue de l’interface' })).toBeDefined();
     expect((await screen.findByRole('link', { name: 'Se connecter' })).getAttribute('href')).toBe(
       '/auth',
@@ -44,5 +50,8 @@ describe('LandingPage', () => {
     expect(
       (await screen.findByRole('link', { name: 'Continuer à réviser' })).getAttribute('href'),
     ).toBe('/app');
+    expect(screen.getByRole('link', { name: 'Ouvrir l’application' }).getAttribute('href')).toBe(
+      '/app',
+    );
   });
 });
