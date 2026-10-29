@@ -333,7 +333,7 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 - `src/shared/styles/_tokens.scss` constitue le pont vers les modules SCSS sans recopier les valeurs primitives.
 - Les animations et composants complexes utilisent des modules SCSS colocalisés avec une imbrication peu profonde.
 - Les durées `fast`, `exit`, `base`, `slow` et `loop`, ainsi que les courbes `enter`, `exit` et `standard`, proviennent exclusivement des tokens CSS partagés.
-- Les entrées utilisent en priorité `transform` et `opacity`. Une sortie reste plus courte que l’entrée correspondante et aucune navigation ne dépend de la fin d’une animation.
+- Les entrées utilisent en priorité `transform`; `opacity` reste réservé aux couches décoratives qui ne portent pas de texte. Une sortie reste plus courte que l’entrée correspondante et aucune navigation ne dépend de la fin d’une animation.
 - Les modules animés définissent leur comportement `prefers-reduced-motion`; la fondation globale neutralise également les animations non essentielles par sécurité.
 - `AppLoader` est le loader plein écran partagé : logo empilé non recadré, libellé annoncé et barre décorative. Les petits chargements d’action continuent d’utiliser `Spinner`.
 

@@ -8,7 +8,6 @@
     radial-gradient(circle at 92% 16%, rgb(200 58 54 / 11%), transparent 18rem),
     radial-gradient(circle at 8% 88%, rgb(146 84 46 / 7%), transparent 20rem),
     tokens.$kl-color-canvas;
-  animation: page-enter tokens.$kl-motion-base tokens.$kl-ease-enter both;
 
   &::before {
     position: absolute;
@@ -64,30 +63,17 @@
   }
 }
 
-@keyframes page-enter {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes content-rise {
   from {
-    opacity: 0;
     transform: translateY(0.75rem);
   }
 
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page,
   .heroCopy,
   .sampleCard {
     animation: none;

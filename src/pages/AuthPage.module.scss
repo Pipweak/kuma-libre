@@ -5,7 +5,6 @@
   background:
     radial-gradient(circle at 88% 12%, rgb(200 58 54 / 10%), transparent 16rem),
     tokens.$kl-color-canvas;
-  animation: page-enter tokens.$kl-motion-base tokens.$kl-ease-enter both;
 }
 
 .panel {
@@ -37,36 +36,22 @@
   }
 }
 
-@keyframes page-enter {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes panel-enter {
   from {
-    opacity: 0;
     transform: translateY(0.75rem) scale(0.99);
   }
 
   to {
-    opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
 
 @keyframes view-enter {
   from {
-    opacity: 0;
     transform: translateX(0.4rem);
   }
 
   to {
-    opacity: 1;
     transform: translateX(0);
   }
 }
@@ -78,7 +63,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page,
   .panel,
   .view {
     animation: none;

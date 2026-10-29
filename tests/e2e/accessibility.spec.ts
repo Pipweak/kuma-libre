@@ -13,13 +13,16 @@ test('removes non-essential public motion when reduced motion is requested', asy
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
 
-  const animationDurationMs = await page.locator('main > section').evaluate((element) => {
-    const duration =
-      window.getComputedStyle(element).animationDuration.split(',').at(0)?.trim() ?? '0s';
-    const parsedDuration = Number.parseFloat(duration);
+  const animationDurationMs = await page
+    .getByRole('heading', { level: 1 })
+    .locator('..')
+    .evaluate((element) => {
+      const duration =
+        window.getComputedStyle(element).animationDuration.split(',').at(0)?.trim() ?? '0s';
+      const parsedDuration = Number.parseFloat(duration);
 
-    return duration.endsWith('ms') ? parsedDuration : parsedDuration * 1000;
-  });
+      return duration.endsWith('ms') ? parsedDuration : parsedDuration * 1000;
+    });
 
   expect(animationDurationMs).toBeLessThanOrEqual(0.01);
 });

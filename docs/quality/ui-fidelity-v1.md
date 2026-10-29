@@ -16,6 +16,7 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 - animations longues limitées aux états continus justifiés ;
 - aucune animation nécessaire à la compréhension ou bloquant une action ;
 - `prefers-reduced-motion` neutralise le mouvement non essentiel ;
+- aucune transition ne diminue temporairement le contraste d’un texte ou d’un CTA ;
 - pas de régression axe, de saut de mise en page visible ou de ralentissement d’interaction.
 
 ## Lot 1/3 — fondations, public et authentification
