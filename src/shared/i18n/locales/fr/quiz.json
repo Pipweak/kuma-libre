@@ -5,6 +5,7 @@
     "label": "Ta réponse",
     "placeholderComprehension": "Français, anglais ou espagnol",
     "placeholderProduction": "Rōmaji, kana ou kanji",
+    "productionLabel": "Ta réponse en japonais",
     "skip": "Je ne sais pas",
     "validate": "Valider"
   },
@@ -14,6 +15,8 @@
     "direction": "Sens du quiz",
     "empty": "Aucun mot ne correspond à cette sélection.",
     "emptyHint": "Ajoute les mots non maîtrisés ou choisis une autre leçon.",
+    "lessonPrefilled": "Leçon {{number}} présélectionnée",
+    "lessonPrefilledHint": "Tu peux encore modifier le périmètre de cette passe.",
     "lessons": "Leçons",
     "mastery": "Mots à inclure",
     "order": "Ordre des questions",
@@ -41,7 +44,9 @@
   "exit": {
     "cancel": "Continuer le quiz",
     "confirm": "Quitter la passe",
-    "description": "La position de cette passe ne sera pas conservée.",
+    "description_one": "{{count}} réponse déjà validée est sauvegardée. La passe ne pourra pas être reprise.",
+    "description_other": "{{count}} réponses déjà validées sont sauvegardées. La passe ne pourra pas être reprise.",
+    "description_zero": "Aucune réponse n’a encore été validée. La passe ne pourra pas être reprise.",
     "open": "Quitter le quiz",
     "title": "Quitter cette passe ?"
   },
@@ -82,7 +87,7 @@
     "progress": "Question {{current}} sur {{total}}"
   },
   "result": {
-    "backToLessons": "Retour aux leçons",
+    "backToHome": "Retour à l’accueil",
     "correct": "Correctes",
     "description": "Les erreurs reviendront dans une prochaine passe.",
     "incorrect": "À revoir",

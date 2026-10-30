@@ -50,6 +50,8 @@ describe('QuizCorrection', () => {
 
     expect(screen.getByRole('heading', { name: 'À retravailler' })).toBeDefined();
     expect(screen.getByText('nomimasu')).toBeDefined();
+    expect(screen.getByText('Réponse attendue')).toBeDefined();
+    expect(screen.getByText('食べます · たべます · tabemasu')).toBeDefined();
     expect(screen.getByText('Ce mot reste non maîtrisé.')).toBeDefined();
   });
 

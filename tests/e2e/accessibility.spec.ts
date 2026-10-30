@@ -1,6 +1,10 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
+import corpus from '../../src/generated/corpus.json' with { type: 'json' };
+
+const FIRST_ENTRY = corpus.entries.find((entry) => entry.lessonId === corpus.lessons[0]!.id)!;
+
 test('has no automatically detectable accessibility violations', async ({ page }) => {
   await page.goto('/');
 
@@ -67,6 +71,22 @@ test('has no automatically detectable quiz-configuration violations', async ({ p
   const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
   expect(accessibilityScanResults.violations).toEqual([]);
+});
+
+test('has no automatically detectable quiz-question or correction violations', async ({ page }) => {
+  await page.goto('/app/quiz/configure?lesson=lesson-01');
+  await page.getByText(/Dans l’ordre|In order|En orden/, { exact: true }).click();
+  await page.getByRole('button', { name: /Commencer|Start|Empezar/ }).click();
+
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+
+  await page
+    .getByRole('textbox', { name: /Ta réponse|Your answer|Tu respuesta/ })
+    .fill(FIRST_ENTRY.meanings.fr[0]!);
+  await page.getByRole('button', { name: /Valider|Validate|Validar/ }).click();
+
+  await expect(page.getByRole('heading', { name: /Bonne réponse|Correct answer/ })).toBeVisible();
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
 });
 
 test('has no automatically detectable account violations', async ({ page }) => {

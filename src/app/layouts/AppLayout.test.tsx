@@ -25,6 +25,7 @@ function renderLayoutAt(
         children: [
           { path: 'lessons', element: <h1>Leçons de test</h1> },
           { path: 'quiz', element: <h1>Question de test</h1> },
+          { path: 'quiz/result', element: <h1>Résultat de test</h1> },
         ],
       },
       { path: '/auth', element: <h1>Connexion requise</h1> },
@@ -68,6 +69,13 @@ describe('AppLayout', () => {
     renderLayoutAt('/app/quiz');
 
     expect(await screen.findByRole('heading', { name: 'Question de test' })).toBeDefined();
+    expect(screen.queryByRole('link', { name: 'Accéder à l’accueil connecté' })).toBeNull();
+  });
+
+  it('keeps the result screen free of the browsing header', async () => {
+    renderLayoutAt('/app/quiz/result');
+
+    expect(await screen.findByRole('heading', { name: 'Résultat de test' })).toBeDefined();
     expect(screen.queryByRole('link', { name: 'Accéder à l’accueil connecté' })).toBeNull();
   });
 

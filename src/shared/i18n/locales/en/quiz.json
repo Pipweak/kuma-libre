@@ -5,6 +5,7 @@
     "label": "Your answer",
     "placeholderComprehension": "French, English, or Spanish",
     "placeholderProduction": "Rōmaji, kana, or kanji",
+    "productionLabel": "Your answer in Japanese",
     "skip": "I don’t know",
     "validate": "Check"
   },
@@ -14,6 +15,8 @@
     "direction": "Quiz direction",
     "empty": "No words match this selection.",
     "emptyHint": "Include unknown words or choose another lesson.",
+    "lessonPrefilled": "Lesson {{number}} preselected",
+    "lessonPrefilledHint": "You can still change the scope of this session.",
     "lessons": "Lessons",
     "mastery": "Words to include",
     "order": "Question order",
@@ -41,7 +44,9 @@
   "exit": {
     "cancel": "Continue the quiz",
     "confirm": "Leave session",
-    "description": "Your position in this session will not be kept.",
+    "description_one": "{{count}} validated answer has been saved. This session cannot be resumed.",
+    "description_other": "{{count}} validated answers have been saved. This session cannot be resumed.",
+    "description_zero": "No answers have been validated yet. This session cannot be resumed.",
     "open": "Leave quiz",
     "title": "Leave this session?"
   },
@@ -82,7 +87,7 @@
     "progress": "Question {{current}} of {{total}}"
   },
   "result": {
-    "backToLessons": "Back to lessons",
+    "backToHome": "Back to home",
     "correct": "Correct",
     "description": "Mistakes will return in a future session.",
     "incorrect": "To review",

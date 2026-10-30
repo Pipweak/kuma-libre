@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 12 — 29 octobre 2026.
+> **Version :** 13 — 29 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -291,7 +291,7 @@ Le store du quiz n'est pas global : il appartient au layout de la session. Un re
 
 Le snapshot de progression est global uniquement à l’espace authentifié. Il ne duplique pas la source de vérité : Supabase reste autoritaire et le Context React sert de vue courante pour filtrer les questions et produire les synthèses sans requête par composant.
 
-`AppHeader` centralise les variantes du header protégé : mot-symbole et profil pour l'accueil et la liste des leçons, puis retour contextuel, titre et profil sur les écrans secondaires, y compris la configuration du quiz. Ses trois colonnes sont explicitement positionnées afin que la flèche reste à gauche, le titre au centre et le profil à droite, même lorsque le titre visuel passe dans le contenu sur desktop. Les pages secondaires ne dupliquent pas le retour dans leur contenu. La question active masque ce header afin de préserver la concentration et conserve sa confirmation de sortie dédiée.
+`AppHeader` centralise les variantes du header protégé : mot-symbole et profil pour l'accueil et la liste des leçons, puis retour contextuel, titre et profil sur les écrans secondaires, y compris la configuration du quiz. Ses trois colonnes sont explicitement positionnées afin que la flèche reste à gauche, le titre au centre et le profil à droite, même lorsque le titre visuel passe dans le contenu sur desktop. Les pages secondaires ne dupliquent pas le retour dans leur contenu. La question active et son bilan masquent ce header afin de préserver la concentration. La confirmation de sortie appartient à `QuizPage`, restaure le focus lorsqu'elle est annulée et revient à l'accueil connecté lorsqu'elle est confirmée.
 
 Le bouton de profil ouvre depuis la droite, côté déclencheur, un panneau de navigation secondaire accessible et adapté au mobile. Il relie l'accueil de révision, la progression, la langue et le compte sans ajouter une barre de navigation permanente au parcours de quiz. Son entrée de `250 ms`, sa sortie de `180 ms`, son piège de focus, sa fermeture par `Escape` et sa réduction de mouvement restent gérés dans le composant.
 
@@ -340,6 +340,7 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 - Les durées `fast`, `exit`, `base`, `slow` et `loop`, ainsi que les courbes `enter`, `exit` et `standard`, proviennent exclusivement des tokens CSS partagés.
 - Les entrées utilisent en priorité `transform`; `opacity` reste réservé aux couches décoratives qui ne portent pas de texte. Une sortie reste plus courte que l’entrée correspondante et aucune navigation ne dépend de la fin d’une animation.
 - Les modules animés définissent leur comportement `prefers-reduced-motion`; la fondation globale neutralise également les animations non essentielles par sécurité.
+- Les questions, corrections, états de dictée, confirmations et bilans du quiz partagent cette échelle de mouvement. Le contenu textuel reste opaque : seules les couches décoratives peuvent animer leur opacité.
 - `AppLoader` est le loader plein écran partagé : logo empilé non recadré, libellé annoncé et barre décorative. Les petits chargements d’action continuent d’utiliser `Spinner`.
 - `index.html` contient un shell de chargement initial minimal, stylé par la feuille globale chargée avant le JavaScript. Il reste visible tant que l’entrée React est indisponible, puis React le remplace sans temporisation artificielle.
 

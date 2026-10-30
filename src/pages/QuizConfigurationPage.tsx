@@ -14,6 +14,7 @@ import {
 import { formatLessonNumber } from '@/features/lessons/lessonPresentation';
 import { useProgress } from '@/features/progress/useProgress';
 import type { QuizRouteState } from '@/features/quiz/navigation/quizNavigation';
+import styles from '@/pages/QuizConfigurationPage.module.scss';
 import { resolveSupportedLocale } from '@/shared/i18n/i18n';
 import { Button, Card, FlagIcon } from '@/shared/ui';
 
@@ -102,8 +103,21 @@ export function QuizConfigurationPage(): ReactElement {
       </header>
 
       {isSessionMissing ? (
-        <Card className="border-warning bg-warning-soft mt-6 p-4" role="status">
+        <Card className={`border-warning bg-warning-soft mt-6 p-4 ${styles.notice}`} role="status">
           <p className="text-ink font-semibold">{t('sessionMissing')}</p>
+        </Card>
+      ) : null}
+
+      {requestedLesson ? (
+        <Card className={`mt-6 p-4 ${styles.notice}`} tone="soft">
+          <strong className="text-ink block">
+            {t('configuration.lessonPrefilled', {
+              number: formatLessonNumber(requestedLesson.number),
+            })}
+          </strong>
+          <span className="text-muted mt-1 block text-sm">
+            {t('configuration.lessonPrefilledHint')}
+          </span>
         </Card>
       ) : null}
 
@@ -125,7 +139,7 @@ export function QuizConfigurationPage(): ReactElement {
                     }}
                     type="checkbox"
                   />
-                  <span className="border-line-strong bg-surface peer-checked:border-action peer-checked:bg-action peer-focus-visible:ring-action rounded-control flex min-h-11 items-center justify-center border text-sm font-black transition-colors peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2">
+                  <span className="border-line-strong bg-surface peer-checked:border-action peer-checked:bg-action peer-focus-visible:ring-action rounded-control flex min-h-11 items-center justify-center border text-sm font-black transition-colors duration-[var(--kl-motion-fast)] ease-[var(--kl-ease-standard)] peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2">
                     {lessonNumber}
                   </span>
                 </label>
@@ -157,7 +171,7 @@ export function QuizConfigurationPage(): ReactElement {
                     }}
                     type="radio"
                   />
-                  <Card className="peer-checked:border-action peer-checked:bg-action-soft peer-focus-visible:ring-action flex min-h-28 flex-col justify-between gap-4 p-4 transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2">
+                  <Card className="peer-checked:border-action peer-checked:bg-action-soft peer-focus-visible:ring-action flex min-h-28 flex-col justify-between gap-4 p-4 transition-colors duration-[var(--kl-motion-fast)] ease-[var(--kl-ease-standard)] peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2">
                     <strong className="text-ink">{t(`direction.${option}`)}</strong>
                     <span
                       aria-label={accessibleLabel}
@@ -198,7 +212,7 @@ export function QuizConfigurationPage(): ReactElement {
                   }}
                   type="checkbox"
                 />
-                <span className="border-line-strong bg-surface peer-checked:border-action peer-checked:bg-action-soft peer-focus-visible:ring-action rounded-control flex min-h-14 items-center gap-3 border px-4 font-bold transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2">
+                <span className="border-line-strong bg-surface peer-checked:border-action peer-checked:bg-action-soft peer-focus-visible:ring-action rounded-control flex min-h-14 items-center gap-3 border px-4 font-bold transition-colors duration-[var(--kl-motion-fast)] ease-[var(--kl-ease-standard)] peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2">
                   <i
                     aria-hidden="true"
                     className={`size-3 shrink-0 rounded-full ${MASTERY_DOT_STYLES[level]}`}
@@ -224,7 +238,7 @@ export function QuizConfigurationPage(): ReactElement {
                   }}
                   type="radio"
                 />
-                <span className="peer-checked:bg-surface-strong peer-focus-visible:ring-action rounded-control flex min-h-11 items-center justify-center px-3 text-sm font-bold transition peer-checked:shadow-sm peer-focus-visible:ring-2">
+                <span className="peer-checked:bg-surface-strong peer-focus-visible:ring-action rounded-control flex min-h-11 items-center justify-center px-3 text-sm font-bold transition duration-[var(--kl-motion-fast)] ease-[var(--kl-ease-standard)] peer-checked:shadow-sm peer-focus-visible:ring-2">
                   {t(`order.${option}`)}
                 </span>
               </label>
@@ -233,9 +247,11 @@ export function QuizConfigurationPage(): ReactElement {
         </fieldset>
       </div>
 
-      <Card className="mt-10 grid gap-3 p-4 sm:grid-cols-[1fr_auto] sm:items-center md:sticky md:bottom-4">
+      <Card
+        className={`sticky bottom-3 z-10 mt-10 grid gap-3 p-4 sm:grid-cols-[1fr_auto] sm:items-center ${styles.actionBar}`}
+      >
         <div>
-          <strong className="text-ink text-lg">
+          <strong aria-live="polite" className="text-ink text-lg">
             {t('configuration.questionCount', { count: sessionPreview.total })}
           </strong>
           {sessionPreview.total === 0 ? (

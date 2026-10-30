@@ -24,39 +24,39 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
-| Chargement initial | toutes | shell visible avant React, logo empilé complet, message FR/EN/ES annoncé, boucle légère, réduction de mouvement | Prêt à valider |
-| Accueil public | `/` | mot-symbole V2 resserré et aligné sans troncature, profil générique, hero, exemple réel, CTA, FR/EN/ES, mobile/desktop | Prêt à valider |
-| Explication | `/#how-it-works` | trois étapes lisibles, ancre clavier, cartes responsives | Prêt à valider |
-| Choix de connexion | `/auth` | retour, Google, email, légal, focus visible | Prêt à valider |
-| Adresse email | `/auth` | transition depuis les méthodes, champ étiqueté, envoi et erreur | Prêt à valider |
-| Email envoyé | `/auth` | adresse confirmée, renvoi, changement d’adresse | Prêt à valider |
-| Callback | `/auth/callback` | attente annoncée, animation réduite, erreur et nouvelle tentative | Prêt à valider |
+| Chargement initial | toutes | shell visible avant React, logo empilé complet, message FR/EN/ES annoncé, boucle légère, réduction de mouvement | Validé |
+| Accueil public | `/` | mot-symbole V2 resserré et aligné sans troncature, profil générique, hero, exemple réel, CTA, FR/EN/ES, mobile/desktop | Validé |
+| Explication | `/#how-it-works` | trois étapes lisibles, ancre clavier, cartes responsives | Validé |
+| Choix de connexion | `/auth` | retour, Google, email, légal, focus visible | Validé |
+| Adresse email | `/auth` | transition depuis les méthodes, champ étiqueté, envoi et erreur | Validé |
+| Email envoyé | `/auth` | adresse confirmée, renvoi, changement d’adresse | Validé |
+| Callback | `/auth/callback` | attente annoncée, animation réduite, erreur et nouvelle tentative | Validé |
 
 ## Lot 2/3 — navigation et consultation
 
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
-| Accueil connecté | `/app` | révision rapide réelle, trois premières leçons, CTA vers le parcours complet | Prêt à valider |
-| Panneau de profil | application | overlay, glissement depuis la droite, fermeture, piège de focus, `Escape`, réduction de mouvement | Prêt à valider |
-| Liste des leçons | `/app/lessons` | révision rapide compacte, progression, cartes, mobile/desktop | Prêt à valider |
-| Détail d’une leçon | `/app/lessons/:lessonId` | vocabulaire réel, C/P, CTA préconfiguré, listes responsives | Prêt à valider |
-| Progression | `/app/progress` | global, directions, leçons, libellés non fondés uniquement sur la couleur | Prêt à valider |
-| Langue | `/app/settings/language` | FR/EN/ES avec drapeaux et sélection explicite, mise à jour immédiate | Prêt à valider |
-| Compte et déconnexion | `/app/account` | initiale, identité, confirmation animée, erreurs | Prêt à valider |
-| Page inconnue | `*` | retour sûr public ou connecté | Prêt à valider |
+| Accueil connecté | `/app` | révision rapide réelle, trois premières leçons, CTA vers le parcours complet | Validé |
+| Panneau de profil | application | overlay, glissement depuis la droite, fermeture, piège de focus, `Escape`, réduction de mouvement | Validé |
+| Liste des leçons | `/app/lessons` | révision rapide compacte, progression, cartes, mobile/desktop | Validé |
+| Détail d’une leçon | `/app/lessons/:lessonId` | vocabulaire réel, C/P, CTA préconfiguré, listes responsives | Validé |
+| Progression | `/app/progress` | global, directions, leçons, libellés non fondés uniquement sur la couleur | Validé |
+| Langue | `/app/settings/language` | FR/EN/ES avec drapeaux et sélection explicite, mise à jour immédiate | Validé |
+| Compte et déconnexion | `/app/account` | initiale, identité, confirmation animée, erreurs | Validé |
+| Page inconnue | `*` | retour sûr public ou connecté | Validé |
 
 ## Lot 3/3 — quiz et voix
 
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
-| Configuration | `/app/quiz/configure` | retour contextuel dans le header, leçons, drapeau actif, statuts, ordre, nombre de questions | À faire |
-| Question compréhension | `/app/quiz` | progression, japonais, écoute, input, micro, clavier | À faire |
-| Question production | `/app/quiz` | signification locale, réponse rōmaji/kana/kanji | À faire |
-| Correction correcte | `/app/quiz` | apparition stable, icône, texte, progression, formes acceptées | À faire |
-| Correction incorrecte | `/app/quiz` | réponse donnée, solution, mouvement discret, annonce | À faire |
-| Sauvegarde échouée | `/app/quiz` | même tentative, réessai idempotent, aucun faux succès | À faire |
-| Dictée | `/app/quiz` | écoute, durée, onde, arrêt, transcription, erreur, clavier | À faire |
-| Sortie de passe | `/app/quiz` | modal, overlay, focus, reprise ou sortie | À faire |
-| Bilan | `/app/quiz/result` | scores, actions suivantes, animation unique | À faire |
+| Configuration | `/app/quiz/configure` | retour contextuel dans le header, leçons, drapeau actif, statuts, ordre, nombre de questions | Validé |
+| Question compréhension | `/app/quiz` | progression, japonais, écoute, input, micro, clavier | Validé |
+| Question production | `/app/quiz` | signification locale, réponse rōmaji/kana/kanji | Validé |
+| Correction correcte | `/app/quiz` | apparition stable, icône, texte, progression, formes acceptées | Validé |
+| Correction incorrecte | `/app/quiz` | réponse donnée, solution, mouvement discret, annonce | Validé |
+| Sauvegarde échouée | `/app/quiz` | même tentative, réessai idempotent, aucun faux succès | Validé |
+| Dictée | `/app/quiz` | écoute, durée, onde, arrêt, transcription, erreur, clavier | Validé |
+| Sortie de passe | `/app/quiz` | modal, overlay, focus, reprise ou sortie | Validé |
+| Bilan | `/app/quiz/result` | scores, actions suivantes, animation unique | Validé |
 
 Un statut passe à **Validé** uniquement après les contrôles automatiques applicables et la validation visuelle utilisateur du lot concerné.

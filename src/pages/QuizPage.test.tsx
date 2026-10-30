@@ -63,6 +63,7 @@ function renderQuiz(
       { path: '/app/quiz', Component: QuizPage },
       { path: '/app/quiz/configure', element: <p>Configuration requise</p> },
       { path: '/app/quiz/result', element: <p>Résultat atteint</p> },
+      { path: '/app', element: <p>Accueil connecté</p> },
     ],
     { initialEntries: [{ pathname: '/app/quiz', state }] },
   );
@@ -95,6 +96,8 @@ describe('QuizPage', () => {
     const { recordReview, router } = renderQuiz();
     const answer = screen.getByRole('textbox', { name: 'Ta réponse' });
 
+    expect(screen.getByRole('heading', { level: 1, name: 'Question 1 sur 1' })).toBeDefined();
+
     await user.type(answer, 'Je');
     await user.click(screen.getByRole('button', { name: 'Valider' }));
 
@@ -121,6 +124,25 @@ describe('QuizPage', () => {
     });
   });
 
+  it('labels a production answer as Japanese', () => {
+    renderQuiz({
+      session: {
+        direction: 'production',
+        questions: [
+          {
+            ...QUESTION,
+            acceptedAnswers: ['watashi', 'わたし', '私'],
+            direction: 'production',
+            prompt: { kind: 'meaning', locale: 'fr', text: 'je' },
+          },
+        ],
+        total: 1,
+      },
+    });
+
+    expect(screen.getByRole('textbox', { name: 'Ta réponse en japonais' })).toBeDefined();
+  });
+
   it('keeps keyboard focus inside the exit dialog and closes it with Escape', async () => {
     const user = userEvent.setup();
     renderQuiz();
@@ -134,6 +156,21 @@ describe('QuizPage', () => {
 
     expect(screen.queryByRole('dialog')).toBeNull();
     expect(document.activeElement).toBe(exitButton);
+  });
+
+  it('explains persisted answers and exits to the connected home', async () => {
+    const user = userEvent.setup();
+    const { router } = renderQuiz();
+
+    await user.type(screen.getByRole('textbox', { name: 'Ta réponse' }), 'je');
+    await user.click(screen.getByRole('button', { name: 'Valider' }));
+    await screen.findByRole('heading', { name: 'Bonne réponse' });
+    await user.click(screen.getByRole('button', { name: 'Quitter le quiz' }));
+
+    expect(screen.getByText(/1 réponse déjà validée est sauvegardée/)).toBeDefined();
+    await user.click(screen.getByRole('button', { name: 'Quitter la passe' }));
+
+    expect(router.state.location.pathname).toBe('/app');
   });
 
   it('redirects a refreshed session to configuration', async () => {

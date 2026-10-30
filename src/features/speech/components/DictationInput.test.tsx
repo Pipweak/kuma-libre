@@ -181,4 +181,33 @@ describe('DictationInput', () => {
     expect(screen.queryByRole('button', { name: 'Dicter ma réponse' })).toBeNull();
     expect(screen.getByRole('textbox', { name: 'Ta réponse' })).toBeDefined();
   });
+
+  it('keeps validated feedback read-only without exposing a microphone action', () => {
+    render(
+      <SpeechProvider
+        services={createServices({
+          cancel: vi.fn(),
+          isSupported: () => true,
+          start: vi.fn().mockRejectedValue(new Error('unused')),
+          stop: vi.fn(),
+        })}
+      >
+        <DictationInput
+          id="answer"
+          label="Ta réponse"
+          language="fr-FR"
+          onValueChange={vi.fn()}
+          readOnly
+          resetKey="question-1"
+          validationState="correct"
+          value="manger"
+        />
+      </SpeechProvider>,
+    );
+
+    expect(screen.getByRole<HTMLInputElement>('textbox', { name: 'Ta réponse' }).readOnly).toBe(
+      true,
+    );
+    expect(screen.queryByRole('button', { name: 'Dicter ma réponse' })).toBeNull();
+  });
 });

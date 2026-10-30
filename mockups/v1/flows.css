@@ -1774,6 +1774,7 @@ main {
   flex: 1;
   align-content: center;
   justify-items: center;
+  animation: quiz-question-in var(--kl-motion-base) var(--kl-ease-enter) both;
 }
 
 .word-question button {
@@ -2107,6 +2108,7 @@ main {
   padding: 10px;
   border: 1px solid;
   border-radius: 11px;
+  animation: quiz-feedback-in var(--kl-motion-base) var(--kl-ease-enter) both;
 }
 
 .result-card--correct {
@@ -2208,6 +2210,37 @@ main {
   color: #fff;
   background: var(--green);
   font-size: 1.1rem;
+  animation: quiz-completion-pop var(--kl-motion-slow) var(--kl-ease-enter) both;
+}
+
+@keyframes quiz-question-in {
+  from {
+    transform: translateY(9px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes quiz-feedback-in {
+  from {
+    transform: translateY(7px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes quiz-completion-pop {
+  from {
+    transform: translateY(7px) scale(0.8);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
 }
 
 .complete-hero > small {
@@ -2469,6 +2502,13 @@ main {
   inset: 0;
   background: rgb(23 33 29 / 43%);
   backdrop-filter: blur(1px);
+  animation: quiz-backdrop-in var(--kl-motion-base) var(--kl-ease-enter) both;
+}
+
+@keyframes quiz-backdrop-in {
+  from {
+    background: transparent;
+  }
 }
 
 .mini-drawer {
@@ -2799,6 +2839,17 @@ main {
   background: #fff;
   box-shadow: 0 18px 40px rgb(23 33 29 / 24%);
   text-align: center;
+  animation: quiz-modal-in var(--kl-motion-base) var(--kl-ease-enter) both;
+}
+
+@keyframes quiz-modal-in {
+  from {
+    transform: translateY(14px) scale(0.98);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
 }
 
 .mini-modal .round-icon {

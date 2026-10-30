@@ -13,7 +13,7 @@ export function AppLayout(): ReactElement {
   const { pathname, search } = useLocation();
   const { session, status } = useAuth();
   const progress = useProgress();
-  const isQuizSession = pathname === '/app/quiz';
+  const isImmersiveQuizScreen = pathname === '/app/quiz' || pathname === '/app/quiz/result';
 
   if (status === 'initializing') {
     return <AppLoader label={t('app.loadingSession')} />;
@@ -48,7 +48,9 @@ export function AppLayout(): ReactElement {
 
   return (
     <div className="bg-canvas min-h-dvh">
-      {isQuizSession ? null : <AppHeader pathname={pathname} search={search} user={session.user} />}
+      {isImmersiveQuizScreen ? null : (
+        <AppHeader pathname={pathname} search={search} user={session.user} />
+      )}
       <Outlet />
     </div>
   );

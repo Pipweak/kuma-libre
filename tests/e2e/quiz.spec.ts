@@ -46,7 +46,10 @@ test('reviews a real lesson vocabulary entry through the first correction', asyn
   await page.getByRole('button', { name: 'Quitter le quiz' }).click();
   await page.getByRole('button', { name: 'Quitter la passe' }).click();
 
-  await expect(page.getByRole('heading', { level: 1, name: 'Ton parcours' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Qu’est-ce qu’on révise ?' }),
+  ).toBeVisible();
+  await page.getByRole('link', { name: 'Voir tout' }).click();
   await page.getByRole('link', { name: /Leçon 01/ }).click();
   await expect(page.getByLabel('Comprendre : À revoir, score 1 sur 3')).toBeVisible();
   await page.getByRole('link', { name: 'Réviser cette leçon' }).click();
@@ -141,4 +144,20 @@ test('reads the question and inserts a dictated answer without validating it', a
   await expect(page.getByText('Transcription ajoutée · tu peux la modifier')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Bonne réponse' })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Valider' })).toBeEnabled();
+});
+
+test('configures production with the active language and an explicit Japanese answer', async ({
+  page,
+}) => {
+  await page.goto('/app/quiz/configure?lesson=lesson-01');
+  await page.getByText('Produire', { exact: true }).click();
+  await page.getByText('Dans l’ordre', { exact: true }).click();
+  await page.getByRole('button', { name: 'Commencer' }).click();
+
+  await expect(page.getByText(FIRST_ENTRY.meanings.fr[0]!, { exact: true })).toBeVisible();
+  const answer = page.getByRole('textbox', { name: 'Ta réponse en japonais' });
+  await answer.fill(FIRST_ENTRY.romaji[0] ?? FIRST_ENTRY.kana[0]!);
+  await page.getByRole('button', { name: 'Valider' }).click();
+
+  await expect(page.getByRole('heading', { name: 'Bonne réponse' })).toBeVisible();
 });
