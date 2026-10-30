@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useLocation } from 'react-router';
 
 import { isQuizResultRouteState } from '@/features/quiz/navigation/quizNavigation';
+import styles from '@/pages/QuizResultPage.module.scss';
 import { Card } from '@/shared/ui';
 
 export function QuizResultPage(): ReactElement {
@@ -17,8 +18,12 @@ export function QuizResultPage(): ReactElement {
   const result = location.state;
 
   return (
-    <section className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-2xl flex-col justify-center px-4 py-10 text-center sm:px-6">
-      <span className="bg-success mx-auto flex size-16 items-center justify-center rounded-full text-white shadow-sm">
+    <section
+      className={`mx-auto flex min-h-dvh w-full max-w-2xl flex-col justify-center px-4 py-10 text-center sm:px-6 ${styles.page}`}
+    >
+      <span
+        className={`bg-success mx-auto flex size-16 items-center justify-center rounded-full text-white shadow-sm ${styles.completionMark}`}
+      >
         <Check aria-hidden="true" size={32} />
       </span>
       <h1 className="text-ink mt-5 text-3xl font-black sm:text-4xl">{t('result.title')}</h1>
@@ -50,9 +55,9 @@ export function QuizResultPage(): ReactElement {
         </Link>
         <Link
           className="border-line-strong bg-surface-strong text-ink hover:border-action hover:text-action focus-visible:ring-action rounded-control inline-flex min-h-12 items-center justify-center border px-5 font-bold transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-          to="/app/lessons"
+          to="/app"
         >
-          {t('result.backToLessons')}
+          {t('result.backToHome')}
         </Link>
       </div>
     </section>

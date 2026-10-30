@@ -104,6 +104,8 @@ Le domaine pur [`src/domain/quiz`](src/domain/quiz) construit les sessions sans 
 
 Les fonctions acceptent une source aléatoire injectable afin que la sélection et le mélange restent entièrement testables. La feature React orchestre ces contrats sans dupliquer leurs règles. `ProgressProvider` charge les scores privés et `SupabaseProgressRepository` délègue l’écriture atomique à la RPC `record_review`.
 
+L'expérience React est immersive pendant la question et le bilan : le header applicatif est masqué, une sortie confirmée revient à l'accueil connecté et chaque correction reste affichée jusqu'à l'action explicite `Question suivante`. Les transitions courtes utilisent les tokens de mouvement partagés et sont neutralisées par `prefers-reduced-motion`.
+
 ### Lecture et dictée vocales
 
 Le quiz utilise les API vocales du navigateur, sans fichier audio ni traitement serveur :

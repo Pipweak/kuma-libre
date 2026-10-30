@@ -9,6 +9,7 @@ function renderResult(state: unknown): ReturnType<typeof createMemoryRouter> {
   const router = createMemoryRouter(
     [
       { path: '/app/quiz/result', Component: QuizResultPage },
+      { path: '/app', element: <p>Accueil connecté</p> },
       { path: '/app/lessons', element: <p>Liste des leçons</p> },
     ],
     { initialEntries: [{ pathname: '/app/quiz/result', state }] },
@@ -30,6 +31,9 @@ describe('QuizResultPage', () => {
     expect(screen.getByText('7')).toBeDefined();
     expect(screen.getByText('3')).toBeDefined();
     expect(screen.getByRole('link', { name: 'Nouvelle passe' })).toBeDefined();
+    expect(screen.getByRole('link', { name: 'Retour à l’accueil' }).getAttribute('href')).toBe(
+      '/app',
+    );
   });
 
   it('redirects invalid result state to the lesson list', async () => {

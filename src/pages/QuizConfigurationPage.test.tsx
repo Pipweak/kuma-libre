@@ -49,6 +49,7 @@ describe('QuizConfigurationPage', () => {
     const selectedLesson = screen.getByRole<HTMLInputElement>('checkbox', { name: '02' });
 
     expect(selectedLesson.checked).toBe(true);
+    expect(screen.getByText('Leçon 02 présélectionnée')).toBeDefined();
     expect(screen.getByRole<HTMLInputElement>('radio', { name: /Comprendre/ }).checked).toBe(true);
     expect(screen.getByRole<HTMLInputElement>('checkbox', { name: /Non maîtrisés/ }).checked).toBe(
       true,

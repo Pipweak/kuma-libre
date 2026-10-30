@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** architecture cible validée pour guider le démarrage du projet.
-> **Version :** 9 — 29 octobre 2026.
+> **Version :** 10 — 29 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -486,6 +486,8 @@ Le résultat ne doit jamais être communiqué uniquement par une couleur : une i
 Le passage à la question suivante n'est pas automatique. L'utilisateur doit avoir le temps de lire la solution. La touche Entrée valide la réponse dans le premier état, puis passe à la question suivante dans le second. Le changement d'état peut utiliser une animation courte et non bloquante, et le résultat doit être annoncé par une zone accessible de type `aria-live`.
 
 L'action `Je ne sais pas` enregistre une tentative incorrecte distinguée par le résultat `skipped`, applique la même transition de maîtrise qu'une mauvaise réponse et affiche immédiatement la solution. Elle ne valide ni ne soumet le contenu éventuel de l'input.
+
+L'action de sortie ouvre une confirmation qui indique combien de réponses ont déjà été sauvegardées. Confirmer ramène à l'accueil connecté ; annuler restitue le focus à l'action de sortie. À la fin de la dernière question, un bilan immersif récapitule les réponses correctes et incorrectes et propose soit une nouvelle passe, soit un retour à l'accueil. La question active comme le bilan masquent la navigation générale afin de conserver un parcours concentré.
 
 ### 11.4 Progression sans surcharge
 

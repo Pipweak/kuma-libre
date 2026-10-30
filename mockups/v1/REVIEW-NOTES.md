@@ -104,3 +104,16 @@ La structure de navigation de `flows.html` ne change pas : cette passe précise 
 - **Header secondaire** : maintenir explicitement la flèche à gauche, le titre au centre et l'avatar à droite sur mobile comme sur desktop.
 - **Retour** : afficher une seule flèche contextuelle dans le header des pages secondaires protégées, y compris la configuration du quiz, sans lien de retour dupliqué dans le contenu.
 
+## Passe du 29 octobre 2026 — quiz et voix
+
+### Intégré
+
+- **Configuration** : conserver la leçon d'origine présélectionnée, permettre de modifier le périmètre et maintenir le nombre de questions ainsi que l'action principale visibles en bas de l'écran.
+- **Question** : placer l'écoute avant le contenu central, montrer le seul drapeau de langue actif en production et garder la progression de session sans navigation générale.
+- **Réponse** : différencier le libellé de production japonaise, afficher l'état correct ou incorrect dans l'input puis rendre ce dernier non modifiable pendant la correction.
+- **Correction** : afficher explicitement la réponse attendue après une erreur, conserver toutes les formes utiles et annoncer le résultat sans dépendre de la couleur.
+- **Dictée** : animer discrètement les états écoute, transcription, résultat prêt et erreur tout en conservant le clavier comme repli permanent.
+- **Sortie** : confirmer l'abandon, rappeler que les réponses déjà validées sont sauvegardées et revenir à l'accueil connecté.
+- **Bilan** : masquer le header applicatif, animer une seule fois la confirmation de fin puis proposer une nouvelle passe ou le retour à l'accueil.
+- **Mouvement** : utiliser les tokens `150/180/250/400 ms`, privilégier `transform`, ne pas réduire l'opacité du texte et neutraliser le mouvement non essentiel avec `prefers-reduced-motion`.
+

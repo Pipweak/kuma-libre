@@ -5,6 +5,7 @@
     "label": "Tu respuesta",
     "placeholderComprehension": "Francés, inglés o español",
     "placeholderProduction": "Rōmaji, kana o kanji",
+    "productionLabel": "Tu respuesta en japonés",
     "skip": "No lo sé",
     "validate": "Validar"
   },
@@ -14,6 +15,8 @@
     "direction": "Dirección del cuestionario",
     "empty": "Ninguna palabra coincide con esta selección.",
     "emptyHint": "Incluye palabras no dominadas o elige otra lección.",
+    "lessonPrefilled": "Lección {{number}} preseleccionada",
+    "lessonPrefilledHint": "Todavía puedes modificar el alcance de esta sesión.",
     "lessons": "Lecciones",
     "mastery": "Palabras que se incluirán",
     "order": "Orden de las preguntas",
@@ -41,7 +44,9 @@
   "exit": {
     "cancel": "Continuar el cuestionario",
     "confirm": "Salir de la sesión",
-    "description": "No se conservará tu posición en esta sesión.",
+    "description_one": "Se guardó {{count}} respuesta validada. Esta sesión no se podrá reanudar.",
+    "description_other": "Se guardaron {{count}} respuestas validadas. Esta sesión no se podrá reanudar.",
+    "description_zero": "Todavía no se validó ninguna respuesta. Esta sesión no se podrá reanudar.",
     "open": "Salir del cuestionario",
     "title": "¿Salir de esta sesión?"
   },
@@ -82,7 +87,7 @@
     "progress": "Pregunta {{current}} de {{total}}"
   },
   "result": {
-    "backToLessons": "Volver a las lecciones",
+    "backToHome": "Volver al inicio",
     "correct": "Correctas",
     "description": "Los errores volverán en una próxima sesión.",
     "incorrect": "Para repasar",

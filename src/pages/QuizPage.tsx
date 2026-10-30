@@ -22,6 +22,7 @@ import { quizReducer } from '@/features/quiz/state/quizReducer';
 import { INITIAL_QUIZ_STATE } from '@/features/quiz/state/quizState';
 import { resolveSupportedLocale } from '@/shared/i18n/i18n';
 import { Button, Card, IconButton, ProgressBar } from '@/shared/ui';
+import styles from '@/pages/QuizPage.module.scss';
 
 export function QuizPage(): ReactElement {
   const { i18n, t } = useTranslation('quiz');
@@ -107,6 +108,7 @@ export function QuizPage(): ReactElement {
   );
   const lessonNumber = lesson ? formatLessonNumber(lesson.number) : '';
   const isAnswerEmpty = state.answer.trim().length === 0;
+  const validatedAnswerCount = state.correctCount + state.incorrectCount;
 
   const persistReview = async (review: ReviewSubmission): Promise<void> => {
     if (isSavingReview) {
@@ -189,7 +191,15 @@ export function QuizPage(): ReactElement {
   };
 
   return (
-    <section className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-3xl flex-col px-4 py-5 sm:px-6 sm:py-8">
+    <section
+      className={`mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-4 py-5 sm:px-6 sm:py-8 ${styles.page}`}
+    >
+      <h1 className="sr-only">
+        {t('question.progress', {
+          current: currentPosition,
+          total: routeState.session.total,
+        })}
+      </h1>
       <header className="grid grid-cols-[auto_1fr_auto] items-start gap-3">
         <IconButton
           aria-label={t('exit.open')}
@@ -223,17 +233,19 @@ export function QuizPage(): ReactElement {
         </span>
       </div>
 
-      <QuizQuestion
-        audioControl={
-          <QuestionAudioButton
-            key={`${currentQuestion.entryId}-${state.currentIndex}`}
-            question={currentQuestion}
-          />
-        }
-        question={currentQuestion}
-      />
+      <div className={styles.question} key={`${currentQuestion.entryId}-${state.currentIndex}`}>
+        <QuizQuestion
+          audioControl={
+            <QuestionAudioButton
+              key={`${currentQuestion.entryId}-${state.currentIndex}`}
+              question={currentQuestion}
+            />
+          }
+          question={currentQuestion}
+        />
+      </div>
 
-      <form className="mt-auto space-y-4" onSubmit={handleSubmit}>
+      <form aria-busy={isSavingReview} className="mt-auto space-y-4 pt-4" onSubmit={handleSubmit}>
         <DictationInput
           {...(state.feedback === null ? {} : { describedBy: 'quiz-correction' })}
           className={
@@ -244,7 +256,9 @@ export function QuizPage(): ReactElement {
                 : 'border-danger bg-danger-soft'
           }
           id="quiz-answer"
-          label={t('answer.label')}
+          label={t(
+            currentQuestion.direction === 'production' ? 'answer.productionLabel' : 'answer.label',
+          )}
           language={getAnswerSpeechLanguage(
             currentQuestion,
             resolveSupportedLocale(i18n.resolvedLanguage ?? i18n.language),
@@ -260,13 +274,19 @@ export function QuizPage(): ReactElement {
           readOnly={state.feedback !== null || isSavingReview || pendingReview !== null}
           ref={inputRef}
           resetKey={`${currentQuestion.entryId}-${state.currentIndex}`}
+          {...(state.feedback === null
+            ? {}
+            : { validationState: state.feedback.isCorrect ? 'correct' : 'incorrect' })}
           value={state.answer}
         />
 
         {state.feedback === null ? (
           <div className="grid gap-2">
             {reviewSaveFailed && pendingReview !== null ? (
-              <Card className="border-danger bg-danger-soft p-4" role="alert">
+              <Card
+                className={`border-danger bg-danger-soft p-4 ${styles.persistenceError}`}
+                role="alert"
+              >
                 <p className="text-ink font-bold">{t('persistence.errorTitle')}</p>
                 <p className="text-muted mt-1 text-sm">{t('persistence.errorDescription')}</p>
                 <Button
@@ -316,7 +336,7 @@ export function QuizPage(): ReactElement {
           aria-describedby="exit-dialog-description"
           aria-labelledby="exit-dialog-title"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-end justify-center bg-black/45 p-4 sm:items-center"
+          className={`fixed inset-0 z-50 flex items-end justify-center bg-black/45 p-4 sm:items-center ${styles.dialogBackdrop}`}
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) {
               setIsExitDialogOpen(false);
@@ -325,19 +345,21 @@ export function QuizPage(): ReactElement {
           }}
           role="dialog"
         >
-          <Card className="w-full max-w-md p-6 shadow-xl" ref={exitDialogRef}>
+          <Card
+            className={`w-full max-w-md p-6 shadow-xl ${styles.dialogPanel}`}
+            ref={exitDialogRef}
+          >
             <h2 className="text-ink text-xl font-black" id="exit-dialog-title">
               {t('exit.title')}
             </h2>
             <p className="text-muted mt-2 leading-6" id="exit-dialog-description">
-              {t('exit.description')}
+              {t('exit.description', { count: validatedAnswerCount })}
             </p>
             <div className="mt-6 grid gap-2">
               <Button
                 onClick={() => {
-                  void navigate('/app/lessons');
+                  void navigate('/app');
                 }}
-                variant="secondary"
               >
                 {t('exit.confirm')}
               </Button>
@@ -347,6 +369,7 @@ export function QuizPage(): ReactElement {
                   exitButtonRef.current?.focus();
                 }}
                 ref={continueButtonRef}
+                variant="secondary"
               >
                 {t('exit.cancel')}
               </Button>

@@ -1,4 +1,4 @@
-import { Mic, Square, X } from 'lucide-react';
+import { Check, Mic, Square, X } from 'lucide-react';
 import {
   forwardRef,
   type InputHTMLAttributes,
@@ -25,6 +25,7 @@ export type DictationInputProps = Omit<
   language: string;
   onValueChange: (value: string) => void;
   resetKey: string;
+  validationState?: 'correct' | 'incorrect';
   value: string;
 };
 
@@ -45,6 +46,7 @@ export const DictationInput = forwardRef<HTMLInputElement, DictationInputProps>(
       onValueChange,
       readOnly = false,
       resetKey,
+      validationState,
       value,
       ...inputProps
     },
@@ -178,13 +180,16 @@ export const DictationInput = forwardRef<HTMLInputElement, DictationInputProps>(
         {state.status === 'listening' || state.status === 'transcribing' ? (
           <div
             aria-live="polite"
-            className="border-line-strong bg-surface-strong rounded-control flex min-h-14 items-center gap-3 border px-3 shadow-sm"
+            className={`border-line-strong bg-surface-strong rounded-control flex min-h-14 items-center gap-3 border px-3 shadow-sm ${styles.statePanel}`}
             id={statusId}
             role="status"
           >
             {state.status === 'listening' ? (
               <>
-                <span aria-hidden="true" className="bg-danger size-2.5 rounded-full" />
+                <span
+                  aria-hidden="true"
+                  className={`bg-danger size-2.5 rounded-full ${styles.listeningDot}`}
+                />
                 <span className="text-ink min-w-10 text-sm font-bold">
                   {formatElapsedTime(elapsedSeconds)}
                 </span>
@@ -223,7 +228,7 @@ export const DictationInput = forwardRef<HTMLInputElement, DictationInputProps>(
               autoComplete="off"
               className={[
                 'rounded-control bg-surface-strong text-ink placeholder:text-muted min-h-12 w-full border px-4 text-base shadow-sm transition-colors focus:outline-none',
-                canDictate ? 'pr-14' : '',
+                canDictate || validationState !== undefined ? 'pr-14' : '',
                 inputProps.className ?? '',
               ]
                 .filter(Boolean)
@@ -259,11 +264,27 @@ export const DictationInput = forwardRef<HTMLInputElement, DictationInputProps>(
                 <Mic aria-hidden="true" size={19} />
               </IconButton>
             ) : null}
+            {validationState !== undefined ? (
+              <span
+                aria-hidden="true"
+                className={[
+                  'absolute top-1/2 right-3 flex size-7 -translate-y-1/2 items-center justify-center rounded-full text-white',
+                  validationState === 'correct' ? 'bg-success' : 'bg-danger',
+                ].join(' ')}
+              >
+                {validationState === 'correct' ? <Check size={17} /> : <X size={17} />}
+              </span>
+            ) : null}
           </div>
         )}
 
         {state.status === 'permission' ? (
-          <p aria-live="polite" className="text-muted mt-2 text-sm" id={statusId} role="status">
+          <p
+            aria-live="polite"
+            className={`text-muted mt-2 text-sm ${styles.statusMessage}`}
+            id={statusId}
+            role="status"
+          >
             {t('speech.permission')}
           </p>
         ) : null}
@@ -271,18 +292,26 @@ export const DictationInput = forwardRef<HTMLInputElement, DictationInputProps>(
           <p className="text-muted mt-2 text-xs">{t('speech.listeningHelp')}</p>
         ) : null}
         {state.status === 'ready' ? (
-          <p aria-live="polite" className="text-success mt-2 text-sm font-bold" id={statusId}>
+          <p
+            aria-live="polite"
+            className={`text-success mt-2 text-sm font-bold ${styles.statusMessage}`}
+            id={statusId}
+          >
             {t('speech.ready')}
           </p>
         ) : null}
         {state.status === 'cancelled' ? (
-          <p aria-live="polite" className="text-muted mt-2 text-sm" id={statusId}>
+          <p
+            aria-live="polite"
+            className={`text-muted mt-2 text-sm ${styles.statusMessage}`}
+            id={statusId}
+          >
             {t('speech.cancelled')}
           </p>
         ) : null}
         {errorCode !== null ? (
           <div
-            className="bg-danger-soft text-ink rounded-control mt-2 p-3 text-sm"
+            className={`bg-danger-soft text-ink rounded-control mt-2 p-3 text-sm ${styles.statusMessage}`}
             id={statusId}
             role="alert"
           >
