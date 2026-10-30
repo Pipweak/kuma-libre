@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 11 — 29 octobre 2026.
+> **Version :** 12 — 29 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -291,9 +291,9 @@ Le store du quiz n'est pas global : il appartient au layout de la session. Un re
 
 Le snapshot de progression est global uniquement à l’espace authentifié. Il ne duplique pas la source de vérité : Supabase reste autoritaire et le Context React sert de vue courante pour filtrer les questions et produire les synthèses sans requête par composant.
 
-`AppHeader` centralise les variantes du header protégé : mot-symbole et profil pour l'accueil et la liste des leçons, puis retour contextuel, titre et profil sur les écrans secondaires. La question active masque ce header afin de préserver la concentration.
+`AppHeader` centralise les variantes du header protégé : mot-symbole et profil pour l'accueil et la liste des leçons, puis retour contextuel, titre et profil sur les écrans secondaires, y compris la configuration du quiz. Ses trois colonnes sont explicitement positionnées afin que la flèche reste à gauche, le titre au centre et le profil à droite, même lorsque le titre visuel passe dans le contenu sur desktop. Les pages secondaires ne dupliquent pas le retour dans leur contenu. La question active masque ce header afin de préserver la concentration et conserve sa confirmation de sortie dédiée.
 
-Le bouton de profil ouvre depuis la gauche un panneau de navigation secondaire accessible et adapté au mobile. Il relie l'accueil de révision, la progression, la langue et le compte sans ajouter une barre de navigation permanente au parcours de quiz. Son entrée de `250 ms`, sa sortie de `180 ms`, son piège de focus, sa fermeture par `Escape` et sa réduction de mouvement restent gérés dans le composant.
+Le bouton de profil ouvre depuis la droite, côté déclencheur, un panneau de navigation secondaire accessible et adapté au mobile. Il relie l'accueil de révision, la progression, la langue et le compte sans ajouter une barre de navigation permanente au parcours de quiz. Son entrée de `250 ms`, sa sortie de `180 ms`, son piège de focus, sa fermeture par `Escape` et sa réduction de mouvement restent gérés dans le composant.
 
 `HomePage` assemble `QuickReviewCard` et les trois premières leçons réelles. `QuickReviewCard` appelle directement la fonction pure `buildQuickReviewSession` : il ne recopie donc pas la priorité rouge puis jaune, la limite de dix ou l'exclusion des verts dans React. `LessonsPage` réutilise une variante compacte de ce composant avant la liste complète.
 

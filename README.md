@@ -48,7 +48,7 @@ Sans variables Supabase, le repository d’aperçu conserve les scores uniquemen
 
 ### Accueil connecté, progression et navigation secondaire
 
-L'accueil connecté propose immédiatement la révision rapide de dix mots au maximum et un aperçu des trois premières leçons réelles. Le bouton de profil du header ouvre un menu mobile donnant accès à cet accueil de révision, à la progression, à la langue de l'interface et au compte. L'écran de progression calcule à partir du snapshot Supabase :
+L'accueil connecté propose immédiatement la révision rapide de dix mots au maximum et un aperçu des trois premières leçons réelles. Le bouton de profil du header ouvre depuis la droite un menu mobile donnant accès à cet accueil de révision, à la progression, à la langue de l'interface et au compte. Les pages secondaires protégées conservent une flèche de retour contextuelle unique dans le header. L'écran de progression calcule à partir du snapshot Supabase :
 
 - le pourcentage de mots verts en compréhension ;
 - le pourcentage de mots verts en production ;

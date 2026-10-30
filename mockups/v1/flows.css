@@ -2478,9 +2478,10 @@ main {
   flex-direction: column;
   width: 82%;
   height: 100%;
+  margin-left: auto;
   padding: 4px 10px 12px;
   background: var(--surface);
-  box-shadow: 15px 0 30px rgb(23 33 29 / 18%);
+  box-shadow: -15px 0 30px rgb(23 33 29 / 18%);
 }
 
 .mini-drawer .mini-brand {

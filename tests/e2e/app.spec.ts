@@ -53,6 +53,16 @@ test('opens secondary navigation, account, and signs out', async ({ page }) => {
   ).toBeVisible();
 
   await page.getByRole('button', { name: /Ouvrir le menu du profil|Open profile menu/ }).click();
+  const drawer = page.locator('#profile-navigation');
+  await expect(drawer).toBeVisible();
+  await drawer.evaluate(async (element) => {
+    await Promise.all(element.getAnimations().map((animation) => animation.finished));
+  });
+  const drawerBox = await drawer.boundingBox();
+  expect(drawerBox).not.toBeNull();
+  expect(Math.round((drawerBox?.x ?? 0) + (drawerBox?.width ?? 0))).toBe(
+    page.viewportSize()?.width,
+  );
   await page.getByRole('link', { name: /Compte|Account/ }).click();
   await expect(page).toHaveURL(/\/app\/account$/);
   await expect(page.getByText('vincent@example.com')).toBeVisible();

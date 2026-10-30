@@ -16,7 +16,7 @@ describe('AppHeader', () => {
   it('uses the wordmark and profile identity on the connected home', () => {
     render(
       <MemoryRouter>
-        <AppHeader pathname="/app" user={user} />
+        <AppHeader pathname="/app" search="" user={user} />
       </MemoryRouter>,
     );
 
@@ -28,11 +28,68 @@ describe('AppHeader', () => {
     const lesson = vocabularyCorpus.lessons[0]!;
     render(
       <MemoryRouter>
-        <AppHeader pathname={`/app/lessons/${lesson.id}`} user={user} />
+        <AppHeader pathname={`/app/lessons/${lesson.id}`} search="" user={user} />
       </MemoryRouter>,
     );
 
     expect(screen.getByText('Leçon 01')).toBeDefined();
     expect(screen.getByRole('link', { name: 'Retour' }).getAttribute('href')).toBe('/app/lessons');
+    expect(
+      screen.getByRole('button', { name: 'Ouvrir le menu du profil' }).parentElement?.className,
+    ).toContain('col-start-3');
+  });
+
+  it('moves quiz configuration navigation into the contextual header', () => {
+    const lesson = vocabularyCorpus.lessons[1]!;
+    render(
+      <MemoryRouter>
+        <AppHeader pathname="/app/quiz/configure" search={`?lesson=${lesson.id}`} user={user} />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText('Configurer le quiz')).toBeDefined();
+    expect(screen.getByRole('link', { name: 'Retour' }).getAttribute('href')).toBe(
+      `/app/lessons/${lesson.id}`,
+    );
+  });
+
+  it('returns quiz configuration without a lesson to the lesson list', () => {
+    render(
+      <MemoryRouter>
+        <AppHeader pathname="/app/quiz/configure" search="?session=missing" user={user} />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole('link', { name: 'Retour' }).getAttribute('href')).toBe('/app/lessons');
+  });
+
+  it.each([
+    ['/app/progress', 'Progression', true],
+    ['/app/settings/language', 'Langue', true],
+    ['/app/account', 'Compte', false],
+  ] as const)(
+    'keeps the %s header controls in their dedicated columns',
+    (pathname, title, hasProfile) => {
+      render(
+        <MemoryRouter>
+          <AppHeader pathname={pathname} search="" user={user} />
+        </MemoryRouter>,
+      );
+
+      expect(screen.getByText(title)).toBeDefined();
+      const profileTrigger = screen.queryByRole('button', { name: 'Ouvrir le menu du profil' });
+      expect(profileTrigger === null).toBe(!hasProfile);
+      expect(screen.getByRole('link', { name: 'Retour' }).getAttribute('href')).toBe('/app');
+    },
+  );
+
+  it('labels a lesson route that is absent from the corpus', () => {
+    render(
+      <MemoryRouter>
+        <AppHeader pathname="/app/lessons/unknown" search="" user={user} />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText('Leçon introuvable')).toBeDefined();
   });
 });

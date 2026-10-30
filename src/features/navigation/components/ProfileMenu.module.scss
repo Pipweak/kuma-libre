@@ -28,7 +28,7 @@
   position: absolute;
   z-index: 1;
   inset-block: 0;
-  inset-inline-start: 0;
+  inset-inline-end: 0;
   display: flex;
   width: min(22rem, 88vw);
   flex-direction: column;
@@ -52,13 +52,13 @@
 
 @keyframes drawer-in {
   from {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
 }
 
 @keyframes drawer-out {
   to {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
 }
 

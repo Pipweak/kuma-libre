@@ -11,6 +11,7 @@ import { BrandLogo } from '@/shared/ui';
 
 export type AppHeaderProps = {
   pathname: string;
+  search: string;
   user: AuthUser;
 };
 
@@ -21,8 +22,8 @@ type SecondaryHeaderConfig = {
 };
 
 /** Resolves the compact mobile-first header used by authenticated browsing pages. */
-export function AppHeader({ pathname, user }: AppHeaderProps): ReactElement {
-  const { t } = useTranslation(['common', 'lessons', 'progress', 'auth']);
+export function AppHeader({ pathname, search, user }: AppHeaderProps): ReactElement {
+  const { t } = useTranslation(['common', 'lessons', 'progress', 'auth', 'quiz']);
   const lessonMatch = matchPath('/app/lessons/:lessonId', pathname);
   let secondaryHeader: SecondaryHeaderConfig | null = null;
 
@@ -56,6 +57,16 @@ export function AppHeader({ pathname, user }: AppHeaderProps): ReactElement {
       showProfile: false,
       title: t('auth:account.title'),
     };
+  } else if (pathname === '/app/quiz/configure') {
+    const requestedLessonId = new URLSearchParams(search).get('lesson');
+    const requestedLesson = vocabularyCorpus.lessons.find(
+      (lesson) => lesson.id === requestedLessonId,
+    );
+    secondaryHeader = {
+      backTo: requestedLesson ? `/app/lessons/${requestedLesson.id}` : '/app/lessons',
+      showProfile: true,
+      title: t('quiz:configuration.title'),
+    };
   }
 
   return (
@@ -64,15 +75,17 @@ export function AppHeader({ pathname, user }: AppHeaderProps): ReactElement {
         <div className="mx-auto grid min-h-16 w-full max-w-5xl grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center gap-3 px-4 sm:px-6">
           <Link
             aria-label={t('common:navigation.back')}
-            className="border-line text-ink hover:border-action hover:text-action focus-visible:ring-action flex size-11 items-center justify-center rounded-full border bg-white transition-[color,border-color,transform] duration-[var(--kl-motion-fast)] ease-[var(--kl-ease-standard)] focus-visible:ring-2 focus-visible:outline-none active:scale-[0.96] motion-reduce:transform-none"
+            className="border-line text-ink hover:border-action hover:text-action focus-visible:ring-action col-start-1 flex size-11 items-center justify-center rounded-full border bg-white transition-[color,border-color,transform] duration-[var(--kl-motion-fast)] ease-[var(--kl-ease-standard)] focus-visible:ring-2 focus-visible:outline-none active:scale-[0.96] motion-reduce:transform-none"
             to={secondaryHeader.backTo}
           >
             <ArrowLeft aria-hidden="true" size={20} />
           </Link>
-          <strong className="text-ink truncate text-center text-base font-black sm:sr-only">
+          <strong className="text-ink col-start-2 truncate text-center text-base font-black sm:sr-only">
             {secondaryHeader.title}
           </strong>
-          {secondaryHeader.showProfile ? <ProfileMenu user={user} /> : <span aria-hidden="true" />}
+          <span className="col-start-3 flex justify-end">
+            {secondaryHeader.showProfile ? <ProfileMenu user={user} /> : null}
+          </span>
         </div>
       ) : (
         <div className="mx-auto flex min-h-16 w-full max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">

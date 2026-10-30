@@ -48,7 +48,7 @@ export function AppLayout(): ReactElement {
 
   return (
     <div className="bg-canvas min-h-dvh">
-      {isQuizSession ? null : <AppHeader pathname={pathname} user={session.user} />}
+      {isQuizSession ? null : <AppHeader pathname={pathname} search={search} user={session.user} />}
       <Outlet />
     </div>
   );

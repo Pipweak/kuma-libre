@@ -62,7 +62,7 @@ test('has no automatically detectable quiz-configuration violations', async ({ p
   await page.goto('/app/quiz/configure?lesson=lesson-01');
 
   await expect(
-    page.getByRole('heading', { name: /Configurer le quiz|Configure the quiz/ }),
+    page.getByText(/Configurer le quiz|Configure the quiz/, { exact: true }).first(),
   ).toBeVisible();
   const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
