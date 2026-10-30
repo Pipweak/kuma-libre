@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** architecture cible validée pour guider le démarrage du projet.
-> **Version :** 10 — 29 octobre 2026.
+> **Version :** 11 — 30 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -134,7 +134,9 @@ La validation suit les étapes suivantes :
 
 La normalisation ne doit pas transformer arbitrairement le sens d'une réponse. Les variantes ambiguës ou particulières doivent pouvoir être déclarées explicitement dans le corpus.
 
-Dans la V1, seules les réponses explicitement enregistrées dans le corpus sont acceptées. Un synonyme absent est donc marqué incorrect ; un futur mécanisme de signalement pourra alimenter la correction éditoriale du corpus sans modifier rétroactivement le résultat de la tentative.
+Dans la V1, seules les réponses explicitement enregistrées dans le corpus sont acceptées. Un synonyme absent est donc marqué incorrect ; par exemple, `docteur` reste refusé si l'entrée contient uniquement `médecin`.
+
+Une évolution post-V1 pourra proposer une assistance sémantique ou un RAG limité à un index du corpus pour repérer les réponses probablement synonymes. Cette assistance ne doit ni accepter automatiquement une réponse ambiguë ni modifier rétroactivement le résultat d'une tentative. Elle produit des suggestions éditoriales à valider humainement ; une variante approuvée rejoint ensuite les réponses explicites du corpus et devient déterministe pour tous les utilisateurs.
 
 ### 4.4 Configuration d'une session
 
@@ -860,6 +862,7 @@ Playwright couvre un petit nombre de parcours essentiels :
 - statistiques détaillées ;
 - filtres de consultation dans l'écran de progression ;
 - amélioration de la sélection des prochains mots ;
+- signalement des réponses sémantiquement proches et assistance RAG à la validation éditoriale des synonymes ;
 - installation éventuelle en PWA.
 
 ### Phase 5 — Voix
@@ -884,6 +887,7 @@ Playwright couvre un petit nombre de parcours essentiels :
 - reconnaissance vocale serveur ;
 - commandes vocales de navigation ou de validation ;
 - évaluation automatique de la prononciation ;
+- acceptation automatique de synonymes par un modèle sémantique ou un RAG ;
 - algorithme avancé de répétition espacée.
 
 Ces éléments restent possibles, mais ne doivent pas retarder une première expérience de quiz utilisable.

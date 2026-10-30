@@ -117,3 +117,8 @@ La structure de navigation de `flows.html` ne change pas : cette passe précise 
 - **Bilan** : masquer le header applicatif, animer une seule fois la confirmation de fin puis proposer une nouvelle passe ou le retour à l'accueil.
 - **Mouvement** : utiliser les tokens `150/180/250/400 ms`, privilégier `transform`, ne pas réduire l'opacité du texte et neutraliser le mouvement non essentiel avec `prefers-reduced-motion`.
 
+## Validation du 30 octobre 2026 — limite connue sur les synonymes
+
+- **Synonymes** : une dictée correctement transcrite reste évaluée par les réponses explicites du corpus. Une variante comme `docteur` est donc incorrecte si seule la forme `médecin` est enregistrée.
+- **Évolution envisagée** : une assistance sémantique ou RAG pourra suggérer ces variantes à la validation éditoriale. Elle ne corrigera pas automatiquement une tentative et ne remplacera pas les réponses déterministes du corpus.
+

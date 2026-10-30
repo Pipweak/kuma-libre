@@ -49,14 +49,14 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
-| Configuration | `/app/quiz/configure` | retour contextuel dans le header, leçons, drapeau actif, statuts, ordre, nombre de questions | Prêt à valider |
-| Question compréhension | `/app/quiz` | progression, japonais, écoute, input, micro, clavier | Prêt à valider |
-| Question production | `/app/quiz` | signification locale, réponse rōmaji/kana/kanji | Prêt à valider |
-| Correction correcte | `/app/quiz` | apparition stable, icône, texte, progression, formes acceptées | Prêt à valider |
-| Correction incorrecte | `/app/quiz` | réponse donnée, solution, mouvement discret, annonce | Prêt à valider |
-| Sauvegarde échouée | `/app/quiz` | même tentative, réessai idempotent, aucun faux succès | Prêt à valider |
-| Dictée | `/app/quiz` | écoute, durée, onde, arrêt, transcription, erreur, clavier | Prêt à valider |
-| Sortie de passe | `/app/quiz` | modal, overlay, focus, reprise ou sortie | Prêt à valider |
-| Bilan | `/app/quiz/result` | scores, actions suivantes, animation unique | Prêt à valider |
+| Configuration | `/app/quiz/configure` | retour contextuel dans le header, leçons, drapeau actif, statuts, ordre, nombre de questions | Validé |
+| Question compréhension | `/app/quiz` | progression, japonais, écoute, input, micro, clavier | Validé |
+| Question production | `/app/quiz` | signification locale, réponse rōmaji/kana/kanji | Validé |
+| Correction correcte | `/app/quiz` | apparition stable, icône, texte, progression, formes acceptées | Validé |
+| Correction incorrecte | `/app/quiz` | réponse donnée, solution, mouvement discret, annonce | Validé |
+| Sauvegarde échouée | `/app/quiz` | même tentative, réessai idempotent, aucun faux succès | Validé |
+| Dictée | `/app/quiz` | écoute, durée, onde, arrêt, transcription, erreur, clavier | Validé |
+| Sortie de passe | `/app/quiz` | modal, overlay, focus, reprise ou sortie | Validé |
+| Bilan | `/app/quiz/result` | scores, actions suivantes, animation unique | Validé |
 
 Un statut passe à **Validé** uniquement après les contrôles automatiques applicables et la validation visuelle utilisateur du lot concerné.
