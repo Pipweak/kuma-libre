@@ -1,8 +1,8 @@
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import type { ReactElement } from 'react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate, useSearchParams } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 
 import { vocabularyCorpus } from '@/app/data/vocabularyCorpus';
 import {
@@ -92,20 +92,10 @@ export function QuizConfigurationPage(): ReactElement {
   };
 
   const languageLabel = t(`languages.${locale}`);
-  const backDestination = requestedLesson ? `/app/lessons/${requestedLesson.id}` : '/app/lessons';
-
   return (
     <section className="mx-auto w-full max-w-4xl px-4 py-6 sm:px-6 sm:py-10">
-      <Link
-        className="text-muted hover:text-action focus-visible:ring-action rounded-control inline-flex min-h-11 items-center gap-2 font-semibold focus-visible:ring-2 focus-visible:outline-none"
-        to={backDestination}
-      >
-        <ArrowLeft aria-hidden="true" size={18} />
-        {requestedLesson ? t('configuration.back') : t('configuration.lessons')}
-      </Link>
-
-      <header className="mt-4 max-w-2xl">
-        <h1 className="text-ink text-3xl font-black tracking-tight sm:text-4xl">
+      <header className="max-w-2xl">
+        <h1 className="text-ink sr-only text-3xl font-black tracking-tight sm:not-sr-only sm:text-4xl">
           {t('configuration.title')}
         </h1>
         <p className="text-muted mt-2 leading-7">{t('configuration.description')}</p>

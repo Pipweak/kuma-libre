@@ -20,13 +20,19 @@ test('reviews a real lesson vocabulary entry through the first correction', asyn
   await page.getByRole('button', { name: 'Français' }).click();
   await page.getByRole('link', { name: 'Continuer à réviser' }).click();
 
-  await expect(page.getByRole('heading', { level: 1, name: 'Ton parcours' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Qu’est-ce qu’on révise ?' }),
+  ).toBeVisible();
   await page.getByRole('link', { name: /Leçon 01/ }).click();
 
   await expect(page.getByRole('heading', { level: 1, name: 'Leçon 01' })).toBeVisible();
   await page.getByRole('link', { name: 'Réviser cette leçon' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Configurer le quiz' })).toBeVisible();
+  await expect(page.getByText('Configurer le quiz', { exact: true }).first()).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Retour' })).toHaveAttribute(
+    'href',
+    `/app/lessons/${FIRST_LESSON.id}`,
+  );
   await expect(page.getByRole('checkbox', { name: '01' })).toBeChecked();
   await page.getByText('Dans l’ordre', { exact: true }).click();
   await page.getByRole('button', { name: 'Commencer' }).click();

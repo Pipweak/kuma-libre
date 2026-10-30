@@ -96,3 +96,11 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 
 La structure de navigation de `flows.html` ne change pas : cette passe précise la restitution et les transitions des écrans existants.
 
+## Corrections de validation du 29 octobre 2026
+
+### Intégré
+
+- **Panneau de profil** : l'ouvrir depuis la droite afin de conserver une continuité spatiale avec l'avatar qui le déclenche.
+- **Header secondaire** : maintenir explicitement la flèche à gauche, le titre au centre et l'avatar à droite sur mobile comme sur desktop.
+- **Retour** : afficher une seule flèche contextuelle dans le header des pages secondaires protégées, y compris la configuration du quiz, sans lien de retour dupliqué dans le contenu.
+

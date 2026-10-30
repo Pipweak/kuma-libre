@@ -6,6 +6,12 @@
   "description": "Choisis une leçon pour consulter son vocabulaire ou démarrer une révision.",
   "entryCount_one": "{{count}} entrée",
   "entryCount_other": "{{count}} entrées",
+  "home": {
+    "eyebrow": "Bon retour",
+    "lessons": "Leçons",
+    "title": "Qu’est-ce qu’on révise ?",
+    "viewAll": "Voir tout"
+  },
   "lessonLabel": "Leçon {{number}}",
   "notFound": {
     "description": "Cette leçon n’existe pas dans le corpus actuel.",

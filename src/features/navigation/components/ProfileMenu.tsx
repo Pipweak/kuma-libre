@@ -6,25 +6,30 @@ import { NavLink } from 'react-router';
 
 import { getUserInitial } from '@/features/auth/authPresentation';
 import type { AuthUser } from '@/features/auth/authTypes';
+import { BrandLogo } from '@/shared/ui';
+
+import styles from './ProfileMenu.module.scss';
 
 export type ProfileMenuProps = {
   user: AuthUser;
 };
 
 const NAVIGATION_ITEMS = [
-  { icon: BookOpen, key: 'lessons', to: '/app/lessons' },
-  { icon: BarChart3, key: 'progress', to: '/app/progress' },
-  { icon: Languages, key: 'language', to: '/app/settings/language' },
-  { icon: User, key: 'account', to: '/app/account' },
+  { end: true, icon: BookOpen, key: 'lessons', to: '/app' },
+  { end: false, icon: BarChart3, key: 'progress', to: '/app/progress' },
+  { end: false, icon: Languages, key: 'language', to: '/app/settings/language' },
+  { end: false, icon: User, key: 'account', to: '/app/account' },
 ] as const;
 
 export function ProfileMenu({ user }: ProfileMenuProps): ReactElement {
   const { t } = useTranslation('common');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isRendered, setIsRendered] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastLinkRef = useRef<HTMLAnchorElement>(null);
   const initial = getUserInitial(user.displayName, user.email);
+  const isOpen = isRendered && !isClosing;
 
   useEffect(() => {
     if (isOpen) {
@@ -46,6 +51,19 @@ export function ProfileMenu({ user }: ProfileMenuProps): ReactElement {
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isClosing) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setIsRendered(false);
+      setIsClosing(false);
+    }, 200);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [isClosing]);
+
+  useEffect(() => {
     if (!isOpen) {
       return;
     }
@@ -53,8 +71,7 @@ export function ProfileMenu({ user }: ProfileMenuProps): ReactElement {
     function handleKeyDown(event: globalThis.KeyboardEvent): void {
       if (event.key === 'Escape') {
         event.preventDefault();
-        setIsOpen(false);
-        window.setTimeout(() => triggerRef.current?.focus(), 0);
+        closeMenu();
         return;
       }
 
@@ -76,7 +93,7 @@ export function ProfileMenu({ user }: ProfileMenuProps): ReactElement {
   }, [isOpen]);
 
   function closeMenu(restoreFocus = true): void {
-    setIsOpen(false);
+    setIsClosing(true);
 
     if (restoreFocus) {
       window.setTimeout(() => triggerRef.current?.focus(), 0);
@@ -90,33 +107,40 @@ export function ProfileMenu({ user }: ProfileMenuProps): ReactElement {
         aria-expanded={isOpen}
         aria-label={t('navigation.open')}
         className="bg-success focus-visible:ring-action flex size-11 items-center justify-center rounded-full font-black text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsRendered(true);
+          setIsClosing(false);
+        }}
         ref={triggerRef}
         type="button"
       >
         {initial}
       </button>
 
-      {isOpen
+      {isRendered
         ? createPortal(
-            <div className="fixed inset-0 z-50">
+            <div
+              aria-hidden={isClosing || undefined}
+              className={`${styles.layer} ${isClosing ? styles.closing : ''}`}
+            >
               <button
                 aria-label={t('navigation.close')}
-                className="absolute inset-0 size-full bg-black/40"
+                className={styles.backdrop}
                 onClick={() => closeMenu()}
                 type="button"
               />
               <div
                 aria-labelledby="profile-navigation-title"
                 aria-modal="true"
-                className="bg-surface-strong shadow-panel absolute inset-y-0 right-0 z-10 flex w-[min(22rem,88vw)] flex-col p-5"
+                className={styles.drawer}
                 id="profile-navigation"
                 role="dialog"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <h2 className="text-ink text-xl font-black" id="profile-navigation-title">
+                  <h2 className="sr-only" id="profile-navigation-title">
                     {t('navigation.title')}
                   </h2>
+                  <BrandLogo alt="" aria-hidden="true" className="w-36" />
                   <button
                     aria-label={t('navigation.close')}
                     className="border-line text-ink hover:border-action hover:text-action focus-visible:ring-action flex size-11 items-center justify-center rounded-full border bg-white focus-visible:ring-2 focus-visible:outline-none"
@@ -129,7 +153,7 @@ export function ProfileMenu({ user }: ProfileMenuProps): ReactElement {
                 </div>
 
                 <nav aria-label={t('navigation.label')} className="mt-8 grid gap-2">
-                  {NAVIGATION_ITEMS.map(({ icon: Icon, key, to }) => (
+                  {NAVIGATION_ITEMS.map(({ end, icon: Icon, key, to }) => (
                     <NavLink
                       className={({ isActive }) =>
                         `rounded-control flex min-h-12 items-center gap-3 px-4 font-bold transition-colors focus-visible:ring-2 focus-visible:outline-none ${
@@ -139,6 +163,7 @@ export function ProfileMenu({ user }: ProfileMenuProps): ReactElement {
                         }`
                       }
                       key={key}
+                      end={end}
                       onClick={() => closeMenu(false)}
                       ref={key === 'account' ? lastLinkRef : undefined}
                       to={to}

@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 10 — 28 octobre 2026.
+> **Version :** 12 — 29 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -61,7 +61,7 @@ Un serveur personnalisé deviendrait pertinent uniquement en cas de traitement a
 
 `/auth/callback` est une route technique. Le chargement, les corrections, les erreurs vocales, le menu et les confirmations de sortie sont des états ou des composants, pas des pages.
 
-Toutes les routes `/app/*` utilisent `AppLayout` comme garde protégé. Sans session, il redirige vers `/auth` avec un paramètre `returnTo` limité aux chemins internes commençant par `/app`. Le callback valide à nouveau cette destination avant de la restaurer afin d'empêcher les redirections ouvertes.
+Toutes les routes `/app/*` utilisent `AppLayout` comme garde protégé. Le layout lui-même est chargé à la demande afin que l'accueil public ne télécharge ni le corpus ni la navigation connectée. Sans session, il redirige vers `/auth` avec un paramètre `returnTo` limité aux chemins internes commençant par `/app`. Le callback valide à nouveau cette destination avant de la restaurer afin d'empêcher les redirections ouvertes.
 
 `AuthProvider` possède l'unique état de session React et dépend du contrat `AuthRepository`. `SupabaseAuthRepository` implémente Google, magic link, callback PKCE ou `token_hash`, renouvellement de session et déconnexion. `PreviewAuthRepository` fournit une session fictive uniquement au serveur Vite local sans configuration et au build E2E explicitement marqué. `UnavailableAuthRepository` maintient un build de production non configuré anonyme, avec une erreur utilisateur contrôlée. Le drapeau `VITE_ENABLE_APP_PREVIEW` reste strictement réservé à la CI Playwright et ne doit jamais être configuré dans un déploiement public.
 
@@ -174,10 +174,11 @@ Chaque primitive définit ses variantes, états, accessibilité et tests. Un él
 Les composants suivants peuvent être partagés par plusieurs pages, tout en restant proches du produit :
 
 - `FormField` ;
-- `ProfileButton` et `ProfileDrawer` ;
+- `AppHeader` et `ProfileMenu` ;
 - `LessonCard` et `LessonListItem` ;
 - `VocabularyRow` ;
 - `ProgressSummary` ;
+- `QuickReviewCard` ;
 - `DirectionSelector` ;
 - `MasteryFilter` ;
 - `LanguageSelector` ;
@@ -290,7 +291,11 @@ Le store du quiz n'est pas global : il appartient au layout de la session. Un re
 
 Le snapshot de progression est global uniquement à l’espace authentifié. Il ne duplique pas la source de vérité : Supabase reste autoritaire et le Context React sert de vue courante pour filtrer les questions et produire les synthèses sans requête par composant.
 
-Le bouton de profil ouvre un panneau de navigation secondaire accessible et adapté au mobile. Il relie les leçons, la progression, la langue et le compte sans ajouter une barre de navigation permanente au parcours de quiz.
+`AppHeader` centralise les variantes du header protégé : mot-symbole et profil pour l'accueil et la liste des leçons, puis retour contextuel, titre et profil sur les écrans secondaires, y compris la configuration du quiz. Ses trois colonnes sont explicitement positionnées afin que la flèche reste à gauche, le titre au centre et le profil à droite, même lorsque le titre visuel passe dans le contenu sur desktop. Les pages secondaires ne dupliquent pas le retour dans leur contenu. La question active masque ce header afin de préserver la concentration et conserve sa confirmation de sortie dédiée.
+
+Le bouton de profil ouvre depuis la droite, côté déclencheur, un panneau de navigation secondaire accessible et adapté au mobile. Il relie l'accueil de révision, la progression, la langue et le compte sans ajouter une barre de navigation permanente au parcours de quiz. Son entrée de `250 ms`, sa sortie de `180 ms`, son piège de focus, sa fermeture par `Escape` et sa réduction de mouvement restent gérés dans le composant.
+
+`HomePage` assemble `QuickReviewCard` et les trois premières leçons réelles. `QuickReviewCard` appelle directement la fonction pure `buildQuickReviewSession` : il ne recopie donc pas la priorité rouge puis jaune, la limite de dix ou l'exclusion des verts dans React. `LessonsPage` réutilise une variante compacte de ce composant avant la liste complète.
 
 ## 9. Internationalisation
 
@@ -382,7 +387,7 @@ Les huit premières étapes sont initialisées avec :
 - la synthèse vocale locale de la question, la dictée vers l’input sans validation automatique, les états accessibles inspirés des messageries mobiles et le repli clavier lorsque les API Web Speech sont absentes ;
 - des adaptateurs vocaux remplaçables, testés avec des dépendances contrôlées, sans stockage d’audio ni dépendance du domaine de quiz aux API navigateur.
 
-Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient 904 entrées trilingues prêtes pour le quiz dans 18 leçons, avec leurs formes japonaises et leur rōmaji stocké. Supabase Auth est connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Les migrations `profiles`, `user_preferences`, `review_events` et `word_progress`, leurs politiques RLS et la RPC idempotente `record_review` sont versionnées et testées par la CI. Le frontend charge les scores, filtre la configuration avec le sens sélectionné et persiste chaque réponse avant d’afficher la correction. L’aperçu sans configuration Supabase conserve ce comportement avec un repository en mémoire réinitialisé au rechargement. Les synthèses globale et par leçon sont connectées à ce snapshot, la liste des leçons affiche la maîtrise dans les deux sens et chaque entrée expose ses deux scores sur trois. Le panneau du profil donne accès aux pages secondaires de progression, de langue et de compte. La passe de fidélité visuelle V1 est suivie page par page dans [`../quality/ui-fidelity-v1.md`](../quality/ui-fidelity-v1.md).
+Les primitives restantes seront ajoutées au rythme des parcours réels. Le corpus normalisé contient 904 entrées trilingues prêtes pour le quiz dans 18 leçons, avec leurs formes japonaises et leur rōmaji stocké. Supabase Auth est connecté derrière un repository testable : Google, magic link, callback, garde de route, restauration de destination, compte et déconnexion sont implémentés. Les migrations `profiles`, `user_preferences`, `review_events` et `word_progress`, leurs politiques RLS et la RPC idempotente `record_review` sont versionnées et testées par la CI. Le frontend charge les scores, filtre la configuration avec le sens sélectionné et persiste chaque réponse avant d’afficher la correction. L’aperçu sans configuration Supabase conserve ce comportement avec un repository en mémoire réinitialisé au rechargement. Les synthèses globale et par leçon sont connectées à ce snapshot, la liste des leçons affiche la maîtrise dans les deux sens et chaque entrée expose ses deux scores sur trois. L'accueil connecté expose la révision rapide et les premières leçons, le panneau animé du profil donne accès aux pages secondaires et la page inconnue choisit un retour public ou connecté sûr. La passe de fidélité visuelle V1 est suivie page par page dans [`../quality/ui-fidelity-v1.md`](../quality/ui-fidelity-v1.md).
 
 ## 13. Qualité et synchronisation documentaire
 

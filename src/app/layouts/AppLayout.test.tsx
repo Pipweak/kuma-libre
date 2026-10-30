@@ -53,7 +53,7 @@ describe('AppLayout', () => {
     const user = userEvent.setup();
     renderLayoutAt('/app/lessons');
 
-    expect(await screen.findByRole('link', { name: 'Accéder aux leçons' })).toBeDefined();
+    expect(await screen.findByRole('link', { name: 'Accéder à l’accueil connecté' })).toBeDefined();
     const trigger = screen.getByRole('button', { name: 'Ouvrir le menu du profil' });
     expect(trigger.textContent).toBe('V');
     await user.click(trigger);
@@ -68,7 +68,7 @@ describe('AppLayout', () => {
     renderLayoutAt('/app/quiz');
 
     expect(await screen.findByRole('heading', { name: 'Question de test' })).toBeDefined();
-    expect(screen.queryByRole('link', { name: 'Accéder aux leçons' })).toBeNull();
+    expect(screen.queryByRole('link', { name: 'Accéder à l’accueil connecté' })).toBeNull();
   });
 
   it('redirects an anonymous visitor to login', async () => {

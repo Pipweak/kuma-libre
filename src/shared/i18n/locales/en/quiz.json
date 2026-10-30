@@ -66,6 +66,15 @@
     "retry": "Try saving again",
     "saving": "Saving…"
   },
+  "quickReview": {
+    "available_one": "{{count}} word ready to review",
+    "available_other": "{{count}} words ready to review",
+    "configure": "Configure",
+    "empty": "No red or yellow words for now.",
+    "eyebrow": "Quick review",
+    "start": "Start",
+    "title": "Up to 10 words to practise"
+  },
   "question": {
     "comprehensionHint": "Give a meaning",
     "lesson": "Lesson {{number}}",

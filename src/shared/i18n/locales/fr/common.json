@@ -3,6 +3,7 @@
     "skipToContent": "Aller au contenu principal"
   },
   "app": {
+    "goToHome": "Accéder à l’accueil connecté",
     "goToLessons": "Accéder aux leçons",
     "loading": "Chargement de Kuma Libre",
     "loadingProgress": "Chargement de ta progression",
@@ -47,6 +48,11 @@
     "title": "Révise un peu. Retiens vraiment."
   },
   "languageSelector": {
+    "descriptions": {
+      "en": "Interface en anglais",
+      "es": "Interface en espagnol",
+      "fr": "Interface en français"
+    },
     "label": "Langue de l’interface",
     "prompt": "Choisir la langue de l’interface"
   },
@@ -68,12 +74,15 @@
     "lessons": "Réviser",
     "open": "Ouvrir le menu du profil",
     "progress": "Progression",
+    "back": "Retour",
     "synchronized": "Progression synchronisée",
     "title": "Menu"
   },
   "notFound": {
+    "backApp": "Revenir à l’application",
     "backHome": "Revenir à l’accueil",
     "description": "La page demandée n’existe pas ou a été déplacée.",
+    "eyebrow": "Chemin introuvable",
     "title": "Page introuvable"
   }
 }

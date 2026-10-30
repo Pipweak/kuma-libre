@@ -1,12 +1,12 @@
 import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Navigate, Outlet, useLocation } from 'react-router';
+import { Navigate, Outlet, useLocation } from 'react-router';
 
 import { createLoginPath } from '@/features/auth/authNavigation';
 import { useAuth } from '@/features/auth/useAuth';
-import { ProfileMenu } from '@/features/navigation/components/ProfileMenu';
+import { AppHeader } from '@/features/navigation/components/AppHeader';
 import { useProgress } from '@/features/progress/useProgress';
-import { AppLoader, BrandLogo, Button, Card } from '@/shared/ui';
+import { AppLoader, Button, Card } from '@/shared/ui';
 
 export function AppLayout(): ReactElement {
   const { t } = useTranslation('common');
@@ -48,20 +48,7 @@ export function AppLayout(): ReactElement {
 
   return (
     <div className="bg-canvas min-h-dvh">
-      {isQuizSession ? null : (
-        <header className="border-line bg-surface/95 sticky top-0 z-20 border-b backdrop-blur">
-          <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-            <Link
-              aria-label={t('app.goToLessons')}
-              className="focus-visible:ring-action rounded-control focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-              to="/app/lessons"
-            >
-              <BrandLogo className="w-32 sm:w-40" priority />
-            </Link>
-            <ProfileMenu user={session.user} />
-          </div>
-        </header>
-      )}
+      {isQuizSession ? null : <AppHeader pathname={pathname} search={search} user={session.user} />}
       <Outlet />
     </div>
   );

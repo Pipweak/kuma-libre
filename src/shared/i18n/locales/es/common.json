@@ -3,6 +3,7 @@
     "skipToContent": "Ir al contenido principal"
   },
   "app": {
+    "goToHome": "Ir al inicio de la sesión",
     "goToLessons": "Ir a las lecciones",
     "loading": "Cargando Kuma Libre",
     "loadingProgress": "Cargando tu progreso",
@@ -47,6 +48,11 @@
     "title": "Repasa un poco. Recuérdalo de verdad."
   },
   "languageSelector": {
+    "descriptions": {
+      "en": "Interfaz en inglés",
+      "es": "Interfaz en español",
+      "fr": "Interfaz en francés"
+    },
     "label": "Idioma de la interfaz",
     "prompt": "Elige el idioma de la interfaz"
   },
@@ -68,12 +74,15 @@
     "lessons": "Repasar",
     "open": "Abrir el menú del perfil",
     "progress": "Progreso",
+    "back": "Volver",
     "synchronized": "Progreso sincronizado",
     "title": "Menú"
   },
   "notFound": {
+    "backApp": "Volver a la aplicación",
     "backHome": "Volver al inicio",
     "description": "La página solicitada no existe o se ha movido.",
+    "eyebrow": "Ruta no encontrada",
     "title": "Página no encontrada"
   }
 }

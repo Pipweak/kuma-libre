@@ -5,6 +5,7 @@
   "entryStatus": "{{direction}} : {{status}}, score {{score}} sur 3",
   "entryTotal_one": "sur {{count}} entrée du corpus",
   "entryTotal_other": "sur {{count}} entrées du corpus",
+  "headerTitle": "Progression",
   "lessonCount_one": "{{count}} leçon",
   "lessonCount_other": "{{count}} leçons",
   "masteredLabel": "maîtrisés",

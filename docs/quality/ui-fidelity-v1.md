@@ -17,6 +17,7 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 - aucune animation nécessaire à la compréhension ou bloquant une action ;
 - `prefers-reduced-motion` neutralise le mouvement non essentiel ;
 - aucune transition ne diminue temporairement le contraste d’un texte ou d’un CTA ;
+- les pages secondaires protégées présentent une seule flèche de retour contextuelle dans le header, avec le profil maintenu à droite ;
 - pas de régression axe, de saut de mise en page visible ou de ralentissement d’interaction.
 
 ## Lot 1/3 — fondations, public et authentification
@@ -35,19 +36,20 @@ Ce contrôle vérifie chaque écran de l’application contre le storyboard fonc
 
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
-| Panneau de profil | application | overlay, glissement, fermeture, piège de focus, `Escape` | À faire |
-| Liste des leçons | `/app/lessons` | révision rapide, progression, cartes, mobile/desktop | À faire |
-| Détail d’une leçon | `/app/lessons/:lessonId` | vocabulaire réel, C/P, CTA préconfiguré, listes responsives | À faire |
-| Progression | `/app/progress` | global, directions, leçons, libellés non fondés uniquement sur la couleur | À faire |
-| Langue | `/app/settings/language` | FR/EN/ES, état sélectionné, mise à jour immédiate | À faire |
-| Compte et déconnexion | `/app/account` | initiale, identité, confirmation animée, erreurs | À faire |
-| Page inconnue | `*` | retour sûr public ou connecté | À faire |
+| Accueil connecté | `/app` | révision rapide réelle, trois premières leçons, CTA vers le parcours complet | Prêt à valider |
+| Panneau de profil | application | overlay, glissement depuis la droite, fermeture, piège de focus, `Escape`, réduction de mouvement | Prêt à valider |
+| Liste des leçons | `/app/lessons` | révision rapide compacte, progression, cartes, mobile/desktop | Prêt à valider |
+| Détail d’une leçon | `/app/lessons/:lessonId` | vocabulaire réel, C/P, CTA préconfiguré, listes responsives | Prêt à valider |
+| Progression | `/app/progress` | global, directions, leçons, libellés non fondés uniquement sur la couleur | Prêt à valider |
+| Langue | `/app/settings/language` | FR/EN/ES avec drapeaux et sélection explicite, mise à jour immédiate | Prêt à valider |
+| Compte et déconnexion | `/app/account` | initiale, identité, confirmation animée, erreurs | Prêt à valider |
+| Page inconnue | `*` | retour sûr public ou connecté | Prêt à valider |
 
 ## Lot 3/3 — quiz et voix
 
 | Écran ou état | Route | Contrôles principaux | Statut |
 | --- | --- | --- | --- |
-| Configuration | `/app/quiz/configure` | leçons, drapeau actif, statuts, ordre, nombre de questions | À faire |
+| Configuration | `/app/quiz/configure` | retour contextuel dans le header, leçons, drapeau actif, statuts, ordre, nombre de questions | À faire |
 | Question compréhension | `/app/quiz` | progression, japonais, écoute, input, micro, clavier | À faire |
 | Question production | `/app/quiz` | signification locale, réponse rōmaji/kana/kanji | À faire |
 | Correction correcte | `/app/quiz` | apparition stable, icône, texte, progression, formes acceptées | À faire |

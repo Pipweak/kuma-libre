@@ -447,6 +447,8 @@ L'interface est conçue mobile-first. Le produit doit rester immédiatement iden
 
 La navigation secondaire peut être regroupée derrière le bouton de profil, notamment sur mobile. Lorsqu'aucune image de profil n'existe, ce bouton affiche l'initiale du prénom dans un cercle. Le futur upload et recadrage d'avatar restent différés. La configuration du quiz reste toutefois accessible directement depuis l'accueil, car elle fait partie du parcours principal.
 
+Le panneau de profil s'ouvre depuis la droite, au même endroit que son bouton déclencheur. Les pages secondaires protégées utilisent une flèche de retour contextuelle unique dans le header ; elles ne dupliquent pas ce retour sous forme de lien dans leur contenu. La question de quiz active fait exception : son action de sortie explicite remplace la navigation arrière afin de confirmer l'abandon de la passe.
+
 Le sens du quiz utilise deux cartes présentant `Comprendre` et `Produire`, avec une flèche, le drapeau japonais et un seul drapeau de traduction. Ce dernier réagit au choix effectué dans les réglages de langue : français, anglais ou espagnol. Les drapeaux restent décoratifs et sont toujours accompagnés de texte ou d'un nom accessible afin de ne pas rendre le contrôle ambigu.
 
 ### 11.2 Écran de quiz

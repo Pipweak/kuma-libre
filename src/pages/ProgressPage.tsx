@@ -17,10 +17,9 @@ export function ProgressPage(): ReactElement {
   );
 
   return (
-    <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+    <section className="mx-auto w-full max-w-4xl px-4 py-7 sm:px-6 sm:py-10">
       <div className="max-w-2xl space-y-3">
-        <p className="text-action text-sm font-bold tracking-[0.16em] uppercase">Kuma Libre</p>
-        <h1 className="font-display text-ink text-3xl font-black tracking-tight sm:text-5xl">
+        <h1 className="font-display text-ink sr-only text-3xl font-black tracking-tight sm:not-sr-only sm:text-5xl">
           {t('title')}
         </h1>
         <p className="text-muted text-base leading-7 sm:text-lg">{t('description')}</p>
