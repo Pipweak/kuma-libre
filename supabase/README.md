@@ -34,6 +34,12 @@ npx supabase db push
 
 `db push` doit être exécuté depuis une branche validée et applique uniquement les migrations versionnées. Les fournisseurs Google et email, les URL de site et les URL de callback restent configurés dans le dashboard Auth pour chaque environnement.
 
+## Import historique de Vincent
+
+Après le déploiement des migrations et la première connexion du compte cible, l'import administratif de `progress-vincent.json` s'exécute avec `npm run progress:vincent:import -- --apply`. Il utilise une clé `service_role` uniquement côté script, jamais une variable `VITE_*`, et s'arrête si des scores distants différents existent déjà.
+
+La préparation des variables, l'aperçu sans écriture et les résultats attendus sont détaillés dans [`../docs/development/vincent-progress-import.md`](../docs/development/vincent-progress-import.md).
+
 ## Garanties de progression
 
 - `review_events` conserve l’historique immuable ;

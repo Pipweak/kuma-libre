@@ -69,6 +69,8 @@ npm run supabase:stop -- --no-backup
 
 La procédure de liaison et de déploiement vers un projet distant est documentée dans [`supabase/README.md`](supabase/README.md). Les migrations sont toujours appliquées avant de tester l’application avec de vraies variables Supabase.
 
+La progression historique de Vincent est importée séparément, après création de son compte, avec `npm run progress:vincent:import`. L'aperçu local résout les 153 entrées sans écrire ; l'option `--apply` exige une configuration administrative hors frontend et refuse tout écrasement d'une progression différente. La procédure complète se trouve dans [`docs/development/vincent-progress-import.md`](docs/development/vincent-progress-import.md).
+
 `@supabase/supabase-js` est verrouillé sur `2.118.0`. Le `postinstall` applique temporairement le correctif de déclaration de la [PR Supabase #2629](https://github.com/supabase/supabase-js/pull/2629), nécessaire à TypeScript 6 avec `skipLibCheck: false`. Ce patch n'affecte aucun comportement d'exécution et devra être supprimé dès qu'une version stable du SDK intègre le correctif.
 
 ### Génération du corpus

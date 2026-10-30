@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** architecture cible validée pour guider le démarrage du projet.
-> **Version :** 11 — 30 octobre 2026.
+> **Version :** 12 — 30 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -247,6 +247,8 @@ Le fichier JSON généré est un artefact de build. Les Markdown restent les sou
 Les colonnes de maîtrise actuellement présentes dans certains fichiers Markdown sont des annotations historiques et ne font pas partie du corpus généré pour l'application. Elles ne doivent pas initialiser silencieusement la progression d'un nouvel utilisateur.
 
 La progression appartient exclusivement à l'utilisateur connecté et réside dans Supabase. Le fichier `progress-vincent.json` conserve la progression historique de Vincent pour la direction **compréhension** (`japonais → signification française ou anglaise`). Il sert de source de migration initiale explicite pour ce compte, mais ne constitue pas une troisième source de vérité et ne doit pas être livré comme progression par défaut aux autres utilisateurs. La migration convertit `red` en score `0`, `yellow` en score `1` et un éventuel `green` en score `3`. La direction **production** commence à rouge avec un score `0`.
+
+Cette migration est une opération d'administration unique, exécutée après la création du compte cible avec le script `progress:vincent:import`. L'outil fonctionne en aperçu par défaut, utilise une clé administrative exclusivement hors du frontend et refuse d'écraser une progression distante différente. Il alimente seulement le résumé `word_progress` : le fichier historique ne contient ni réponses soumises ni durées, donc aucun faux `review_event` n'est fabriqué. Une nouvelle exécution contre des lignes identiques n'écrit rien.
 
 ## 6. Moteur de quiz
 

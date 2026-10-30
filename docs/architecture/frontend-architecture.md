@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 13 — 29 octobre 2026.
+> **Version :** 14 — 30 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -78,8 +78,10 @@ kuma-libre/
 ├── mockups/                         # Explorations et référence UX
 ├── docs/                            # Architecture détaillée et mémoire de conception
 ├── scripts/
-│   └── corpus/
-│       └── generate-corpus.ts       # CLI de génération et de validation
+│   ├── corpus/
+│   │   └── generate-corpus.ts       # CLI de génération et de validation
+│   └── progress/                     # Migration administrative hors frontend
+│       └── import-vincent-progress.ts
 ├── src/
 │   ├── app/
 │   │   ├── router/
@@ -266,6 +268,8 @@ Les implémentations initiales sont `SupabaseAuthRepository`, `SupabaseProgressR
 Le client génère l’identifiant UUID d’une tentative avant l’appel. `record_review` déduit l’utilisateur avec `auth.uid()`, insère `review_events` et met à jour `word_progress` dans la même transaction. Une répétition strictement identique du même UUID retourne le score existant ; un contenu différent utilisant cet UUID est rejeté. La correction n’est révélée qu’après confirmation de la RPC. En cas d’échec, l’UI conserve l’objet `ReviewSubmission` et renvoie exactement le même identifiant.
 
 Le frontend configure Supabase exclusivement avec `VITE_SUPABASE_URL` et `VITE_SUPABASE_PUBLISHABLE_KEY`. Le client utilise PKCE, désactive l'échange automatique de l'URL afin que `/auth/callback` porte explicitement l'état d'interface, puis laisse le SDK persister et renouveler sa session technique. Aucune clé administrative et aucune donnée de progression ne passent par ce stockage.
+
+Le script Node `progress:vincent:import` constitue un outil d'administration séparé du bundle Vite. Sa clé `SUPABASE_SERVICE_ROLE_KEY` n'utilise jamais le préfixe `VITE_`, reste dans un environnement local ignoré par Git et sert uniquement après vérification explicite de l'UUID du compte. La transformation du fichier historique vers les identifiants stables du corpus est pure et testée. Avant toute écriture, l'outil compare les lignes distantes et s'arrête si l'import risquerait d'écraser une progression différente.
 
 Le SDK `@supabase/supabase-js@2.118.0` possède actuellement une déclaration WebAuthn incompatible avec TypeScript 6 lorsque `skipLibCheck` reste désactivé. Le dépôt applique par `patch-package` le correctif de déclaration proposé dans la PR amont Supabase `#2629`. Le patch est supprimé dès sa publication dans une version stable ; il ne modifie pas le runtime.
 
