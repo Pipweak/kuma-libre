@@ -11,6 +11,17 @@ Objectifs mesurés sur mobile dans des conditions reproductibles :
 
 Le premier build de production stable établira la référence du bundle. Une régression supérieure à 10 % sur un bundle ou une métrique suivie doit être expliquée et acceptée explicitement.
 
+### Baseline automatisée V1
+
+`npm run performance:check` analyse le manifeste du dernier `npm run build`. La CI refuse un build qui dépasse :
+
+- `220 KiB` de JavaScript critique compressé en gzip ;
+- `16 KiB` de CSS critique compressé en gzip ;
+- `500 000` octets pour le plus grand chunk JavaScript brut ;
+- `850 KiB` pour l'ensemble des assets de marque émis.
+
+Baseline du 31 octobre 2026 : `187,5 KiB` de JavaScript critique gzip, `9,1 KiB` de CSS critique gzip, un plus grand chunk de `308,2 KiB` et `755,3 KiB` d'assets de marque émis. Les Core Web Vitals et le score Lighthouse seront ajoutés après mesure du premier release candidate sur Cloudflare Pages ; ils ne sont pas déduits du poids du bundle.
+
 ## Pratiques attendues
 
 - Charger les routes secondaires à la demande lorsque cela réduit réellement le chargement initial.

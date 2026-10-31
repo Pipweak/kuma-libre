@@ -19,6 +19,7 @@
     "format:check": "prettier --check .",
     "lint": "npm run lint:code",
     "lint:code": "eslint . --max-warnings 0",
+    "performance:check": "tsx scripts/performance/check-build.ts",
     "postinstall": "patch-package",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest",
@@ -31,7 +32,7 @@
     "supabase:stop": "supabase stop",
     "supabase:reset": "supabase db reset",
     "test:database": "supabase test db",
-    "quality": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run build"
+    "quality": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run performance:check"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0",
