@@ -1,7 +1,7 @@
 # Architecture cible — Kuma Libre
 
 > **Statut :** architecture cible validée pour guider le démarrage du projet.
-> **Version :** 12 — 30 octobre 2026.
+> **Version :** 13 — 31 octobre 2026.
 > Ce document est vivant : il doit être mis à jour lorsque les besoins ou les décisions techniques évoluent.
 
 ## 1. Objectif du projet
@@ -434,6 +434,8 @@ Les règles suivantes sont obligatoires :
 - une éventuelle clé `service_role` ne doit jamais être incluse dans le frontend ou dans Git ;
 - aucune confiance n'est accordée à des headers d'identité fabriqués par le navigateur ;
 - les environnements local, preview et production utilisent des projets ou configurations explicitement identifiés.
+- Cloudflare Pages applique une Content Security Policy, interdit l'intégration en iframe, limite le microphone à la même origine et désactive les capacités navigateur inutilisées ;
+- les scripts nécessaires au chargement initial restent externes afin de ne pas autoriser les scripts inline dans la CSP.
 
 ## 11. Interface envisagée
 
@@ -749,10 +751,12 @@ Cloudflare Pages construit et publie l'application statique depuis le dépôt Gi
 
 Configuration attendue :
 
-- commande de build : à définir après l'initialisation Vite ;
+- branche de production : `main` ;
+- commande de build : `npm run build` ;
 - répertoire de sortie : `dist` ;
-- fallback SPA si le routing client en a besoin ;
-- déploiements de preview pour les branches ou pull requests.
+- fallback SPA versionné dans `public/_redirects` ;
+- headers de cache et de sécurité versionnés dans `public/_headers` ;
+- déploiements de preview pour les branches ou pull requests, notamment la branche de release avant sa fusion vers `main`.
 
 ### 15.2 Variables publiques
 
@@ -760,7 +764,8 @@ Le frontend reçoit uniquement les valeurs publiques nécessaires :
 
 - URL du projet Supabase ;
 - clé publique ou `anon` Supabase ;
-- URL publique de redirection OAuth.
+
+L'URL de callback est calculée depuis l'origine courante avec le chemin `/auth/callback`, puis autorisée explicitement dans Supabase pour chaque environnement.
 
 Aucun secret administratif ne doit être configuré dans le bundle frontend.
 
@@ -775,6 +780,12 @@ Un backend personnalisé pourra être ajouté si un besoin concret apparaît, pa
 - administration complexe ;
 - génération ou enrichissement de contenu ;
 - agrégations ou traitements impossibles à exposer directement au client.
+
+### 15.4 Budget de build V1
+
+Le build produit un manifeste Vite et la CI exécute `performance:check`. La baseline V1 limite le JavaScript critique à `220 KiB` gzip, le CSS critique à `16 KiB` gzip, le plus grand chunk JavaScript à `500 000` octets et les assets de marque émis à `850 KiB`. React et Supabase possèdent des chunks stables séparés pour le cache et pour éviter un chunk monolithique. Les variantes de logo archivées mais inutilisées ne sont pas importées dans le build.
+
+Ces budgets contrôlent les régressions du bundle. Les objectifs réels LCP, INP, CLS et Lighthouse restent à mesurer sur le déploiement Cloudflare de release candidate, dans des conditions mobiles reproductibles.
 
 ## 16. Stratégie de tests
 
