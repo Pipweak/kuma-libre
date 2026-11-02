@@ -2,6 +2,8 @@
 
 Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Minna no Nihongo — Shokyū I*.
 
+Version préparée : `0.1.0`. Les fonctionnalités, limites connues et opérations de déploiement sont récapitulées dans le [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Développement de l'application
 
 Le socle applicatif utilise Node.js 22.13, npm, React, TypeScript, Vite, React Router en Data Mode, Supabase Auth, i18next, Tailwind CSS et Sass.
