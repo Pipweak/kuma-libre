@@ -1,0 +1,122 @@
+{
+  "answer": {
+    "correct": "Correct answer",
+    "incorrect": "Needs work",
+    "label": "Your answer",
+    "placeholderComprehension": "French, English, or Spanish",
+    "placeholderProduction": "Rōmaji, kana, or kanji",
+    "productionLabel": "Your answer in Japanese",
+    "skip": "I don’t know",
+    "validate": "Check"
+  },
+  "configuration": {
+    "back": "Back to the lesson",
+    "description": "Choose the scope of this session before starting.",
+    "direction": "Quiz direction",
+    "empty": "No words match this selection.",
+    "emptyHint": "Include unknown words or choose another lesson.",
+    "lessonPrefilled": "Lesson {{number}} preselected",
+    "lessonPrefilledHint": "You can still change the scope of this session.",
+    "lessons": "Lessons",
+    "mastery": "Words to include",
+    "order": "Question order",
+    "questionCount_one": "{{count}} question",
+    "questionCount_other": "{{count}} questions",
+    "start": "Start",
+    "title": "Configure the quiz"
+  },
+  "correction": {
+    "expectedAnswer": "Expected answer",
+    "forms": "Japanese forms",
+    "meanings": "Meanings",
+    "next": "Next question",
+    "scoreGreen": "This word is now mastered.",
+    "scoreRed": "This word is still not mastered.",
+    "scoreYellow": "This word is now marked “To review”.",
+    "yourAnswer": "Your answer"
+  },
+  "direction": {
+    "comprehension": "Understand",
+    "comprehensionAccessible": "Understand: Japanese to {{language}}",
+    "production": "Produce",
+    "productionAccessible": "Produce: {{language}} to Japanese"
+  },
+  "exit": {
+    "cancel": "Continue the quiz",
+    "confirm": "Leave session",
+    "description_one": "{{count}} validated answer has been saved. This session cannot be resumed.",
+    "description_other": "{{count}} validated answers have been saved. This session cannot be resumed.",
+    "description_zero": "No answers have been validated yet. This session cannot be resumed.",
+    "open": "Leave quiz",
+    "title": "Leave this session?"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
+    "ja": "Japanese"
+  },
+  "mastery": {
+    "green": "Mastered",
+    "red": "Not mastered",
+    "yellow": "To review"
+  },
+  "order": {
+    "corpus": "In order",
+    "random": "Random"
+  },
+  "persistence": {
+    "errorDescription": "Your answer was not saved. It remains displayed and will not be counted twice.",
+    "errorTitle": "Unable to save",
+    "retry": "Try saving again",
+    "saving": "Saving…"
+  },
+  "quickReview": {
+    "available_one": "{{count}} word ready to review",
+    "available_other": "{{count}} words ready to review",
+    "configure": "Configure",
+    "empty": "No red or yellow words for now.",
+    "eyebrow": "Quick review",
+    "start": "Start",
+    "title": "Up to 10 words to practise"
+  },
+  "question": {
+    "comprehensionHint": "Give a meaning",
+    "lesson": "Lesson {{number}}",
+    "productionHint": "Find the Japanese word",
+    "progress": "Question {{current}} of {{total}}"
+  },
+  "result": {
+    "backToHome": "Back to home",
+    "correct": "Correct",
+    "description": "Mistakes will return in a future session.",
+    "incorrect": "To review",
+    "newSession": "New session",
+    "title": "Session complete",
+    "total": "Words seen"
+  },
+  "speech": {
+    "cancel": "Cancel",
+    "cancelled": "Dictation cancelled. You can use the keyboard.",
+    "dictate": "Dictate my answer",
+    "errors": {
+      "network-error": "Voice recognition is unavailable",
+      "no-speech": "No speech was detected",
+      "permission-denied": "Microphone access was denied",
+      "unsupported": "Dictation is not supported"
+    },
+    "keyboardAvailable": "You can always answer with the keyboard.",
+    "listen": "Listen",
+    "listening": "Listening",
+    "listeningHelp": "Speak normally. No audio is stored.",
+    "permission": "Waiting for microphone permission…",
+    "playbackError": "Voice playback is unavailable.",
+    "ready": "Transcript added · you can edit it",
+    "retry": "Try dictation again",
+    "stop": "Stop dictation",
+    "stopPlayback": "Stop playback",
+    "transcribing": "Transcribing…",
+    "transcribingHint": "This should only take a few seconds"
+  },
+  "sessionMissing": "This session is no longer available. Configure a new review."
+}

@@ -1,0 +1,39 @@
+@use '../shared/styles/_tokens.scss' as tokens;
+
+.page {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(
+      circle at 50% 28%,
+      color-mix(in srgb, tokens.$kl-color-success 12%, transparent),
+      transparent 18rem
+    );
+    content: '';
+    pointer-events: none;
+  }
+}
+
+.completionMark {
+  animation: completion-pop tokens.$kl-motion-slow tokens.$kl-ease-enter both;
+}
+
+@keyframes completion-pop {
+  from {
+    transform: translateY(tokens.kl-space(3)) scale(0.8);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .completionMark {
+    animation: none;
+  }
+}

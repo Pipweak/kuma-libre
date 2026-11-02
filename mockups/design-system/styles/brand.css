@@ -12,6 +12,7 @@
   background-color: transparent;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .kl-brand-art--horizontal {
@@ -19,7 +20,7 @@
 }
 
 .kl-brand-art--wordmark {
-  background-image: url("../assets/kuma-wordmark.png");
+  background-image: url("../assets/kuma-wordmark-v2.png");
 }
 
 .kl-brand-art--stacked {

@@ -1,0 +1,85 @@
+@use '../shared/styles/_tokens.scss' as tokens;
+
+.page {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 auto;
+    height: min(24rem, 55dvh);
+    background: radial-gradient(
+      circle at 50% 38%,
+      color-mix(in srgb, tokens.$kl-color-action 8%, transparent),
+      transparent 68%
+    );
+    content: '';
+    pointer-events: none;
+  }
+}
+
+.question {
+  animation: question-in tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+.persistenceError {
+  animation: state-in tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+.dialogBackdrop {
+  animation: backdrop-in tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+.dialogPanel {
+  animation: dialog-in tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+@keyframes question-in {
+  from {
+    transform: translateX(tokens.kl-space(3));
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes state-in {
+  from {
+    transform: translateY(tokens.kl-space(3));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    background-color: transparent;
+  }
+
+  to {
+    background-color: rgb(0 0 0 / 45%);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    transform: translateY(tokens.kl-space(4)) scale(0.985);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .question,
+  .persistenceError,
+  .dialogBackdrop,
+  .dialogPanel {
+    animation: none;
+  }
+}

@@ -2,6 +2,131 @@
 
 Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Minna no Nihongo — Shokyū I*.
 
+Version préparée : `0.1.0`. Les fonctionnalités, limites connues et opérations de déploiement sont récapitulées dans le [`CHANGELOG.md`](CHANGELOG.md).
+
+## Développement de l'application
+
+Le socle applicatif utilise Node.js 22.13, npm, React, TypeScript, Vite, React Router en Data Mode, Supabase Auth, i18next, Tailwind CSS et Sass.
+
+```bash
+nvm use
+npm ci
+npm run dev
+```
+
+Contrôles disponibles :
+
+```bash
+npm run format:check
+npm run lint
+npm run typecheck
+npm run test:coverage
+npm run build
+npm run performance:check
+npm run test:e2e
+npm run test:a11y
+npm run security:audit
+```
+
+`npm run quality` exécute les contrôles locaux obligatoires hors Playwright, tests PostgreSQL et audit réseau, y compris les budgets du build de production. La CI GitHub ajoute l'audit des dépendances, les tests Supabase locaux et les parcours Playwright sur Chromium.
+
+### Authentification et aperçu local
+
+L'application propose Google et un magic link envoyé par email. Toutes les routes `/app/*` exigent une session ; lorsqu'une destination protégée est demandée, elle est restaurée après le callback d'authentification. Le SDK Supabase conserve uniquement les éléments techniques de session nécessaires à Auth.
+
+Copier [`.env.example`](.env.example) vers `.env.local`, puis renseigner les valeurs publiques affichées par le panneau **Connect** du projet Supabase :
+
+```dotenv
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_your_public_key
+```
+
+La clé est publique et fonctionne avec la Row Level Security ; aucune clé `service_role` ne doit être placée dans un fichier frontend. Dans Supabase Auth, activer Google et email, puis autoriser au minimum les URLs de callback locale et déployée, par exemple `http://127.0.0.1:4173/auth/callback`.
+
+Sans variables Supabase, `npm run dev` utilise le compte fictif `Vincent` afin de conserver un parcours local testable. Dès que les deux variables sont présentes, le serveur local utilise Supabase réellement. Un build de production non configuré reste anonyme et ne donne jamais accès aux routes protégées. `VITE_ENABLE_APP_PREVIEW=true` est réservé au build Playwright de la CI et ne doit jamais être défini sur Cloudflare Pages.
+
+Une session Supabase charge sa progression avant d’ouvrir l’espace protégé. Chaque réponse validée crée ensuite un événement immuable et met à jour atomiquement le score du sens travaillé. Une panne conserve la tentative courante en mémoire et permet de la renvoyer avec le même identifiant, sans double comptage. Recharger une question renvoie toujours vers la configuration, conformément à la règle V1 sur les passes interrompues ; les réponses déjà sauvegardées restent acquises.
+
+Sans variables Supabase, le repository d’aperçu conserve les scores uniquement en mémoire pour la durée de l’onglet. Il ne crée aucun fallback métier dans `localStorage`.
+
+### Accueil connecté, progression et navigation secondaire
+
+L'accueil connecté propose immédiatement la révision rapide de dix mots au maximum et un aperçu des trois premières leçons réelles. Le bouton de profil du header ouvre depuis la droite un menu mobile donnant accès à cet accueil de révision, à la progression, à la langue de l'interface et au compte. Les pages secondaires protégées conservent une flèche de retour contextuelle unique dans le header. L'écran de progression calcule à partir du snapshot Supabase :
+
+- le pourcentage de mots verts en compréhension ;
+- le pourcentage de mots verts en production ;
+- le pourcentage de mots verts dans les deux sens, globalement et par leçon.
+
+Ces agrégats sont dérivés à la volée et ne sont pas stockés. Le détail d'une leçon affiche les deux scores `C/P` sur `3` pour chaque entrée, avec un texte accessible en plus des couleurs rouge, jaune et verte.
+
+### Base Supabase locale
+
+Les migrations, politiques RLS et tests SQL se trouvent dans [`supabase`](supabase). Leur exécution locale nécessite Docker Desktop :
+
+```bash
+npm run supabase:start
+npm run supabase:reset
+npm run test:database
+npm run supabase:stop -- --no-backup
+```
+
+La procédure de liaison et de déploiement vers un projet distant est documentée dans [`supabase/README.md`](supabase/README.md). Les migrations sont toujours appliquées avant de tester l’application avec de vraies variables Supabase.
+
+La progression historique de Vincent est importée séparément, après création de son compte, avec `npm run progress:vincent:import`. L'aperçu local résout les 153 entrées sans écrire ; l'option `--apply` exige une configuration administrative hors frontend et refuse tout écrasement d'une progression différente. La procédure complète se trouve dans [`docs/development/vincent-progress-import.md`](docs/development/vincent-progress-import.md).
+
+`@supabase/supabase-js` est verrouillé sur `2.118.0`. Le `postinstall` applique temporairement le correctif de déclaration de la [PR Supabase #2629](https://github.com/supabase/supabase-js/pull/2629), nécessaire à TypeScript 6 avec `skipLibCheck: false`. Ce patch n'affecte aucun comportement d'exécution et devra être supprimé dès qu'une version stable du SDK intègre le correctif.
+
+### Génération du corpus
+
+Les fichiers Markdown de [`lessons`](lessons) sont les sources éditables. L'importeur les convertit en un artefact unique et déterministe, [`src/generated/corpus.json`](src/generated/corpus.json), qui ne doit jamais être modifié manuellement.
+
+```bash
+npm run corpus:generate        # régénère le JSON après une modification des Markdown
+npm run corpus:check           # vérifie que le JSON versionné est à jour et structurellement valide
+npm run corpus:validate-ready  # contrôle les données requises pour activer tous les quiz FR/EN/ES
+```
+
+`npm run build` exécute automatiquement `corpus:validate-ready`. Ce contrôle vérifie que le JSON est synchronisé et que chaque entrée possède ses significations française, anglaise et espagnole ainsi que les lectures japonaises nécessaires aux quiz. Le corpus versionné satisfait désormais ce contrôle ; toute nouvelle entrée doit conserver cette couverture.
+
+### Design system applicatif
+
+- [`src/shared/styles/tokens.css`](src/shared/styles/tokens.css) est la source canonique des couleurs, espacements, rayons, ombres, typographies et variables Tailwind de Kuma Libre.
+- [`src/shared/styles/_tokens.scss`](src/shared/styles/_tokens.scss) expose ces mêmes tokens aux modules SCSS sans dupliquer leurs valeurs.
+- [`src/shared/ui`](src/shared/ui) contient les premières primitives accessibles et réutilisables : `BrandLogo`, `Button`, `IconButton`, `Card`, `FlagIcon`, `ProgressBar` et `Spinner`.
+- [`src/assets/brand`](src/assets/brand) contient les déclinaisons PNG transparentes de la marque utilisées par l'application. Le composant `BrandLogo` en préserve toujours les proportions.
+
+Tailwind reste le choix principal pour la mise en page et les états simples. Les modules SCSS sont réservés aux besoins spécifiques, notamment les animations et l'imbrication locale.
+
+### Moteur de quiz
+
+Le domaine pur [`src/domain/quiz`](src/domain/quiz) construit les sessions sans dépendre de React ni de Supabase. Il couvre :
+
+- les sessions configurées par leçon, catégorie, direction, niveau de maîtrise et ordre ;
+- la révision rapide de dix mots au maximum, avec priorité aux rouges puis aux jaunes ;
+- les questions de compréhension et de production avec toutes les réponses explicitement déclarées ;
+- la normalisation Unicode, des espaces, de la ponctuation, de la casse et des accents latins sans correction floue ;
+- les progressions indépendantes de compréhension et de production, ainsi que la maîtrise globale dérivée.
+
+Les fonctions acceptent une source aléatoire injectable afin que la sélection et le mélange restent entièrement testables. La feature React orchestre ces contrats sans dupliquer leurs règles. `ProgressProvider` charge les scores privés et `SupabaseProgressRepository` délègue l’écriture atomique à la RPC `record_review`.
+
+L'expérience React est immersive pendant la question et le bilan : le header applicatif est masqué, une sortie confirmée revient à l'accueil connecté et chaque correction reste affichée jusqu'à l'action explicite `Question suivante`. Les transitions courtes utilisent les tokens de mouvement partagés et sont neutralisées par `prefers-reduced-motion`.
+
+### Lecture et dictée vocales
+
+Le quiz utilise les API vocales du navigateur, sans fichier audio ni traitement serveur :
+
+- **Écouter** lit la question avec une voix compatible avec sa langue ; le japonais est prononcé depuis la forme kana, même lorsqu’un kanji est affiché ;
+- le microphone transcrit une réponse dans le champ existant avec une locale adaptée au sens du quiz ;
+- le texte transcrit reste modifiable et n’est jamais validé automatiquement ;
+- aucun enregistrement audio n’est conservé par Kuma Libre ;
+- le clavier reste toujours utilisable et le microphone est masqué lorsque le navigateur ne prend pas la reconnaissance vocale en charge.
+
+Les voix installées et la reconnaissance vocale varient selon le navigateur et le système. L’adaptateur choisit automatiquement une voix exacte, puis une voix de la même langue, puis la voix par défaut. L’accès au microphone exige un contexte sécurisé en production (`https`) ; `http://127.0.0.1` reste accepté par les navigateurs pour le développement local.
+
+### Déploiement
+
+Cloudflare Pages sert le frontend statique et Supabase fournit l'authentification ainsi que la progression privée. La configuration complète de la branche de production, des variables, des callbacks Google/magic link, des headers de sécurité, des vérifications et du rollback se trouve dans [`docs/development/deployment.md`](docs/development/deployment.md).
+
 ## Leçons
 
 - [Leçon 1 — Vocabulaire](lessons/lesson-01/vocabulary.md)
@@ -21,17 +146,23 @@ Notes de vocabulaire transcrites à partir des photos personnelles du manuel *Mi
 - [Leçon 14 — Vocabulaire](lessons/lesson-14/vocabulary.md)
 - [Leçon 15 — Vocabulaire](lessons/lesson-15/vocabulary.md)
 - [Leçon 16 — Vocabulaire](lessons/lesson-16/vocabulary.md)
+- [Leçon 17 — Vocabulaire](lessons/lesson-17/vocabulary.md)
+- [Leçon 18 — Vocabulaire](lessons/lesson-18/vocabulary.md)
 - [Glossaire des termes du manuel](reference/instruction-terms.md)
 
 ## Format
 
-Chaque entrée est une ligne de tableau Markdown : **Japonais | Lecture | Français | English | Maîtrise**.
+Chaque entrée est une ligne de tableau Markdown. Les anciennes transcriptions utilisent plusieurs formes de colonnes, notamment **Japonais | Lecture | Français | English | Maîtrise** et **Kana | Kanji | English | Français | Maîtrise**. L'importeur reconnaît ces formats historiques et les convertit vers un même modèle JSON contenant les formes japonaises et les traductions `fr`, `en` et `es`.
 
-Les entrées sont regroupées par leçon et séparées en vocabulaire, expressions et noms propres. Lorsqu'une leçon comprend une section **III. Useful Words and Information**, elle est conservée dans un fichier `useful-words.md` distinct du vocabulaire principal. Les lectures de mots écrits en katakana restent en katakana. Les traductions françaises sont des aides à l'étude.
+La valeur complète d'une cellule de traduction est conservée comme libellé principal. Les variantes séparées explicitement par une virgule, une barre oblique ou un point-virgule deviennent aussi des réponses acceptées. Les formes rōmaji sont générées à partir des lectures déclarées ; une lecture absente reste une lacune de données et n'est jamais inventée par l'importeur.
+
+Les entrées sont regroupées par leçon et par catégorie : vocabulaire principal, expressions, noms propres ou `useful-words`. `Useful Words and Information` est une catégorie de vocabulaire possible dans n'importe quelle leçon ; elle est conservée dans un fichier distinct lorsqu'elle existe et participe aux quiz de la leçon. Les lectures de mots écrits en katakana restent en katakana.
+
+Les tableaux contiennent désormais une colonne espagnole contrôlée pour chaque entrée. Toute nouvelle donnée de vocabulaire doit fournir les significations française, anglaise et espagnole avant d'être activée dans les quiz.
 
 ## Utilisation en révision
 
-Demander des quiz par leçon, japonais → français, français → japonais, ou kanji → lecture. Les fichiers sont la source des questions : aucun mot ne doit être présenté comme appartenant à une leçon sans figurer dans son fichier.
+Le moteur propose deux directions : japonais → signification et signification → japonais. Une réponse de signification peut être donnée en français, en anglais ou en espagnol. Une réponse japonaise peut utiliser les formes romaji, kana ou kanji déclarées. Les fichiers restent la source des questions : aucun mot ne doit être présenté comme appartenant à une leçon sans figurer dans son fichier.
 
 ## Méthode d'ajout
 
@@ -45,14 +176,29 @@ Chaque mot possède un champ **Maîtrise** :
 - 🟡 **À réviser** : surlignage jaune, mot à consolider.
 - 🔴 **À revoir** : surlignage rouge ou absence de surlignage, mot à réapprendre.
 
-Ces statuts sont un instantané des photos du livre et peuvent évoluer en fonction des réponses aux quiz. Les quiz donnent la priorité aux mots 🔴, puis 🟡, tout en réintroduisant régulièrement les mots 🟢.
+Ces statuts sont uniquement un instantané historique des photos et ne pilotent pas la progression de l'application. La progression utilisateur vit dans Supabase et distingue compréhension et production. Le fichier [`progress-vincent.json`](progress-vincent.json) conserve séparément la progression historique de Vincent pour la compréhension japonais → signification.
 
 ## Précision et limites de transcription
 
-- Les photos du manuel constituent la référence pour l'appartenance des mots à une leçon. La transcription doit reprendre uniquement les graphies, lectures et équivalents anglais imprimés sur la photo, sans ajouter de graphies alternatives. Les traductions françaises sont la seule colonne ajoutée.
-- Les traductions françaises sont des reformulations pédagogiques vérifiées dans le contexte, et non le texte du livre.
+- Les photos du manuel constituent la référence pour l'appartenance des mots à une leçon. La transcription doit reprendre uniquement les graphies, lectures et équivalents anglais imprimés sur la photo, sans ajouter de graphies alternatives.
+- Les traductions françaises et espagnoles sont des reformulations pédagogiques vérifiées dans le contexte, et non le texte du livre.
 - Les couleurs sont lues sur les photographies ; en cas de photo floue, leur attribution peut être incertaine.
 - Un mot sans surlignage est marqué « À revoir » suivant la convention choisie, ce qui n'est pas une mesure indépendante de connaissance.
 
-- [Leçon 17 — Vocabulaire](lessons/lesson-17/vocabulary.md)
-- [Leçon 18 — Vocabulaire](lessons/lesson-18/vocabulary.md)
+## Documents de conception
+
+- [Architecture cible](ARCHITECTURE.md)
+- [Architecture frontend et applicative](docs/architecture/frontend-architecture.md)
+- [Standards de qualité](docs/quality/README.md)
+- [Git Flow et cycle de release](docs/development/git-flow.md)
+- [Index de la documentation](docs/README.md)
+- [Synthèse des fondations de la V1 — 17 octobre 2026](docs/reflexion/2026-10-17-fondations-v1.md)
+- [Audit du corpus et de l'internationalisation](reference/corpus-i18n-audit.md)
+- [Maquettes et parcours UX](mockups/README.md)
+
+Les instructions destinées aux agents travaillant dans ce dépôt sont définies dans [`AGENTS.md`](AGENTS.md). Quatre skills locaux les complètent :
+
+- [développement Kuma Libre](.agents/skills/kuma-libre-development/SKILL.md) ;
+- [synchronisation automatique des features et de leur documentation](.agents/skills/kuma-libre-feature-sync/SKILL.md) ;
+- [contrôle qualité final](.agents/skills/kuma-libre-quality-gate/SKILL.md).
+- [Git Flow et cycle de release](.agents/skills/kuma-libre-git-flow/SKILL.md).

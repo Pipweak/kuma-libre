@@ -1,0 +1,88 @@
+{
+  "accessibility": {
+    "skipToContent": "Ir al contenido principal"
+  },
+  "app": {
+    "goToHome": "Ir al inicio de la sesión",
+    "goToLessons": "Ir a las lecciones",
+    "loading": "Cargando Kuma Libre",
+    "loadingProgress": "Cargando tu progreso",
+    "loadingSession": "Comprobando la sesión",
+    "openAccount": "Abrir la cuenta",
+    "progressErrorDescription": "No se pudo cargar tu progreso. Comprueba tu conexión e inténtalo de nuevo.",
+    "progressErrorTitle": "Progreso no disponible",
+    "retryProgress": "Reintentar"
+  },
+  "landing": {
+    "accountNote": "Se necesita una cuenta para iniciar un cuestionario y sincronizar tu progreso.",
+    "continueAction": "Seguir repasando",
+    "description": "Cuestionarios sencillos para practicar cada palabra en ambos sentidos y seguir tu progreso.",
+    "eyebrow": "Vocabulario japonés",
+    "homeLabel": "Inicio de Kuma Libre",
+    "howAction": "¿Cómo funciona?",
+    "methodDescription": "Elige una lección, responde en ambos sentidos y encuentra enseguida las palabras que debes repasar.",
+    "methodEyebrow": "Una rutina sencilla",
+    "methodTitle": "Tres pasos para recordar mejor.",
+    "openApplication": "Abrir la aplicación",
+    "openAuthentication": "Abrir inicio de sesión",
+    "sample": {
+      "kana": "たべます",
+      "meaning": "comer",
+      "word": "食べます"
+    },
+    "signInAction": "Iniciar sesión",
+    "steps": {
+      "0": {
+        "description": "Selecciona una o varias lecciones de tu recorrido.",
+        "title": "Elige"
+      },
+      "1": {
+        "description": "Practica la comprensión y después la producción en japonés.",
+        "title": "Repasa"
+      },
+      "2": {
+        "description": "Sigue por separado lo que entiendes y lo que sabes producir.",
+        "title": "Progresa"
+      }
+    },
+    "title": "Repasa un poco. Recuérdalo de verdad."
+  },
+  "languageSelector": {
+    "descriptions": {
+      "en": "Interfaz en inglés",
+      "es": "Interfaz en español",
+      "fr": "Interfaz en francés"
+    },
+    "label": "Idioma de la interfaz",
+    "prompt": "Elige el idioma de la interfaz"
+  },
+  "languagePage": {
+    "description": "Elige el idioma de los menús, los botones y la traducción principal mostrada durante el cuestionario.",
+    "note": "En comprensión, se siguen aceptando las traducciones registradas en francés, inglés y español.",
+    "title": "Idioma"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "navigation": {
+    "account": "Cuenta",
+    "close": "Cerrar el menú del perfil",
+    "label": "Navegación de la aplicación",
+    "language": "Idioma",
+    "lessons": "Repasar",
+    "open": "Abrir el menú del perfil",
+    "progress": "Progreso",
+    "back": "Volver",
+    "synchronized": "Progreso sincronizado",
+    "title": "Menú"
+  },
+  "notFound": {
+    "backApp": "Volver a la aplicación",
+    "backHome": "Volver al inicio",
+    "description": "La página solicitada no existe o se ha movido.",
+    "eyebrow": "Ruta no encontrada",
+    "title": "Página no encontrada"
+  }
+}

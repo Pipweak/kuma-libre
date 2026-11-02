@@ -1,0 +1,97 @@
+@use '../../styles/_tokens.scss' as tokens;
+
+.loader {
+  display: flex;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: tokens.kl-space(6);
+  background:
+    radial-gradient(circle at 50% 42%, rgb(200 58 54 / 8%), transparent 15rem),
+    tokens.$kl-color-canvas;
+
+  .content {
+    display: grid;
+    width: min(100%, 18rem);
+    justify-items: center;
+    text-align: center;
+    animation: loader-enter tokens.$kl-motion-base tokens.$kl-ease-enter both;
+  }
+
+  .logo {
+    width: min(13.5rem, 70vw);
+    animation: brand-breathe tokens.$kl-motion-loop ease-in-out infinite alternate;
+    transform-origin: 50% 75%;
+  }
+
+  .label {
+    margin: tokens.kl-space(6) 0 0;
+    color: tokens.$kl-color-text-muted;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .track {
+    width: 6rem;
+    height: 0.25rem;
+    margin-top: tokens.kl-space(5);
+    overflow: hidden;
+    border-radius: tokens.kl-radius(pill);
+    background: var(--kl-color-border);
+  }
+
+  .indicator {
+    display: block;
+    width: 42%;
+    height: 100%;
+    border-radius: inherit;
+    background: tokens.$kl-color-action;
+    animation: loader-progress tokens.$kl-motion-loop ease-in-out infinite alternate;
+  }
+}
+
+@keyframes loader-enter {
+  from {
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes brand-breathe {
+  from {
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    transform: translateY(-0.25rem) scale(1.012);
+  }
+}
+
+@keyframes loader-progress {
+  from {
+    transform: translateX(-5%);
+  }
+
+  to {
+    transform: translateX(145%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    .content,
+    .logo,
+    .indicator {
+      animation: none;
+    }
+
+    .indicator {
+      width: 100%;
+      opacity: 0.65;
+      transform: none;
+    }
+  }
+}

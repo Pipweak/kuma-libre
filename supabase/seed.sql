@@ -1,0 +1,1 @@
+-- Intentionally empty. User progress is created through authenticated review events.

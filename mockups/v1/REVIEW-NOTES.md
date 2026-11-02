@@ -40,7 +40,7 @@ Les icônes simples sont dessinées en SVG inline. Une dépendance comme Font Aw
 
 ### Données à préparer
 
-- Ajouter les traductions espagnoles aux quelque 909 lignes de tableaux détectées dans les 19 fichiers de contenu, puis les faire relire avant d’activer la locale espagnole en production.
+- Ajouter les traductions espagnoles aux 904 entrées actuellement détectées dans les 19 fichiers de contenu, puis les contrôler avant d’activer la locale espagnole en production.
 - Ajouter des titres thématiques uniquement s’ils sont édités et validés dans les métadonnées du corpus ; ne jamais les déduire ou les inventer dans un composant.
 
 Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audit.md`](../../reference/corpus-i18n-audit.md).
@@ -52,6 +52,8 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 - **Réponse vocale** : remplacer le point rouge ambigu dans le champ de réponse par une vraie icône de microphone, nommée `Dicter ma réponse` pour les technologies d'assistance.
 - **Comportement attendu** : le microphone lance la reconnaissance vocale, puis insère la transcription dans le même input que la saisie clavier. Le texte reste modifiable et n'est validé que par une action explicite de l'utilisateur.
 - **Confidentialité** : le contrôle ne représente pas un enregistrement audio persistant. Aucun fichier sonore n'est stocké dans l'application ou dans sa base de données.
+- **Interaction mobile** : après un toucher sur le microphone, le compositeur prend la forme d'une barre d'écoute inspirée des applications de messagerie : point rouge, durée, onde, annulation et arrêt. Il passe ensuite par un état `Transcription…` avant de replacer le texte modifiable dans l'input.
+- **Erreurs** : une permission refusée ou une absence de parole affiche un message local, un bouton `Réessayer` et conserve la saisie clavier.
 
 ## Passe du 17 octobre 2026 — langue du quiz
 
@@ -60,4 +62,63 @@ Le détail de la migration est consigné dans [`../../reference/corpus-i18n-audi
 - **Sens du quiz** : ne plus afficher simultanément les drapeaux français, anglais et espagnol. La carte montre le japonais et uniquement la langue active.
 - **Réactivité** : la sélection de `Français`, `English` ou `Español` dans l'écran Langue met à jour les deux cartes de sens dans toutes les configurations de quiz de la planche.
 - **Accessibilité** : le nom accessible de chaque carte est également actualisé, par exemple `Comprendre : japonais vers anglais`.
+
+## Passe du 17 octobre 2026 — décisions consolidées
+
+### Intégré
+
+- **Accès** : aucun quiz n'est accessible sans compte dans le MVP.
+- **Leçons** : liste continue sans livre ni volume dans l'interface.
+- **Email** : connexion par magic link.
+- **Révision rapide** : dix mots maximum, rouges en priorité puis jaunes ; aucun mot vert et aucune obligation d'atteindre dix.
+- **Progression** : trois réussites non consécutives mènent au vert ; une erreur jaune ne retire rien ; une erreur verte ramène à deux réussites et la bonne réponse suivante remet au vert.
+- **Détail du vocabulaire** : chaque ligne affiche désormais les deux scores `C/P` sur 3 en plus de la couleur, afin que le niveau reste compréhensible sans dépendre uniquement du rouge, du jaune ou du vert.
+- **Migration de Vincent** : `progress-vincent.json` représente uniquement la compréhension japonais vers signification ; la production démarre rouge.
+- **Session interrompue** : pas de reprise dans le MVP ; les réponses déjà validées restent sauvegardées.
+- **Styles futurs** : Tailwind majoritaire et modules SCSS imbriqués pour les besoins spécifiques.
+- **Catégories** : `useful-words` est une catégorie de vocabulaire possible dans toute leçon et participe aux quiz de la leçon.
+
+## Passe du 29 octobre 2026 — mouvement et fidélité d’interface
+
+### Intégré
+
+- **Durée principale** : une ouverture, une transition d’état ou une apparition structurante dure `250 ms` par défaut.
+- **Micro-interactions** : pressions, survols et changements de couleur utilisent `150 ms`; une fermeture peut être raccourcie à `180 ms`.
+- **Courbes** : les entrées décélèrent pour apparaître immédiatement puis se poser en douceur; les sorties accélèrent et restent plus courtes.
+- **Performance** : privilégier `transform` et `opacity`, sans bloquer la navigation ni animer inutilement la mise en page.
+- **Accessibilité** : neutraliser les mouvements non essentiels avec `prefers-reduced-motion`; le focus, les annonces et les actions clavier restent immédiats.
+- **Chargement** : le logo empilé transparent respire légèrement et la barre progresse en boucle lente. Le logo conserve toujours son ratio complet.
+- **Premier affichage** : le chargement doit être rendu par le document HTML avant React afin de rester visible lorsque le bundle JavaScript est ralenti. Il disparaît dès que React est prêt, sans durée minimale imposée.
+- **Mot-symbole des headers** : conserver l'image originale et utiliser une V2 dérivée mécaniquement, dont le canevas transparent est resserré au plus près des pixels visibles avec une faible marge de sécurité. Ce recadrage du canevas ne coupe pas le dessin et évite que des marges invisibles faussent sa taille et son alignement.
+- **Accueil public** : entrée discrète du hero et de l’exemple de vocabulaire, pression courte des CTA et élévation légère des cartes sur un pointeur compatible.
+- **Authentification** : transition courte entre les méthodes, l’email, la confirmation et le callback.
+- **Parcours connectés** : le panneau de profil, les modales, le quiz, la correction, la progression et la dictée recevront le même langage de mouvement pendant leur passe de fidélité respective.
+
+La structure de navigation de `flows.html` ne change pas : cette passe précise la restitution et les transitions des écrans existants.
+
+## Corrections de validation du 29 octobre 2026
+
+### Intégré
+
+- **Panneau de profil** : l'ouvrir depuis la droite afin de conserver une continuité spatiale avec l'avatar qui le déclenche.
+- **Header secondaire** : maintenir explicitement la flèche à gauche, le titre au centre et l'avatar à droite sur mobile comme sur desktop.
+- **Retour** : afficher une seule flèche contextuelle dans le header des pages secondaires protégées, y compris la configuration du quiz, sans lien de retour dupliqué dans le contenu.
+
+## Passe du 29 octobre 2026 — quiz et voix
+
+### Intégré
+
+- **Configuration** : conserver la leçon d'origine présélectionnée, permettre de modifier le périmètre et maintenir le nombre de questions ainsi que l'action principale visibles en bas de l'écran.
+- **Question** : placer l'écoute avant le contenu central, montrer le seul drapeau de langue actif en production et garder la progression de session sans navigation générale.
+- **Réponse** : différencier le libellé de production japonaise, afficher l'état correct ou incorrect dans l'input puis rendre ce dernier non modifiable pendant la correction.
+- **Correction** : afficher explicitement la réponse attendue après une erreur, conserver toutes les formes utiles et annoncer le résultat sans dépendre de la couleur.
+- **Dictée** : animer discrètement les états écoute, transcription, résultat prêt et erreur tout en conservant le clavier comme repli permanent.
+- **Sortie** : confirmer l'abandon, rappeler que les réponses déjà validées sont sauvegardées et revenir à l'accueil connecté.
+- **Bilan** : masquer le header applicatif, animer une seule fois la confirmation de fin puis proposer une nouvelle passe ou le retour à l'accueil.
+- **Mouvement** : utiliser les tokens `150/180/250/400 ms`, privilégier `transform`, ne pas réduire l'opacité du texte et neutraliser le mouvement non essentiel avec `prefers-reduced-motion`.
+
+## Validation du 30 octobre 2026 — limite connue sur les synonymes
+
+- **Synonymes** : une dictée correctement transcrite reste évaluée par les réponses explicites du corpus. Une variante comme `docteur` est donc incorrecte si seule la forme `médecin` est enregistrée.
+- **Évolution envisagée** : une assistance sémantique ou RAG pourra suggérer ces variantes à la validation éditoriale. Elle ne corrigera pas automatiquement une tentative et ne remplacera pas les réponses déterministes du corpus.
 

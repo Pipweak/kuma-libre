@@ -1,0 +1,41 @@
+@use '../../styles/_tokens.scss' as tokens;
+
+.container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  display: block;
+  width: tokens.kl-space(5);
+  height: tokens.kl-space(5);
+  flex: 0 0 auto;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: tokens.kl-radius(pill);
+  animation: spin var(--kl-motion-standard) linear infinite;
+
+  &.small {
+    width: tokens.kl-space(4);
+    height: tokens.kl-space(4);
+  }
+
+  &.large {
+    width: tokens.kl-space(8);
+    height: tokens.kl-space(8);
+    border-width: 3px;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 1.4s;
+  }
+}

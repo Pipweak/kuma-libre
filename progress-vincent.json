@@ -1,10 +1,17 @@
 {
-  "version": 1,
-  "description": "Progression des quiz, indépendante des fichiers de vocabulaire. Toute entrée absente de entries est considérée comme à revoir (red), avec zéro réussite.",
+  "version": 2,
+  "description": "Progression historique de Vincent pour la direction japonais vers signification française ou anglaise. Toute entrée absente de entries est considérée comme non maîtrisée (red), avec zéro réussite.",
+  "direction": "japanese_to_meaning",
+  "migration": {
+    "target_direction": "japanese_to_meaning",
+    "meaning": "Cette progression initialise uniquement la compréhension. La production japonais depuis une signification commence à red.",
+    "score_mapping": "red devient mastery_score 0, yellow devient mastery_score 1 et green deviendrait mastery_score 3. Le fichier actuel contient 29 entrées red et 124 entrées yellow.",
+    "legacy_fields": "progress_streak et successful_dates sont conservés pour l'historique, mais ne participent plus au calcul de maîtrise."
+  },
   "rules": {
-    "correct": "Première réussite: yellow; après trois réussites sur trois dates distinctes: green.",
-    "incorrect": "Une erreur fait redescendre green à yellow ou yellow à red; elle remet à zéro la série de réussites vers green.",
-    "session": "Une seule réussite par mot et par date locale compte pour la progression vers green.",
+    "correct": "Chaque réussite augmente le score de maîtrise de 1, jusqu'à 3. Score 0: red; scores 1 et 2: yellow; score 3: green.",
+    "incorrect": "Une erreur laisse les scores 0, 1 et 2 inchangés. Une erreur au score 3 ramène le score à 2; la réussite suivante remet donc le mot à green.",
+    "session": "Les trois réussites ne doivent pas être consécutives et aucune règle de date ne s'applique.",
     "default_status": "red"
   },
   "entries": {

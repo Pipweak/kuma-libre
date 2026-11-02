@@ -1,0 +1,90 @@
+@use '../shared/styles/_tokens.scss' as tokens;
+
+.page {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 92% 16%, rgb(200 58 54 / 11%), transparent 18rem),
+    radial-gradient(circle at 8% 88%, rgb(146 84 46 / 7%), transparent 20rem),
+    tokens.$kl-color-canvas;
+
+  &::before {
+    position: absolute;
+    top: 6.5rem;
+    right: -8rem;
+    width: 18rem;
+    height: 18rem;
+    border: 1px solid rgb(200 58 54 / 8%);
+    border-radius: 50%;
+    content: '';
+    pointer-events: none;
+  }
+}
+
+.heroCopy {
+  animation: content-rise tokens.$kl-motion-base tokens.$kl-ease-enter 60ms both;
+}
+
+.sampleCard {
+  position: relative;
+  isolation: isolate;
+  animation: content-rise tokens.$kl-motion-slow tokens.$kl-ease-enter 120ms both;
+  transition:
+    transform tokens.$kl-motion-base tokens.$kl-ease-enter,
+    box-shadow tokens.$kl-motion-base tokens.$kl-ease-standard;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 12% 10%;
+    border-radius: 50%;
+    background: rgb(200 58 54 / 8%);
+    filter: blur(2.5rem);
+    content: '';
+  }
+
+  &:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: var(--kl-shadow-md);
+  }
+}
+
+.methodCard {
+  transition:
+    transform tokens.$kl-motion-base tokens.$kl-ease-enter,
+    border-color tokens.$kl-motion-fast tokens.$kl-ease-standard,
+    box-shadow tokens.$kl-motion-base tokens.$kl-ease-standard;
+
+  &:hover {
+    border-color: var(--kl-color-border-strong);
+    transform: translateY(-0.2rem);
+    box-shadow: var(--kl-shadow-md);
+  }
+}
+
+@keyframes content-rise {
+  from {
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCopy,
+  .sampleCard {
+    animation: none;
+  }
+
+  .sampleCard,
+  .methodCard {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

@@ -4,13 +4,17 @@ Ce dossier transforme les références visuelles générées en fondations réut
 
 ## Source de vérité
 
-- `styles/tokens.css` contient la palette primitive et les rôles sémantiques, la typographie, les espacements, les rayons et les ombres.
-- `styles/tokens.scss` expose des alias SCSS vers les variables CSS, sans recopier les valeurs hexadécimales.
+- [`../../src/shared/styles/tokens.css`](../../src/shared/styles/tokens.css) est la source canonique de la palette, des rôles sémantiques, de la typographie, des espacements, des rayons, des ombres et du thème Tailwind.
+- [`../../src/shared/styles/_tokens.scss`](../../src/shared/styles/_tokens.scss) expose les mêmes tokens aux modules SCSS, sans recopier les valeurs hexadécimales.
+- `styles/tokens.css` et `styles/tokens.scss` restent des points d'entrée de compatibilité pour les maquettes HTML et redirigent vers les sources applicatives.
 - `styles/brand.css` fournit les variantes réutilisables de la marque.
 - `assets/kuma-bear-wink.png` est la référence raster transparente de la mascotte avec son clin d’œil.
-- `assets/kuma-wordmark.png` contient le mot-symbole transparent sans la mascotte.
+- `assets/kuma-wordmark.png` conserve le mot-symbole transparent original sans la mascotte.
+- `assets/kuma-wordmark-v2.png` est la variante de header au canevas transparent resserré, sans modification du dessin.
 - `assets/kuma-logo-horizontal.png` contient la composition horizontale transparente avec la mascotte.
 - `assets/kuma-logo-stacked.png` contient la composition verticale transparente utilisée pendant le chargement.
+
+Les copies de production se trouvent dans [`../../src/assets/brand`](../../src/assets/brand). Leur contenu reste identique aux références transparentes de ce dossier.
 
 ## Direction retenue
 
@@ -19,6 +23,7 @@ Ce dossier transforme les références visuelles générées en fondations réut
 - **Action principale** : rouge vermillon.
 - **Fond** : crème chaud, avec des surfaces presque blanches.
 - **Mascotte** : brun caramel, museau crème, montagne et soleil rouge.
+- **Styles de l'application** : Tailwind CSS pour la majorité de la mise en page et des états simples ; modules SCSS colocalisés pour les styles spécifiques, les animations et l'imbrication contrôlée.
 
 La fonte du visuel généré n’est pas reprise pour l’instant. Le choix typographique final reste ouvert.
 
@@ -31,6 +36,24 @@ Pour afficher directement les compositions générées :
 ```
 
 La taille et le recadrage restent définis par le composant qui les utilise.
+
+## Cible React
+
+Les valeurs du design system restent centralisées dans les variables CSS sémantiques. Tailwind référence ces mêmes tokens au lieu de dupliquer la palette. Un composant nécessitant du SCSS utilise un fichier `Component.module.scss` et peut imbriquer ses variantes :
+
+```scss
+.answer {
+  &.correct {
+    border-color: var(--kl-color-success);
+  }
+
+  .icon {
+    margin-inline-end: var(--kl-space-2);
+  }
+}
+```
+
+L'imbrication reste courte et locale au composant. Aucun nouveau code métier ne dépend d'un grand fichier de styles global.
 
 ## Utilisation
 

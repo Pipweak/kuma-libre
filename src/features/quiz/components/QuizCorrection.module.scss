@@ -1,0 +1,21 @@
+@use '../../../shared/styles/_tokens.scss' as tokens;
+
+.card {
+  animation: correction-in tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+@keyframes correction-in {
+  from {
+    transform: translateY(tokens.kl-space(3));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+}

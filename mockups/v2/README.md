@@ -1,6 +1,6 @@
-# Maquettes UI V2 — Kuma Libre
+# Maquettes UI V2 — Kuma Libre (archive)
 
-Cette deuxième direction reprend le parcours fonctionnel de la V1 avec un langage plus graphique, expressif et tactile. Elle reste une référence de conception en HTML/CSS/JS, sans dépendance ni composant de production.
+Cette deuxième direction est une exploration graphique archivée. La V1 et ses parcours `../v1/flows.html` constituent la direction retenue. La V2 reste une référence visuelle en HTML/CSS/JS, mais ses règles fonctionnelles ne sont plus à jour.
 
 ## Direction visuelle
 

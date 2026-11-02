@@ -1,0 +1,122 @@
+{
+  "answer": {
+    "correct": "Bonne réponse",
+    "incorrect": "À retravailler",
+    "label": "Ta réponse",
+    "placeholderComprehension": "Français, anglais ou espagnol",
+    "placeholderProduction": "Rōmaji, kana ou kanji",
+    "productionLabel": "Ta réponse en japonais",
+    "skip": "Je ne sais pas",
+    "validate": "Valider"
+  },
+  "configuration": {
+    "back": "Retour à la leçon",
+    "description": "Choisis le périmètre de cette passe avant de commencer.",
+    "direction": "Sens du quiz",
+    "empty": "Aucun mot ne correspond à cette sélection.",
+    "emptyHint": "Ajoute les mots non maîtrisés ou choisis une autre leçon.",
+    "lessonPrefilled": "Leçon {{number}} présélectionnée",
+    "lessonPrefilledHint": "Tu peux encore modifier le périmètre de cette passe.",
+    "lessons": "Leçons",
+    "mastery": "Mots à inclure",
+    "order": "Ordre des questions",
+    "questionCount_one": "{{count}} question",
+    "questionCount_other": "{{count}} questions",
+    "start": "Commencer",
+    "title": "Configurer le quiz"
+  },
+  "correction": {
+    "expectedAnswer": "Réponse attendue",
+    "forms": "Formes japonaises",
+    "meanings": "Significations",
+    "next": "Question suivante",
+    "scoreGreen": "Ce mot est maintenant maîtrisé.",
+    "scoreRed": "Ce mot reste non maîtrisé.",
+    "scoreYellow": "Ce mot passe à « À revoir ».",
+    "yourAnswer": "Réponse donnée"
+  },
+  "direction": {
+    "comprehension": "Comprendre",
+    "comprehensionAccessible": "Comprendre : japonais vers {{language}}",
+    "production": "Produire",
+    "productionAccessible": "Produire : {{language}} vers japonais"
+  },
+  "exit": {
+    "cancel": "Continuer le quiz",
+    "confirm": "Quitter la passe",
+    "description_one": "{{count}} réponse déjà validée est sauvegardée. La passe ne pourra pas être reprise.",
+    "description_other": "{{count}} réponses déjà validées sont sauvegardées. La passe ne pourra pas être reprise.",
+    "description_zero": "Aucune réponse n’a encore été validée. La passe ne pourra pas être reprise.",
+    "open": "Quitter le quiz",
+    "title": "Quitter cette passe ?"
+  },
+  "languages": {
+    "en": "anglais",
+    "es": "espagnol",
+    "fr": "français",
+    "ja": "japonais"
+  },
+  "mastery": {
+    "green": "Maîtrisés",
+    "red": "Non maîtrisés",
+    "yellow": "À revoir"
+  },
+  "order": {
+    "corpus": "Dans l’ordre",
+    "random": "Aléatoire"
+  },
+  "persistence": {
+    "errorDescription": "Ta réponse n’a pas été enregistrée. Elle reste affichée et ne sera pas comptée deux fois.",
+    "errorTitle": "Enregistrement impossible",
+    "retry": "Réessayer l’enregistrement",
+    "saving": "Enregistrement…"
+  },
+  "quickReview": {
+    "available_one": "{{count}} mot prêt à réviser",
+    "available_other": "{{count}} mots prêts à réviser",
+    "configure": "Configurer",
+    "empty": "Aucun mot rouge ou jaune pour le moment.",
+    "eyebrow": "Révision rapide",
+    "start": "Commencer",
+    "title": "Jusqu’à 10 mots à travailler"
+  },
+  "question": {
+    "comprehensionHint": "Donne une signification",
+    "lesson": "Leçon {{number}}",
+    "productionHint": "Trouve le mot japonais",
+    "progress": "Question {{current}} sur {{total}}"
+  },
+  "result": {
+    "backToHome": "Retour à l’accueil",
+    "correct": "Correctes",
+    "description": "Les erreurs reviendront dans une prochaine passe.",
+    "incorrect": "À revoir",
+    "newSession": "Nouvelle passe",
+    "title": "Passe terminée",
+    "total": "Mots vus"
+  },
+  "speech": {
+    "cancel": "Annuler",
+    "cancelled": "Dictée annulée. Tu peux utiliser le clavier.",
+    "dictate": "Dicter ma réponse",
+    "errors": {
+      "network-error": "Reconnaissance vocale indisponible",
+      "no-speech": "Aucune parole détectée",
+      "permission-denied": "Microphone non autorisé",
+      "unsupported": "Dictée non prise en charge"
+    },
+    "keyboardAvailable": "Tu peux toujours répondre avec le clavier.",
+    "listen": "Écouter",
+    "listening": "Dictée en cours",
+    "listeningHelp": "Parle normalement. Aucun audio n’est conservé.",
+    "permission": "Autorisation du microphone…",
+    "playbackError": "La lecture vocale n’est pas disponible.",
+    "ready": "Transcription ajoutée · tu peux la modifier",
+    "retry": "Réessayer la dictée",
+    "stop": "Arrêter la dictée",
+    "stopPlayback": "Arrêter la lecture",
+    "transcribing": "Transcription…",
+    "transcribingHint": "Quelques secondes seulement"
+  },
+  "sessionMissing": "Cette passe n’est plus disponible. Configure une nouvelle révision."
+}

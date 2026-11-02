@@ -1,0 +1,71 @@
+@use '../../../shared/styles/_tokens.scss' as tokens;
+
+.wave {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  height: 1.5rem;
+
+  &__bar {
+    width: 0.18rem;
+    height: 35%;
+    border-radius: tokens.kl-radius(pill);
+    background: tokens.$kl-color-action;
+    animation: voice-wave tokens.$kl-motion-loop tokens.$kl-ease-standard infinite alternate;
+
+    &:nth-child(2n) {
+      height: 70%;
+      animation-delay: -0.35s;
+    }
+
+    &:nth-child(3n) {
+      height: 100%;
+      animation-delay: -0.6s;
+    }
+  }
+}
+
+.statePanel,
+.statusMessage {
+  animation: voice-state-in tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+.listeningDot {
+  box-shadow: 0 0 0 0 color-mix(in srgb, tokens.$kl-color-danger 28%, transparent);
+  animation: voice-pulse tokens.$kl-motion-loop tokens.$kl-ease-enter infinite;
+}
+
+@keyframes voice-wave {
+  from {
+    transform: scaleY(0.45);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes voice-state-in {
+  from {
+    transform: translateY(tokens.kl-space(2));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes voice-pulse {
+  to {
+    box-shadow: 0 0 0 tokens.kl-space(2) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave__bar,
+  .statePanel,
+  .statusMessage,
+  .listeningDot {
+    animation: none;
+  }
+}

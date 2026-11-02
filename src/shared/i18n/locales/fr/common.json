@@ -1,0 +1,88 @@
+{
+  "accessibility": {
+    "skipToContent": "Aller au contenu principal"
+  },
+  "app": {
+    "goToHome": "Accéder à l’accueil connecté",
+    "goToLessons": "Accéder aux leçons",
+    "loading": "Chargement de Kuma Libre",
+    "loadingProgress": "Chargement de ta progression",
+    "loadingSession": "Vérification de la session",
+    "openAccount": "Ouvrir le compte",
+    "progressErrorDescription": "Ta progression n’a pas pu être chargée. Vérifie ta connexion puis réessaie.",
+    "progressErrorTitle": "Progression indisponible",
+    "retryProgress": "Réessayer"
+  },
+  "landing": {
+    "accountNote": "Un compte est nécessaire pour lancer un quiz et synchroniser ta progression.",
+    "continueAction": "Continuer à réviser",
+    "description": "Des quiz simples pour travailler chaque mot dans les deux sens et suivre ta progression.",
+    "eyebrow": "Vocabulaire japonais",
+    "homeLabel": "Accueil Kuma Libre",
+    "howAction": "Comment ça marche ?",
+    "methodDescription": "Choisis une leçon, réponds dans les deux sens et retrouve immédiatement les mots à revoir.",
+    "methodEyebrow": "Une routine simple",
+    "methodTitle": "Trois étapes pour mieux retenir.",
+    "openApplication": "Ouvrir l’application",
+    "openAuthentication": "Ouvrir la connexion",
+    "sample": {
+      "kana": "たべます",
+      "meaning": "manger",
+      "word": "食べます"
+    },
+    "signInAction": "Se connecter",
+    "steps": {
+      "0": {
+        "description": "Sélectionne une ou plusieurs leçons de ton parcours.",
+        "title": "Choisis"
+      },
+      "1": {
+        "description": "Travaille la compréhension puis la production japonaise.",
+        "title": "Révise"
+      },
+      "2": {
+        "description": "Suis séparément ce que tu comprends et ce que tu sais produire.",
+        "title": "Progresse"
+      }
+    },
+    "title": "Révise un peu. Retiens vraiment."
+  },
+  "languageSelector": {
+    "descriptions": {
+      "en": "Interface en anglais",
+      "es": "Interface en espagnol",
+      "fr": "Interface en français"
+    },
+    "label": "Langue de l’interface",
+    "prompt": "Choisir la langue de l’interface"
+  },
+  "languagePage": {
+    "description": "Choisis la langue des menus, des boutons et la traduction principale affichée pendant le quiz.",
+    "note": "En compréhension, les traductions enregistrées en français, anglais et espagnol restent acceptées.",
+    "title": "Langue"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "navigation": {
+    "account": "Compte",
+    "close": "Fermer le menu du profil",
+    "label": "Navigation de l’application",
+    "language": "Langue",
+    "lessons": "Réviser",
+    "open": "Ouvrir le menu du profil",
+    "progress": "Progression",
+    "back": "Retour",
+    "synchronized": "Progression synchronisée",
+    "title": "Menu"
+  },
+  "notFound": {
+    "backApp": "Revenir à l’application",
+    "backHome": "Revenir à l’accueil",
+    "description": "La page demandée n’existe pas ou a été déplacée.",
+    "eyebrow": "Chemin introuvable",
+    "title": "Page introuvable"
+  }
+}

@@ -1,0 +1,29 @@
+@use '../shared/styles/_tokens.scss' as tokens;
+
+.notice,
+.actionBar {
+  animation: configuration-state-in tokens.$kl-motion-base tokens.$kl-ease-enter both;
+}
+
+.actionBar {
+  box-shadow:
+    tokens.$kl-color-canvas 0 0 0 tokens.kl-space(2),
+    var(--kl-shadow-sm);
+}
+
+@keyframes configuration-state-in {
+  from {
+    transform: translateY(tokens.kl-space(2));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notice,
+  .actionBar {
+    animation: none;
+  }
+}

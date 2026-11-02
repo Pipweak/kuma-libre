@@ -1,0 +1,88 @@
+{
+  "accessibility": {
+    "skipToContent": "Skip to main content"
+  },
+  "app": {
+    "goToHome": "Go to the signed-in home",
+    "goToLessons": "Go to lessons",
+    "loading": "Loading Kuma Libre",
+    "loadingProgress": "Loading your progress",
+    "loadingSession": "Checking the session",
+    "openAccount": "Open account",
+    "progressErrorDescription": "Your progress could not be loaded. Check your connection and try again.",
+    "progressErrorTitle": "Progress unavailable",
+    "retryProgress": "Try again"
+  },
+  "landing": {
+    "accountNote": "An account is required to start a quiz and synchronize your progress.",
+    "continueAction": "Continue reviewing",
+    "description": "Simple quizzes to practise every word in both directions and follow your progress.",
+    "eyebrow": "Japanese vocabulary",
+    "homeLabel": "Kuma Libre home",
+    "howAction": "How does it work?",
+    "methodDescription": "Choose a lesson, answer in both directions, and immediately find the words to review.",
+    "methodEyebrow": "A simple routine",
+    "methodTitle": "Three steps to remember more.",
+    "openApplication": "Open the application",
+    "openAuthentication": "Open sign in",
+    "sample": {
+      "kana": "たべます",
+      "meaning": "eat",
+      "word": "食べます"
+    },
+    "signInAction": "Sign in",
+    "steps": {
+      "0": {
+        "description": "Select one or more lessons from your learning path.",
+        "title": "Choose"
+      },
+      "1": {
+        "description": "Practise Japanese comprehension, then production.",
+        "title": "Review"
+      },
+      "2": {
+        "description": "Track separately what you understand and what you can produce.",
+        "title": "Progress"
+      }
+    },
+    "title": "Review a little. Remember for real."
+  },
+  "languageSelector": {
+    "descriptions": {
+      "en": "English interface",
+      "es": "Spanish interface",
+      "fr": "French interface"
+    },
+    "label": "Interface language",
+    "prompt": "Choose the interface language"
+  },
+  "languagePage": {
+    "description": "Choose the language used for menus, buttons, and the main translation shown during quizzes.",
+    "note": "In comprehension quizzes, recorded French, English, and Spanish translations remain accepted.",
+    "title": "Language"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "navigation": {
+    "account": "Account",
+    "close": "Close profile menu",
+    "label": "Application navigation",
+    "language": "Language",
+    "lessons": "Review",
+    "open": "Open profile menu",
+    "progress": "Progress",
+    "back": "Back",
+    "synchronized": "Progress synchronized",
+    "title": "Menu"
+  },
+  "notFound": {
+    "backApp": "Return to the application",
+    "backHome": "Return home",
+    "description": "The requested page does not exist or has been moved.",
+    "eyebrow": "Path not found",
+    "title": "Page not found"
+  }
+}
