@@ -19,6 +19,7 @@ Ce dossier complète les documents placés à la racine sans les remplacer.
 - [`quality/definition-of-done.md`](quality/definition-of-done.md) : contrôle final avant de déclarer un changement terminé.
 - [`quality/ui-fidelity-v1.md`](quality/ui-fidelity-v1.md) : suivi page par page du rendu, du responsive et des animations V1.
 - [`development/git-flow.md`](development/git-flow.md) : branches, pull requests, release candidates, tags et releases.
+- [`development/deployment.md`](development/deployment.md) : préparation et validation du déploiement Cloudflare Pages avec Supabase.
 - [`development/vincent-progress-import.md`](development/vincent-progress-import.md) : import administratif, contrôlé et unique de la progression historique de Vincent.
 
 ## Instructions pour les agents

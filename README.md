@@ -20,12 +20,13 @@ npm run lint
 npm run typecheck
 npm run test:coverage
 npm run build
+npm run performance:check
 npm run test:e2e
 npm run test:a11y
 npm run security:audit
 ```
 
-`npm run quality` exécute les contrôles locaux obligatoires hors Playwright, tests PostgreSQL et audit réseau. La CI GitHub ajoute l'audit des dépendances, les tests Supabase locaux et les parcours Playwright sur Chromium.
+`npm run quality` exécute les contrôles locaux obligatoires hors Playwright, tests PostgreSQL et audit réseau, y compris les budgets du build de production. La CI GitHub ajoute l'audit des dépendances, les tests Supabase locaux et les parcours Playwright sur Chromium.
 
 ### Authentification et aperçu local
 
@@ -119,6 +120,10 @@ Le quiz utilise les API vocales du navigateur, sans fichier audio ni traitement 
 - le clavier reste toujours utilisable et le microphone est masqué lorsque le navigateur ne prend pas la reconnaissance vocale en charge.
 
 Les voix installées et la reconnaissance vocale varient selon le navigateur et le système. L’adaptateur choisit automatiquement une voix exacte, puis une voix de la même langue, puis la voix par défaut. L’accès au microphone exige un contexte sécurisé en production (`https`) ; `http://127.0.0.1` reste accepté par les navigateurs pour le développement local.
+
+### Déploiement
+
+Cloudflare Pages sert le frontend statique et Supabase fournit l'authentification ainsi que la progression privée. La configuration complète de la branche de production, des variables, des callbacks Google/magic link, des headers de sécurité, des vérifications et du rollback se trouve dans [`docs/development/deployment.md`](docs/development/deployment.md).
 
 ## Leçons
 

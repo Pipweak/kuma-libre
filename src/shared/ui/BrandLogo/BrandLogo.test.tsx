@@ -5,8 +5,6 @@ import { BrandLogo, type BrandLogoVariant } from '@/shared/ui/BrandLogo/BrandLog
 
 describe('BrandLogo', () => {
   it.each([
-    ['bear', 1254, 1254, 'kuma-bear-wink'],
-    ['horizontal', 1536, 1024, 'kuma-logo-horizontal'],
     ['stacked', 1122, 1402, 'kuma-logo-stacked'],
     ['wordmark', 1610, 328, 'kuma-wordmark-v2'],
   ] satisfies ReadonlyArray<readonly [BrandLogoVariant, number, number, string]>)(

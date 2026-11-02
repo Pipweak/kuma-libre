@@ -1,7 +1,7 @@
 # Architecture frontend et applicative
 
 > **Statut :** architecture technique de référence, initialisée dans l'application.
-> **Version :** 14 — 30 octobre 2026.
+> **Version :** 15 — 31 octobre 2026.
 
 Ce document précise le découpage technique de Kuma Libre. Les règles produit restent définies dans [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md).
 
@@ -336,7 +336,7 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 - `lucide-react` fournit les icônes génériques importées individuellement.
 - Les drapeaux japonais, français, anglais et espagnol sont de petits SVG internes accompagnés d'un libellé accessible.
 - Les logos de fournisseurs et les assets Kuma Libre restent des assets de marque séparés.
-- `src/assets/brand` contient les PNG transparents de production ; `BrandLogo` conserve leurs dimensions intrinsèques et utilise `object-contain` afin d'éviter tout recadrage. Le mot-symbole original reste archivé sans être embarqué par le build, tandis que la variante `wordmark` utilise la V2 dans les headers : son canevas est recadré au plus près des pixels visibles avec une marge de sécurité transparente, sans modifier le dessin.
+- `src/assets/brand` contient les PNG transparents de production et les sources archivées ; `BrandLogo` importe uniquement les variantes réellement utilisées `wordmark` et `stacked`, conserve leurs dimensions intrinsèques et utilise `object-contain` afin d'éviter tout recadrage. Les variantes `bear`, `horizontal` et le mot-symbole original restent disponibles dans le dépôt sans être émis dans le build. La variante `wordmark` utilise la V2 dans les headers : son canevas est recadré au plus près des pixels visibles avec une marge de sécurité transparente, sans modifier le dessin.
 - Tailwind gère en priorité layout, espacements, responsive et états simples.
 - `src/shared/styles/tokens.css` est la source canonique des couleurs, rayons, ombres, espacements, polices et variables de thème Tailwind.
 - `src/shared/styles/_tokens.scss` constitue le pont vers les modules SCSS sans recopier les valeurs primitives.
@@ -347,6 +347,7 @@ La préférence du compte est stockée dans Supabase. Avant la connexion, l'accu
 - Les questions, corrections, états de dictée, confirmations et bilans du quiz partagent cette échelle de mouvement. Le contenu textuel reste opaque : seules les couches décoratives peuvent animer leur opacité.
 - `AppLoader` est le loader plein écran partagé : logo empilé non recadré, libellé annoncé et barre décorative. Les petits chargements d’action continuent d’utiliser `Spinner`.
 - `index.html` contient un shell de chargement initial minimal, stylé par la feuille globale chargée avant le JavaScript. Il reste visible tant que l’entrée React est indisponible, puis React le remplace sans temporisation artificielle.
+- la détection de langue du shell est servie par `public/initial-locale.js` plutôt que par un script inline afin de conserver une CSP stricte sur les scripts.
 
 ## 11. Tests attendus
 
@@ -406,7 +407,7 @@ Les conventions exécutables et critères de fin sont définis dans [`../quality
 
 Toute évolution fonctionnelle doit synchroniser dans le même changement les implémentations, tests, clés i18n, documents vivants et maquettes réellement affectés. Le workflow détaillé se trouve dans le skill local [`kuma-libre-feature-sync`](../../.agents/skills/kuma-libre-feature-sync/SKILL.md), et le contrôle final dans [`kuma-libre-quality-gate`](../../.agents/skills/kuma-libre-quality-gate/SKILL.md).
 
-L’intégration continue exécute le formatage, le lint, le typecheck, la couverture, le build, l’audit, les parcours critiques, l’accessibilité et les tests PostgreSQL. Le job `database` démarre la stack Supabase, réapplique les migrations puis vérifie le schéma, les privilèges, la RLS, les transitions de maîtrise et l’idempotence. Localement, ce job nécessite Docker Desktop ; son absence doit être signalée et ne doit jamais être maquillée par un faux succès.
+L’intégration continue exécute le formatage, le lint, le typecheck, la couverture, le build, les budgets de performance, l’audit, les parcours critiques, l’accessibilité et les tests PostgreSQL. Le manifeste de production permet à `performance:check` de calculer les imports critiques réels ; React et Supabase sont isolés dans des chunks stables, sans modifier la liste des ressources nécessaires au premier chargement. Le job `database` démarre la stack Supabase, réapplique les migrations puis vérifie le schéma, les privilèges, la RLS, les transitions de maîtrise et l’idempotence. Localement, ce job nécessite Docker Desktop ; son absence doit être signalée et ne doit jamais être maquillée par un faux succès.
 
 ## 14. Références techniques
 
